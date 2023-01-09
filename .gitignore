@@ -4,4 +4,5 @@ frontend/project
 frontend/target
 examples/bin/
 examples/generated/
-
+project
+target
