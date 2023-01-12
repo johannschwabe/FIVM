@@ -1,3 +1,5 @@
+-- noinspection SqlNoDataSourceInspectionForFile
+
 IMPORT DTREE FROM FILE 'housing.txt';
 
 CREATE DISTRIBUTED TYPE RingFactorizedRelation

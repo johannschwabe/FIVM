@@ -22,7 +22,7 @@ void Application::on_end_processing(dbtoaster::data_t& data, bool print_result) 
     // cout << "  sizeof(V_unemployment_D1) = " << data.get_V_unemployment_D1().count() << endl;
     // cout << "  sizeof(V_nbbuslines_T1) = " << data.get_V_nbbuslines_T1().count() << endl;
 
-    size_t output_size = 0; 
+    size_t output_size = 0;
     size_t total_multiplicity = 0;
 
     const auto& v_postcode_HSIRDT1 = data.get_V_postcode_HSIRDT1();
@@ -32,7 +32,7 @@ void Application::on_end_processing(dbtoaster::data_t& data, bool print_result) 
         auto &key1 = t1.first;
         auto postcode = std::get<0>(key1);
 
-        { // For each V_house_H1(postcode) -> (livingarea, price, nbbedrooms, nbbathrooms, kitchensize, house, flat, unknown, garden, parking)
+        // For each V_house_H1(postcode) -> (livingarea, price, nbbedrooms, nbbathrooms, kitchensize, house, flat, unknown, garden, parking)
             V_house_H1_entry e2;
             const auto& rel2 = data.get_V_house_H1().getValueOrDefault(e2.modify(postcode));
             for (auto &t2 : rel2.store) {
@@ -91,7 +91,7 @@ void Application::on_end_processing(dbtoaster::data_t& data, bool print_result) 
                     }
                 }
             }
-        }
+
     }
 
     cout << "Number of output tuples: " << output_size << endl;

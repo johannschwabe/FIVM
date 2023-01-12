@@ -6,3 +6,4 @@ examples/bin/
 examples/generated/
 project
 target
+**/a.out
