@@ -21,5 +21,5 @@ FROM FILE './datasets/housing/Demographics.tbl' LINE DELIMITED CSV(delimiter := 
 CREATE STREAM TRANSPORT(postcode double, nbbuslines double, nbtrainstations double, distancecitycentre double)
 FROM FILE './datasets/housing/Transport.tbl' LINE DELIMITED CSV(delimiter := '|');
 
-SELECT SUM([lift: RingAvg](HOUSE.postcode * HOUSE.postcode))
+SELECT postcode, house, SUM([lift: RingAvg](HOUSE.postcode * HOUSE.postcode))
 FROM HOUSE NATURAL JOIN SHOP NATURAL JOIN INSTITUTION NATURAL JOIN RESTAURANT NATURAL JOIN DEMOGRAPHICS NATURAL JOIN TRANSPORT;

@@ -1,0 +1,10 @@
+application_housing_factorized_join
+get_V_postcode_HSIRDT1
+application_housing_base
+-
+house_H1|key_0[0]
+sainsburys_S1|key_0[0]
+typeeducation_I1|key_0[0]
+pricerangerest_R1|key_0[0]
+unemployment_D1|key_0[0]
+nbbuslines_T1|key_0[0]
