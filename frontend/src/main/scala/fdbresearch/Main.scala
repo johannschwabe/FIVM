@@ -63,10 +63,20 @@ object Main extends App {
       val dtree = parseDTree(dtreeFile)
       Logger.instance.debug("DTREE AST: " + dtree.toString)
 
-      val output = new Driver().compile(sql, dtree, config.batchUpdates)
+      val (output, configFile) = new Driver().compile(sql, dtree, config.batchUpdates)
       config.outputM3 match {
-        case Some(file) => new java.io.PrintWriter(file) {
-          write(output); close()
+        case Some(file) => {
+          new java.io.PrintWriter(file) {
+            write(output);
+            close()
+          }
+          val split_file_path = file.split("/")
+          val file_name = split_file_path(3).split("_").init.mkString("_")
+          val config_file_path = split_file_path(0) + "/config/" + split_file_path(2) + "/" + file_name + ".txt"
+          new java.io.PrintWriter(config_file_path) {
+            write(configFile);
+            close()
+          }
         }
         case None => println(output)
       }

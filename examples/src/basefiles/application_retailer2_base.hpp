@@ -1,7 +1,7 @@
 #ifndef APPLICATION_RETAILER_BASE_HPP
 #define APPLICATION_RETAILER_BASE_HPP
 
-#include "../application.hpp"
+#include "application.hpp"
 
 const string dataPath = "data/retailer";
 

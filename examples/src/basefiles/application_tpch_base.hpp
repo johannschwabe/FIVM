@@ -1,7 +1,7 @@
 #ifndef APPLICATION_TPCH_BASE_HPP
 #define APPLICATION_TPCH_BASE_HPP
 
-#include "../application.hpp"
+#include "application.hpp"
 
 const string dataPath = "data/tpch0.01";
 

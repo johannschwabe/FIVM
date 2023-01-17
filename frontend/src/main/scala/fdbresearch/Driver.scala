@@ -47,7 +47,7 @@ class Driver {
     }.asInstanceOf[SQL.System]
   }
 
-  def compile(sql: SQL.System, dtree: Tree[DTreeNode], batchUpdates: Boolean): String = {
+  def compile(sql: SQL.System, dtree: Tree[DTreeNode], batchUpdates: Boolean): (String, String) = {
 
     checkSchemas(sql.sources, dtree.getRelations)
 
@@ -63,6 +63,10 @@ class Driver {
     Logger.instance.debug("\n\nVIEW TREE:\n" + viewtree)
 
     val cg = new CodeGenerator(viewtree, sql.typeDefs, sql.sources, batchUpdates)
+    var config = "gugus\n"
+    config = config + sql.sources(0).in.toString.split("/")(2)
+    config = config + "\n"
+    cg.generateQueries.foreach(t=>config = config + t.name.substring(2) + "|" + t.expr.ovars.map{case (a,b)=>a}.mkString(",") + "\n")
     val m3 = cg.generateM3
     Logger.instance.debug("\n\nORIGINAL M3\n" + m3)
 
@@ -73,6 +77,6 @@ class Driver {
     val checkedM3 = new M3Parser().apply(optM3.toString)
     Logger.instance.debug("M3 SYNTAX CHECKED")
 
-    checkedM3.toString
+    (checkedM3.toString, config)
   }
 }

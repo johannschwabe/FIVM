@@ -1,9 +1,0 @@
-application_retailer_factorized_join
-get_V_locn_IWLC1
-application_retailer2_base
-dateid_IW1|key_0[0]
-ksn_I1|key_0[0],key_1[0]
-rain_W1|key_0[0],key_1[0]
-zip_LC1|key_0[0]
-rgn_cd_L1|key_0[0],key_4[0]
-population_C1|key_4[0]

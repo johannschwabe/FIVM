@@ -1,7 +1,7 @@
 #ifndef APPLICATION_HOUSING_BASE_HPP
 #define APPLICATION_HOUSING_BASE_HPP
 
-#include "../application.hpp"
+#include "application.hpp"
 
 const string dataPath = "data/housing-1-normalised";
 

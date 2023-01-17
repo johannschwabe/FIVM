@@ -123,7 +123,7 @@ class CodeGenerator(tree: Tree[View],
   private def generateMaps: List[M3.MapDef] =
     tree.map2(t => if (t.isMaterialized) Some(t.createMapDef) else None).flatten.toList
 
-  private def generateQueries: List[M3.Query] =
+  def generateQueries: List[M3.Query] =
     tree.map2(t =>
       if (t.isRoot || Type.isDistributed(t.node.tp))
         Some(M3.Query(t.node.name, t.createMapRef))
