@@ -120,8 +120,11 @@ class CodeGenerator(tree: Tree[View],
   def generateM3: M3.System =
     M3.System(typeDefs, sources, generateMaps, generateQueries, generateTriggers)
 
-  private def generateMaps: List[M3.MapDef] =
+  def generateMaps: List[M3.MapDef] =
     tree.map2(t => if (t.isMaterialized) Some(t.createMapDef) else None).flatten.toList
+
+  def getTree: Tree[View] =
+    tree
 
   def generateQueries: List[M3.Query] =
     tree.map2(t =>

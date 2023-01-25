@@ -58,13 +58,16 @@ $(APP_GEN): $(SRC_DIR)/result_enumeration.cpp
 
 $(M3_FILES_BATCH): $(M3_OUT_DIR)/%_BATCH.m3: $(SQL_DIR)/%.sql
 	@test -d $(dir $@) || mkdir -p $(dir $@)
+	@test -d $(dir $(patsubst generated/m3/%,generated/config/%,$@)) || mkdir -p $(dir $(patsubst generated/m3/%,generated/config/%,$@))
 	$(FRONTEND_BIN) --batch -o $@ $<
 
 $(M3_FILES_SINGLE): $(M3_OUT_DIR)/%_SINGLE.m3: $(SQL_DIR)/%.sql
 	@test -d $(dir $@) || mkdir -p $(dir $@)
+	@test -d $(dir $(patsubst generated/m3/%,generated/config/%,$@)) || mkdir -p $(dir $(patsubst generated/m3/%,generated/config/%,$@))
 	$(FRONTEND_BIN) --single -o $@ $<
 
 $(APPLICATION_FILES): $(APP_OUT_DIR)/%.hpp: $(M3_OUT_DIR)/%_SINGLE.m3 $(APP_GEN)
+	@test -d $(dir $@) || mkdir -p $(dir $@)
 	./$(APP_GEN) $(patsubst %.hpp,%.txt,$(patsubst $(APP_OUT_DIR)/%,$(CONFIG_OUT_DIR)/%,$@)) $@
 
 $(CPP_FILES_BATCH): $(CPP_OUT_DIR)/%.hpp : $(M3_OUT_DIR)/%.m3
@@ -108,4 +111,4 @@ exe_single: $(EXE_FILES_SINGLE)
 exe: exe_batch exe_single
 
 clean: 
-	rm -fr $(M3_OUT_DIR) $(CPP_OUT_DIR) $(EXE_OUT_DIR) $(CONFIG_OUT_DIR)
+	rm -fr $(M3_OUT_DIR) $(CPP_OUT_DIR) $(EXE_OUT_DIR) $(CONFIG_OUT_DIR) $(APP_OUT_DIR) $(APP_GEN)

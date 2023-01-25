@@ -13,7 +13,11 @@ struct ViewConfig{
   std::string payload_key;
   std::string child_views;
   std::string access_vars;
-  ViewConfig(std::string view_name, const std::string& access_vars): access_vars(access_vars) {
+  std::string payload_vars;
+  bool payload_view;
+  ViewConfig(std::string view_name, const std::string& access_vars, const std::string& payload_vars, const bool payload_view):
+    access_vars(access_vars), payload_vars(payload_vars), payload_view(payload_view)
+    {
     splitViewName(std::move(view_name));
   }
 
@@ -53,9 +57,13 @@ public:
       std::istringstream f(line);
       std::string view_name;
       std::string access_vars;
+      std::string payload_vars;
+      std::string payload_view;
       getline(f, view_name, '|');
-      getline(f, access_vars, '\n');
-      config->push_back(new ViewConfig(view_name, access_vars));
+      getline(f, access_vars, '|');
+      getline(f, payload_vars, '|');
+      getline(f, payload_view, '\n');
+      config->push_back(new ViewConfig(view_name, access_vars, payload_vars, payload_view == "1"));
     }
   }
 
@@ -97,7 +105,7 @@ public:
     res += tabbing(tabbing_iter) + "auto &" + config->at(0)->payload_key + " = std::get<0>(t0.first);\n";
     res += tabbing(tabbing_iter) + "auto payload_0 = t0.second;\n";
     std::string combined_key = tabbing(tabbing_iter) + "auto combined_key = std::tuple_cat(t0.first, ";
-    std::string combined_value = tabbing(tabbing_iter) + "auto combined_value = payload_0 * ";
+    std::string combined_value = tabbing(tabbing_iter) + "auto combined_value =";
     auto view = config->begin();
     std::advance(view, 1);
     for (; view != config->end(); ++view) {
@@ -110,7 +118,9 @@ public:
       res += tabbing(tabbing_iter) + "auto &" + (*view)->payload_key + " = std::get<0>(t" + nr + ".first);\n";
       res += tabbing(tabbing_iter) + "auto &payload_" + nr + " = t" + nr + ".second;\n";
       combined_key += "t" + nr + ".first, ";
-      combined_value += "payload_" + nr + " * ";
+      if((*view)->payload_view) {
+        combined_value += "payload_" + nr + " * ";
+      }
       ++var_name_iter;
     }
 

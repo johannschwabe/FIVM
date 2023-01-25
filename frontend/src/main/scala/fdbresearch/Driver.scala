@@ -9,7 +9,7 @@
 //===----------------------------------------------------------------------===//
 package fdbresearch
 
-import fdbresearch.tree.{DTreeNode, DTreeRelation, Tree, ViewTree}
+import fdbresearch.tree.{DTreeNode, DTreeRelation, Tree, View, ViewTree}
 import fdbresearch.core.{SQL, SQLToM3Compiler, Source}
 import fdbresearch.parsing.M3Parser
 import fdbresearch.util.Logger
@@ -47,6 +47,33 @@ class Driver {
     }.asInstanceOf[SQL.System]
   }
 
+  def findVars(a: Tree[View],
+               keyMap: scala.collection.mutable.Map[String, String],
+               payloadViews: scala.collection.mutable.MutableList[String]): scala.collection.mutable.Map[String, List[String]] = {
+    var res = scala.collection.mutable.Map[String, List[String]]()
+    res += (a.node.name -> a.node.terms(0).schema._1.map(i => {
+      i._1
+    }))
+    var completeCover = true
+    a.children.foreach(child => {
+      if(keyMap.contains(child.node.name)){
+        var child_res = findVars(child, keyMap, payloadViews)
+//        Logger.instance.info("name: " + child.node.name)
+//        Logger.instance.info("res.values.toSet: " + res.values.flatten.toSet.toString())
+//        Logger.instance.info("chi.values.toSet: " + child_res.values.flatten.toSet.toString())
+        if(!child_res.values.flatten.toSet.subsetOf(res.values.flatten.toSet) && !res.values.flatten.toSet.equals(child_res.values.flatten.toSet)){
+//          Logger.instance.info("subset")
+          child_res.foreach(view => res += (view._1 -> view._2))
+          completeCover = false
+        }
+      }
+    })
+    if(completeCover){
+      payloadViews += a.node.name.substring(2)
+    }
+    res
+  }
+
   def compile(sql: SQL.System, dtree: Tree[DTreeNode], batchUpdates: Boolean): (String, String) = {
 
     checkSchemas(sql.sources, dtree.getRelations)
@@ -63,10 +90,31 @@ class Driver {
     Logger.instance.debug("\n\nVIEW TREE:\n" + viewtree)
 
     val cg = new CodeGenerator(viewtree, sql.typeDefs, sql.sources, batchUpdates)
+
     var config = "gugus\n"
     config = config + sql.sources(0).in.toString.split("/")(2)
     config = config + "\n"
-    cg.generateQueries.foreach(t=>config = config + t.name.substring(2) + "|" + t.expr.ovars.map{case (a,b)=>a}.mkString(",") + "\n")
+
+    val keyMap = scala.collection.mutable.Map[String, String]()
+    val viewOrder = scala.collection.mutable.MutableList[String]()
+    val payloadViews = scala.collection.mutable.MutableList[String]()
+    cg.generateQueries.foreach(t => {
+      viewOrder += t.name
+      var ovars = t.expr.ovars.map(ovar => {
+        ovar._1
+      })
+      keyMap += (t.name -> ovars.mkString(","))
+    })
+    var payloadMap = findVars(cg.getTree, keyMap, payloadViews)
+    viewOrder.foreach(view => {
+      var payloadView = if (payloadViews.contains(view.substring(2))) "1" else "0"
+      config = config + view.substring(2) + "|" + keyMap(view) + "|" + payloadMap(view).mkString(",") + "|" + payloadView + "\n"
+    })
+    //Logger.instance.info(payloadMap.mkString("\n"))
+
+
+    //cg.getTree.map2(t => Logger.instance.info(t.node.freeVars.mkString))
+
     val m3 = cg.generateM3
     Logger.instance.debug("\n\nORIGINAL M3\n" + m3)
 
