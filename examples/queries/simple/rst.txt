@@ -1,4 +1,4 @@
-5 3
+6 3
 0 A int -1 {} 0
 1 B float 0 {0} 0
 2 C int 0 {0} 0
@@ -6,5 +6,5 @@
 4 E float 2 {0,2} 0
 5 extra int 4 {0,2,4} 0
 R 1 A,B
-T 3 C,D
+T 3 A,C
 S 5 A,C,E,extra

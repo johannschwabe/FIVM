@@ -61,7 +61,6 @@ object Main extends App {
 
       val dtreeFile = new File(sqlFile.getParentFile.getAbsolutePath, sql.dtree.file.path)
       val dtree = parseDTree(dtreeFile)
-      Logger.instance.debug("DTREE AST: " + dtree.toString)
 
       val (output, configFile) = new Driver().compile(sql, dtree, config.batchUpdates)
       config.outputM3 match {
