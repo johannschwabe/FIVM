@@ -10,33 +10,21 @@ std::string tabbing(int nr){
 }
 
 struct ViewConfig{
-  std::string payload_key;
-  std::string child_views;
   std::string access_vars;
   std::string payload_vars;
   bool payload_view;
+  std::string view_name;
   ViewConfig(std::string view_name, const std::string& access_vars, const std::string& payload_vars, const bool payload_view):
-    access_vars(access_vars), payload_vars(payload_vars), payload_view(payload_view)
-    {
-    splitViewName(std::move(view_name));
-  }
+    access_vars(access_vars), payload_vars(payload_vars), payload_view(payload_view),view_name(view_name)
+    {}
 
   std::string getStructName() const {
-    return "V_" + payload_key + "_" + child_views + "_entry";
+    return "V_" + view_name + "_entry";
   };
 
   std::string getViewAccessFunctionName() const {
-    return "get_V_" +  payload_key + "_" + child_views;
+    return "get_V_" + view_name;
   };
-
-  void splitViewName(std::string viewname){
-    std::reverse(viewname.begin(), viewname.end());
-    std::istringstream f(viewname);
-    getline(f, child_views, '_');
-    getline(f, payload_key, '\n');
-    std::reverse(child_views.begin(), child_views.end());
-    std::reverse(payload_key.begin(), payload_key.end());
-  }
 };
 
 class Config {
@@ -102,7 +90,7 @@ public:
     }
     res += tabbing(tabbing_iter) + "for (auto &t0 : ring.store) {\n";
     tabbing_iter += 1;
-    res += tabbing(tabbing_iter) + "auto &" + config->at(0)->payload_key + " = std::get<0>(t0.first);\n";
+    res += tabbing(tabbing_iter) + "auto &" + config->at(0)->payload_vars + " = std::get<0>(t0.first);\n";
     res += tabbing(tabbing_iter) + "auto payload_0 = t0.second;\n";
     std::string combined_key = tabbing(tabbing_iter) + "auto combined_key = std::tuple_cat(t0.first, ";
     std::string combined_value = tabbing(tabbing_iter) + "auto combined_value =";
@@ -115,7 +103,7 @@ public:
              "().getValueOrDefault(e" + nr + ".modify(" + (*view)->access_vars + "));\n";
       res += tabbing(tabbing_iter) + "for (auto &t" + nr + " : rel" + nr + ".store) {\n";
       tabbing_iter += 1;
-      res += tabbing(tabbing_iter) + "auto &" + (*view)->payload_key + " = std::get<0>(t" + nr + ".first);\n";
+      res += tabbing(tabbing_iter) + "auto &" + (*view)->payload_vars + " = std::get<0>(t" + nr + ".first);\n";
       res += tabbing(tabbing_iter) + "auto &payload_" + nr + " = t" + nr + ".second;\n";
       combined_key += "t" + nr + ".first, ";
       if((*view)->payload_view) {
