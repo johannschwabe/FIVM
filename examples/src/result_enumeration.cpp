@@ -9,6 +9,7 @@ std::string tabbing(int nr){
   return std::string(nr * 2, ' ');
 }
 
+
 struct ViewConfig{
   std::string access_vars;
   std::string payload_vars;
@@ -27,10 +28,20 @@ struct ViewConfig{
   };
 };
 
+struct Query{
+  std::vector<ViewConfig*> *views;
+  std::string query_name;
+  int nr_views;
+  Query(std::string query_name, int nr_views): query_name(query_name), nr_views(nr_views){
+    views = new std::vector<ViewConfig*>();
+  }
+
+};
+
 class Config {
   std::string filename;
   std::string dataset;
-  std::vector<ViewConfig* >* config = new std::vector<ViewConfig* >();
+  std::vector<Query* >* queries = new std::vector<Query* >();
 
 public:
   explicit Config(const std::string& config_file_name){
@@ -38,20 +49,34 @@ public:
     std::getline(config_file, filename);
     std::getline(config_file, dataset);
 
-    while (true){
-      std::string line;
-      std::getline(config_file, line);
-      if(!config_file) break;
-      std::istringstream f(line);
-      std::string view_name;
-      std::string access_vars;
-      std::string payload_vars;
-      std::string payload_view;
-      getline(f, view_name, '|');
-      getline(f, access_vars, '|');
-      getline(f, payload_vars, '|');
-      getline(f, payload_view, '\n');
-      config->push_back(new ViewConfig(view_name, access_vars, payload_vars, payload_view == "1"));
+    std::string query_list;
+    std::getline(config_file, query_list);
+    std::istringstream q(query_list);
+    while(true){
+      std::string query_name;
+      std::string nr_views;
+      getline(q,query_name, '|');
+      if(!q) break;
+      getline(q,nr_views,'|');
+      std::cout << query_name << " " << nr_views << std::endl;
+      queries->push_back(new Query(query_name, std::stoi(nr_views)));
+    }
+    for (auto &query : *queries) {
+      for (int i = 0; i < query->nr_views; ++i) {
+        std::string line;
+        std::getline(config_file, line);
+        if (!config_file) break;
+        std::istringstream f(line);
+        std::string view_name;
+        std::string access_vars;
+        std::string payload_vars;
+        std::string payload_view;
+        getline(f, view_name, '|');
+        getline(f, access_vars, '|');
+        getline(f, payload_vars, '|');
+        getline(f, payload_view, '\n');
+        query->views->push_back(new ViewConfig(view_name, access_vars, payload_vars, payload_view == "1"));
+      }
     }
   }
 
@@ -67,17 +92,12 @@ public:
                             "    cout << endl << \"Enumerating factorized join result... \" << endl;\n"
                             "\n"
                             "    size_t output_size = 0; \n";
-
-  std::string generate() {
-    std::string res;
-    std::string uppercase_filename = filename;
-    std::transform(uppercase_filename.begin(), uppercase_filename.end(), uppercase_filename.begin(), toupper);
-    res += "#ifndef " + uppercase_filename + "_HPP\n";
-    res += "#define " + uppercase_filename + "_HPP\n";
-    res += "#include \"../src/basefiles/application_" + dataset + "_base.hpp\"\n\n";
-    res += start;
+  std::string generate_function(Query* query){
+    std::string res = "void enumerate_" + query->query_name + "(dbtoaster::data_t &data, bool print_result) {\n";
+    res += "    size_t output_size = 0; \n";
     int var_name_iter = 1;
     int tabbing_iter = 0;
+    auto config = query->views;
     if(config->at(0)->access_vars != "") {
       res += "    const auto& top_level_view = data." + config->at(0)->getViewAccessFunctionName() + "();\n";
       res += "    " + config->at(0)->getStructName() + "* r0 = top_level_view.head;\n";
@@ -101,11 +121,15 @@ public:
       res += tabbing(tabbing_iter) + (*view)->getStructName() + " e" + nr + ";\n";
       res += tabbing(tabbing_iter) + "const auto& rel" + nr + " = data." + (*view)->getViewAccessFunctionName() +
              "().getValueOrDefault(e" + nr + ".modify(" + (*view)->access_vars + "));\n";
-      res += tabbing(tabbing_iter) + "for (auto &t" + nr + " : rel" + nr + ".store) {\n";
-      tabbing_iter += 1;
-      res += tabbing(tabbing_iter) + "auto &" + (*view)->payload_vars + " = std::get<0>(t" + nr + ".first);\n";
-      res += tabbing(tabbing_iter) + "auto &payload_" + nr + " = t" + nr + ".second;\n";
-      combined_key += "t" + nr + ".first, ";
+      if((*view)->payload_vars == ""){
+        res += tabbing(tabbing_iter) + "auto &payload_" + nr + " = rel" + nr + ";\n";
+      } else {
+        res += tabbing(tabbing_iter) + "for (auto &t" + nr + " : rel" + nr + ".store) {\n";
+        tabbing_iter += 1;
+        res += tabbing(tabbing_iter) + "auto &" + (*view)->payload_vars + " = std::get<0>(t" + nr + ".first);\n";
+        res += tabbing(tabbing_iter) + "auto &payload_" + nr + " = t" + nr + ".second;\n";
+        combined_key += "t" + nr + ".first, ";
+      }
       if((*view)->payload_view) {
         combined_value += "payload_" + nr + " * ";
       }
@@ -124,7 +148,27 @@ public:
 
     auto end_brackets = std::string(tabbing_iter + 1, '}');
     res += end_brackets;
-    res += "\n #endif";
+    return res;
+  }
+  std::string generate() {
+    std::string res;
+    std::string uppercase_filename = filename;
+    std::transform(uppercase_filename.begin(), uppercase_filename.end(), uppercase_filename.begin(), toupper);
+    res += "#ifndef " + uppercase_filename + "_HPP\n";
+    res += "#define " + uppercase_filename + "_HPP\n";
+    res += "#include \"../src/basefiles/application_" + filename + "_base.hpp\"\n\n";
+    //iterate over queries and generate enumeration function for them
+    for(auto query : *queries){
+      res += generate_function(query);
+      res += "\n";
+    }
+    res += start;
+    for(auto query : *queries){
+      res += "    cout << \"Enumerating " + query->query_name + "... \" << endl;\n";
+      res += "    enumerate_" + query->query_name + "(data, print_result);\n";
+    }
+
+    res += "}\n #endif";
     return res;
   }
 };
