@@ -8,6 +8,25 @@
 std::string tabbing(int nr){
   return std::string(nr * 2, ' ');
 }
+// split the input variable by comma
+std::vector<std::string>* split(std::string input){
+  std::vector<std::string> *splitted = new std::vector<std::string>();
+  std::string res = "";
+  std::stringstream ss(input);
+  std::string token;
+  while(std::getline(ss, token, ',')) {
+    splitted->push_back(token);
+  }
+  return splitted;
+}
+
+std::string join(std::vector<std::string>* splitted, std::string delimiter){
+  std::string res = "";
+  for(auto it = splitted->begin(); it != splitted->end(); ++it) {
+    res += *it + delimiter;
+  }
+  return res;
+}
 
 
 struct ViewConfig{
@@ -32,7 +51,8 @@ struct Query{
   std::vector<ViewConfig*> *views;
   std::string query_name;
   int nr_views;
-  Query(std::string query_name, int nr_views): query_name(query_name), nr_views(nr_views){
+  bool call_batch_update;
+  Query(std::string query_name, int nr_views, bool call_batch_update): query_name(query_name), nr_views(nr_views), call_batch_update(call_batch_update){
     views = new std::vector<ViewConfig*>();
   }
 
@@ -55,11 +75,13 @@ public:
     while(true){
       std::string query_name;
       std::string nr_views;
+      std::string call_batch_update;
       getline(q,query_name, '|');
       if(!q) break;
       getline(q,nr_views,'|');
+      getline(q,call_batch_update,'|');
       std::cout << query_name << " " << nr_views << std::endl;
-      queries->push_back(new Query(query_name, std::stoi(nr_views)));
+      queries->push_back(new Query(query_name, std::stoi(nr_views), call_batch_update == "1" ));
     }
     for (auto &query : *queries) {
       for (int i = 0; i < query->nr_views; ++i) {
@@ -93,8 +115,13 @@ public:
                             "\n"
                             "    size_t output_size = 0; \n";
   std::string generate_function(Query* query){
+    std::vector<std::string> all_vars = std::vector<std::string>();
     std::string res = "void enumerate_" + query->query_name + "(dbtoaster::data_t &data, bool print_result) {\n";
     res += "    size_t output_size = 0; \n";
+    std::string update_type = "DELTA_";
+    if(query->call_batch_update){
+      res += "    std::vector<"+update_type+query->query_name+"_entry> update = std::vector<"+update_type+query->query_name+"_entry>();";
+    }
     int var_name_iter = 1;
     int tabbing_iter = 0;
     auto config = query->views;
@@ -112,7 +139,11 @@ public:
     tabbing_iter += 1;
     res += tabbing(tabbing_iter) + "auto &" + config->at(0)->payload_vars + " = std::get<0>(t0.first);\n";
     res += tabbing(tabbing_iter) + "auto payload_0 = t0.second;\n";
-    std::string combined_key = tabbing(tabbing_iter) + "auto combined_key = std::tuple_cat(t0.first, ";
+    std::string combined_key = tabbing(tabbing_iter) + "auto combined_entry = " + update_type+query->query_name+"_entry(" + config->at(0)->payload_vars + ", ";
+
+    auto splitted = split(config->at(0)->payload_vars);
+    all_vars.insert(all_vars.end(), splitted->begin(), splitted->end());
+    delete splitted;
     std::string combined_value = tabbing(tabbing_iter) + "auto combined_value =";
     auto view = config->begin();
     std::advance(view, 1);
@@ -128,8 +159,12 @@ public:
         tabbing_iter += 1;
         res += tabbing(tabbing_iter) + "auto &" + (*view)->payload_vars + " = std::get<0>(t" + nr + ".first);\n";
         res += tabbing(tabbing_iter) + "auto &payload_" + nr + " = t" + nr + ".second;\n";
-        combined_key += "t" + nr + ".first, ";
-      }
+        combined_key += (*view)->payload_vars + ", ";
+
+        splitted = split((*view)->payload_vars);
+        all_vars.insert(all_vars.end(), splitted->begin(), splitted->end());
+
+        delete splitted;      }
       if((*view)->payload_view) {
         combined_value += "payload_" + nr + " * ";
       }
@@ -141,13 +176,24 @@ public:
     combined_value.pop_back();
     combined_value.pop_back();
     combined_value.pop_back();
-    res += combined_key + ");\n";
     res += combined_value + ";\n";
+    if(query->call_batch_update){
+      res += combined_key + ", combined_value);\n";
+    }
     res += tabbing(tabbing_iter) + "output_size++;\n";
-    res += tabbing(tabbing_iter) + "if (print_result) std::cout << combined_key << \" -> \" << combined_value << std::endl;\n";
+    res += tabbing(tabbing_iter) + "if (print_result) std::cout << " + join(&all_vars, " << \",\" << ")+ "\"-> \" << combined_value << std::endl;\n";
+    if(query->call_batch_update) {
+      res += tabbing(tabbing_iter) + "update.push_back(combined_entry);\n";
+    }
 
-    auto end_brackets = std::string(tabbing_iter + 1, '}');
+    auto end_brackets = std::string(tabbing_iter, '}');
     res += end_brackets;
+    if(query->call_batch_update) {
+      res += "data.on_batch_update_" + query->query_name + "(update.begin(), update.end());\n}\n";
+    }
+    else {
+      res += "}\n";
+    }
     return res;
   }
   std::string generate() {
@@ -172,7 +218,6 @@ public:
     return res;
   }
 };
-
 
 int main(int argc, char** argv) {
   if(argc == 1) {
