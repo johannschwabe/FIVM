@@ -1,5 +1,7 @@
 echo $1
 g++ -O3 -DNDEBUG -Wall -Wno-unused-variable -std=c++17 -pedantic src/result_enumeration.cpp -o cavier/app_generator
+mkdir "cavier/application/$1"
+mkdir "bin/$1"
 ./cavier/app_generator cavier/config/$1/$1.txt cavier/application/$1/$1.hpp
 
 if [ $2 = "batch" ]; then

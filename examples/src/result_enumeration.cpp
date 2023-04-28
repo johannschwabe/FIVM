@@ -9,12 +9,12 @@ std::string tabbing(int nr){
   return std::string(nr * 2, ' ');
 }
 // split the input variable by comma
-std::vector<std::string>* split(std::string input){
+std::vector<std::string>* split(std::string input, char delimiter = ',' ){
   std::vector<std::string> *splitted = new std::vector<std::string>();
   std::string res = "";
   std::stringstream ss(input);
   std::string token;
-  while(std::getline(ss, token, ',')) {
+  while(std::getline(ss, token, delimiter)) {
     splitted->push_back(token);
   }
   return splitted;
@@ -62,6 +62,7 @@ class Config {
   std::string filename;
   std::string dataset;
   std::vector<Query* >* queries = new std::vector<Query* >();
+  std::vector<std::string>* relations;
 
 public:
   explicit Config(const std::string& config_file_name){
@@ -83,6 +84,9 @@ public:
       std::cout << query_name << " " << nr_views << std::endl;
       queries->push_back(new Query(query_name, std::stoi(nr_views), call_batch_update == "1" ));
     }
+    std::string relation_list;
+    std::getline(config_file, relation_list);
+    relations = split(relation_list, '|');
     for (auto &query : *queries) {
       for (int i = 0; i < query->nr_views; ++i) {
         std::string line;
@@ -114,6 +118,52 @@ public:
                             "    cout << endl << \"Enumerating factorized join result... \" << endl;\n"
                             "\n"
                             "    size_t output_size = 0; \n";
+
+
+  std::string generate_application(){
+    std::string base = "const string dataPath = \"data/" + dataset + "\";\n";
+    base += "void Application::init_relations() {\n"
+            "    clear_relations();\n\n";
+    for (auto &relation : *relations) {
+      base += "\t\t#if defined(RELATION_"+relation+"_STATIC)\n"
+              "        relations.push_back(std::unique_ptr<IRelation>(\n"
+              "            new EventDispatchableRelation<"+relation+"_entry>(\n"
+              "                \""+relation+"\", dataPath + \"/"+relation+".tbl\", '|', true,\n"
+              "                [](dbtoaster::data_t& data) {\n"
+              "                    return [&]("+relation+"_entry& t) {\n"
+              "                        data.on_insert_"+relation+"(t);\n"
+              "                    };\n"
+              "                }\n"
+              "        )));\n"
+              "    #elif defined(RELATION_"+relation+"_DYNAMIC) && defined(BATCH_SIZE)\n"
+              "        typedef const std::vector<DELTA_"+relation+"_entry>::iterator CIterator"+relation+";\n"
+              "        relations.push_back(std::unique_ptr<IRelation>(\n"
+              "            new BatchDispatchableRelation<DELTA_"+relation+"_entry>(\n"
+              "                \""+relation+"\", dataPath + \"/"+relation+".tbl\", '|', false,\n"
+              "                [](dbtoaster::data_t& data) {\n"
+              "                    return [&](CIterator"+relation+"& begin, CIterator"+relation+"& end) {\n"
+              "                        data.on_batch_update_"+relation+"(begin, end);\n"
+              "                    };\n"
+              "                }\n"
+              "        )));\n"
+              "    #elif defined(RELATION_"+relation+"_DYNAMIC)\n"
+              "        relations.push_back(std::unique_ptr<IRelation>(\n"
+              "            new EventDispatchableRelation<"+relation+"_entry>(\n"
+              "                \""+relation+"\", dataPath + \"/"+relation+".tbl\", '|', false,\n"
+              "                [](dbtoaster::data_t& data) {\n"
+              "                    return [&]("+relation+"_entry& t) {\n"
+              "                        data.on_insert_"+relation+"(t);\n"
+              "                    };\n"
+              "                }\n"
+              "        )));\n"
+              "    #endif\n\n";
+    }
+    base += "}\n\n";
+
+    return base;
+  }
+
+
   std::string generate_function(Query* query){
     std::vector<std::string> all_vars = std::vector<std::string>();
     std::string res = "void enumerate_" + query->query_name + "(dbtoaster::data_t &data, bool print_result) {\n";
@@ -137,11 +187,15 @@ public:
     }
     res += tabbing(tabbing_iter) + "for (auto &t0 : ring.store) {\n";
     tabbing_iter += 1;
-    res += tabbing(tabbing_iter) + "auto &" + config->at(0)->payload_vars + " = std::get<0>(t0.first);\n";
+    auto splitted = split(config->at(0)->payload_vars);
+    int i = 0;
+    for(auto &var : *splitted){
+      res += tabbing(tabbing_iter) + "auto &" + var + " = std::get<"+std::to_string(i)+">(t0.first);\n";
+      i+=1;
+    }
     res += tabbing(tabbing_iter) + "auto payload_0 = t0.second;\n";
     std::string combined_key = tabbing(tabbing_iter) + "auto combined_entry = " + update_type+query->query_name+"_entry(" + config->at(0)->payload_vars + ", ";
 
-    auto splitted = split(config->at(0)->payload_vars);
     all_vars.insert(all_vars.end(), splitted->begin(), splitted->end());
     delete splitted;
     std::string combined_value = tabbing(tabbing_iter) + "auto combined_value =";
@@ -157,11 +211,15 @@ public:
       } else {
         res += tabbing(tabbing_iter) + "for (auto &t" + nr + " : rel" + nr + ".store) {\n";
         tabbing_iter += 1;
-        res += tabbing(tabbing_iter) + "auto &" + (*view)->payload_vars + " = std::get<0>(t" + nr + ".first);\n";
+        splitted = split((*view)->payload_vars);
+        int i = 0;
+        for(auto &var : *splitted){
+          res += tabbing(tabbing_iter) + "auto &" + var + " = std::get<"+std::to_string(i)+">(t" + nr + ".first);\n";
+          i+=1;
+        }
         res += tabbing(tabbing_iter) + "auto &payload_" + nr + " = t" + nr + ".second;\n";
         combined_key += (*view)->payload_vars + ", ";
 
-        splitted = split((*view)->payload_vars);
         all_vars.insert(all_vars.end(), splitted->begin(), splitted->end());
 
         delete splitted;      }
@@ -202,7 +260,9 @@ public:
     std::transform(uppercase_filename.begin(), uppercase_filename.end(), uppercase_filename.begin(), toupper);
     res += "#ifndef " + uppercase_filename + "_HPP\n";
     res += "#define " + uppercase_filename + "_HPP\n";
-    res += "#include \"../src/basefiles/application_" + filename + "_base.hpp\"\n\n";
+    res += "#include \"../src/basefiles/application.hpp\"\n";
+    res += generate_application();
+
     //iterate over queries and generate enumeration function for them
     for(auto query : *queries){
       res += generate_function(query);
@@ -214,7 +274,8 @@ public:
       res += "    enumerate_" + query->query_name + "(data, print_result);\n";
     }
 
-    res += "}\n #endif";
+    res += "}\n";
+    res += " #endif";
     return res;
   }
 };
