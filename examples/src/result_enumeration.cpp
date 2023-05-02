@@ -4,6 +4,7 @@
 #include <iostream>
 #include <sstream>
 #include <fstream>
+#include <map>
 
 std::string tabbing(int nr){
   return std::string(nr * 2, ' ');
@@ -63,6 +64,7 @@ class Config {
   std::string dataset;
   std::vector<Query* >* queries = new std::vector<Query* >();
   std::vector<std::string>* relations;
+  std::map<std::string, std::vector<std::string> >* enumerated_relations;
 
 public:
   explicit Config(const std::string& config_file_name){
@@ -87,6 +89,16 @@ public:
     std::string relation_list;
     std::getline(config_file, relation_list);
     relations = split(relation_list, '|');
+    enumerated_relations = new std::map<std::string, std::vector<std::string> >();
+    std::string enumerated_relation_list;
+    std::getline(config_file, enumerated_relation_list);
+    auto enumerated_relations_list = split(enumerated_relation_list, '|');
+    for (auto &enumerated_relation : *enumerated_relations_list){
+      auto splitted = split(enumerated_relation, ':');
+      auto relation_name = splitted->at(0);
+      auto variables = split(splitted->at(1), ',');
+      enumerated_relations->insert(std::pair<std::string, std::vector<std::string> >(relation_name, *variables));
+    }
     for (auto &query : *queries) {
       for (int i = 0; i < query->nr_views; ++i) {
         std::string line;
@@ -166,8 +178,8 @@ public:
 
   std::string generate_function(Query* query){
     std::vector<std::string> all_vars = std::vector<std::string>();
-    std::string res = "void enumerate_" + query->query_name + "(dbtoaster::data_t &data, bool print_result) {\n";
-    res += "    size_t output_size = 0; \n";
+    std::string head = "void enumerate_" + query->query_name + "(dbtoaster::data_t &data, bool print_result) {\n";
+    std::string res = "    size_t output_size = 0; \n";
     std::string update_type = "DELTA_";
     if(query->call_batch_update){
       res += "    std::vector<"+update_type+query->query_name+"_entry> update = std::vector<"+update_type+query->query_name+"_entry>();";
@@ -194,7 +206,6 @@ public:
       i+=1;
     }
     res += tabbing(tabbing_iter) + "auto payload_0 = t0.second;\n";
-    std::string combined_key = tabbing(tabbing_iter) + "auto combined_entry = " + update_type+query->query_name+"_entry(" + config->at(0)->payload_vars + ", ";
 
     all_vars.insert(all_vars.end(), splitted->begin(), splitted->end());
     delete splitted;
@@ -218,7 +229,6 @@ public:
           i+=1;
         }
         res += tabbing(tabbing_iter) + "auto &payload_" + nr + " = t" + nr + ".second;\n";
-        combined_key += (*view)->payload_vars + ", ";
 
         all_vars.insert(all_vars.end(), splitted->begin(), splitted->end());
 
@@ -229,17 +239,20 @@ public:
       ++var_name_iter;
     }
 
-    combined_key.pop_back();
-    combined_key.pop_back();
     combined_value.pop_back();
     combined_value.pop_back();
     combined_value.pop_back();
     res += combined_value + ";\n";
     if(query->call_batch_update){
-      res += combined_key + ", combined_value);\n";
+      auto ordered_vars = enumerated_relations->find(query->query_name)->second;
+      std::string combined_key = tabbing(tabbing_iter) + "auto combined_entry = " + update_type+query->query_name+"_entry(" +
+          join(&ordered_vars, ",") + "combined_value);\n";
+      res += combined_key ;
     }
     res += tabbing(tabbing_iter) + "output_size++;\n";
     res += tabbing(tabbing_iter) + "if (print_result) std::cout << " + join(&all_vars, " << \",\" << ")+ "\"-> \" << combined_value << std::endl;\n";
+    std::string print_variable_order = "    std::cout << \""+join(&all_vars, ",") + "\" << std::endl;\n";
+
     if(query->call_batch_update) {
       res += tabbing(tabbing_iter) + "update.push_back(combined_entry);\n";
     }
@@ -252,7 +265,7 @@ public:
     else {
       res += "}\n";
     }
-    return res;
+    return head + print_variable_order + res;
   }
   std::string generate() {
     std::string res;
