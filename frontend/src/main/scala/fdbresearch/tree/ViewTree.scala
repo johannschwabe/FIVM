@@ -11,6 +11,7 @@ package fdbresearch.tree
 
 import fdbresearch.core._
 import fdbresearch.util.Utils
+import fdbresearch.util.Logger
 
 /**
   * View tree implementation
@@ -52,7 +53,7 @@ object ViewTree {
     assert(freeVars.subsetOf(dtreeVars.map(_.name).toSet))
 
     val variableMap = dtreeVars.map(v => v.name -> v).toMap
-
+    //Logger.instance.info(dtree.toString)
     // Build view tree from dtree
     dtree.map2WithPostChildren[View] { (tree, children) =>
 
@@ -94,11 +95,14 @@ object ViewTree {
       // Construct view name
       val relations = tree.getRelations.map(_.name.head).mkString
       val viewName = Utils.fresh("V_" + tree.node.name + "_" + relations)
-
+      //Logger.instance.info(viewName)
       // Determine view type
       val viewType = tree.node match {
-        case _: DTreeVariable =>
+        case node: DTreeVariable => {
+          //Logger.instance.info(node.name)
+          //Logger.instance.info(children.toString)
           (children.map(_.node.tp) ++ nodeTerms.map(_.tp)).reduce(Type.resolve)
+        }
         case r: DTreeRelation => r.tp
       }
 

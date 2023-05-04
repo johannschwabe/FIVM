@@ -50,10 +50,16 @@ class Driver {
   def findVars(a: Tree[View],
                keyMap: scala.collection.mutable.Map[String, String],
                payloadViews: scala.collection.mutable.MutableList[String]): scala.collection.mutable.Map[String, List[String]] = {
-    var res = scala.collection.mutable.Map[String, List[String]]()
-    res += (a.node.name -> a.node.terms(0).schema._1.map(i => {
-      i._1
-    }))
+    val res = scala.collection.mutable.Map[String, List[String]]()
+    //Logger.instance.info(a.node.name)
+    //Logger.instance.info(a.node.terms.toString)
+    if(a.node.terms.length > 0) {
+      res += (a.node.name -> a.node.terms(0).schema._1.map(i => {
+        i._1
+      }))
+    } else {
+      res += (a.node.name -> List.empty[String])
+    }
     var completeCover = true
     a.children.foreach(child => {
       if(keyMap.contains(child.node.name)){
@@ -105,6 +111,9 @@ class Driver {
       })
       keyMap += (t.name -> ovars.mkString(","))
     })
+    config = config + "FIVMQ2|" + viewOrder.length.toString + "|0\n"
+    val all_relations = dtree.getRelations.map(i => i.name.toString).mkString("|")
+    config = config + all_relations + "\n\n"
     var payloadMap = findVars(cg.getTree, keyMap, payloadViews)
     viewOrder.foreach(view => {
       var payloadView = if (payloadViews.contains(view.substring(2))) "1" else "0"
