@@ -154,8 +154,7 @@ public:
             "    clear_relations();\n\n";
     for (auto &relation: *relations) {
       std::string uppercase;
-      std::transform(relation.begin(), relation.end(), std::back_inserter(uppercase),
-                     [](unsigned char c) { return std::toupper(c); });
+      std::transform(relation.begin(), relation.end(), std::back_inserter(uppercase),[](unsigned char c) { return std::toupper(c); });
       base += "\t\t#if defined(RELATION_" + uppercase + "_STATIC)\n"
                                                         "        relations.push_back(std::unique_ptr<IRelation>(\n"
                                                         "            new EventDispatchableRelation<" + relation +
@@ -208,6 +207,7 @@ public:
     std::vector<std::string> all_vars = std::vector<std::string>();
     std::string head = "void enumerate_" + query->query_name + "(dbtoaster::data_t &data, bool print_result) {\n";
     std::string res = "    size_t output_size = 0; \n";
+    res += "Stopwatch start_time;\nstart_time.restart();\n";
     res += "std::ofstream output_file; output_file.open (\""+query->query_name+".csv\");";
     std::string update_type = "DELTA_";
     if (query->call_batch_update) {
@@ -284,7 +284,7 @@ public:
     }
     res += tabbing(tabbing_iter) + "output_size++;\n";
     res += tabbing(tabbing_iter) + "if (print_result) { output_file << " + join(&all_vars, " <<\",\"<<") +
-           "\",\" << combined_value << std::endl;}\n";
+           " combined_value << std::endl;}\n";
 
     std::string print_variable_order = "    std::cout << \"" + join(&all_vars, ",") + "\" << std::endl;\n";
 
@@ -294,8 +294,13 @@ public:
 
     auto end_brackets = std::string(tabbing_iter, '}');
     res += end_brackets;
+    res += "start_time.stop();\n";
+    res += "std::cout << \"query time "+query->query_name +": \" << start_time.elapsedTimeInMilliSeconds() << \"ms\"<< std::endl;\n";
     if (query->call_batch_update) {
+      res += "Stopwatch update_time;\nupdate_time.restart();\n";
       res += "data.on_batch_update_" + query->query_name + "(update.begin(), update.end());\n";
+      res += "update_time.stop();\n";
+      res += "std::cout << \"update time "+query->query_name +": \" << update_time.elapsedTimeInMilliSeconds() << \"ms\" << std::endl;\n";
     }
     res += "output_file.close();";
     res += "std::cout << \"" + query->query_name + ": \" << output_size << std::endl;\n}\n";
