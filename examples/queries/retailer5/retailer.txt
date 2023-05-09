@@ -17,16 +17,16 @@
 15 walmartdrivetime double 14 {0,4,5,6,7,8,9,10,11,12,13,14} 0 
 16 walmartsupercenterdistance double 15 {0,4,5,6,7,8,9,10,11,12,13,14,15} 0
 17 walmartsupercenterdrivetime double 16 {0,4,5,6,7,8,9,10,11,12,13,14,15,16} 0
-18 subcategory byte 2 {2} 1 
-19 category byte 18 {2,18} 0 
-20 categoryCluster byte 19 {2,18,19} 0
+18 category int 2 {2} 1
+19 subcategory int 18 {2,18} 0
+20 categoryCluster int 19 {2,18,19} 0
 21 prize double 20 {2,18,19,20} 0 
-22 rain byte 1 {0,1} 0
-23 snow byte 22 {0,1,22} 0
+22 rain int 1 {0,1} 0
+23 snow int 22 {0,1,22} 0
 24 maxtemp int 23 {0,1,22,23} 0
 25 mintemp int 24 {0,1,22,23,24} 0
 26 meanwind double 25 {0,1,22,23,24,25} 0
-27 thunder byte 26 {0,1,22,23,24,25,26} 0
+27 thunder int 26 {0,1,22,23,24,25,26} 0
 INVENTORY 3 locn,dateid,ksn,inventoryunits  
 LOCATION 17 locn,zip,rgn_cd,clim_zn_nbr,tot_area_sq_ft,sell_area_sq_ft,avghhi,supertargetdistance,supertargetdrivetime,targetdistance,targetdrivetime,walmartdistance,walmartdrivetime,walmartsupercenterdistance,walmartsupercenterdrivetime
 ITEM 21 ksn,subcategory,category,categoryCluster,prize

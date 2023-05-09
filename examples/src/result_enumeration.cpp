@@ -283,7 +283,7 @@ public:
       res += combined_key;
     }
     res += tabbing(tabbing_iter) + "output_size++;\n";
-    res += tabbing(tabbing_iter) + "if (print_result) { output_file << " + join(&all_vars, " <<\",\"<<") +
+    res += tabbing(tabbing_iter) + "if (print_result) { output_file << " + join(&all_vars, " <<\"|\"<<") +
            " combined_value << std::endl;}\n";
 
     std::string print_variable_order = "    std::cout << \"" + join(&all_vars, ",") + "\" << std::endl;\n";
