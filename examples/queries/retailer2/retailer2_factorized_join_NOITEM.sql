@@ -20,10 +20,10 @@ SELECT SUM(
     [lift<0>: RingFactorizedRelation<[0,int]>](locn) *
     [lift<1>: RingFactorizedRelation<[1,int]>](dateid) *
     [lift<2>: RingFactorizedRelation<[2,int,int]>](ksn, inventoryunits) *
-    [lift<4>: RingFactorizedRelation<[4,byte,byte,int,int,double,byte]>](rain, snow, maxtemp, mintemp, meanwind, thunder)
+    [lift<4>: RingFactorizedRelation<[4,byte,byte,int,int,double,byte]>](rain, snow, maxtemp, mintemp, meanwind, thunder) *
     [lift<10>: RingFactorizedRelation<[10,int]>](zip) *
     [lift<11>: RingFactorizedRelation<[11,int,int,int,int,int,double,double,double,double,double,double,double,double]>](rgn_cd, clim_zn_nbr, tot_area_sq_ft, sell_area_sq_ft, avghhi, supertargetdistance, supertargetdrivetime, targetdistance, targetdrivetime, walmartdistance, walmartdrivetime, walmartsupercenterdistance, walmartsupercenterdrivetime) *
-    [lift<24>: RingFactorizedRelation<[24,int,int,int,int,int,double,int,int,int,int,int,int,int,int,int]>](population, white, asian, pacific, blackafrican, medianage, occupiedhouseunits, houseunits, families, households, husbwife, males, females, householdschildren, hispanic) *
+    [lift<24>: RingFactorizedRelation<[24,int,int,int,int,int,double,int,int,int,int,int,int,int,int,int]>](population, white, asian, pacific, blackafrican, medianage, occupiedhouseunits, houseunits, families, households, husbwife, males, females, householdschildren, hispanic)
     -- [lift<4>: RingFactorizedRelation<[4,byte,byte,byte,double]>](subcategory, category, categoryCluster, prize) *
 )
 FROM INVENTORY NATURAL JOIN LOCATION NATURAL JOIN CENSUS NATURAL JOIN WEATHER;

@@ -66,6 +66,7 @@ struct Query {
 class Config {
   std::string filename;
   std::string dataset;
+  std::string filetype;
   std::vector<Query *> *queries = new std::vector<Query *>();
   std::vector<std::string> *relations;
   std::map<std::string, std::vector<std::string> > *enumerated_relations;
@@ -75,6 +76,7 @@ public:
     std::ifstream config_file(config_file_name);
     std::getline(config_file, filename);
     std::getline(config_file, dataset);
+    std::getline(config_file, filetype);
 
     std::string query_list;
     std::getline(config_file, query_list);
@@ -159,7 +161,7 @@ public:
                                                         "        relations.push_back(std::unique_ptr<IRelation>(\n"
                                                         "            new EventDispatchableRelation<" + relation +
               "_entry>(\n"
-              "                \"" + relation + "\", dataPath + \"/" + relation + ".tbl\", '|', true,\n"
+              "                \"" + relation + "\", dataPath + \"/" + relation + "." + filetype +"\", '|', true,\n"
                                                                                   "                [](dbtoaster::data_t& data) {\n"
                                                                                   "                    return [&](" +
               relation + "_entry& t) {\n"
@@ -174,7 +176,7 @@ public:
                          "        relations.push_back(std::unique_ptr<IRelation>(\n"
                          "            new BatchDispatchableRelation<DELTA_" + relation + "_entry>(\n"
                                                                                          "                \"" +
-              relation + "\", dataPath + \"/" + relation + ".tbl\", '|', false,\n"
+              relation + "\", dataPath + \"/" + relation + "." + filetype +"\", '|', false,\n"
                                                            "                [](dbtoaster::data_t& data) {\n"
                                                            "                    return [&](CIterator" + relation +
               "& begin, CIterator" + relation + "& end) {\n"
@@ -187,7 +189,7 @@ public:
                                                           "        relations.push_back(std::unique_ptr<IRelation>(\n"
                                                           "            new EventDispatchableRelation<" + relation +
               "_entry>(\n"
-              "                \"" + relation + "\", dataPath + \"/" + relation + ".tbl\", '|', false,\n"
+              "                \"" + relation + "\", dataPath + \"/" + relation + "."+filetype+"\", '|', false,\n"
                                                                                   "                [](dbtoaster::data_t& data) {\n"
                                                                                   "                    return [&](" +
               relation + "_entry& t) {\n"
@@ -295,12 +297,12 @@ public:
     auto end_brackets = std::string(tabbing_iter, '}');
     res += end_brackets;
     res += "start_time.stop();\n";
-    res += "std::cout << \"query time "+query->query_name +": \" << start_time.elapsedTimeInMilliSeconds() << \"ms\"<< std::endl;\n";
+    res += "std::cout << \"enumeration time "+query->query_name +": \" << start_time.elapsedTimeInMilliSeconds() << \"ms\"<< std::endl;\n";
     if (query->call_batch_update) {
       res += "Stopwatch update_time;\nupdate_time.restart();\n";
       res += "data.on_batch_update_" + query->query_name + "(update.begin(), update.end());\n";
       res += "update_time.stop();\n";
-      res += "std::cout << \"update time "+query->query_name +": \" << update_time.elapsedTimeInMilliSeconds() << \"ms\" << std::endl;\n";
+      res += "std::cout << \"propagation time "+query->query_name +": \" << update_time.elapsedTimeInMilliSeconds() << \"ms\" << std::endl;\n";
     }
     res += "output_file.close();";
     res += "std::cout << \"" + query->query_name + ": \" << output_size << std::endl;\n}\n";

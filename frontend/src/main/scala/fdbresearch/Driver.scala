@@ -100,6 +100,7 @@ class Driver {
     var config = "gugus\n"
     config = config + sql.sources(0).in.toString.split("/")(2)
     config = config + "\n"
+    config = config + "tbl\n"
 
     val keyMap = scala.collection.mutable.Map[String, String]()
     val viewOrder = scala.collection.mutable.MutableList[String]()

@@ -11,3 +11,4 @@ examples/cavier
 **.csv
 examples/cmake-build-debug/
 **.dSYM/
+examples/data/tpch
