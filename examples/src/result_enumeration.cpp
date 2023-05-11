@@ -70,6 +70,7 @@ class Config {
   std::vector<Query *> *queries = new std::vector<Query *>();
   std::vector<std::string> *relations;
   std::map<std::string, std::vector<std::string> > *enumerated_relations;
+  std::string write_to_config;
 
 public:
   explicit Config(const std::string &config_file_name) {
@@ -121,7 +122,21 @@ public:
         query->views->push_back(new ViewConfig(view_name, access_vars, payload_vars, payload_view == "1"));
       }
     }
-  }
+    write_to_config = "void write_to_config(std::vector<std::vector<std::string>>* times, std::ofstream& config_file){\n"
+                      "    config_file << \"" + filename + "|\"<<\"" + dataset + "|\";"
+                     "    for (auto &time: *times) {\n"
+                     "        bool first = true; \n"
+                         "    for (auto &t : time) {\n"
+                         "      if (!first) {\n"
+                         "        config_file << \"|\"; \n"
+                         "      } else {\n"
+                         "        first = false;\n"
+                         "      }\n"
+                         "      config_file << t;\n"
+                         "    }\n"
+                     "    }\n"
+                     "}";
+  };
 
   ~Config() {
     for (auto &query: *queries) {
@@ -147,6 +162,7 @@ public:
                             "\n"
                             "    cout << endl << \"Enumerating factorized join result... \" << endl;\n"
                             "\n"
+                            "    std::vector<std::vector<std::string>> times;\n"
                             "    size_t output_size = 0; \n";
 
 
@@ -156,14 +172,15 @@ public:
             "    clear_relations();\n\n";
     for (auto &relation: *relations) {
       std::string uppercase;
-      std::transform(relation.begin(), relation.end(), std::back_inserter(uppercase),[](unsigned char c) { return std::toupper(c); });
+      std::transform(relation.begin(), relation.end(), std::back_inserter(uppercase),
+                     [](unsigned char c) { return std::toupper(c); });
       base += "\t\t#if defined(RELATION_" + uppercase + "_STATIC)\n"
                                                         "        relations.push_back(std::unique_ptr<IRelation>(\n"
                                                         "            new EventDispatchableRelation<" + relation +
               "_entry>(\n"
-              "                \"" + relation + "\", dataPath + \"/" + relation + "." + filetype +"\", '|', true,\n"
-                                                                                  "                [](dbtoaster::data_t& data) {\n"
-                                                                                  "                    return [&](" +
+              "                \"" + relation + "\", dataPath + \"/" + relation + "." + filetype + "\", '|', true,\n"
+                                                                                                   "                [](dbtoaster::data_t& data) {\n"
+                                                                                                   "                    return [&](" +
               relation + "_entry& t) {\n"
                          "                        data.on_insert_" + relation + "(t);\n"
                                                                                 "                    };\n"
@@ -176,9 +193,10 @@ public:
                          "        relations.push_back(std::unique_ptr<IRelation>(\n"
                          "            new BatchDispatchableRelation<DELTA_" + relation + "_entry>(\n"
                                                                                          "                \"" +
-              relation + "\", dataPath + \"/" + relation + "." + filetype +"\", '|', false,\n"
-                                                           "                [](dbtoaster::data_t& data) {\n"
-                                                           "                    return [&](CIterator" + relation +
+              relation + "\", dataPath + \"/" + relation + "." + filetype + "\", '|', false,\n"
+                                                                            "                [](dbtoaster::data_t& data) {\n"
+                                                                            "                    return [&](CIterator" +
+              relation +
               "& begin, CIterator" + relation + "& end) {\n"
                                                 "                        data.on_batch_update_" + relation +
               "(begin, end);\n"
@@ -189,9 +207,9 @@ public:
                                                           "        relations.push_back(std::unique_ptr<IRelation>(\n"
                                                           "            new EventDispatchableRelation<" + relation +
               "_entry>(\n"
-              "                \"" + relation + "\", dataPath + \"/" + relation + "."+filetype+"\", '|', false,\n"
-                                                                                  "                [](dbtoaster::data_t& data) {\n"
-                                                                                  "                    return [&](" +
+              "                \"" + relation + "\", dataPath + \"/" + relation + "." + filetype + "\", '|', false,\n"
+                                                                                                   "                [](dbtoaster::data_t& data) {\n"
+                                                                                                   "                    return [&](" +
               relation + "_entry& t) {\n"
                          "                        data.on_insert_" + relation + "(t);\n"
                                                                                 "                    };\n"
@@ -207,10 +225,13 @@ public:
 
   std::string generate_function(Query *query) {
     std::vector<std::string> all_vars = std::vector<std::string>();
-    std::string head = "void enumerate_" + query->query_name + "(dbtoaster::data_t &data, bool print_result) {\n";
+    std::string head =
+        "void enumerate_" + query->query_name +
+        "(dbtoaster::data_t &data, bool print_result, std::vector<std::string>* " +
+        query->query_name + "_time) {\n";
     std::string res = "    size_t output_size = 0; \n";
     res += "Stopwatch start_time;\nstart_time.restart();\n";
-    res += "std::ofstream output_file; output_file.open (\""+query->query_name+".csv\");";
+    res += "std::ofstream output_file;\n if (print_result) output_file.open (\"" + query->query_name + ".csv\");";
     std::string update_type = "DELTA_";
     if (query->call_batch_update) {
       res += "    std::vector<" + update_type + query->query_name + "_entry> update = std::vector<" + update_type +
@@ -297,14 +318,25 @@ public:
     auto end_brackets = std::string(tabbing_iter, '}');
     res += end_brackets;
     res += "start_time.stop();\n";
-    res += "std::cout << \"enumeration time "+query->query_name +": \" << start_time.elapsedTimeInMilliSeconds() << \"ms\"<< std::endl;\n";
+    res += "std::cout << \"enumeration time " + query->query_name +
+           ": \" << start_time.elapsedTimeInMilliSeconds() << \"ms\"<< std::endl;\n";
+    res += query->query_name + "_time->push_back(\"" + query->query_name + "\");\n";
+    res += query->query_name + "_time->push_back(std::to_string(start_time.elapsedTimeInMilliSeconds()));\n";
     if (query->call_batch_update) {
       res += "Stopwatch update_time;\nupdate_time.restart();\n";
       res += "data.on_batch_update_" + query->query_name + "(update.begin(), update.end());\n";
       res += "update_time.stop();\n";
-      res += "std::cout << \"propagation time "+query->query_name +": \" << update_time.elapsedTimeInMilliSeconds() << \"ms\" << std::endl;\n";
+      res += "std::cout << \"propagation time " + query->query_name +
+             ": \" << update_time.elapsedTimeInMilliSeconds() << \"ms\" << std::endl;\n";
+      res += query->query_name + "_time->push_back(std::to_string(update_time.elapsedTimeInMilliSeconds()));\n";
+    } else {
+      res += query->query_name + "_time->push_back(\"-\");\n";
     }
-    res += "output_file.close();";
+    res += "output_file.close();\n";
+    res += query->query_name + "_time->push_back(std::to_string(output_size));\n";
+    auto vars = join(&all_vars, ",");
+    vars.pop_back();
+    res += query->query_name + "_time->push_back(\"" + vars + "\");\n";
     res += "std::cout << \"" + query->query_name + ": \" << output_size << std::endl;\n}\n";
     return head + print_variable_order + res;
   }
@@ -317,6 +349,7 @@ public:
     res += "#define " + uppercase_filename + "_HPP\n";
     res += "#include \"../src/basefiles/application.hpp\"\n";
     res += generate_application();
+    res += write_to_config;
 
     //iterate over queries and generate enumeration function for them
     for (auto query: *queries) {
@@ -325,10 +358,14 @@ public:
     }
     res += start;
     for (auto query: *queries) {
+      res += "    std::vector<std::string>" + query->query_name + "_time;\n";
       res += "    cout << \"Enumerating " + query->query_name + "... \" << endl;\n";
-      res += "    enumerate_" + query->query_name + "(data, print_result);\n";
+      res += "    enumerate_" + query->query_name + "(data, print_result, &" + query->query_name + "_time);\n";
+      res += "    times.push_back(" + query->query_name + "_time);\n";
     }
-
+    res += "std::ofstream config_file(\"config.txt\", std::ios::app);\n";
+    res += "write_to_config(&times, config_file);\n";
+    res += "config_file.close();\n";
     res += "}\n";
     res += " #endif";
     return res;
