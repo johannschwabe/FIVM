@@ -122,20 +122,23 @@ public:
         query->views->push_back(new ViewConfig(view_name, access_vars, payload_vars, payload_view == "1"));
       }
     }
-    write_to_config = "void write_to_config(std::vector<std::vector<std::string>>* times, std::ofstream& config_file){\n"
-                      "    config_file << \"" + filename + "|\"<<\"" + dataset + "|\";"
-                     "    for (auto &time: *times) {\n"
-                     "        bool first = true; \n"
-                         "    for (auto &t : time) {\n"
-                         "      if (!first) {\n"
-                         "        config_file << \"|\"; \n"
-                         "      } else {\n"
-                         "        first = false;\n"
-                         "      }\n"
-                         "      config_file << t;\n"
-                         "    }\n"
-                     "    }\n"
-                     "}";
+    write_to_config =
+      "void write_to_config(std::vector<std::vector<std::string>>* times, std::ofstream& config_file){\n"
+      "    config_file << \"" + filename + "|\"<<\"" + dataset + ":\";"
+      "    for (auto &time: *times) {\n"
+      "        bool first = true; \n"
+      "    for (auto &t : time) {\n"
+      "      if (!first) {\n"
+      "        config_file << \"|\"; \n"
+      "      } else {\n"
+      "        first = false;\n"
+      "      }\n"
+      "      config_file << t;\n"
+      "    }\n"
+      "    config_file << \":\";\n"
+      "    }\n"
+      "    config_file << \"\\n\";\n"
+      "}";
   };
 
   ~Config() {
