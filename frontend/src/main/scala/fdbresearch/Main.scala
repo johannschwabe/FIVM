@@ -73,7 +73,9 @@ object Main extends App {
           val file_name = split_file_path(3).split("_").init.mkString("_")
           val config_file_path = split_file_path(0) + "/config/" + split_file_path(2) + "/" + file_name + ".txt"
           new java.io.PrintWriter(config_file_path) {
-            write(configFile);
+            val splitted = dtreeFile.getName.split('.')(0)
+            val fixed_config = splitted +"\n"+ configFile.replace("FIVMQUERY", splitted.split('-')(1))
+            write(fixed_config);
             close()
           }
         }

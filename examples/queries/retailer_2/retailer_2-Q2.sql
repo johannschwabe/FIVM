@@ -1,4 +1,4 @@
-IMPORT DTREE FROM FILE 'retailer_2Q2.txt';
+IMPORT DTREE FROM FILE 'retailer_2-Q2.txt';
 
 CREATE DISTRIBUTED TYPE RingFactorizedRelation
 FROM FILE 'ring/ring_factorized.hpp'

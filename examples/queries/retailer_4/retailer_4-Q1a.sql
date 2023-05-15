@@ -1,4 +1,4 @@
-IMPORT DTREE FROM FILE 'retailer_4Q1b.txt';
+IMPORT DTREE FROM FILE 'retailer_4-Q1a.txt';
 
 CREATE DISTRIBUTED TYPE RingFactorizedRelation
 FROM FILE 'ring/ring_factorized.hpp'
@@ -14,8 +14,8 @@ CREATE STREAM ITEM(ksn int, subcategory int, category int, categoryCluster int, 
 FROM FILE './datasets/retailer/Item.tbl' LINE DELIMITED CSV(delimiter := '|');
 
 SELECT SUM(
-    [lift<0>: RingFactorizedRelation<[0,int]>](locn) *
-    [lift<1>: RingFactorizedRelation<[1,int]>](ksn) *
+    [lift<0>: RingFactorizedRelation<[0,int]>](ksn) *
+    [lift<1>: RingFactorizedRelation<[1,int]>](locn) *
     [lift<14>: RingFactorizedRelation<[14,int]>](zip) *
     [lift<3>: RingFactorizedRelation<[3,int]>](category)
 )

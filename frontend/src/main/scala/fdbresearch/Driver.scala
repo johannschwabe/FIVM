@@ -97,10 +97,11 @@ class Driver {
 
     val cg = new CodeGenerator(viewtree, sql.typeDefs, sql.sources, batchUpdates)
 
-    var config = "gugus\n"
+    var config = ""
     config = config + sql.sources(0).in.toString.split("/")(2)
     config = config + "\n"
     config = config + "tbl\n"
+    config = config + "FIVM\n"
 
     val keyMap = scala.collection.mutable.Map[String, String]()
     val viewOrder = scala.collection.mutable.MutableList[String]()
@@ -112,7 +113,7 @@ class Driver {
       })
       keyMap += (t.name -> ovars.mkString(","))
     })
-    config = config + "FIVMQ2|" + viewOrder.length.toString + "|0\n"
+    config = config + "FIVMQUERY|" + viewOrder.length.toString + "|0\n"
     val all_relations = dtree.getRelations.map(i => i.name.toString).mkString("|")
     config = config + all_relations + "\n\n"
     var payloadMap = findVars(cg.getTree, keyMap, payloadViews)

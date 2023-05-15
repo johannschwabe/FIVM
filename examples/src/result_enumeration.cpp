@@ -67,6 +67,7 @@ class Config {
   std::string filename;
   std::string dataset;
   std::string filetype;
+  std::string executor;
   std::vector<Query *> *queries = new std::vector<Query *>();
   std::vector<std::string> *relations;
   std::map<std::string, std::vector<std::string> > *enumerated_relations;
@@ -78,6 +79,7 @@ public:
     std::getline(config_file, filename);
     std::getline(config_file, dataset);
     std::getline(config_file, filetype);
+    std::getline(config_file, executor);
 
     std::string query_list;
     std::getline(config_file, query_list);
@@ -122,9 +124,16 @@ public:
         query->views->push_back(new ViewConfig(view_name, access_vars, payload_vars, payload_view == "1"));
       }
     }
+    std::string fixed_filename;
+    auto splitted_filename = split(filename, '-');
+    if(splitted_filename->size() == 1){
+      fixed_filename = filename ;
+    } else {
+      fixed_filename = splitted_filename->at(0);
+    }
     write_to_config =
         "void write_to_config(std::vector<std::vector<std::string>>* times, std::ofstream& config_file, long stream_processing, std::string relations){\n"
-        "    config_file << \"" + filename + "|\"<<\"" + dataset + "|\" << stream_processing << \"|\" << relations;"
+        "    config_file << \"" + fixed_filename + "|"+executor+"|\"<<\"" + dataset + "|\" << stream_processing << \"|\" << relations;"
        "    for (auto &time: *times) {\n"
        "    config_file << \":\";\n"
 
@@ -354,8 +363,9 @@ public:
     std::string res;
     std::string uppercase_filename = filename;
     std::transform(uppercase_filename.begin(), uppercase_filename.end(), uppercase_filename.begin(), toupper);
-    res += "#ifndef " + uppercase_filename + "_HPP\n";
-    res += "#define " + uppercase_filename + "_HPP\n";
+    std::string define_name = split(uppercase_filename, '-')->at(0);
+    res += "#ifndef " + define_name + "_HPP\n";
+    res += "#define " + define_name + "_HPP\n";
     res += "#include \"../src/basefiles/application.hpp\"\n";
     res += generate_application();
     res += write_to_config;

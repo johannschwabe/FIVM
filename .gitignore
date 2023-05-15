@@ -12,3 +12,5 @@ examples/cavier
 examples/cmake-build-debug/
 **.dSYM/
 examples/data/tpch**
+**.xlsx
+.venv
