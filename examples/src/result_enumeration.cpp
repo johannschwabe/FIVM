@@ -123,22 +123,23 @@ public:
       }
     }
     write_to_config =
-      "void write_to_config(std::vector<std::vector<std::string>>* times, std::ofstream& config_file){\n"
-      "    config_file << \"" + filename + "|\"<<\"" + dataset + ":\";"
-      "    for (auto &time: *times) {\n"
-      "        bool first = true; \n"
-      "    for (auto &t : time) {\n"
-      "      if (!first) {\n"
-      "        config_file << \"|\"; \n"
-      "      } else {\n"
-      "        first = false;\n"
-      "      }\n"
-      "      config_file << t;\n"
-      "    }\n"
-      "    config_file << \":\";\n"
-      "    }\n"
-      "    config_file << \"\\n\";\n"
-      "}";
+        "void write_to_config(std::vector<std::vector<std::string>>* times, std::ofstream& config_file, long stream_processing, std::string relations){\n"
+        "    config_file << \"" + filename + "|\"<<\"" + dataset + "|\" << stream_processing << \"|\" << relations;"
+       "    for (auto &time: *times) {\n"
+       "    config_file << \":\";\n"
+
+       "        bool first = true; \n"
+       "    for (auto &t : time) {\n"
+       "      if (!first) {\n"
+       "        config_file << \"|\"; \n"
+       "      } else {\n"
+       "        first = false;\n"
+       "      }\n"
+       "      config_file << t;\n"
+       "    }\n"
+       "    }\n"
+       "    config_file << \"\\n\";\n"
+       "}";
   };
 
   ~Config() {
@@ -165,6 +166,11 @@ public:
                             "\n"
                             "    cout << endl << \"Enumerating factorized join result... \" << endl;\n"
                             "\n"
+                            "std::string relation_list = \"\";\n"
+                            "  for(auto& rel: relations){\n"
+                            "    relation_list += rel->get_name() + \",\";\n"
+                            "  }\n"
+                            "  relation_list = relation_list.substr(0, relation_list.size() - 1);"
                             "    std::vector<std::vector<std::string>> times;\n"
                             "    size_t output_size = 0; \n";
 
@@ -367,7 +373,7 @@ public:
       res += "    times.push_back(" + query->query_name + "_time);\n";
     }
     res += "std::ofstream config_file(\"config.txt\", std::ios::app);\n";
-    res += "write_to_config(&times, config_file);\n";
+    res += "write_to_config(&times, config_file,stream_processing, relation_list);\n";
     res += "config_file.close();\n";
     res += "}\n";
     res += " #endif";

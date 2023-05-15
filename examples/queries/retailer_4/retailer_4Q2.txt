@@ -1,0 +1,11 @@
+8 2
+0 ksn int -1 {} 0
+1 category int 0 {0} 0
+2 prize double 1 {0,1} 0
+3 subcategory int 2 {0,1,2} 0
+4 categoryCluster int 3 {0,1,2,3} 0
+5 locn int 0 {0} 0
+6 dateid int 5 {0,5} 0
+7 inventoryunits int 6 {0,5,6} 0
+ITEM 4 ksn,subcategory,category,categoryCluster,prize
+INVENTORY 7 locn,dateid,ksn,inventoryunits

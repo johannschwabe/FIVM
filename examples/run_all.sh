@@ -24,16 +24,21 @@ fi
 # Read the comma-separated lists from the file run_params.txt
 IFS=',' read -ra list1 <<< $(sed -n 1p run_params.txt)
 IFS=',' read -ra list2 <<< $(sed -n 2p run_params.txt)
+
+make clean
+
 # Execute the shell script cavier/run.sh" for each element in the first list
 for item in $list1; do
-  echo cavier/run.sh "$item" "batch" "exe"
-  bash cavier/run.sh "$item" "batch" "exe"
-done
+  #CAVIER
+  echo cavier/run.sh "$item" "exe"
+  bash cavier/run.sh "$item" "exe"
 
-# Execute commands for each element in the second list
-for item in $list2; do
-  echo DATASET="$item"
+  #FIVM
+  echo make DATASET="$item"
   make DATASET="$item"
-  echo ./bin/"$item"/"$item"_BATCH_1000 --no-output
-  ./bin/"$item"/"$item"_BATCH_1000 --no-output
+  for file in ./bin/"$item/$item"*_BATCH_1000; do
+    echo "$file" --no-output
+    "$file" --no-output
+  done
+
 done
