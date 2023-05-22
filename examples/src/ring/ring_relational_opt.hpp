@@ -1,7 +1,7 @@
 #ifndef RINGRELATIONAL_OPT_HPP
 #define RINGRELATIONAL_OPT_HPP
 
-#include <vector>
+#include <array>
 #include <unordered_map>
 #include <tuple>
 #include <type_traits>
@@ -12,20 +12,25 @@
 using namespace dbtoaster;
 
 template <typename... Keys>
-using Vector = std::vector<std::tuple<std::tuple<Keys...>, long>>;
+using SingletonArray = std::array<std::tuple<std::tuple<Keys...>, long>, 1>;
 
 template <typename... Keys>
 using Map = std::unordered_map<std::tuple<Keys...>, long, hash_tuple::hash<std::tuple<Keys...>>>;
 
 template <size_t Idx, typename... Keys>
-struct RelationVector {
-    Vector<Keys...> store;
+struct SingletonRelation {
+    SingletonArray<Keys...> store;
+    static long count;
 
-    explicit RelationVector(const Keys&... keys, long value)
-        : store(Vector<Keys...> { std::make_pair(std::make_tuple(keys...), value) }) { }
+    explicit SingletonRelation(const Keys&... keys, long value)
+        : store { std::make_pair(std::make_tuple(keys...), value) } { }
 
-    inline bool isZero() const { return store.empty(); }
+    inline bool isZero() const { return std::get<1>(store[0]) == 0L; }
 };
+
+template <size_t Idx, typename... Keys>
+long SingletonRelation<Idx, Keys...>::count = 1L;
+
 
 template <size_t Idx, typename... Keys>
 struct RelationMap {
@@ -69,7 +74,24 @@ struct RelationMap {
 
     template <typename... Args>
     inline void apply(const Container<Idx, Args...>& c) {
-        apply(c, std::tuple<>(), c.scale, Int<sizeof...(Args)>());
+        // apply(c, std::tuple<>(), c.scale, Int<sizeof...(Args)>());
+        apply2(c, c.scale, Int<sizeof...(Args)>());
+    }
+
+    template <size_t N, typename... Args, typename... TupleKeys>
+    inline void apply2(const Container<Idx, Args...>& c, long value, Int<N>, TupleKeys&&... keys) {
+        for (auto &it : std::get<N-1>(c.values).store) {
+            apply2(c, std::get<1>(it) * value, Int<N-1>(), std::get<0>(it), std::forward<decltype(keys)>(keys)...);
+        }
+    }
+
+    template <typename... Args, typename... TupleKeys>
+    inline void apply2(const Container<Idx, Args...>& c, long value, Int<1>, TupleKeys&&... keys) {
+        for (auto &it : std::get<0>(c.values).store) {
+            auto t = std::tuple_cat(std::get<0>(it), std::forward<decltype(keys)>(keys)...);
+            store[t] += std::get<1>(it) * value;
+            if (store[t] == 0L) this->store.erase(t);
+        }
     }
 
     template <typename Key, size_t N, typename... Args>
@@ -129,8 +151,8 @@ Container<Idx, const RelationMap<Idx, Keys...>&> operator*(long alpha, RelationM
 
 // LIFTING FUNCTION
 template <size_t Idx, typename... Args>
-Container<Idx, RelationVector<Idx, Args...>> Ulift(Args&... args) {
-    return FactoryContainer<Idx, RelationVector<Idx, Args...>>::create(RelationVector<Idx, Args...>(args..., 1L));
+Container<Idx, SingletonRelation<Idx, Args...>> Ulift(Args&... args) {
+    return FactoryContainer<Idx, SingletonRelation<Idx, Args...>>::create(SingletonRelation<Idx, Args...>(args..., 1L));
 }
 
 template <size_t Idx, typename... Keys>
