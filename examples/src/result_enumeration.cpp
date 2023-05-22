@@ -5,6 +5,7 @@
 #include <sstream>
 #include <fstream>
 #include <map>
+#include <algorithm>
 
 std::string tabbing(int nr) {
   return std::string(nr * 2, ' ');
