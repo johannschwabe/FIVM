@@ -1,8 +1,8 @@
-#ifndef APPLICATION_RETAILER_HPP
-#define APPLICATION_RETAILER_HPP
+#ifndef APPLICATION_FAVORITA_HPP
+#define APPLICATION_FAVORITA_HPP
 
 #include <sys/time.h>
-#include "application_retailer_base.hpp"
+#include "application_favorita_base.hpp"
 
 void Application::on_snapshot(dbtoaster::data_t& data) {
     struct timeval tp;
@@ -25,4 +25,4 @@ void Application::on_end_processing(dbtoaster::data_t& data, bool print_result) 
     }
 }
 
-#endif /* APPLICATION_RETAILER_HPP */
+#endif /* APPLICATION_FAVORITA_HPP */

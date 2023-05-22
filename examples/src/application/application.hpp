@@ -3,9 +3,21 @@
 
 #include <iostream>
 #include <vector>
+#include <sys/time.h>
 #include "stopwatch.hpp"
 #include "dispatcher.hpp"
 #include "relation.hpp"
+
+#ifdef LOG_MEMORY_INFO
+    #include "memory.hpp"
+    #define START_HEAP_PROFILE startHeapProfiler("MAIN");
+    #define STOP_HEAP_PROFILE stopHeapProfiler();
+    #define DUMP_HEAP_PROFILE dumpHeapProfile("APPLICATION");
+#else
+    #define START_HEAP_PROFILE
+    #define STOP_HEAP_PROFILE
+    #define DUMP_HEAP_PROFILE
+#endif
 
 using namespace dbtoaster;
 
@@ -42,6 +54,8 @@ class Application {
     void on_end_processing(dbtoaster::data_t& data, bool print_result);
 
     void print_result(dbtoaster::data_t& data);
+
+    void print_checkpoint(dbtoaster::data_t& data);
 
   public:
     Application() { }
@@ -87,20 +101,51 @@ void Application::clear_dispatchers() {
 }
 
 void Application::process_tables(dbtoaster::data_t& data) {
+    #ifdef LOG_MEMORY_INFO
+        std::cout << "Memory before process_tables" << std::flush;
+        DUMP_HEAP_PROFILE
+    #endif
+
     while (static_multiplexer.has_next()) {
         static_multiplexer.next();
     }
+
+    #ifdef LOG_MEMORY_INFO
+        std::cout << "Memory after process_tables: " << std::flush;
+        DUMP_HEAP_PROFILE
+    #endif
 }
 
 void Application::process_on_system_ready(dbtoaster::data_t& data) {
+    #ifdef LOG_MEMORY_INFO
+        std::cout << "Memory before on_system_ready: " << std::flush;
+        DUMP_HEAP_PROFILE
+    #endif
+
     data.on_system_ready_event();
+
+    #ifdef LOG_MEMORY_INFO
+        std::cout << "Memory after on_system_ready: " << std::flush;
+        DUMP_HEAP_PROFILE
+    #endif
+
 }
 
 void Application::process_streams(dbtoaster::data_t& data) {
+    #ifdef LOG_MEMORY_INFO
+        std::cout << "Memory before process_streams: " << std::flush;
+        DUMP_HEAP_PROFILE
+    #endif
+
     #ifdef SNAPSHOT_INTERVAL
         process_streams_snapshot(data, SNAPSHOT_INTERVAL);
     #else
         process_streams_no_snapshot(data);
+    #endif
+
+    #ifdef LOG_MEMORY_INFO
+        std::cout << "Memory after process_streams: " << std::flush;
+        DUMP_HEAP_PROFILE
     #endif
 }
 
@@ -108,12 +153,11 @@ void Application::process_streams_snapshot(dbtoaster::data_t& data, long snapsho
     long next_snapshot = 0;
 
     while (dynamic_multiplexer.has_next()) {
-        dynamic_multiplexer.next();
-
         if (data.tN >= next_snapshot) {
             on_snapshot(data);
             next_snapshot = data.tN + snapshot_interval;
         }
+        dynamic_multiplexer.next();
     }
 
     if (next_snapshot != data.tN + snapshot_interval) {
@@ -125,6 +169,14 @@ void Application::process_streams_no_snapshot(dbtoaster::data_t& data) {
     while (dynamic_multiplexer.has_next()) {
         dynamic_multiplexer.next();
     }
+}
+
+void Application::print_checkpoint(dbtoaster::data_t& data) {
+    struct timeval tp;
+    gettimeofday(&tp, nullptr);
+    std::cout << data.tN << " tuples processed at "
+            << tp.tv_sec * 1000 + tp.tv_usec / 1000
+            << " ms" << std::endl;
 }
 
 void Application::run(size_t num_of_runs, bool print_result) {
