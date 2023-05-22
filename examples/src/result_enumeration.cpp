@@ -250,7 +250,7 @@ public:
         query->query_name + "_time) {\n";
     std::string res = "    size_t output_size = 0; \n";
     res += "Stopwatch start_time;\nstart_time.restart();\n";
-    res += "std::ofstream output_file;\n if (print_result) output_file.open (\"" + query->query_name + ".csv\");";
+    res += "std::ofstream output_file;\n if (print_result) output_file.open (\"" + query->query_name + ".csv\");\n";
     std::string update_type = "DELTA_";
     if (query->call_batch_update) {
       res += "    std::vector<" + update_type + query->query_name + "_entry> update = std::vector<" + update_type +
