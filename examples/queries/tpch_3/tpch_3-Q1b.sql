@@ -1,4 +1,4 @@
-IMPORT DTREE FROM FILE 'tpch_3-Q2.txt';
+IMPORT DTREE FROM FILE 'tpch_3-Q1b.txt';
 
 CREATE DISTRIBUTED TYPE RingFactorizedRelation
 FROM FILE 'ring/ring_factorized.hpp'
@@ -14,11 +14,11 @@ STREAM LINEITEM (
         l_extendedprice  DECIMAL,
         l_discount       DECIMAL,
         l_tax            DECIMAL,
-        l_returnflag     VARCHAR(1),
-        l_linestatus     VARCHAR(1),
-        l_shipdate       VARCHAR(10),
-        l_commitdate     VARCHAR(10),
-        l_receiptdate    VARCHAR(10),
+        l_returnflag     CHAR(1),
+        l_linestatus     CHAR(1),
+        l_shipdate       DATE,
+        l_commitdate     DATE,
+        l_receiptdate    DATE,
         l_shipinstruct   CHAR(25),
         l_shipmode       CHAR(10),
         l_comment        VARCHAR(44)
@@ -31,7 +31,7 @@ STREAM SUPPLIER (
         suppkey        INT,
         s_name         VARCHAR(25),
         s_address         CHAR(25),
-        nationkey        INT,
+        s_nationkey        INT,
         s_phone         CHAR(15),
         s_acctbal         DECIMAL,
         s_comment         VARCHAR(101)
@@ -51,12 +51,13 @@ STREAM PARTSUPP (
   LINE DELIMITED CSV (delimiter := '|');
 
 SELECT SUM(
-    [lift<0>: RingFactorizedRelation<[0, INT]>](suppkey) *
-    [lift<1>: RingFactorizedRelation<[1, INT]>](partkey) *
+    [lift<0>: RingFactorizedRelation<[0, INT, INT]>](suppkey,partkey) *
     [lift<2>: RingFactorizedRelation<[2, DECIMAL]>](l_quantity) *
-    [lift<17>: RingFactorizedRelation<[17, INT, DECIMAL]>](ps_availqty, ps_supplycost) *
-    [lift<20>: RingFactorizedRelation<[20, VARCHAR(25)]>](s_name)
+    [lift<16>: RingFactorizedRelation<[16, INT, DECIMAL]>](ps_availqty, ps_supplycost) *
+    [lift<19>: RingFactorizedRelation<[19, VARCHAR(25)]>](s_name)
 )
 FROM LINEITEM
+         NATURAL JOIN PART
          NATURAL JOIN SUPPLIER
          NATURAL JOIN PARTSUPP;
+

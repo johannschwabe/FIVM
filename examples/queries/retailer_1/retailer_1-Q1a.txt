@@ -1,4 +1,4 @@
-43 5
+28 5
 0 locn int -1 {} 0
 1 dateid int 0 {0} 0
 2 ksn int 1 {0,1} 0
