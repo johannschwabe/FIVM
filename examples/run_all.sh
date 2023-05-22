@@ -22,8 +22,8 @@ if [[ -e "config.txt" ]]; then
 fi
 
 # Read the comma-separated lists from the file run_params.txt
-IFS=',' read -ra list1 <<< $(sed -n 1p run_params.txt)
-IFS=',' read -ra list2 <<< $(sed -n 2p run_params.txt)
+IFS=',' read -rA list1 <<< $(sed -n 1p run_params.txt)
+IFS=',' read -rA list2 <<< $(sed -n 2p run_params.txt)
 
 make clean
 
