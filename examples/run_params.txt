@@ -1,1 +1,1 @@
-tpch_1,tpch_2,tpch_3
+retailer_1,retailer_2,retailer_3,retailer_4,tpch_1,tpch_2,tpch_3
