@@ -69,6 +69,7 @@ class Config {
   std::string dataset;
   std::string filetype;
   std::string executor;
+  std::string propagation_size;
   std::vector<Query *> *queries = new std::vector<Query *>();
   std::vector<std::string> *relations;
   std::map<std::string, std::vector<std::string> > *enumerated_relations;
@@ -81,6 +82,7 @@ public:
     std::getline(config_file, dataset);
     std::getline(config_file, filetype);
     std::getline(config_file, executor);
+    std::getline(config_file, propagation_size);
 
     std::string query_list;
     std::getline(config_file, query_list);
@@ -249,7 +251,12 @@ public:
         "(dbtoaster::data_t &data, bool print_result, std::vector<std::string>* " +
         query->query_name + "_time) {\n";
     std::string res = "    size_t output_size = 0; \n";
-    res += "Stopwatch start_time;\nstart_time.restart();\n";
+    res += "Stopwatch enumeration_timer;\nenumeration_timer.restart();\n";
+    if (query->call_batch_update) {
+      res += "Stopwatch propatation_timer;\npropatation_timer.restart();\n";
+      res += "long propagation_time = 0;\n";
+    }
+    res += "long enumeration_time = 0;\n";
     res += "std::ofstream output_file;\n if (print_result) output_file.open (\"" + query->query_name + ".csv\");\n";
     std::string update_type = "DELTA_";
     if (query->call_batch_update) {
@@ -317,37 +324,42 @@ public:
     combined_value.pop_back();
     combined_value.pop_back();
     res += combined_value + ";\n";
+    res += tabbing(tabbing_iter) + "output_size++;\n";
+
     if (query->call_batch_update) {
+
       auto ordered_vars = enumerated_relations->find(query->query_name)->second;
-      std::string combined_key =
+      res +=
           tabbing(tabbing_iter) + "auto combined_entry = " + update_type + query->query_name + "_entry(" +
           join(&ordered_vars, ",") + "combined_value);\n";
-      res += combined_key;
+      res += tabbing(tabbing_iter) + "update.push_back(combined_entry);\n";
+
+      res += tabbing(tabbing_iter) + "if (output_size % "+propagation_size+" == "+propagation_size +"-1) { enumeration_timer.stop(); enumeration_time += enumeration_timer.elapsedTimeInMilliSeconds();"+
+             "propatation_timer.restart(); data.on_batch_update_Q2(update.begin(), update.end()); update.clear();propatation_timer.stop();propagation_time += propatation_timer.elapsedTimeInMilliSeconds();\n";
+      res += tabbing(tabbing_iter) + "enumeration_timer.restart();}\n";
     }
-    res += tabbing(tabbing_iter) + "output_size++;\n";
+
     res += tabbing(tabbing_iter) + "if (print_result) { output_file << " + join(&all_vars, " <<\"|\"<<") +
            " combined_value << std::endl;}\n";
 
     std::string print_variable_order = "    std::cout << \"" + join(&all_vars, ",") + "\" << std::endl;\n";
 
-    if (query->call_batch_update) {
-      res += tabbing(tabbing_iter) + "update.push_back(combined_entry);\n";
-    }
 
     auto end_brackets = std::string(tabbing_iter, '}');
     res += end_brackets;
-    res += "start_time.stop();\n";
+    res += "enumeration_timer.stop();\n";
     res += "std::cout << \"enumeration time " + query->query_name +
-           ": \" << start_time.elapsedTimeInMilliSeconds() << \"ms\"<< std::endl;\n";
+           ": \" << enumeration_time << \"ms\"<< std::endl;\n";
     res += query->query_name + "_time->push_back(\"" + query->query_name + "\");\n";
-    res += query->query_name + "_time->push_back(std::to_string(start_time.elapsedTimeInMilliSeconds()));\n";
+    res += query->query_name + "_time->push_back(std::to_string(enumeration_time));\n";
     if (query->call_batch_update) {
-      res += "Stopwatch update_time;\nupdate_time.restart();\n";
+      res += "propatation_timer.restart();\n";
       res += "data.on_batch_update_" + query->query_name + "(update.begin(), update.end());\n";
-      res += "update_time.stop();\n";
+      res += "propatation_timer.stop();\n";
+      res += "propagation_time += propatation_timer.elapsedTimeInMilliSeconds();\n";
       res += "std::cout << \"propagation time " + query->query_name +
-             ": \" << update_time.elapsedTimeInMilliSeconds() << \"ms\" << std::endl;\n";
-      res += query->query_name + "_time->push_back(std::to_string(update_time.elapsedTimeInMilliSeconds()));\n";
+             ": \" << propagation_time << \"ms\" << std::endl;\n";
+      res += query->query_name + "_time->push_back(std::to_string(propagation_time));\n";
     } else {
       res += query->query_name + "_time->push_back(\"-\");\n";
     }
