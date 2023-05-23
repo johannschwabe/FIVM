@@ -407,6 +407,7 @@ public:
 };
 
 int main(int argc, char **argv) {
+  std::cout << "Generating Application" << std::endl;
   if (argc == 1) {
     std::cout << "No Config file given" << std::endl;
     return 1;
