@@ -95,6 +95,7 @@ public:
       if (!q) break;
       getline(q, nr_views, '|');
       getline(q, call_batch_update, '|');
+      std::cout << "test: " << nr_views << std::endl;
       queries->push_back(new Query(query_name, std::stoi(nr_views), call_batch_update == "1"));
     }
     std::string relation_list;
