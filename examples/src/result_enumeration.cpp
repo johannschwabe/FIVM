@@ -243,7 +243,15 @@ public:
     return base;
   }
 
-
+  std::string generate_struct(std::vector<std::string>* all_vars, std::string name) {
+    std::string res = "struct " + name + "_entry {\n";
+    for (auto var: *all_vars) {
+      res += "    std::any " + var + ";\n";
+    }
+    res += "    long combined_value;\n";
+    res += "};\n\n";
+    return res;
+  }
   std::string generate_function(Query *query) {
     std::vector<std::string> all_vars = std::vector<std::string>();
     std::string head =
@@ -253,7 +261,7 @@ public:
     std::string res = "    size_t output_size = 0; \n";
     res += "Stopwatch enumeration_timer;\nenumeration_timer.restart();\n";
     if (query->call_batch_update) {
-      res += "Stopwatch propatation_timer;\npropatation_timer.restart();\n";
+      res += "Stopwatch propagation_timer;\n";
       res += "long propagation_time = 0;\n";
     }
     res += "long enumeration_time = 0;\n";
@@ -261,6 +269,9 @@ public:
     std::string update_type = "DELTA_";
     if (query->call_batch_update) {
       res += "    std::vector<" + update_type + query->query_name + "_entry> update = std::vector<" + update_type +
+             query->query_name + "_entry>();";
+    } else {
+      res += "    std::vector<" + query->query_name + "_entry> update = std::vector<" +
              query->query_name + "_entry>();";
     }
     int var_name_iter = 1;
@@ -335,8 +346,13 @@ public:
       res += tabbing(tabbing_iter) + "update.push_back(combined_entry);\n";
 
       res += tabbing(tabbing_iter) + "if (output_size % "+propagation_size+" == "+propagation_size +"-1) { enumeration_timer.stop(); enumeration_time += enumeration_timer.elapsedTimeInMilliSeconds();"+
-             "propatation_timer.restart(); data.on_batch_update_Q2(update.begin(), update.end()); update.clear();propatation_timer.stop();propagation_time += propatation_timer.elapsedTimeInMilliSeconds();\n";
+             "propagation_timer.restart(); data.on_batch_update_Q2(update.begin(), update.end()); update.clear();propagation_timer.stop();propagation_time += propagation_timer.elapsedTimeInMilliSeconds();\n";
       res += tabbing(tabbing_iter) + "enumeration_timer.restart();}\n";
+    } else {
+      res +=
+          tabbing(tabbing_iter) + "auto combined_entry = " + query->query_name + "_entry{" +
+          join(&all_vars, ",") + "combined_value};\n";
+      res += tabbing(tabbing_iter) + "update.push_back(combined_entry);\n";
     }
 
     res += tabbing(tabbing_iter) + "if (print_result) { output_file << " + join(&all_vars, " <<\"|\"<<") +
@@ -348,20 +364,26 @@ public:
     auto end_brackets = std::string(tabbing_iter, '}');
     res += end_brackets;
     res += "enumeration_timer.stop();\n";
+    res += "enumeration_time += enumeration_timer.elapsedTimeInMilliSeconds();\n";
     res += "std::cout << \"enumeration time " + query->query_name +
            ": \" << enumeration_time << \"ms\"<< std::endl;\n";
     res += query->query_name + "_time->push_back(\"" + query->query_name + "\");\n";
     res += query->query_name + "_time->push_back(std::to_string(enumeration_time));\n";
     if (query->call_batch_update) {
-      res += "propatation_timer.restart();\n";
+      res += "propagation_timer.restart();\n";
       res += "data.on_batch_update_" + query->query_name + "(update.begin(), update.end());\n";
-      res += "propatation_timer.stop();\n";
-      res += "propagation_time += propatation_timer.elapsedTimeInMilliSeconds();\n";
+      res += "propagation_timer.stop();\n";
+      res += "propagation_time += propagation_timer.elapsedTimeInMilliSeconds();\n";
       res += "std::cout << \"propagation time " + query->query_name +
              ": \" << propagation_time << \"ms\" << std::endl;\n";
       res += query->query_name + "_time->push_back(std::to_string(propagation_time));\n";
     } else {
       res += query->query_name + "_time->push_back(\"-\");\n";
+      std::string entry = generate_struct(&all_vars, query->query_name);
+      head = entry + head;
+      res += "std::uniform_int_distribution<int> uni(0,output_size);\n";
+      res += "volatile auto dummy = update.at(uni(rng));\n";
+      res += "std::cout << \"dummy: \" << dummy.combined_value << std::endl;\n";
     }
     res += "output_file.close();\n";
     res += query->query_name + "_time->push_back(std::to_string(output_size));\n";
@@ -372,6 +394,7 @@ public:
     return head + print_variable_order + res;
   }
 
+
   std::string generate() {
     std::string res;
     std::string uppercase_filename = filename;
@@ -380,6 +403,10 @@ public:
     res += "#ifndef " + define_name + "_HPP\n";
     res += "#define " + define_name + "_HPP\n";
     res += "#include \"../src/basefiles/application.hpp\"\n";
+    res += "#include <any>\n";
+    res += "#include <random>\n";
+    res += "std::random_device rd;\n";
+    res += "std::mt19937 rng(rd());\n";
     res += generate_application();
     res += write_to_config;
 
