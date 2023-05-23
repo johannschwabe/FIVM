@@ -1,4 +1,4 @@
-g++ -O3 -DNDEBUG -Wall -Wno-unused-variable -std=c++17 -pedantic src/result_enumeration.cpp -o cavier/app_generator
+g++ -O3 -DNDEBUG -Wall -Wno-unused-variable -std=c++17 -pedantic src/result_enumeration.cpp -o cavier/app_generator || exit 1;
 mkdir -p "cavier/application/$1"
 mkdir -p "bin/$1"
 
