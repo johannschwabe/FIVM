@@ -1,4 +1,4 @@
-IMPORT DTREE FROM FILE 'tpch_1-Q1.txt';
+IMPORT DTREE FROM FILE 'tpch_2-Q1.txt';
 
 CREATE DISTRIBUTED TYPE RingFactorizedRelation
 FROM FILE 'ring/ring_factorized.hpp'
@@ -23,7 +23,7 @@ STREAM LINEITEM (
         l_shipmode       CHAR(10),
         l_comment        VARCHAR(44)
     )
-  FROM FILE './datasets/tpch/lineitem.csv'
+  FROM FILE './datasets/tpch1/lineitem.csv'
   LINE DELIMITED CSV (delimiter := '|');
 
 
@@ -39,7 +39,7 @@ STREAM PART (
         p_retailprice  DECIMAL,
         p_comment      VARCHAR(23)
     )
-  FROM FILE './datasets/tpch/part.csv'
+  FROM FILE './datasets/tpch1/part.csv'
   LINE DELIMITED CSV (delimiter := '|');
 
 CREATE STREAM ORDERS (
@@ -53,7 +53,7 @@ CREATE STREAM ORDERS (
         o_shippriority   INT,
         o_comment        VARCHAR(79)
     )
-  FROM FILE './datasets/tpch/orders.csv'
+  FROM FILE './datasets/tpch1/orders.csv'
   LINE DELIMITED CSV (delimiter := '|');
 
 CREATE
@@ -64,7 +64,7 @@ STREAM PARTSUPP (
         ps_supplycost   DECIMAL,
         ps_comment      VARCHAR(199)
     )
-  FROM FILE './datasets/tpch/partsupp.csv'
+  FROM FILE './datasets/tpch1/partsupp.csv'
   LINE DELIMITED CSV (delimiter := '|');
 
 SELECT SUM(

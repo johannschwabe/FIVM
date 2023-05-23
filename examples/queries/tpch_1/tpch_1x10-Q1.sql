@@ -1,4 +1,4 @@
-IMPORT DTREE FROM FILE 'tpch_2-Q2.txt';
+IMPORT DTREE FROM FILE 'tpch_1-Q1.txt';
 
 CREATE DISTRIBUTED TYPE RingFactorizedRelation
 FROM FILE 'ring/ring_factorized.hpp'
@@ -23,7 +23,7 @@ STREAM LINEITEM (
         l_shipmode       CHAR(10),
         l_comment        VARCHAR(44)
     )
-  FROM FILE './datasets/tpch/lineitem.csv'
+  FROM FILE './datasets/tpch10/lineitem.csv'
   LINE DELIMITED CSV (delimiter := '|');
 
 
@@ -39,7 +39,21 @@ STREAM PART (
         p_retailprice  DECIMAL,
         p_comment      VARCHAR(23)
     )
-  FROM FILE './datasets/tpch/part.csv'
+  FROM FILE './datasets/tpch10/part.csv'
+  LINE DELIMITED CSV (delimiter := '|');
+
+CREATE STREAM ORDERS (
+        orderkey         INT,
+        o_custkey        INT,
+        o_orderstatus    CHAR(1),
+        o_totalprice     DECIMAL,
+        o_orderdate      DATE,
+        o_orderpriority  CHAR(15),
+        o_clerk          CHAR(15),
+        o_shippriority   INT,
+        o_comment        VARCHAR(79)
+    )
+  FROM FILE './datasets/tpch10/orders.csv'
   LINE DELIMITED CSV (delimiter := '|');
 
 CREATE
@@ -50,17 +64,20 @@ STREAM PARTSUPP (
         ps_supplycost   DECIMAL,
         ps_comment      VARCHAR(199)
     )
-  FROM FILE './datasets/tpch/partsupp.csv'
+  FROM FILE './datasets/tpch10/partsupp.csv'
   LINE DELIMITED CSV (delimiter := '|');
 
 SELECT SUM(
-    [lift<0>: RingFactorizedRelation<[0, INT]>](partkey) *
-    [lift<1>: RingFactorizedRelation<[1, INT]>](suppkey) *
-    [lift<2>: RingFactorizedRelation<[2, INT,DECIMAL]>](orderkey,l_quantity) *
+    [lift<0>: RingFactorizedRelation<[0, INT]>](orderkey) *
+    [lift<1>: RingFactorizedRelation<[1, INT]>](partkey) *
+    [lift<2>: RingFactorizedRelation<[2, INT]>](suppkey) *
+    [lift<3>: RingFactorizedRelation<[3, DECIMAL]>](l_quantity) *
     [lift<16>: RingFactorizedRelation<[16, INT]>](ps_availqty) *
-    [lift<19>: RingFactorizedRelation<[19, VARCHAR(55)]>](p_name)
+    [lift<19>: RingFactorizedRelation<[19, VARCHAR(55)]>](p_name) *
+    [lift<27>: RingFactorizedRelation<[27, DECIMAL]>](o_totalprice)
 )
 
 FROM LINEITEM
 NATURAL JOIN PART
+NATURAL JOIN ORDERS
 NATURAL JOIN PARTSUPP;
