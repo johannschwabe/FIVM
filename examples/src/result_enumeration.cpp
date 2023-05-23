@@ -77,7 +77,6 @@ class Config {
 
 public:
   explicit Config(const std::string &config_file_name) {
-    std::cout << "config file name: " << config_file_name << std::endl;
     std::ifstream config_file(config_file_name);
     std::getline(config_file, filename);
     std::getline(config_file, dataset);
@@ -96,7 +95,6 @@ public:
       if (!q) break;
       getline(q, nr_views, '|');
       getline(q, call_batch_update, '|');
-      std::cout << "test: " << nr_views << std::endl;
       queries->push_back(new Query(query_name, std::stoi(nr_views), call_batch_update == "1"));
     }
     std::string relation_list;
@@ -407,7 +405,6 @@ public:
 };
 
 int main(int argc, char **argv) {
-  std::cout << "Generating Application" << std::endl;
   if (argc == 1) {
     std::cout << "No Config file given" << std::endl;
     return 1;
