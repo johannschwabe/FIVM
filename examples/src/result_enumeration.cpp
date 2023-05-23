@@ -353,6 +353,7 @@ public:
           tabbing(tabbing_iter) + "auto combined_entry = " + query->query_name + "_entry{" +
           join(&all_vars, ",") + "combined_value};\n";
       res += tabbing(tabbing_iter) + "update.push_back(combined_entry);\n";
+      res += tabbing(tabbing_iter) + "if (output_size % "+propagation_size+" == "+propagation_size +"-1) { update.clear();}\n";
     }
 
     res += tabbing(tabbing_iter) + "if (print_result) { output_file << " + join(&all_vars, " <<\"|\"<<") +
@@ -381,7 +382,7 @@ public:
       res += query->query_name + "_time->push_back(\"-\");\n";
       std::string entry = generate_struct(&all_vars, query->query_name);
       head = entry + head;
-      res += "std::uniform_int_distribution<int> uni(0,output_size);\n";
+      res += "std::uniform_int_distribution<int> uni(0,"+propagation_size+"-2);\n";
       res += "volatile auto dummy = update.at(uni(rng));\n";
       res += "std::cout << \"dummy: \" << dummy.combined_value << std::endl;\n";
     }
