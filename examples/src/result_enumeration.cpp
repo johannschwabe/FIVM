@@ -77,6 +77,7 @@ class Config {
 
 public:
   explicit Config(const std::string &config_file_name) {
+    std::cout << "config file name: " << config_file_name << std::endl;
     std::ifstream config_file(config_file_name);
     std::getline(config_file, filename);
     std::getline(config_file, dataset);
