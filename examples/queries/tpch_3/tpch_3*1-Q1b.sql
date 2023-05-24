@@ -16,9 +16,9 @@ STREAM lineitem (
         l_tax            DECIMAL,
         l_returnflag     CHAR(1),
         l_linestatus     CHAR(1),
-        l_shipdate       VCHAR(10),
-        l_commitdate     VCHAR(10),
-        l_receiptdate    VCHAR(10),
+        l_shipdate       CHAR(10),
+        l_commitdate     CHAR(10),
+        l_receiptdate    CHAR(10),
         l_shipinstruct   CHAR(25),
         l_shipmode       CHAR(10),
         l_comment        VARCHAR(44)
