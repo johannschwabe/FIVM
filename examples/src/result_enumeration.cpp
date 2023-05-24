@@ -274,6 +274,7 @@ public:
       res += "    std::vector<" + query->query_name + "_entry> update = std::vector<" +
              query->query_name + "_entry>();";
     }
+    res += "    update.reserve(" + propagation_size + ");\n";
     int var_name_iter = 1;
     int tabbing_iter = 0;
     auto config = query->views;
@@ -343,7 +344,7 @@ public:
       res +=
           tabbing(tabbing_iter) + "auto combined_entry = " + update_type + query->query_name + "_entry(" +
           join(&ordered_vars, ",") + "combined_value);\n";
-      res += tabbing(tabbing_iter) + "update.push_back(combined_entry);\n";
+      res += tabbing(tabbing_iter) + "update.emplace_back(combined_entry);\n";
 
       res += tabbing(tabbing_iter) + "if (output_size % "+propagation_size+" == "+propagation_size +"-1) { enumeration_timer.stop(); enumeration_time += enumeration_timer.elapsedTimeInMilliSeconds();"+
              "propagation_timer.restart(); data.on_batch_update_Q2(update.begin(), update.end()); update.clear();propagation_timer.stop();propagation_time += propagation_timer.elapsedTimeInMilliSeconds();\n";
@@ -352,7 +353,7 @@ public:
       res +=
           tabbing(tabbing_iter) + "auto combined_entry = " + query->query_name + "_entry{" +
           join(&all_vars, ",") + "combined_value};\n";
-      res += tabbing(tabbing_iter) + "update.push_back(combined_entry);\n";
+      res += tabbing(tabbing_iter) + "update.emplace_back(combined_entry);\n";
       res += tabbing(tabbing_iter) + "if (output_size % "+propagation_size+" == "+propagation_size +"-1) { update.clear();}\n";
     }
 

@@ -19,7 +19,7 @@ FROM FILE './datasets/favorita/Transactions.csv' LINE DELIMITED CSV(delimiter :=
 CREATE STREAM STORES(store int, city int, state int, store_type int, cluster int) 
 FROM FILE './datasets/favorita/Stores.csv' LINE DELIMITED CSV(delimiter := ',');
 
-CREATE STREAM ITEMS(item int, family int, itemclass int, perishable int) 
+CREATE STREAM ItemS(item int, family int, itemclass int, perishable int)
 FROM FILE './datasets/favorita/Stores.csv' LINE DELIMITED CSV(delimiter := ',');
 
 SELECT SUM(
