@@ -7,5 +7,5 @@
 5 dateid int 0 {0} 0
 6 locn int 5 {0,5} 0
 7 inventoryunits int 6 {0,5,6} 0
-ITEM 4 ksn,subcategory,category,categoryCluster,prize
+Item 4 ksn,subcategory,category,categoryCluster,prize
 Inventory 7 locn,dateid,ksn,inventoryunits

@@ -47,7 +47,7 @@ Lineitem(...)  PartSupp(...)
 33 o_clerk string 32 {0,27,28,29,30,31,32} 0
 34 o_comment string 33 {0,27,28,29,30,31,32,33} 0
 
-LINEITEM 15 orderkey, partkey, suppkey, l_linenumber, l_quantity, l_extendedprice, l_discount, l_tax, l_returnflag, l_linestatus, l_shipdate, l_commitdate, l_receiptdate, l_shipinstruct, l_shipmode, l_comment
+LINEItem 15 orderkey, partkey, suppkey, l_linenumber, l_quantity, l_extendedprice, l_discount, l_tax, l_returnflag, l_linestatus, l_shipdate, l_commitdate, l_receiptdate, l_shipinstruct, l_shipmode, l_comment
 PARTSUPP 18 partkey, suppkey, ps_availqty, ps_supplycost, ps_comment
 PART 26 partkey, p_name, p_mfgr, p_brand, p_type, p_size, p_container, p_retailprice, p_comment
 ORDERS 34 orderkey, o_custkey, o_orderstatus, o_totalprice, o_orderdate, o_orderpriority, o_clerk, o_shippriority, o_comment

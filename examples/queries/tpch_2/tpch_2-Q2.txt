@@ -28,6 +28,6 @@
 26 p_comment string 25 {0,19,20,21,22,23,24,25} 0
 
 
-LINEITEM 15 orderkey, partkey, suppkey, l_linenumber, l_quantity, l_extendedprice, l_discount, l_tax, l_returnflag, l_linestatus, l_shipdate, l_commitdate, l_receiptdate, l_shipinstruct, l_shipmode, l_comment
+LINEItem 15 orderkey, partkey, suppkey, l_linenumber, l_quantity, l_extendedprice, l_discount, l_tax, l_returnflag, l_linestatus, l_shipdate, l_commitdate, l_receiptdate, l_shipinstruct, l_shipmode, l_comment
 PARTSUPP 18 partkey, suppkey, ps_availqty, ps_supplycost, ps_comment
 PART 26 partkey, p_name, p_mfgr, p_brand, p_type, p_size, p_container, p_retailprice, p_comment

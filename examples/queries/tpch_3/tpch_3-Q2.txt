@@ -28,4 +28,4 @@
 26 l_extendedprice double 25 {0,1,2,3,4,5,6,7,9,10,13,14,15,16,17,18,19,20,21,22,23,24,25} 0
 SUPPLIER 8 suppkey,s_name,s_address, char ,s_phone,s_acctbal,s_comment
 PARTSUPP 12 partkey,suppkey,ps_availqty,ps_supplycost,ps_comment
-LINEITEM 26 orderkey,partkey,suppkey,l_linenumber,l_quantity,l_extendedprice,l_discount,l_tax,l_returnflag,l_linestatus,l_shipdate,l_commitdate,l_receiptdate,l_shipinstruct,l_shipmode,l_comment
+LINEItem 26 orderkey,partkey,suppkey,l_linenumber,l_quantity,l_extendedprice,l_discount,l_tax,l_returnflag,l_linestatus,l_shipdate,l_commitdate,l_receiptdate,l_shipinstruct,l_shipmode,l_comment

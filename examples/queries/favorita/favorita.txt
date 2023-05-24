@@ -22,4 +22,4 @@ OIL 5 date,oilprize
 HOLIDAY 9 date,holiday_type,locale,locale_id,transferred
 TRANSACTIONS 10 date,store,transactions
 STORES 14 store,city,state,store_type,cluster
-ITEMS 17 item,family,itemclass,perishable
+ItemS 17 item,family,itemclass,perishable
