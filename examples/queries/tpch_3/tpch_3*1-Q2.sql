@@ -5,7 +5,7 @@ FROM FILE 'ring/ring_factorized.hpp'
 WITH PARAMETER SCHEMA (dynamic_min);
 
 CREATE
-STREAM LINEITEM (
+STREAM lineitem (
         orderkey         INT,
         partkey          INT,
         suppkey          INT,
@@ -27,7 +27,7 @@ STREAM LINEITEM (
   LINE DELIMITED CSV (delimiter := '|');
 
 CREATE
-STREAM SUPPLIER (
+STREAM supplier (
         suppkey        INT,
         s_name         VARCHAR(25),
         s_address         CHAR(25),
@@ -40,7 +40,7 @@ STREAM SUPPLIER (
   LINE DELIMITED CSV (delimiter := '|');
 
 CREATE
-STREAM PARTSUPP (
+STREAM partsupp (
         partkey         INT,
         suppkey         INT,
         ps_availqty     INT,
@@ -57,6 +57,6 @@ SELECT SUM(
     [lift<17>: RingFactorizedRelation<[17, INT, DECIMAL]>](ps_availqty, ps_supplycost) *
     [lift<20>: RingFactorizedRelation<[20, VARCHAR(25)]>](s_name)
 )
-FROM LINEITEM
-         NATURAL JOIN SUPPLIER
-         NATURAL JOIN PARTSUPP;
+FROM lineitem
+         NATURAL JOIN supplier
+         NATURAL JOIN partsupp;

@@ -5,7 +5,7 @@ FROM FILE 'ring/ring_factorized.hpp'
 WITH PARAMETER SCHEMA (dynamic_min);
 
 CREATE
-STREAM LINEITEM (
+STREAM lineitem (
         orderkey         INT,
         partkey          INT,
         suppkey          INT,
@@ -27,7 +27,7 @@ STREAM LINEITEM (
   LINE DELIMITED CSV (delimiter := '|');
 
 
-CREATE STREAM ORDERS (
+CREATE STREAM orders (
         orderkey         INT,
         o_custkey        INT,
         o_orderstatus    CHAR(1),
@@ -47,5 +47,5 @@ SELECT SUM(
     [lift<16>: RingFactorizedRelation<[16, DECIMAL]>](o_totalprice)
 )
 
-FROM LINEITEM
-NATURAL JOIN ORDERS
+FROM lineitem
+NATURAL JOIN orders

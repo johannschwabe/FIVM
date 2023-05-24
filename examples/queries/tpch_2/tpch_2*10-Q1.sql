@@ -5,7 +5,7 @@ FROM FILE 'ring/ring_factorized.hpp'
 WITH PARAMETER SCHEMA (dynamic_min);
 
 CREATE
-STREAM LINEITEM (
+STREAM lineitem (
         orderkey         INT,
         partkey          INT,
         suppkey          INT,
@@ -28,7 +28,7 @@ STREAM LINEITEM (
 
 
 CREATE
-STREAM PART (
+STREAM part (
         partkey        INT,
         p_name         VARCHAR(55),
         p_mfgr         CHAR(25),
@@ -42,7 +42,7 @@ STREAM PART (
   FROM FILE './datasets/tpch10/part.csv'
   LINE DELIMITED CSV (delimiter := '|');
 
-CREATE STREAM ORDERS (
+CREATE STREAM orders (
         orderkey         INT,
         o_custkey        INT,
         o_orderstatus    CHAR(1),
@@ -57,7 +57,7 @@ CREATE STREAM ORDERS (
   LINE DELIMITED CSV (delimiter := '|');
 
 CREATE
-STREAM PARTSUPP (
+STREAM partsupp (
         partkey         INT,
         suppkey         INT,
         ps_availqty     INT,
@@ -77,7 +77,7 @@ SELECT SUM(
     [lift<27>: RingFactorizedRelation<[27, DECIMAL]>](o_totalprice)
 )
 
-FROM LINEITEM
-NATURAL JOIN PART
-NATURAL JOIN ORDERS
-NATURAL JOIN PARTSUPP;
+FROM lineitem
+NATURAL JOIN part
+NATURAL JOIN orders
+NATURAL JOIN partsupp;
