@@ -382,9 +382,10 @@ public:
       res += query->query_name + "_time->push_back(\"-\");\n";
       std::string entry = generate_struct(&all_vars, query->query_name);
       head = entry + head;
-      res += "std::uniform_int_distribution<int> uni(0,"+propagation_size+"-2);\n";
+      res += "if (update.size() > 0) {\n";
+      res += "std::uniform_int_distribution<int> uni(0,update.size()-1);\n";
       res += "volatile auto dummy = update.at(uni(rng));\n";
-      res += "std::cout << \"dummy: \" << dummy.combined_value << std::endl;\n";
+      res += "std::cout << \"dummy: \" << dummy.combined_value << std::endl;}\n";
     }
     res += "output_file.close();\n";
     res += query->query_name + "_time->push_back(std::to_string(output_size));\n";
