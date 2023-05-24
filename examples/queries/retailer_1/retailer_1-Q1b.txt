@@ -27,7 +27,7 @@
 25 mintemp int 24 {0,1,22,23,24} 0
 26 meanwind double 25 {0,1,22,23,24,25} 0
 27 thunder int 26 {0,1,22,23,24,25,26} 0
-INVENTORY 3 locn,dateid,ksn,inventoryunits
-LOCATION 17 locn,zip,rgn_cd,clim_zn_nbr,tot_area_sq_ft,sell_area_sq_ft,avghhi,supertargetdistance,supertargetdrivetime,targetdistance,targetdrivetime,walmartdistance,walmartdrivetime,walmartsupercenterdistance,walmartsupercenterdrivetime
+Inventory 3 locn,dateid,ksn,inventoryunits
+Location 17 locn,zip,rgn_cd,clim_zn_nbr,tot_area_sq_ft,sell_area_sq_ft,avghhi,supertargetdistance,supertargetdrivetime,targetdistance,targetdrivetime,walmartdistance,walmartdrivetime,walmartsupercenterdistance,walmartsupercenterdrivetime
 ITEM 21 ksn,subcategory,category,categoryCluster,prize
-WEATHER 27 locn,dateid,rain,snow,maxtemp,mintemp,meanwind,thunder
+Weather 27 locn,dateid,rain,snow,maxtemp,mintemp,meanwind,thunder

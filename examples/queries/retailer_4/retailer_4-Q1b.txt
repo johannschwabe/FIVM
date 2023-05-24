@@ -22,5 +22,5 @@
 20 prize double 19 {1,18,19} 0
 21 subcategory int 20 {1,18,19,20} 0
 ITEM 21 ksn,subcategory,category,categoryCluster,prize
-INVENTORY 3 locn,dateid,ksn,inventoryunits
-LOCATION 17 locn,zip,rgn_cd,clim_zn_nbr,tot_area_sq_ft,sell_area_sq_ft,avghhi,supertargetdistance,supertargetdrivetime,targetdistance,targetdrivetime,walmartdistance,walmartdrivetime,walmartsupercenterdistance,walmartsupercenterdrivetime
+Inventory 3 locn,dateid,ksn,inventoryunits
+Location 17 locn,zip,rgn_cd,clim_zn_nbr,tot_area_sq_ft,sell_area_sq_ft,avghhi,supertargetdistance,supertargetdrivetime,targetdistance,targetdrivetime,walmartdistance,walmartdrivetime,walmartsupercenterdistance,walmartsupercenterdrivetime

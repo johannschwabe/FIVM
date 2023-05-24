@@ -36,6 +36,6 @@
 34 mintemp int 33 {0,1,31,32,33} 0
 35 meanwind double 34 {0,1,31,32,33,34} 0
 36 thunder byte 35 {0,1,31,32,33,34,35} 0
-LOCATION 15 locn,zip,rgn_cd,clim_zn_nbr,tot_area_sq_ft,sell_area_sq_ft,avghhi,supertargetdistance,supertargetdrivetime,targetdistance,targetdrivetime,walmartdistance,walmartdrivetime,walmartsupercenterdistance,walmartsupercenterdrivetime
-CENSUS 30 zip,population,white,asian,pacific,blackafrican,medianage,occupiedhouseunits,houseunits,families,households,husbwife,males,females,householdschildren,hispanic
-WEATHER 36 locn,dateid,rain,snow,maxtemp,mintemp,meanwind,thunder
+Location 15 locn,zip,rgn_cd,clim_zn_nbr,tot_area_sq_ft,sell_area_sq_ft,avghhi,supertargetdistance,supertargetdrivetime,targetdistance,targetdrivetime,walmartdistance,walmartdrivetime,walmartsupercenterdistance,walmartsupercenterdrivetime
+Census 30 zip,population,white,asian,pacific,blackafrican,medianage,occupiedhouseunits,houseunits,families,households,husbwife,males,females,householdschildren,hispanic
+Weather 36 locn,dateid,rain,snow,maxtemp,mintemp,meanwind,thunder

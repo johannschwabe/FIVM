@@ -21,5 +21,5 @@
 19 mintemp int 18 {0,1,16,17,18} 0
 20 meanwind double 19 {0,1,16,17,18,19} 0
 21 thunder byte 20 {0,1,16,17,18,19,20} 0
-LOCATION 15 locn,zip,rgn_cd,clim_zn_nbr,tot_area_sq_ft,sell_area_sq_ft,avghhi,supertargetdistance,supertargetdrivetime,targetdistance,targetdrivetime,walmartdistance,walmartdrivetime,walmartsupercenterdistance,walmartsupercenterdrivetime
-WEATHER 21 locn,dateid,rain,snow,maxtemp,mintemp,meanwind,thunder
+Location 15 locn,zip,rgn_cd,clim_zn_nbr,tot_area_sq_ft,sell_area_sq_ft,avghhi,supertargetdistance,supertargetdrivetime,targetdistance,targetdrivetime,walmartdistance,walmartdrivetime,walmartsupercenterdistance,walmartsupercenterdrivetime
+Weather 21 locn,dateid,rain,snow,maxtemp,mintemp,meanwind,thunder
