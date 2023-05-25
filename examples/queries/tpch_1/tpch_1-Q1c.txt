@@ -1,0 +1,20 @@
+16 3
+0 partkey int -1 {} 0
+1 suppkey int 0 {0} 0
+2 ps_availqty int 1 {0,1} 0
+3 ps_supplycost double 2 {0,1,2} 0
+4 ps_comment string 3 {0,1,2,3} 0
+5 l_quantity double 1 {0,1} 0
+6 orderkey int 5 {0,1,5} 0
+7 o_totalprice double 6 {0,1,5,6} 0
+8 p_name string 0 {0} 0
+9 p_container string 8 {0,8} 0
+10 p_mfgr string 9 {0,8,9} 0
+11 p_size int 10 {0,8,10,9} 0
+12 p_comment string 11 {0,8,9,10,11} 0
+13 p_brand string 12 {0,8,9,10,11,12} 0
+14 p_retailprice double 13 {0,8,9,10,11,12,13} 0
+15 p_type string 14 {0,8,9,10,11,12,13,14} 0
+part 15 partkey,p_name,p_mfgr,p_brand,p_type,p_size,p_container,p_retailprice,p_comment
+partsupp 4 partkey,suppkey,ps_availqty,ps_supplycost,ps_comment
+q2 7 orderkey,partkey,suppkey,l_quantity,o_totalprice
