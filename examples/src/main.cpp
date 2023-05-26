@@ -5,12 +5,18 @@
 int main(int argc, char** argv) {
     
     int opt_num_runs = 1;
-    bool opt_print_result = true;
+    bool opt_print_result = false;
+    bool opt_count_view_size = false;
     for (int i = 0; i < argc; i++) {
         if (strcmp(argv[i], "--num-runs") == 0 || strcmp(argv[i], "-r") == 0) {
             opt_num_runs = atoi(argv[i + 1]);
         }
-        opt_print_result = opt_print_result && (strcmp(argv[i], "--no-output") != 0);
+        if (strcmp(argv[i], "--output") == 0){
+          opt_print_result = true;
+        }
+        if (strcmp(argv[i], "--sizes") == 0){
+          opt_count_view_size = true;
+        }
     }
 
 #ifndef __APPLE__
@@ -21,7 +27,7 @@ int main(int argc, char** argv) {
 #endif
 
     Application app;
-    app.run(opt_num_runs, opt_print_result);
+    app.run(opt_num_runs, opt_print_result, opt_count_view_size);
     
     return 0;
 }

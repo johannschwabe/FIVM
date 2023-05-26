@@ -14,7 +14,6 @@ protected:
   std::vector<std::unique_ptr<IRelation>> relations;
   Multiplexer static_multiplexer;
   Multiplexer dynamic_multiplexer;
-  long stream_processing;
 
   void init_relations();
 
@@ -40,7 +39,7 @@ protected:
 
   void on_begin_processing(dbtoaster::data_t &data);
 
-  void on_end_processing(dbtoaster::data_t &data, bool print_result);
+  void on_end_processing(dbtoaster::data_t &data, bool print_result, bool count_view_size);
 
   void print_result(dbtoaster::data_t &data);
 
@@ -52,7 +51,7 @@ public:
     clear_dispatchers();
   }
 
-  void run(size_t num_of_runs, bool output_result);
+  void run(size_t num_of_runs, bool output_result, bool count_view_size);
 };
 
 void Application::load_relations() {
@@ -127,9 +126,10 @@ void Application::process_streams_no_snapshot(dbtoaster::data_t &data) {
   }
 }
 
-void Application::run(size_t num_of_runs, bool print_result) {
+void Application::run(size_t num_of_runs, bool print_result, bool count_view_size) {
   std::cout << "-------------" << std::endl;
-
+  if (print_result) std::cout << "Printing result..." << std::endl;
+  if (count_view_size) std::cout << "Counting view size..." << std::endl;
   init_relations();
 
   Stopwatch local_time, total_time;
@@ -175,12 +175,11 @@ void Application::run(size_t num_of_runs, bool print_result) {
     local_time.restart();
     process_streams(data);
     local_time.stop();
-    stream_processing = local_time.elapsedTimeInMilliSeconds();
-    std::cout << stream_processing << " ms" << std::endl;
+    std::cout << local_time.elapsedTimeInMilliSeconds() << " ms" << std::endl;
 
     std::cout << "5. On end of processing... " << std::flush;
     local_time.restart();
-    on_end_processing(data, print_result);
+    on_end_processing(data, print_result, count_view_size);
     local_time.stop();
     std::cout << local_time.elapsedTimeInMilliSeconds() << " ms" << std::endl;
 

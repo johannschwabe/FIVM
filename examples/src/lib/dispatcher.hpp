@@ -1,15 +1,19 @@
 #ifndef DISPATCHER_HPP
 #define DISPATCHER_HPP
 
+#include <string>
 #include <vector>
 #include <functional>
 #include <memory>
 #include <iterator>
 #include <initializer_list>
+#include <map>
 
 class Dispatcher {
   public:
-    virtual ~Dispatcher() { }
+    std::string name;
+    Dispatcher(std::string _name) : name(_name) { }
+  virtual ~Dispatcher() { }
     virtual bool has_next() const = 0;
     virtual void next() = 0;
 };
@@ -25,7 +29,7 @@ class EventDispatcher : public Dispatcher {
     const Func& func;
 
   public:
-    EventDispatcher(std::vector<T>& v, const Func& f) : it(v.begin()), end(v.end()), func(f) { }
+    EventDispatcher(std::vector<T>& v, const Func& f, std::string _name) : Dispatcher(_name), it(v.begin()), end(v.end()), func(f){ }
 
     EventDispatcher(std::vector<T>& v, Func&& f) = delete;
 
@@ -45,7 +49,7 @@ class BatchDispatcher : public Dispatcher {
     const Func& func;
 
   public:
-    BatchDispatcher(std::vector<T>& v, const Func& f) : it(v.begin()), end(v.end()), func(f) { }
+    BatchDispatcher(std::vector<T>& v, const Func& f,std::string _name) : Dispatcher(_name), it(v.begin()), end(v.end()), func(f) { }
 
     BatchDispatcher(std::vector<T>& v, Func&& f) = delete;
 
@@ -63,11 +67,13 @@ class Multiplexer : public Dispatcher {
   private:
     std::vector<std::unique_ptr<Dispatcher>> v;
     size_t idx, active;
- 
-  public:
-    Multiplexer(): idx(0), active(0) { }
 
-    Multiplexer(std::initializer_list<Dispatcher*> dispatchers) : idx(0), active(0) {
+  public:
+  std::map<std::string, long> updating_times;
+
+  Multiplexer(): Dispatcher("Multiplexer"), idx(0), active(0), updating_times() { }
+
+    Multiplexer(std::initializer_list<Dispatcher*> dispatchers) :Dispatcher("Multiplexer"), idx(0), active(0), updating_times() {
         for (auto d : dispatchers) {
             add_dispatcher(d);
         }
@@ -76,19 +82,23 @@ class Multiplexer : public Dispatcher {
     inline bool has_next() const { return active > 0; }
 
     inline void next() {
-        v[idx]->next();
+      Stopwatch sw;
+      sw.restart();
+      v[idx]->next();
 
-        if (v[idx]->has_next()) {
-            idx++;
-        }
-        else {
-            active--;
-            for (size_t i = idx; i < active; i++) {
-                std::swap(v[i], v[i + 1]);
-            }
-        }
+      if (v[idx]->has_next()) {
+          idx++;
+      }
+      else {
+          active--;
+          for (size_t i = idx; i < active; i++) {
+              std::swap(v[i], v[i + 1]);
+          }
+      }
 
-        if (idx >= active) { idx = 0; }
+      if (idx >= active) { idx = 0; }
+      sw.stop();
+      updating_times[v[idx]->name] += sw.elapsedTimeInMilliSeconds();
     }
 
     void add_dispatcher(Dispatcher* d) {

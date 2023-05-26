@@ -1,7 +1,7 @@
 import pandas as pd
 
 # Read the text file
-with open('config.txt', 'r') as f:
+with open('output/config.txt', 'r') as f:
     lines = f.readlines()
 
 # Parse the data

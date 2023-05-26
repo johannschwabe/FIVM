@@ -72,6 +72,7 @@ class Config {
   std::string propagation_size;
   std::vector<Query *> *queries = new std::vector<Query *>();
   std::vector<std::string> *relations;
+  std::map<std::string, std::vector<std::string> > *query_atoms;
   std::map<std::string, std::vector<std::string> > *enumerated_relations;
   std::string write_to_config;
 
@@ -100,6 +101,18 @@ public:
     std::string relation_list;
     std::getline(config_file, relation_list);
     relations = split(relation_list, '|');
+
+    query_atoms = new std::map<std::string, std::vector<std::string> >();
+    std::string query_atom_list;
+    std::getline(config_file, query_atom_list);
+    auto query_atom_list_splitted = split(query_atom_list, '|');
+    for (auto &query_atom: *query_atom_list_splitted) {
+      auto splitted = split(query_atom, ':');
+      auto query_name = splitted->at(0);
+      auto atoms = split(splitted->at(1), ',');
+      query_atoms->insert(std::pair<std::string, std::vector<std::string> >(query_name, *atoms));
+    }
+
     enumerated_relations = new std::map<std::string, std::vector<std::string> >();
     std::string enumerated_relation_list;
     std::getline(config_file, enumerated_relation_list);
@@ -129,29 +142,30 @@ public:
     }
     std::string fixed_filename;
     auto splitted_filename = split(filename, '-');
-    if(splitted_filename->size() == 1){
-      fixed_filename = filename ;
+    if (splitted_filename->size() == 1) {
+      fixed_filename = filename;
     } else {
       fixed_filename = splitted_filename->at(0);
     }
     write_to_config =
-        "void write_to_config(std::vector<std::vector<std::string>>* times, std::ofstream& config_file, long stream_processing, std::string relations){\n"
-        "    config_file << \"" + fixed_filename + "|"+executor+"|\"<<\"" + dataset + "|\" << stream_processing << \"|\" << relations;"
-       "    for (auto &time: *times) {\n"
-       "    config_file << \":\";\n"
+        "void write_times(std::vector<std::vector<std::string>>* times, std::ofstream& measurements_file, std::string relations){\n"
+        "    measurements_file << \"" + fixed_filename + "|" + executor + "|\"<<\"" + dataset +
+        "|\" << \"|\" << relations;"
+        "    for (auto &time: *times) {\n"
+        "    measurements_file << \":\";\n"
 
-       "        bool first = true; \n"
-       "    for (auto &t : time) {\n"
-       "      if (!first) {\n"
-       "        config_file << \"|\"; \n"
-       "      } else {\n"
-       "        first = false;\n"
-       "      }\n"
-       "      config_file << t;\n"
-       "    }\n"
-       "    }\n"
-       "    config_file << \"\\n\";\n"
-       "}";
+        "        bool first = true; \n"
+        "    for (auto &t : time) {\n"
+        "      if (!first) {\n"
+        "        measurements_file << \"|\"; \n"
+        "      } else {\n"
+        "        first = false;\n"
+        "      }\n"
+        "      measurements_file << t;\n"
+        "    }\n"
+        "    }\n"
+        "    measurements_file << \"\\n\";\n"
+        "}";
   };
 
   ~Config() {
@@ -164,17 +178,24 @@ public:
     }
     delete queries;
     delete relations;
+    for (auto &query_atom: *query_atoms) {
+      delete &query_atom.second;
+    }
+    delete query_atoms;
+    for (auto &enumerated_relation: *enumerated_relations) {
+      delete &enumerated_relation.second;
+    }
     delete enumerated_relations;
   }
 
   const std::string start = "void Application::on_snapshot(dbtoaster::data_t& data) {\n"
-                            "    on_end_processing(data, false);\n"
+                            "    on_end_processing(data, false, false);\n"
                             "}\n"
                             "\n"
                             "void Application::on_begin_processing(dbtoaster::data_t& data) {\n"
                             "}\n"
                             "\n"
-                            "void Application::on_end_processing(dbtoaster::data_t& data, bool print_result) {\n"
+                            "void Application::on_end_processing(dbtoaster::data_t& data, bool print_result, bool count_view_size) {\n"
                             "\n"
                             "    cout << endl << \"Enumerating factorized join result... \" << endl;\n"
                             "\n"
@@ -243,7 +264,7 @@ public:
     return base;
   }
 
-  std::string generate_struct(std::vector<std::string>* all_vars, std::string name) {
+  std::string generate_struct(std::vector<std::string> *all_vars, std::string name) {
     std::string res = "struct " + name + "_entry {\n";
     for (auto var: *all_vars) {
       res += "    std::any " + var + ";\n";
@@ -252,20 +273,34 @@ public:
     res += "};\n\n";
     return res;
   }
+
   std::string generate_function(Query *query) {
     std::vector<std::string> all_vars = std::vector<std::string>();
     std::string head =
         "void enumerate_" + query->query_name +
-        "(dbtoaster::data_t &data, bool print_result, std::vector<std::string>* " +
+        "(dbtoaster::data_t &data, bool print_result, bool count_view_size, std::vector<std::string>* " +
         query->query_name + "_time) {\n";
     std::string res = "    size_t output_size = 0; \n";
+    res += "std::ofstream view_sizes_file;\n";
+    res += "if(count_view_size) {\nview_sizes_file = std::ofstream(\"sizes/" + filename + "_" + query->query_name +
+           "_view_sizes.csv\");\n";
+
+    auto it = std::next(query->views->begin()); // Iterator pointing to the second view
+    auto view_0 = *it;
+    res += "view_sizes_file << \"" + query->views->at(0)->view_name + ", \" << 0<< std::endl;\n";
+    for (; it != query->views->end(); ++it) {
+      auto view = *it;
+      res += "view_sizes_file << \"" + view->view_name + ", \" << data." + view->getViewAccessFunctionName() + "().primary_index->count()<< std::endl;\n";
+    }
+    res += "view_sizes_file.close();\n}\n";
     res += "Stopwatch enumeration_timer;\nenumeration_timer.restart();\n";
     if (query->call_batch_update) {
       res += "Stopwatch propagation_timer;\n";
       res += "long propagation_time = 0;\n";
     }
     res += "long enumeration_time = 0;\n";
-    res += "std::ofstream output_file;\n if (print_result) output_file.open (\"" + query->query_name + ".csv\");\n";
+    res +=
+        "std::ofstream output_file;\n if (print_result) output_file.open (\"output/" + query->query_name + ".csv\");\n";
     std::string update_type = "DELTA_";
     if (query->call_batch_update) {
       res += "    std::vector<" + update_type + query->query_name + "_entry> update = std::vector<" + update_type +
@@ -281,9 +316,11 @@ public:
     if (config->at(0)->access_vars != "") {
       res += "    const auto& top_level_view = data." + config->at(0)->getViewAccessFunctionName() + "();\n";
       res += "    " + config->at(0)->getStructName() + "* r0 = top_level_view.head;\n";
+
       res += "    while (r0 != nullptr) {\n";
       res += "        auto ring = r0->__av;\n";
       res += "        r0 = r0->nxt;\n";
+
       tabbing_iter += 1;
     } else {
       res += "    const auto& ring = data." + config->at(0)->getViewAccessFunctionName() + "();\n";
@@ -308,6 +345,7 @@ public:
       res += tabbing(tabbing_iter) + (*view)->getStructName() + " e" + nr + ";\n";
       res += tabbing(tabbing_iter) + "const auto& rel" + nr + " = data." + (*view)->getViewAccessFunctionName() +
              "().getValueOrDefault(e" + nr + ".modify(" + (*view)->access_vars + "));\n";
+
       if ((*view)->payload_vars == "") {
         res += tabbing(tabbing_iter) + "auto &payload_" + nr + " = rel" + nr + ";\n";
       } else {
@@ -346,7 +384,8 @@ public:
           join(&ordered_vars, ",") + "combined_value);\n";
       res += tabbing(tabbing_iter) + "update.emplace_back(combined_entry);\n";
 
-      res += tabbing(tabbing_iter) + "if (output_size % "+propagation_size+" == "+propagation_size +"-1) { enumeration_timer.stop(); enumeration_time += enumeration_timer.elapsedTimeInMilliSeconds();"+
+      res += tabbing(tabbing_iter) + "if (output_size % " + propagation_size + " == " + propagation_size +
+             "-1) { enumeration_timer.stop(); enumeration_time += enumeration_timer.elapsedTimeInMilliSeconds();" +
              "propagation_timer.restart(); data.on_batch_update_Q2(update.begin(), update.end()); update.clear();propagation_timer.stop();propagation_time += propagation_timer.elapsedTimeInMilliSeconds();\n";
       res += tabbing(tabbing_iter) + "enumeration_timer.restart();}\n";
     } else {
@@ -354,7 +393,8 @@ public:
           tabbing(tabbing_iter) + "auto combined_entry = " + query->query_name + "_entry{" +
           join(&all_vars, ",") + "combined_value};\n";
       res += tabbing(tabbing_iter) + "update.emplace_back(combined_entry);\n";
-      res += tabbing(tabbing_iter) + "if (output_size % "+propagation_size+" == "+propagation_size +"-1) { update.clear();}\n";
+      res += tabbing(tabbing_iter) + "if (output_size % " + propagation_size + " == " + propagation_size +
+             "-1) { update.clear();}\n";
     }
 
     res += tabbing(tabbing_iter) + "if (print_result) { output_file << " + join(&all_vars, " <<\"|\"<<") +
@@ -389,10 +429,12 @@ public:
       res += "std::cout << \"dummy: \" << dummy.combined_value << std::endl;}\n";
     }
     res += "output_file.close();\n";
+
     res += query->query_name + "_time->push_back(std::to_string(output_size));\n";
     auto vars = join(&all_vars, ",");
     vars.pop_back();
     res += query->query_name + "_time->push_back(\"" + vars + "\");\n";
+
     res += "std::cout << \"" + query->query_name + ": \" << output_size << std::endl;\n}\n";
     return head + print_variable_order + res;
   }
@@ -419,15 +461,27 @@ public:
       res += "\n";
     }
     res += start;
+    for (const auto& query: *query_atoms) {
+      auto query_name = query.first;
+      auto atoms = query.second;
+      res += "    long updating_" + query_name + " = ";
+      for(const auto& atom : atoms){
+        res +="dynamic_multiplexer.updating_times.find(\""+atom+"\")->second + ";
+      }
+      res.pop_back();
+      res.pop_back();
+      res += ";\n";    }
     for (auto query: *queries) {
       res += "    std::vector<std::string>" + query->query_name + "_time;\n";
+
       res += "    cout << \"Enumerating " + query->query_name + "... \" << endl;\n";
-      res += "    enumerate_" + query->query_name + "(data, print_result, &" + query->query_name + "_time);\n";
+      res += "    enumerate_" + query->query_name + "(data, print_result, count_view_size, &" + query->query_name +
+             "_time);\n";
       res += "    times.push_back(" + query->query_name + "_time);\n";
     }
-    res += "std::ofstream config_file(\"config.txt\", std::ios::app);\n";
-    res += "write_to_config(&times, config_file,stream_processing, relation_list);\n";
-    res += "config_file.close();\n";
+    res += "std::ofstream measurements_file(\"outputs/output.txt\", std::ios::app);\n";
+    res += "write_to_config(&times, measurements_file, relation_list);\n";
+    res += "measurements_file.close();\n";
     res += "}\n";
     res += " #endif";
     return res;

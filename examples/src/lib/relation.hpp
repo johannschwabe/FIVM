@@ -64,7 +64,7 @@ class EventDispatchableRelation : public Relation<T> {
 
     Dispatcher* create_dispatcher(dbtoaster::data_t& data) {
         func = data_func(data);
-        return new EventDispatcher<T>(this->tuples, func);
+        return new EventDispatcher<T>(this->tuples, func, IRelation::name);
     }
 };
 
@@ -86,7 +86,7 @@ class BatchDispatchableRelation : public Relation<T> {
 
     Dispatcher* create_dispatcher(dbtoaster::data_t& data) {
         func = data_func(data);
-        return new BatchDispatcher<T, BATCH_SIZE>(this->tuples, func);
+        return new BatchDispatcher<T, BATCH_SIZE>(this->tuples, func, IRelation::name);
     }
 };
 
