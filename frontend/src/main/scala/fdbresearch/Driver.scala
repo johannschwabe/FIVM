@@ -116,7 +116,8 @@ class Driver {
     })
     config = config + "FIVMQUERY|" + viewOrder.length.toString + "|0\n"
     val all_relations = dtree.getRelations.map(i => i.name.toString).mkString("|")
-    config = config + all_relations + "\n\n"
+    config = config + all_relations + "\n"
+    config = config + "FIVMQUERY:" +  dtree.getRelations.map(i => i.name.toString).mkString(",") + "\n\n"
     var payloadMap = findVars(cg.getTree, keyMap, payloadViews)
     viewOrder.foreach(view => {
       var payloadView = if (payloadViews.contains(view.substring(2))) "1" else "0"

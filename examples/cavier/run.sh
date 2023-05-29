@@ -7,8 +7,8 @@ mkdir -p "bin/$1"
 for file in cavier/config/$1/*; do
   filename=$(basename "$file" .txt)
   echo $filename
-  echo ./cavier/app_generator "$file" "cavier/application/$1/app_$filename.hpp"
-  ./cavier/app_generator "$file" "cavier/application/$1/app_$filename.hpp"
+  echo ./cavier/app_generator "$file" "cavier/application/$1/_$filename.hpp"
+  ./cavier/app_generator "$file" "cavier/application/$1/$filename.hpp"
 
   echo g++ -O3 -DNDEBUG -Wall -Wno-unused-variable -std=c++17 -pedantic src/main.cpp -I ../backend/lib -I src -I src/lib -DBATCH_SIZE=1000 -include cavier/cpp/$1/$1.hpp -include cavier/application/$1/app_$filename.hpp -o bin/$1/CAVIER_${filename}_BATCH_1000; \
   g++ -O3 -DNDEBUG -Wall -Wno-unused-variable -std=c++17 -pedantic src/main.cpp -I ../backend/lib -I src -I src/lib -DBATCH_SIZE=1000 -include cavier/cpp/$1/$1.hpp -include cavier/application/$1/app_$filename.hpp -o bin/$1/CAVIER_${filename}_BATCH_1000 || exit 1; \
