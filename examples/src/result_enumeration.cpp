@@ -162,7 +162,7 @@ public:
         "    return os;\n"
         "}\n\n"
         "void write_to_config(std::vector<Measurement*>* measurements, std::ofstream& measurements_file, std::string relations){\n"
-        "    measurements_file << \"" + fixed_filename + "|" + executor + "|\"<<\"" + dataset + "|\" << \"|\" << relations << \"|\";"
+        "    measurements_file << \"" + fixed_filename + "|" + executor + "|\"<<\"" + dataset + "|\" << \"|\" << relations << \":\";"
         "for (size_t i = 0; i < measurements->size(); i++) {\n"
         "            measurements_file << measurements->at(i);\n"
         "            if (i != measurements->size() - 1) {\n"
@@ -468,7 +468,9 @@ public:
       auto atoms = query.second;
       res += "    long updating_" + query_name + " = ";
       for (const auto &atom: atoms) {
-        res += "dynamic_multiplexer.updating_times.find(\"" + atom + "\")->second + ";
+        if(std::find(relations->begin(), relations->end(),atom) != relations->end()) {
+          res += "dynamic_multiplexer.updating_times.find(\"" + atom + "\")->second + ";
+        }
       }
       res.pop_back();
       res.pop_back();
@@ -480,9 +482,24 @@ public:
           query->query_name + ", \"" + join(&(query_atoms->at(query->query_name)), ",") + "\");\n";
       res += "    cout << \"Enumerating " + query->query_name + "... \" << endl;\n";
       res +=
-          "    enumerate_" + query->query_name + "(data, print_result, count_view_size, &measure_" + query->query_name +
+          "  long "+query->query_name+"_propagation = enumerate_" + query->query_name + "(data, print_result, count_view_size, &measure_" + query->query_name +
           ");\n";
       res += "    measurements.push_back(&measure_" + query->query_name + ");\n";
+    }
+
+    for (auto query_1: *queries) {
+      int count = 0;
+      for (auto query_2: *queries) {
+        for (const auto& atom: query_atoms->at(query_2->query_name)) {
+          if (atom == query_1->query_name){
+            res += "    measure_" + query_1->query_name + ".update_time += " + query_2->query_name + "_propagation;\n";
+            count++;
+          }
+        }
+      }
+      if(count > 1){
+        res += "std::cout << \"WARNING: " + query_1->query_name + " is used in multiple queries but propagation time is indivisible\" << std::endl;";
+      }
     }
     res += "std::ofstream measurements_file(\"output/output.txt\", std::ios::app | std::ios::out);\n";
     res += "write_to_config(&measurements, measurements_file, relation_list);\n";
