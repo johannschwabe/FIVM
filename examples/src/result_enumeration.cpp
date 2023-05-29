@@ -28,6 +28,7 @@ std::string join(std::vector<std::string> *splitted, std::string delimiter) {
   for (auto it = splitted->begin(); it != splitted->end(); ++it) {
     res += *it + delimiter;
   }
+  res.erase(res.end() - delimiter.size(), res.end());
   return res;
 }
 
@@ -148,22 +149,26 @@ public:
       fixed_filename = splitted_filename->at(0);
     }
     write_to_config =
-        "void write_times(std::vector<std::vector<std::string>>* times, std::ofstream& measurements_file, std::string relations){\n"
-        "    measurements_file << \"" + fixed_filename + "|" + executor + "|\"<<\"" + dataset +
-        "|\" << \"|\" << relations;"
-        "    for (auto &time: *times) {\n"
-        "    measurements_file << \":\";\n"
-
-        "        bool first = true; \n"
-        "    for (auto &t : time) {\n"
-        "      if (!first) {\n"
-        "        measurements_file << \"|\"; \n"
-        "      } else {\n"
-        "        first = false;\n"
-        "      }\n"
-        "      measurements_file << t;\n"
-        "    }\n"
-        "    }\n"
+        "struct Measurement {\n std::string query_name;\n long update_time;\nstd::string relations;\nstd::string free_variables;\n long enumeration_time;\n long size_output; "
+        "Measurement(std::string query_name, long update_time, std::string relations) : query_name(query_name), update_time(update_time), relations(relations), free_variables(\"\"), enumeration_time(0L), size_output(0L) {}\n"
+        "};\n\n"
+        "std::ofstream& operator<<(std::ofstream& os, const Measurement *measurement) {\n"
+        "    os << measurement->query_name << \" | \"\n"
+        "       << measurement->update_time << \" | \"\n"
+        "       << measurement->enumeration_time << \" | \"\n"
+        "       << measurement->size_output << \" | \"\n"
+        "       << measurement->free_variables << \" | \"\n"
+        "       << measurement->relations;\n"
+        "    return os;\n"
+        "}\n\n"
+        "void write_to_config(std::vector<Measurement*>* measurements, std::ofstream& measurements_file, std::string relations){\n"
+        "    measurements_file << \"" + fixed_filename + "|" + executor + "|\"<<\"" + dataset + "|\" << \"|\" << relations << \"|\";"
+        "for (size_t i = 0; i < measurements->size(); i++) {\n"
+        "            measurements_file << measurements->at(i);\n"
+        "            if (i != measurements->size() - 1) {\n"
+        "                measurements_file << \" : \";\n"
+        "            }\n"
+        "        }"
         "    measurements_file << \"\\n\";\n"
         "}";
   };
@@ -194,6 +199,7 @@ public:
                             "\n"
                             "void Application::on_begin_processing(dbtoaster::data_t& data) {\n"
                             "}\n"
+
                             "\n"
                             "void Application::on_end_processing(dbtoaster::data_t& data, bool print_result, bool count_view_size) {\n"
                             "\n"
@@ -204,7 +210,7 @@ public:
                             "    relation_list += rel->get_name() + \",\";\n"
                             "  }\n"
                             "  relation_list = relation_list.substr(0, relation_list.size() - 1);"
-                            "    std::vector<std::vector<std::string>> times;\n"
+                            "    std::vector<Measurement*> measurements;\n"
                             "    size_t output_size = 0; \n";
 
 
@@ -277,9 +283,8 @@ public:
   std::string generate_function(Query *query) {
     std::vector<std::string> all_vars = std::vector<std::string>();
     std::string head =
-        "void enumerate_" + query->query_name +
-        "(dbtoaster::data_t &data, bool print_result, bool count_view_size, std::vector<std::string>* " +
-        query->query_name + "_time) {\n";
+        "long enumerate_" + query->query_name +
+        "(dbtoaster::data_t &data, bool print_result, bool count_view_size, Measurement *measure) {\n";
     std::string res = "    size_t output_size = 0; \n";
     res += "std::ofstream view_sizes_file;\n";
     res += "if(count_view_size) {\nview_sizes_file = std::ofstream(\"sizes/" + filename + "_" + query->query_name +
@@ -290,14 +295,15 @@ public:
     res += "view_sizes_file << \"" + query->views->at(0)->view_name + ", \" << 0<< std::endl;\n";
     for (; it != query->views->end(); ++it) {
       auto view = *it;
-      res += "view_sizes_file << \"" + view->view_name + ", \" << data." + view->getViewAccessFunctionName() + "().primary_index->count()<< std::endl;\n";
+      res += "view_sizes_file << \"" + view->view_name + ", \" << data." + view->getViewAccessFunctionName() +
+             "().primary_index->count()<< std::endl;\n";
     }
     res += "view_sizes_file.close();\n}\n";
     res += "Stopwatch enumeration_timer;\nenumeration_timer.restart();\n";
     if (query->call_batch_update) {
       res += "Stopwatch propagation_timer;\n";
-      res += "long propagation_time = 0;\n";
     }
+    res += "long propagation_time = 0;\n";
     res += "long enumeration_time = 0;\n";
     res +=
         "std::ofstream output_file;\n if (print_result) output_file.open (\"output/" + query->query_name + ".csv\");\n";
@@ -381,7 +387,7 @@ public:
       auto ordered_vars = enumerated_relations->find(query->query_name)->second;
       res +=
           tabbing(tabbing_iter) + "auto combined_entry = " + update_type + query->query_name + "_entry(" +
-          join(&ordered_vars, ",") + "combined_value);\n";
+          join(&ordered_vars, ",") + ", combined_value);\n";
       res += tabbing(tabbing_iter) + "update.emplace_back(combined_entry);\n";
 
       res += tabbing(tabbing_iter) + "if (output_size % " + propagation_size + " == " + propagation_size +
@@ -391,14 +397,14 @@ public:
     } else {
       res +=
           tabbing(tabbing_iter) + "auto combined_entry = " + query->query_name + "_entry{" +
-          join(&all_vars, ",") + "combined_value};\n";
+          join(&all_vars, ",") + ", combined_value};\n";
       res += tabbing(tabbing_iter) + "update.emplace_back(combined_entry);\n";
       res += tabbing(tabbing_iter) + "if (output_size % " + propagation_size + " == " + propagation_size +
              "-1) { update.clear();}\n";
     }
 
     res += tabbing(tabbing_iter) + "if (print_result) { output_file << " + join(&all_vars, " <<\"|\"<<") +
-           " combined_value << std::endl;}\n";
+           " << combined_value << std::endl;}\n";
 
     std::string print_variable_order = "    std::cout << \"" + join(&all_vars, ",") + "\" << std::endl;\n";
 
@@ -409,8 +415,7 @@ public:
     res += "enumeration_time += enumeration_timer.elapsedTimeInMilliSeconds();\n";
     res += "std::cout << \"enumeration time " + query->query_name +
            ": \" << enumeration_time << \"ms\"<< std::endl;\n";
-    res += query->query_name + "_time->push_back(\"" + query->query_name + "\");\n";
-    res += query->query_name + "_time->push_back(std::to_string(enumeration_time));\n";
+    res += "measure->enumeration_time = enumeration_time;\n";
     if (query->call_batch_update) {
       res += "propagation_timer.restart();\n";
       res += "data.on_batch_update_" + query->query_name + "(update.begin(), update.end());\n";
@@ -418,9 +423,7 @@ public:
       res += "propagation_time += propagation_timer.elapsedTimeInMilliSeconds();\n";
       res += "std::cout << \"propagation time " + query->query_name +
              ": \" << propagation_time << \"ms\" << std::endl;\n";
-      res += query->query_name + "_time->push_back(std::to_string(propagation_time));\n";
     } else {
-      res += query->query_name + "_time->push_back(\"-\");\n";
       std::string entry = generate_struct(&all_vars, query->query_name);
       head = entry + head;
       res += "if (update.size() > 0) {\n";
@@ -429,13 +432,12 @@ public:
       res += "std::cout << \"dummy: \" << dummy.combined_value << std::endl;}\n";
     }
     res += "output_file.close();\n";
-
-    res += query->query_name + "_time->push_back(std::to_string(output_size));\n";
+    res += "measure->size_output = output_size;\n";
     auto vars = join(&all_vars, ",");
-    vars.pop_back();
-    res += query->query_name + "_time->push_back(\"" + vars + "\");\n";
+    res += "measure->free_variables = \""+vars+"\";\n";
 
-    res += "std::cout << \"" + query->query_name + ": \" << output_size << std::endl;\n}\n";
+    res += "std::cout << \"" + query->query_name + ": \" << output_size << std::endl;\n";
+    res += "return propagation_time;\n}\n";
     return head + print_variable_order + res;
   }
 
@@ -461,26 +463,29 @@ public:
       res += "\n";
     }
     res += start;
-    for (const auto& query: *query_atoms) {
+    for (const auto &query: *query_atoms) {
       auto query_name = query.first;
       auto atoms = query.second;
       res += "    long updating_" + query_name + " = ";
-      for(const auto& atom : atoms){
-        res +="dynamic_multiplexer.updating_times.find(\""+atom+"\")->second + ";
+      for (const auto &atom: atoms) {
+        res += "dynamic_multiplexer.updating_times.find(\"" + atom + "\")->second + ";
       }
       res.pop_back();
       res.pop_back();
-      res += ";\n";    }
-    for (auto query: *queries) {
-      res += "    std::vector<std::string>" + query->query_name + "_time;\n";
-
-      res += "    cout << \"Enumerating " + query->query_name + "... \" << endl;\n";
-      res += "    enumerate_" + query->query_name + "(data, print_result, count_view_size, &" + query->query_name +
-             "_time);\n";
-      res += "    times.push_back(" + query->query_name + "_time);\n";
+      res += ";\n";
     }
-    res += "std::ofstream measurements_file(\"outputs/output.txt\", std::ios::app);\n";
-    res += "write_to_config(&times, measurements_file, relation_list);\n";
+    for (auto query: *queries) {
+      res +=
+          "    Measurement measure_" + query->query_name + " = Measurement(\"" + query->query_name + "\", updating_" +
+          query->query_name + ", \"" + join(&(query_atoms->at(query->query_name)), ",") + "\");\n";
+      res += "    cout << \"Enumerating " + query->query_name + "... \" << endl;\n";
+      res +=
+          "    enumerate_" + query->query_name + "(data, print_result, count_view_size, &measure_" + query->query_name +
+          ");\n";
+      res += "    measurements.push_back(&measure_" + query->query_name + ");\n";
+    }
+    res += "std::ofstream measurements_file(\"output/output.txt\", std::ios::app | std::ios::out);\n";
+    res += "write_to_config(&measurements, measurements_file, relation_list);\n";
     res += "measurements_file.close();\n";
     res += "}\n";
     res += " #endif";
