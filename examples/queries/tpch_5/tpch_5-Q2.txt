@@ -1,0 +1,21 @@
+17 3
+0 nationkey int -1 {} 0
+1 n_name string 0 {0} 0
+2 regionkey int 1 {0,1} 0
+3 n_comment string 2 {0,1,2} 0
+4 s_name string 0 {0} 0
+5 s_address string 4 {0,4} 0
+6 suppkey int 5 {0,4,5} 0
+7 s_comment string 6 {0,4,5,6} 0
+8 s_acctbal double 7 {0,4,5,6,7} 0
+9 s_phone string 8 {0,4,5,6,7,8} 0
+10 custkey int 0 {0} 0
+11 c_name string 10 {0,10} 0
+12 c_phone string 11 {0,10,11} 0
+13 c_mktsegment string 12 {0,10,11,12} 0
+14 c_acctbal double 13 {0,10,11,12,13} 0
+15 c_address string 14 {0,10,11,12,13,14} 0
+16 c_comment string 15 {0,10,11,12,13,14,15} 0
+nation 3 nationkey,n_name,regionkey,n_comment
+supplier 9 suppkey,s_name,s_address,nationkey,s_phone,s_acctbal,s_comment
+customer 16 custkey,c_name,c_address,nationkey,c_phone,c_acctbal,c_mktsegment,c_comment
