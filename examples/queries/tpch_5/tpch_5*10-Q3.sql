@@ -16,7 +16,7 @@ STREAM part (
         p_retailprice  DECIMAL,
         p_comment      VARCHAR(23)
     )
-  FROM FILE './datasets/tpch1/part.csv'
+  FROM FILE './datasets/tpch10/part.csv'
   LINE DELIMITED CSV (delimiter := '|');
 
 
@@ -27,7 +27,7 @@ CREATE STREAM partsupp (
         ps_supplycost   DECIMAL,
         ps_comment      VARCHAR(199)
     )
-  FROM FILE './datasets/tpch1/partsupp.csv'
+  FROM FILE './datasets/tpch10/partsupp.csv'
   LINE DELIMITED CSV (delimiter := '|');
 
 SELECT SUM(
