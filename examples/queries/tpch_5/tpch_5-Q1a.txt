@@ -1,0 +1,35 @@
+29 5
+0 suppkey int -1 {} 0
+1 partkey int 0 {0} 0
+2 p_name string 1 {0,1} 0
+3 p_size int 2 {0,1,2} 0
+4 p_type string 3 {0,1,2,3} 0
+5 p_container string 4 {0,1,2,3,4} 0
+6 p_comment string 5 {0,1,2,3,4,5} 0
+7 p_retailprice double 6 {0,1,2,3,4,5,6} 0
+8 p_brand string 7 {0,1,2,3,4,5,6,7} 0
+9 p_mfgr string 8 {0,1,2,3,4,5,6,7,8} 0
+10 ps_availqty int 1 {0,1} 0
+11 ps_comment string 10 {0,1,10} 0
+12 ps_supplycost double 11 {0,1,10,11} 0
+13 nationkey int 0 {0} 0
+14 n_name string 13 {0,13} 0
+15 n_comment string 14 {0,13,14} 0
+16 regionkey int 15 {0,13,14,15} 0
+17 s_name string 13 {0,13} 0
+18 s_comment string 17 {0,17,13} 0
+19 s_phone string 18 {0,17,18,13} 0
+20 s_acctbal double 19 {0,17,18,19,13} 0
+21 s_address string 20 {0,17,18,19,20,13} 0
+22 c_mktsegment string 13 {0,13} 0
+23 custkey int 22 {0,13,22} 0
+24 c_phone string 23 {0,13,22,23} 0
+25 c_acctbal double 24 {0,22,23,24,13} 0
+26 c_name string 25 {0,22,23,24,25,13} 0
+27 c_comment string 26 {0,22,23,24,25,26,13} 0
+28 c_address string 27 {0,22,23,24,25,26,27,13} 0
+nation 16 nationkey,n_name,regionkey,n_comment
+supplier 21 suppkey,s_name,s_address,nationkey,s_phone,s_acctbal,s_comment
+customer 28 custkey,c_name,c_address,nationkey,c_phone,c_acctbal,c_mktsegment,c_comment
+part 9 partkey,p_name,p_mfgr,p_brand,p_type,p_size,p_container,p_retailprice,p_comment
+partsupp 12 partkey,suppkey,ps_availqty,ps_supplycost,ps_comment
