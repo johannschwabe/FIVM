@@ -490,8 +490,8 @@ public:
     for (auto query_1: *queries) {
       int count = 0;
       for (auto query_2: *queries) {
-        for (const auto& atom: query_atoms->at(query_2->query_name)) {
-          if (atom == query_1->query_name){
+        for (const auto& atom: query_atoms->at(query_1->query_name)) {
+          if (atom == query_2->query_name){
             res += "    measure_" + query_1->query_name + ".update_time += " + query_2->query_name + "_propagation;\n";
             count++;
           }
