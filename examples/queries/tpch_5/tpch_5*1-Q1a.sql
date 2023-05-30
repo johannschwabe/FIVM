@@ -14,7 +14,7 @@ CREATE STREAM customer (
         c_mktsegment   CHAR(10),
         c_comment      VARCHAR(117)
     )
-  FROM FILE './datasets/tpch/customer.csv'
+  FROM FILE './datasets/tpch1/customer.csv'
   LINE DELIMITED CSV (delimiter := '|');
 
 
@@ -53,7 +53,7 @@ CREATE STREAM supplier (
         s_acctbal      DECIMAL,
         s_comment      VARCHAR(101)
     )
-  FROM FILE './datasets/tpch/supplier.csv'
+  FROM FILE './datasets/tpch1/supplier.csv'
   LINE DELIMITED CSV (delimiter := '|');
 
 CREATE STREAM nation (
@@ -62,7 +62,7 @@ CREATE STREAM nation (
         regionkey    INT,
         n_comment      VARCHAR(152)
 )
-    FROM FILE './datasets/tpch/nation.csv'
+    FROM FILE './datasets/tpch1/nation.csv'
   LINE DELIMITED CSV (delimiter := '|');
 
 SELECT SUM(
