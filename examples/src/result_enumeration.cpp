@@ -392,7 +392,7 @@ public:
 
       res += tabbing(tabbing_iter) + "if (output_size % " + propagation_size + " == " + propagation_size +
              "-1) { enumeration_timer.stop(); enumeration_time += enumeration_timer.elapsedTimeInMilliSeconds();" +
-             "propagation_timer.restart(); data.on_batch_update_Q2(update.begin(), update.end()); update.clear();propagation_timer.stop();propagation_time += propagation_timer.elapsedTimeInMilliSeconds();\n";
+             "propagation_timer.restart(); data.on_batch_update_"+query->query_name+"(update.begin(), update.end()); update.clear();propagation_timer.stop();propagation_time += propagation_timer.elapsedTimeInMilliSeconds();\n";
       res += tabbing(tabbing_iter) + "enumeration_timer.restart();}\n";
     } else {
       res +=
@@ -466,7 +466,7 @@ public:
     for (const auto &query: *query_atoms) {
       auto query_name = query.first;
       auto atoms = query.second;
-      res += "    long updating_" + query_name + " = ";
+      res += "    long updating_" + query_name + " = 0 + ";
       for (const auto &atom: atoms) {
         if(std::find(relations->begin(), relations->end(),atom) != relations->end()) {
           res += "dynamic_multiplexer.updating_times.find(\"" + atom + "\")->second + ";
@@ -490,15 +490,15 @@ public:
     for (auto query_1: *queries) {
       int count = 0;
       for (auto query_2: *queries) {
-        for (const auto& atom: query_atoms->at(query_1->query_name)) {
-          if (atom == query_2->query_name){
-            res += "    measure_" + query_1->query_name + ".update_time += " + query_2->query_name + "_propagation;\n";
+        for (const auto& atom: query_atoms->at(query_2->query_name)) {
+          if (atom == query_1->query_name){
+            res += "    measure_" + query_2->query_name + ".update_time += " + query_1->query_name + "_propagation;\n";
             count++;
           }
         }
       }
       if(count > 1){
-        res += "std::cout << \"WARNING: " + query_1->query_name + " is used in multiple queries but propagation time is indivisible\" << std::endl;";
+        res += "std::cout << \"WARNING: " + query_1->query_name + " is used in multiple queries but propagation time is indivisible. updating with "+query_1->query_name+" took\" << "+query_1->query_name + R"(_propagation" << "ms"<< std::endl;)";
       }
     }
     res += "std::ofstream measurements_file(\"output/output.txt\", std::ios::app | std::ios::out);\n";
