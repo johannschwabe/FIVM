@@ -8,4 +8,4 @@
 6 locn int 5 {0,5} 0
 
 Item 4 ksn,subcategory,category,categoryCluster,prize
-q2_small 6 locn,dateid,ksn
+q2 6 locn,dateid,ksn

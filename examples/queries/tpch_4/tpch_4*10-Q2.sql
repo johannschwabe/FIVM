@@ -51,11 +51,11 @@ STREAM partsupp (
   LINE DELIMITED CSV (delimiter := '|');
 
 SELECT SUM(
-    [lift<0>: RingFactorizedRelation<[0, INT]>](suppkey) *
+           [lift<0>: RingFactorizedRelation<[0, INT]>](suppkey) *
     [lift<1>: RingFactorizedRelation<[1, INT]>](partkey) *
     [lift<2>: RingFactorizedRelation<[2, DECIMAL]>](l_quantity) *
     [lift<17>: RingFactorizedRelation<[17, INT, DECIMAL]>](ps_availqty, ps_supplycost) *
-    [lift<20>: RingFactorizedRelation<[20, VARCHAR(25)]>](s_name)
+    [lift<20>: RingFactorizedRelation<[20, INT, VARCHAR(25)]>](nationkey,s_name)
 )
 FROM lineitem
          NATURAL JOIN supplier

@@ -4,7 +4,7 @@ CREATE DISTRIBUTED TYPE RingFactorizedRelation
 FROM FILE 'ring/ring_factorized.hpp'
 WITH PARAMETER SCHEMA (dynamic_min);
 
-CREATE STREAM q2_small (
+CREATE STREAM q2 (
     locn int,
     dateid int,
     ksn int
@@ -17,4 +17,4 @@ SELECT SUM(
     [lift<0>: RingFactorizedRelation<[0,int]>](ksn) *
     [lift<1>: RingFactorizedRelation<[1,int, int]>](locn,dateid)
 )
-FROM q2_small NATURAL JOIN Item
+FROM q2 NATURAL JOIN Item
