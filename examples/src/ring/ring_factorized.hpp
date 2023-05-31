@@ -39,7 +39,7 @@ long SingletonRelation<Idx, Keys...>::count = 1L;
 template <size_t Idx, typename... Keys>
 struct RelationMap {
     // Map<Keys...> store;
-    Map<Keys...> store= Map<Keys...>{50000};
+    Map<Keys...> store= Map<Keys...>{25000};
     long count;
 
     explicit RelationMap() : count(0L) { }
