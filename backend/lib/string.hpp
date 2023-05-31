@@ -320,6 +320,20 @@ namespace dbtoaster {
             return !(this->operator==(other));
         }
 
+        FORCE_INLINE bool operator<(const PooledRefCountedString& other) const {
+          // Compare based on length first
+          if (this->size_ < other.size_) {
+            return true;
+          }
+          if (this->size_ > other.size_) {
+            return false;
+          }
+
+          // If lengths are equal, do lexicographical comparison of character arrays
+          return std::lexicographical_compare(this->data_, this->data_ + this->size_,
+                                              other.data_, other.data_ + other.size_);
+        }
+
         FORCE_INLINE PooledRefCountedString& operator=(const char* str) {
             if ((--(*ptr_count_)) == 0) {
                 *ptr_count_ = 1;        // re-use ptr_count_
