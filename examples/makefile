@@ -82,14 +82,14 @@ $(EXE_FILES_BATCH): $(EXE_OUT_DIR)/%_BATCH_$(BATCH_SIZE) : $(CPP_OUT_DIR)/%_BATC
 	@test -d $(dir $@) || mkdir -p $(dir $@)
 	$(eval DATASET := $(patsubst $(EXE_OUT_DIR)/%/, %, $(dir $@)))
 	$(eval APP_HEADER := $(patsubst $(EXE_OUT_DIR)/$(DATASET)/%_BATCH_${BATCH_SIZE}, $(APP_OUT_DIR)/$(DATASET)/%.hpp, $@))
-	$(CC) $(CFLAGS) $(SRC_DIR)/main.cpp -I ../backend/lib -I $(SRC_DIR) -I $(SRC_DIR)/lib -DBATCH_SIZE=$(BATCH_SIZE) -include $< -include $(APP_HEADER) -o $@; \
+	$(CC) $(CFLAGS) $(SRC_DIR)/main.cpp -I ../backend/lib -I $(SRC_DIR) -I $(SRC_DIR)/lib -I $(SRC_DIR)/TLXInstall/include/tlx -DBATCH_SIZE=$(BATCH_SIZE) -include $< -include $(APP_HEADER) -o $@; \
 
 
 $(EXE_FILES_SINGLE): $(EXE_OUT_DIR)/%_SINGLE : $(CPP_OUT_DIR)/%_SINGLE.hpp $(SRC_DIR)/main.cpp $(APP_OUT_DIR)/%.hpp
 	@test -d $(dir $@) || mkdir -p $(dir $@)
 	$(eval DATASET := $(patsubst $(EXE_OUT_DIR)/%/,%, $(dir $@)))	
 	$(eval APP_HEADER := $(patsubst $(EXE_OUT_DIR)/$(DATASET)/%_SINGLE, $(APP_OUT_DIR)/$(DATASET)/%.hpp, $@))
-	$(CC) $(CFLAGS) $(SRC_DIR)/main.cpp -I ../backend/lib -I $(SRC_DIR) -I $(SRC_DIR)/lib -include $< -include $(APP_HEADER) -o $@; \
+	$(CC) $(CFLAGS) $(SRC_DIR)/main.cpp -I ../backend/lib -I $(SRC_DIR) -I $(SRC_DIR)/lib -I $(SRC_DIR)/TLXInstall/include/tlx -include $< -include $(APP_HEADER) -o $@; \
 
 
 m3_batch: $(M3_FILES_BATCH)

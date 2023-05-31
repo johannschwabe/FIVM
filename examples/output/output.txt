@@ -1,0 +1,5 @@
+retailer_1|CAVIER|retailer||Weather,Item,Location,Inventory:Q2 | 7962 | 1452 | 84055817 | Locn,DateId,MaxTemp,Rain,Ksn,Zip | Inventory,Weather,Location : Q1 | 27597 | 4474 | 84055817 | Ksn,Zip,DateId,Rain,Locn,Category | Item,Q2
+retailer_1|FIVM|retailer||Inventory,Item,Weather,Location:Q1a | 27258 | 5802 | 84055817 | locn,dateid,ksn,category,rain,zip | Inventory,Item,Weather,Location
+retailer_1|FIVM|retailer||Inventory,Weather,Location,Item:Q1b | 68329 | 23680 | 84055817 | ksn,locn,dateid,rain,zip,category | Inventory,Weather,Location,Item
+retailer_1|FIVM|retailer||Item,q2:Q1c | 31152 | 3924 | 84055817 | ksn,category,locn,dateid,rain,zip | Item,q2
+retailer_1|FIVM|retailer||Inventory,Weather,Location:Q2 | 7338 | 4159 | 84055817 | locn,dateid,ksn,rain,maxtemp,zip | Inventory,Weather,Location
