@@ -2,7 +2,7 @@
 #define RINGFACTORIZED_HPP
 
 #include <array>
-#include <unordered_map>
+#include <tlx/container/btree_map.hpp>
 #include <tuple>
 #include <type_traits>
 #include "types.hpp"
@@ -14,7 +14,7 @@ template <typename... Keys>
 using SingletonArray = std::array<std::tuple<std::tuple<Keys...>, long>, 1>;
 
 template <typename... Keys>
-using Map = std::unordered_map<std::tuple<Keys...>, long, hash_tuple::hash<std::tuple<Keys...>>>;
+using Map = tlx::btree_map<std::tuple<Keys...>, long, std::less<>>;
 
 template <size_t, typename>
 struct Accumulator;
@@ -38,8 +38,7 @@ long SingletonRelation<Idx, Keys...>::count = 1L;
 
 template <size_t Idx, typename... Keys>
 struct RelationMap {
-    // Map<Keys...> store;
-    Map<Keys...> store= Map<Keys...>{100};
+    Map<Keys...> store;
     long count;
 
     explicit RelationMap() : count(0L) { }

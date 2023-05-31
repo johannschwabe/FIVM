@@ -1,0 +1,3 @@
+[submodule "examples/src/tlx"]
+	path = examples/src/tlx
+	url = https://github.com/tlx/tlx.git
