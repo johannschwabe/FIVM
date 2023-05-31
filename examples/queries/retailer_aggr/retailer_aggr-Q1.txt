@@ -1,0 +1,6 @@
+4 1
+0 dateid int -1 {} 0
+1 locn int 0 {0} 0
+2 ksn int 1 {0,1} 0
+3 inventoryunits int 2 {0,1,2} 0
+Inventory 3 locn,dateid,ksn,inventoryunits

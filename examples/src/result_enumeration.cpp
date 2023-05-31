@@ -343,7 +343,7 @@ public:
 
     all_vars.insert(all_vars.end(), splitted->begin(), splitted->end());
     delete splitted;
-    std::string combined_value = tabbing(tabbing_iter) + "auto combined_value =";
+    std::string combined_value = tabbing(tabbing_iter) + "auto combined_value = 1  * ";
     auto view = config->begin();
     std::advance(view, 1);
     for (; view != config->end(); ++view) {
@@ -392,8 +392,8 @@ public:
 
       res += tabbing(tabbing_iter) + "if (output_size % " + propagation_size + " == " + propagation_size +
              "-1) { enumeration_timer.stop(); enumeration_time += enumeration_timer.elapsedTimeInMilliSeconds();" +
-             "propagation_timer.restart(); data.on_batch_update_"+query->query_name+"(update.begin(), update.end()); update.clear();propagation_timer.stop();propagation_time += propagation_timer.elapsedTimeInMilliSeconds();\n";
-      res += tabbing(tabbing_iter) + "enumeration_timer.restart();}\n";
+             "propagation_timer.restart(); data.on_batch_update_"+query->query_name+"(update.begin(), update.end()); propagation_timer.stop();propagation_time += propagation_timer.elapsedTimeInMilliSeconds();\n";
+      res += tabbing(tabbing_iter) + "enumeration_timer.restart();update.clear();}\n";
     } else {
       res +=
           tabbing(tabbing_iter) + "auto combined_entry = " + query->query_name + "_entry{" +
