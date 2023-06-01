@@ -1,5 +1,75 @@
-retailer_1|CAVIER|retailer||Weather,Item,Location,Inventory:Q2 | 7962 | 1452 | 84055817 | Locn,DateId,MaxTemp,Rain,Ksn,Zip | Inventory,Weather,Location : Q1 | 27597 | 4474 | 84055817 | Ksn,Zip,DateId,Rain,Locn,Category | Item,Q2
-retailer_1|FIVM|retailer||Inventory,Item,Weather,Location:Q1a | 27258 | 5802 | 84055817 | locn,dateid,ksn,category,rain,zip | Inventory,Item,Weather,Location
-retailer_1|FIVM|retailer||Inventory,Weather,Location,Item:Q1b | 68329 | 23680 | 84055817 | ksn,locn,dateid,rain,zip,category | Inventory,Weather,Location,Item
-retailer_1|FIVM|retailer||Item,q2:Q1c | 31152 | 3924 | 84055817 | ksn,category,locn,dateid,rain,zip | Item,q2
-retailer_1|FIVM|retailer||Inventory,Weather,Location:Q2 | 7338 | 4159 | 84055817 | locn,dateid,ksn,rain,maxtemp,zip | Inventory,Weather,Location
+retailer_1|CAVIER|retailer||Inventory,Weather,Location,Item:Q2 | 71850 | 8605 | 84055817 | Locn,Zip,DateId,MaxTemp,Rain,Ksn | Inventory,Weather,Location : Q1 | 298243 | 26385 | 84055817 | Ksn,Zip,DateId,Locn,Rain,Category | Item,Q2
+retailer_1|FIVM|retailer||Inventory,Item,Weather,Location:Q1a | 232407 | 45196 | 84055817 | locn,dateid,ksn,category,rain,zip | Inventory,Item,Weather,Location
+retailer_1|FIVM|retailer||Inventory,Weather,Location,Item:Q1b | 815241 | 245381 | 84055817 | ksn,locn,dateid,rain,zip,category | Inventory,Weather,Location,Item
+retailer_1|FIVM|retailer||Item,q2:Q1c | 427972 | 39555 | 84055817 | ksn,category,locn,dateid,rain,zip | Item,q2
+retailer_1|FIVM|retailer||Inventory,Weather,Location:Q2 | 49360 | 29379 | 84055817 | locn,dateid,ksn,rain,maxtemp,zip | Inventory,Weather,Location
+retailer_2|CAVIER|retailer||Census,Weather,Location:Q2 | 972 | 215 | 1159457 | Locn,WalmartSuperCenterDriveTime,Zip,WalmartDriveTime,WalmartSuperCenterDistance,WalmartDistance,SuperTargetDistance,TargetDistance,AvgHigh,ClimbZnNbr,RgnCd,TotalAreaSqFt,SellAreaSqFt,SuperTargetDriveTime,TargetDriveTime,Snow,DateId,MaxTemp,Thunder,MinTemp,MeanWind,Rain | Weather,Location : Q1 | 2243 | 1302 | 1159457 | Zip,Snow,WalmartSuperCenterDriveTime,DateId,MaxTemp,AvgHigh,TotalAreaSqFt,Thunder,MinTemp,Rain,Locn,SellAreaSqFt,WalmartSuperCenterDistance,SuperTargetDistance,RgnCd,WalmartDriveTime,WalmartDistance,TargetDistance,ClimbZnNbr,SuperTargetDriveTime,TargetDriveTime,MeanWind,HousholdsChildren,Hispanic,Males,Asian,HusbWife,Pacific,Families,Females,MedianAge,OccupiedHouseUnits,White,Housholds,Blackafrican,Population,HouseUnits | Census,Q2
+retailer_2|FIVM|retailer||Weather,Location,Census:Q1 | 828 | 1209 | 1159457 | locn,dateid,rain,snow,maxtemp,mintemp,meanwind,thunder,zip,rgn_cd,clim_zn_nbr,tot_area_sq_ft,sell_area_sq_ft,avghhi,supertargetdistance,supertargetdrivetime,targetdistance,targetdrivetime,walmartdistance,walmartdrivetime,walmartsupercenterdistance,walmartsupercenterdrivetime,population,white,asian,pacific,blackafrican,medianage,occupiedhouseunits,houseunits,families,households,husbwife,males,females,householdschildren,hispanic | Weather,Location,Census
+retailer_2|FIVM|retailer||Weather,Location:Q2 | 811 | 679 | 1159457 | locn,dateid,rain,snow,maxtemp,mintemp,meanwind,thunder,zip,rgn_cd,clim_zn_nbr,tot_area_sq_ft,sell_area_sq_ft,avghhi,supertargetdistance,supertargetdrivetime,targetdistance,targetdrivetime,walmartdistance,walmartdrivetime,walmartsupercenterdistance,walmartsupercenterdrivetime | Weather,Location
+retailer_3|CAVIER|retailer||Inventory,Weather,Location,Item:Q2 | 373394 | 15326 | 84055817 | Ksn,Category,Prize,DateId,Locn | Inventory,Item : Q1 | 994640 | 27668 | 84055817 | Locn,DateId,Category,Ksn,Rain,Zip | Weather,Location,Q2
+retailer_3|FIVM|retailer||Inventory,Item,Weather,Location:Q1 | 34265 | 19294 | 84055817 | locn,dateid,ksn,category,rain,zip | Inventory,Item,Weather,Location
+retailer_3|FIVM|retailer||Item,Inventory:Q2 | 86549 | 14391 | 84055817 | ksn,prize,category,locn,dateid | Item,Inventory
+retailer_4|CAVIER|retailer||Inventory,Location,Item:Q2 | 115218 | 142 | 1731231 | Ksn,Locn,Category,Prize | Inventory,Item : Q1 | 3209 | 646 | 1731231 | Locn,Zip,Category,Ksn | Location,Q2
+retailer_4|FIVM|retailer||Inventory,Location,Item:Q1a | 113874 | 894 | 1731231 | ksn,locn,zip,category | Inventory,Location,Item
+retailer_4|FIVM|retailer||Inventory,Item,Location:Q1b | 61326 | 1097 | 1731231 | locn,ksn,category,zip | Inventory,Item,Location
+retailer_4|FIVM|retailer||Item,Inventory:Q2 | 74617 | 162 | 1731231 | ksn,prize,category,locn | Item,Inventory
+retailer_5|CAVIER|retailer||Inventory,Weather,Location,Item:Q2 | 12201 | 1970 | 84055817 | Locn,DateId,Ksn | Inventory,Weather,Location : Q1 | 111162 | 5380 | 84055817 | Ksn,DateId,Locn | Item,Q2
+retailer_5|FIVM|retailer||Inventory,Item,Weather,Location:Q1a | 31061 | 2149 | 84055817 | locn,dateid,ksn | Inventory,Item,Weather,Location
+retailer_5|FIVM|retailer||Inventory,Weather,Location,Item:Q1b | 115585 | 3593 | 84055817 | ksn,locn,dateid | Inventory,Weather,Location,Item
+retailer_5|FIVM|retailer||Item,q2:Q1c | 59251 | 3430 | 84055817 | ksn,locn,dateid | Item,q2
+retailer_5|FIVM|retailer||Inventory,Weather,Location:Q2 | 10149 | 2138 | 84055817 | locn,dateid,ksn | Inventory,Weather,Location
+tpch_1|FIVM|tpch10||lineitem,orders:Q2 | 18137 | 4356 | 59986052 | orderkey,partkey,suppkey,l_quantity,o_totalprice | lineitem,orders
+tpch_1|FIVM|tpch1||lineitem,orders:Q2 | 1729 | 444 | 6001215 | orderkey,partkey,suppkey,l_quantity,o_totalprice | lineitem,orders
+tpch_1|CAVIER|tpch10||part,partsupp,lineitem,orders:Q2 | 26209 | 8030 | 59986052 | ORDERKEY,SUPPKEY,PARTKEY,L_QUANTITY,O_TOTALPRICE | lineitem,orders : Q1 | 258290 | 18854 | 59986052 | PARTKEY,P_NAME,SUPPKEY,PS_AVAILQTY,ORDERKEY,O_TOTALPRICE,L_QUANTITY | part,partsupp,Q2
+tpch_1|CAVIER|tpch1||part,partsupp,lineitem,orders:Q2 | 1902 | 207 | 6001215 | ORDERKEY,O_TOTALPRICE,SUPPKEY,PARTKEY,L_QUANTITY | lineitem,orders : Q1 | 11918 | 1140 | 6001215 | PARTKEY,SUPPKEY,PS_AVAILQTY,ORDERKEY,O_TOTALPRICE,L_QUANTITY,P_NAME | part,partsupp,Q2
+tpch_1|FIVM|tpch10||lineitem,partsupp,part,orders:Q1a | 174286 | 122220 | 59986052 | orderkey,partkey,suppkey,l_quantity,ps_availqty,p_name,o_totalprice | lineitem,partsupp,part,orders
+tpch_1|FIVM|tpch10||lineitem,orders,partsupp,part:Q1b | 230110 | 105364 | 59986052 | partkey,suppkey,orderkey,l_quantity,o_totalprice,ps_availqty,p_name | lineitem,orders,partsupp,part
+tpch_1|FIVM|tpch10||partsupp,q2,part:Q1c | 134063 | 10557 | 59986052 | partkey,suppkey,ps_availqty,orderkey,l_quantity,o_totalprice,p_name | partsupp,q2,part
+tpch_1|FIVM|tpch10||lineitem,orders:Q2 | 18256 | 4351 | 59986052 | orderkey,partkey,suppkey,l_quantity,o_totalprice | lineitem,orders
+tpch_1|FIVM|tpch1||lineitem,partsupp,part,orders:Q1a | 11404 | 5792 | 6001215 | orderkey,partkey,suppkey,l_quantity,ps_availqty,p_name,o_totalprice | lineitem,partsupp,part,orders
+tpch_1|FIVM|tpch1||lineitem,orders,partsupp,part:Q1b | 15064 | 3840 | 6001215 | partkey,suppkey,orderkey,l_quantity,o_totalprice,ps_availqty,p_name | lineitem,orders,partsupp,part
+tpch_1|FIVM|tpch1||partsupp,q2,part:Q1c | 10995 | 1009 | 6001215 | partkey,suppkey,ps_availqty,orderkey,l_quantity,o_totalprice,p_name | partsupp,q2,part
+tpch_1|FIVM|tpch1||lineitem,orders:Q2 | 1730 | 444 | 6001215 | orderkey,partkey,suppkey,l_quantity,o_totalprice | lineitem,orders
+tpch_2|CAVIER|tpch10||part,partsupp,lineitem,orders:Q2 | 221615 | 26415 | 59986052 | PARTKEY,SUPPKEY,ORDERKEY,L_QUANTITY,PS_AVAILQTY,P_NAME | part,partsupp,lineitem : Q1 | 306396 | 29587 | 59986052 | ORDERKEY,P_NAME,SUPPKEY,PARTKEY,PS_AVAILQTY,L_QUANTITY,O_TOTALPRICE | orders,Q2
+tpch_2|CAVIER|tpch1||part,partsupp,lineitem,orders:Q2 | 10038 | 707 | 6001215 | PARTKEY,SUPPKEY,ORDERKEY,L_QUANTITY,PS_AVAILQTY,P_NAME | part,partsupp,lineitem : Q1 | 14002 | 1468 | 6001215 | ORDERKEY,O_TOTALPRICE,P_NAME,SUPPKEY,PARTKEY,PS_AVAILQTY,L_QUANTITY | orders,Q2
+tpch_2|FIVM|tpch10||lineitem,partsupp,part,orders:Q1 | 184358 | 142779 | 59986052 | orderkey,partkey,suppkey,l_quantity,ps_availqty,p_name,o_totalprice | lineitem,partsupp,part,orders
+tpch_2|FIVM|tpch10||lineitem,partsupp,part:Q2 | 133803 | 10142 | 59986052 | partkey,suppkey,orderkey,l_quantity,ps_availqty,p_name | lineitem,partsupp,part
+tpch_2|FIVM|tpch1||lineitem,partsupp,part,orders:Q1 | 11454 | 5787 | 6001215 | orderkey,partkey,suppkey,l_quantity,ps_availqty,p_name,o_totalprice | lineitem,partsupp,part,orders
+tpch_2|FIVM|tpch1||lineitem,partsupp,part:Q2 | 10826 | 984 | 6001215 | partkey,suppkey,orderkey,l_quantity,ps_availqty,p_name | lineitem,partsupp,part
+tpch_3|CAVIER|tpch10||supplier,part,partsupp,lineitem:Q2 | 132248 | 5920 | 56367668 | SUPPKEY,PARTKEY,PS_AVAILQTY,PS_SUPPLYCOST,L_QUANTITY,S_NAME | partsupp,lineitem,supplier : Q1 | 39563 | 15711 | 56367668 | PARTKEY,P_NAME,SUPPKEY,S_NAME,PS_AVAILQTY,L_QUANTITY | part,Q2
+tpch_3|CAVIER|tpch1||supplier,part,partsupp,lineitem:Q2 | 9603 | 501 | 5579862 | SUPPKEY,S_NAME,PARTKEY,L_QUANTITY,PS_AVAILQTY,PS_SUPPLYCOST | partsupp,lineitem,supplier : Q1 | 3411 | 997 | 5579862 | PARTKEY,P_NAME,SUPPKEY,S_NAME,PS_AVAILQTY,L_QUANTITY | part,Q2
+tpch_3|FIVM|tpch10||lineitem,partsupp,supplier,part:Q1a | 133063 | 13148 | 56367668 | partkey,suppkey,l_quantity,ps_availqty,s_name,p_name | lineitem,partsupp,supplier,part
+tpch_3|FIVM|tpch10||lineitem,partsupp,supplier:Q1b | 139842 | 10337 | 56367668 | suppkey,partkey,l_quantity,ps_availqty,ps_supplycost,s_name | lineitem,partsupp,supplier
+tpch_3|FIVM|tpch10||partsupp,lineitem,supplier:Q2 | 130342 | 9147 | 56367668 | suppkey,partkey,ps_availqty,ps_supplycost,l_quantity,s_name | partsupp,lineitem,supplier
+tpch_3|FIVM|tpch1||lineitem,partsupp,supplier,part:Q1a | 10850 | 1224 | 5579862 | partkey,suppkey,l_quantity,ps_availqty,s_name,p_name | lineitem,partsupp,supplier,part
+tpch_3|FIVM|tpch1||lineitem,partsupp,supplier:Q1b | 11131 | 992 | 5579862 | suppkey,partkey,l_quantity,ps_availqty,ps_supplycost,s_name | lineitem,partsupp,supplier
+tpch_3|FIVM|tpch1||partsupp,lineitem,supplier:Q2 | 9463 | 862 | 5579862 | suppkey,partkey,ps_availqty,ps_supplycost,l_quantity,s_name | partsupp,lineitem,supplier
+tpch_4|CAVIER|tpch10||orders,supplier,partsupp,lineitem,customer:Q3 | 51169 | 1578 | 15000000 | CUSTKEY,ORDERKEY,NATIONKEY | customer,orders : Q2 | 227834 | 20687 | 59986052 | SUPPKEY,PARTKEY,ORDERKEY,L_QUANTITY,PS_SUPPLYCOST,PS_AVAILQTY,NATIONKEY,S_NAME | partsupp,lineitem,supplier : Q1 | 94685 | 5794 | 2398579 | NATIONKEY,ORDERKEY,CUSTKEY,SUPPKEY,PARTKEY | Q2,Q3
+tpch_4|CAVIER|tpch1||orders,supplier,partsupp,lineitem,customer:Q3 | 2024 | 45 | 1500000 | CUSTKEY,NATIONKEY,ORDERKEY | customer,orders : Q2 | 9372 | 555 | 6001215 | SUPPKEY,NATIONKEY,S_NAME,PARTKEY,PS_SUPPLYCOST,PS_AVAILQTY,ORDERKEY,L_QUANTITY | partsupp,lineitem,supplier : Q1 | 4465 | 110 | 239917 | NATIONKEY,ORDERKEY,SUPPKEY,PARTKEY,CUSTKEY | Q2,Q3
+tpch_4|FIVM|tpch10||lineitem,partsupp,supplier,customer,orders:Q1a | 121026 | 49255 | 2398579 | orderkey,partkey,suppkey,nationkey,custkey | lineitem,partsupp,supplier,customer,orders
+tpch_4|FIVM|tpch10||partsupp,lineitem,supplier:Q2 | 134336 | 10805 | 59986052 | suppkey,partkey,ps_availqty,ps_supplycost,l_quantity,orderkey,nationkey,s_name | partsupp,lineitem,supplier
+tpch_4|FIVM|tpch10||customer,orders:Q3 | 18204 | 778 | 15000000 | custkey,nationkey,orderkey | customer,orders
+tpch_4|FIVM|tpch1||lineitem,partsupp,supplier,customer,orders:Q1a | 7848 | 2235 | 239917 | orderkey,partkey,suppkey,nationkey,custkey | lineitem,partsupp,supplier,customer,orders
+tpch_4|FIVM|tpch1||partsupp,lineitem,supplier:Q2 | 9906 | 1015 | 6001215 | suppkey,partkey,ps_availqty,ps_supplycost,l_quantity,orderkey,nationkey,s_name | partsupp,lineitem,supplier
+tpch_4|FIVM|tpch1||customer,orders:Q3 | 1324 | 75 | 1500000 | custkey,nationkey,orderkey | customer,orders
+tpch_5|CAVIER|tpch10||supplier,part,partsupp,customer,nation:Q3 | 2635 | 315 | 8000000 | PARTKEY,P_NAME,SUPPKEY,PS_AVAILQTY | part,partsupp : Q2 | 238 | 295723 | 5999974575 | NATIONKEY,CUSTKEY,SUPPKEY,S_NAME,S_ADDRESS,N_NAME | supplier,customer,nation : Q1 | 5422809 | 2241 | 8000000 | SUPPKEY,NATIONKEY,N_NAME,S_NAME,PARTKEY,PS_AVAILQTY,P_NAME | Q2,Q3
+tpch_5|CAVIER|tpch1||supplier,part,partsupp,customer,nation:Q3 | 270 | 30 | 800000 | PARTKEY,P_NAME,SUPPKEY,PS_AVAILQTY | part,partsupp : Q2 | 22 | 2340 | 60000414 | NATIONKEY,CUSTKEY,SUPPKEY,S_NAME,S_ADDRESS,N_NAME | supplier,customer,nation : Q1 | 21701 | 215 | 800000 | SUPPKEY,PARTKEY,PS_AVAILQTY,P_NAME,NATIONKEY,N_NAME,S_NAME | Q2,Q3
+tpch_5|FIVM|tpch10||part,partsupp,nation,supplier,customer:Q1a | 142769 | 5105 | 8000000 | suppkey,partkey,p_name,ps_availqty,nationkey,n_name,s_name | part,partsupp,nation,supplier,customer
+tpch_5|FIVM|tpch10||nation,supplier,customer:Q2 | 94379051146351 | 1046356 | 5999974575 | nationkey,n_name,suppkey,s_name,s_address,custkey | nation,supplier,customer
+tpch_5|FIVM|tpch10||part,partsupp:Q3 | 2459 | 713 | 8000000 | partkey,p_name,suppkey,ps_availqty | part,partsupp
+tpch_5|FIVM|tpch1||part,partsupp,nation,supplier,customer:Q1a | 1370 | 495 | 800000 | suppkey,partkey,p_name,ps_availqty,nationkey,n_name,s_name | part,partsupp,nation,supplier,customer
+tpch_5|FIVM|tpch1||nation,supplier,customer:Q2 | 94859965934369 | 9873 | 60000414 | nationkey,n_name,suppkey,s_name,s_address,custkey | nation,supplier,customer
+tpch_5|FIVM|tpch1||part,partsupp:Q3 | 250 | 71 | 800000 | partkey,p_name,suppkey,ps_availqty | part,partsupp
+retailer_1|FIVM|retailer||Inventory,Weather,Location:Q2 | 19586 | 0 | 0 | locn,dateid,ksn,rain,maxtemp,zip | Inventory,Weather,Location
+retailer_1|FIVM|retailer||Inventory,Weather,Location:Q2 | 1148 | 0 | 0 | locn,dateid,ksn,rain,maxtemp,zip | Inventory,Weather,Location
+retailer_1|FIVM|retailer||Inventory,Weather,Location:Q2 | 1458 | 26553 | 161092473 | locn,dateid,ksn,rain,maxtemp,zip | Inventory,Weather,Location
+retailer_1|FIVM|retailer||Inventory,Weather,Location:Q2 | 1492 | 17987 | 161092473 | locn,dateid,ksn,rain,maxtemp,zip | Inventory,Weather,Location
+retailer_1|FIVM|retailer||Inventory,Weather,Location:Q2 | 1446 | 19120 | 161092473 | locn,dateid,ksn,rain,maxtemp,zip | Inventory,Weather,Location
+retailer_5|FIVM|retailer||Inventory,Item,Weather,Location:Q1a | 28108 | 895878 | 44273346533 | locn,dateid,ksn | Inventory,Item,Weather,Location
+retailer_1|FIVM|retailer||Inventory,Weather,Location:Q2 | 1819 | 35331 | 358538357 | locn,dateid,ksn,rain,maxtemp,zip | Inventory,Weather,Location
+retailer_1|FIVM|retailer||Inventory,Weather,Location:Q2 | 1882 | 35329 | 358538357 | locn,dateid,ksn,rain,maxtemp,zip | Inventory,Weather,Location
+retailer_1|FIVM|retailer||Inventory,Weather,Location:Q2 | 2032 | 66863 | 724248063 | locn,dateid,ksn,rain,maxtemp,zip | Inventory,Weather,Location
+retailer_1|FIVM|retailer||Inventory,Weather,Location:Q2 | 8071 | 7562 | 82297085 | locn,dateid,ksn,rain,maxtemp,zip | Inventory,Weather,Location
+retailer_1|FIVM|retailer||Inventory,Weather,Location:Q2 | 7855 | 7349 | 79722134 | locn,dateid,ksn,rain,maxtemp,zip | Inventory,Weather,Location
+retailer_2|FIVM|retailer||Weather,Location,Census:Q1 | 150 | 373 | 1105130 | locn,dateid,rain,snow,maxtemp,mintemp,meanwind,thunder,zip,rgn_cd,clim_zn_nbr,tot_area_sq_ft,sell_area_sq_ft,avghhi,supertargetdistance,supertargetdrivetime,targetdistance,targetdrivetime,walmartdistance,walmartdrivetime,walmartsupercenterdistance,walmartsupercenterdrivetime,population,white,asian,pacific,blackafrican,medianage,occupiedhouseunits,houseunits,families,households,husbwife,males,females,householdschildren,hispanic | Weather,Location,Census
+retailer_2|FIVM|retailer||Weather,Location,Census:Q1 | 151 | 368 | 1105130 | locn,dateid,rain,snow,maxtemp,mintemp,meanwind,thunder,zip,rgn_cd,clim_zn_nbr,tot_area_sq_ft,sell_area_sq_ft,avghhi,supertargetdistance,supertargetdrivetime,targetdistance,targetdrivetime,walmartdistance,walmartdrivetime,walmartsupercenterdistance,walmartsupercenterdrivetime,population,white,asian,pacific,blackafrican,medianage,occupiedhouseunits,houseunits,families,households,husbwife,males,females,householdschildren,hispanic | Weather,Location,Census

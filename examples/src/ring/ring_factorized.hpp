@@ -7,11 +7,15 @@
 #include <type_traits>
 #include "types.hpp"
 #include "serialization.hpp"
+#include "hybrid_map.hpp"
 
 using namespace dbtoaster;
 
 template <typename... Keys>
 using SingletonArray = std::array<std::tuple<std::tuple<Keys...>, long>, 1>;
+
+//template <typename... Keys>
+//using Map = HybridMap<std::tuple<Keys...>, long, hash_tuple::hash<std::tuple<Keys...>>, std::less<>>;
 
 template <typename... Keys>
 using Map = tlx::btree_map<std::tuple<Keys...>, long, std::less<>>;
@@ -41,7 +45,7 @@ struct RelationMap {
     Map<Keys...> store;
     long count;
 
-    explicit RelationMap() : count(0L) { }
+    explicit RelationMap() : count(0L) {}
 
     RelationMap(Map<Keys...>&& s, long c) : store(std::forward<decltype(s)>(s)), count(c) { }
 
@@ -49,7 +53,7 @@ struct RelationMap {
 
     RelationMap& operator+=(const RelationMap& other) {
         count += other.count;
-        for (auto &it : other.store) {
+        for (const auto &it : other.store) {
             store[it.first] += it.second;
             if (store[it.first] == 0L) store.erase(it.first);
         }
@@ -65,7 +69,7 @@ struct RelationMap {
     RelationMap& operator=(const RelationMap& other) {
         store.clear();
         count = other.count;
-        for (auto &it : other.store)
+        for (const auto &it : other.store)
             store[it.first] = it.second;
         return *this;
     }

@@ -331,7 +331,7 @@ public:
     } else {
       res += "    const auto& ring = data." + config->at(0)->getViewAccessFunctionName() + "();\n";
     }
-    res += tabbing(tabbing_iter) + "for (auto &t0 : ring.store) {\n";
+    res += tabbing(tabbing_iter) + "for (const auto &t0 : ring.store) {\n";
     tabbing_iter += 1;
     auto splitted = split(config->at(0)->payload_vars);
     int i = 0;
@@ -355,7 +355,7 @@ public:
       if ((*view)->payload_vars == "") {
         res += tabbing(tabbing_iter) + "auto &payload_" + nr + " = rel" + nr + ";\n";
       } else {
-        res += tabbing(tabbing_iter) + "for (auto &t" + nr + " : rel" + nr + ".store) {\n";
+        res += tabbing(tabbing_iter) + "for (const auto &t" + nr + " : rel" + nr + ".store) {\n";
         tabbing_iter += 1;
         splitted = split((*view)->payload_vars);
         int i = 0;
