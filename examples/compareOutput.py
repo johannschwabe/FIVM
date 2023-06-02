@@ -1,25 +1,21 @@
 import pandas as pd
 
 # Read the CSV files
-df1 = pd.read_csv('Q1a.csv',
-                  names=["orderkey", "partkey", "suppkey", "l_quantity", "ps_availqty", "p_name", "o_totalprice",
-                         "combi"], header=None, sep='|')
-df2 = pd.read_csv('Q1b.csv',
-                  names=["partkey", "suppkey", "orderkey", "l_quantity", "o_totalprice", "ps_availqty", "p_name",
-                         "combi"], header=None, sep='|')
+df1 = pd.read_csv('output/Q2_hybrid.csv', sep='|')
+df2 = pd.read_csv('output/Q2_correct.csv', sep='|')
 
-# Sort the DataFrames by column names
-df1 = df1.sort_index(axis=1)
-df2 = df2.sort_index(axis=1)
+# Set column names
+df1.columns = ["locn", "dateid", "ksn", "rain", "maxtemp", "zip"]
+df2.columns = ["locn", "dateid", "ksn", "rain", "maxtemp", "zip"]
 
-# Sort the DataFrames by column values
-df1 = df1.sort_values(by=list(df1.columns)).reset_index(drop=True)
-df2 = df2.sort_values(by=list(df2.columns)).reset_index(drop=True)
+# Merge the DataFrames
+merged = pd.merge(df1, df2, on=["locn", "dateid", "ksn", "rain", "maxtemp", "zip"], how="outer", indicator=True)
 
-# Compare the two dataframes
-comparison = df1.equals(df2)
+# Identify differences
+diff_frame = merged[merged["_merge"] != "both"]
 
-print(f"The two csv files are {'the same.' if comparison else 'different.'}")
-if not comparison:
-    diff_frame = df1.compare(df2)
+if diff_frame.empty:
+    print("The two CSV files are the same.")
+else:
+    print("The two CSV files are different.")
     print(diff_frame.head(1))

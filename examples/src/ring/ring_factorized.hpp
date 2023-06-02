@@ -17,6 +17,9 @@ using SingletonArray = std::array<std::tuple<std::tuple<Keys...>, long>, 1>;
 //template <typename... Keys>
 //using Map = HybridMap<std::tuple<Keys...>, long, hash_tuple::hash<std::tuple<Keys...>>, std::less<>>;
 
+//template <typename... Keys>
+//using Map = std::unordered_map<std::tuple<Keys...>, long, hash_tuple::hash<std::tuple<Keys...>>>;
+
 template <typename... Keys>
 using Map = tlx::btree_map<std::tuple<Keys...>, long, std::less<>>;
 
