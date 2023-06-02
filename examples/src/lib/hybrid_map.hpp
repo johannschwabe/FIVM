@@ -1,7 +1,7 @@
 #include <unordered_map>
 #include "tlx/container/btree_map.hpp"
 #include <optional>
-#define MAX_REHASH 4
+#define MAX_REHASH 10
 template<
     typename HashMapIter,
     typename BtreeIter
