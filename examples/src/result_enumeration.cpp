@@ -154,6 +154,7 @@ public:
         "};\n\n"
         "std::ofstream& operator<<(std::ofstream& os, const Measurement *measurement) {\n"
         "    os << measurement->query_name << \" | \"\n"
+        "       << MAP_TYPE << \" | \"\n"
         "       << measurement->update_time << \" | \"\n"
         "       << measurement->enumeration_time << \" | \"\n"
         "       << measurement->size_output << \" | \"\n"

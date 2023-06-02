@@ -1,0 +1,8 @@
+  Hybrid6_retailer_5|FIVM|retailer||Inventory,Weather,Location:Q2 | 8475 | 1886 | 84055817 | locn,dateid,ksn | Inventory,Weather,Location
+unordered_retailer_5|FIVM|retailer||Inventory,Weather,Location:Q2 | 8434 | 2291 | 84055817 | locn,dateid,ksn | Inventory,Weather,Location
+    btree_retailer_5|FIVM|retailer||Inventory,Weather,Location:Q2 | 7444 | 1920 | 84055817 | locn,dateid,ksn | Inventory,Weather,Location
+    btree_retailer_5|FIVM|retailer||Inventory,Weather,Location:Q2 | 7319 | 1884 | 84055817 | locn,dateid,ksn | Inventory,Weather,Location
+  Hybrid7_retailer_5|FIVM|retailer||Inventory,Weather,Location:Q2 | 9628 | 1722 | 84055817 | locn,dateid,ksn | Inventory,Weather,Location
+  Hybrid5_retailer_5|FIVM|retailer||Inventory,Weather,Location:Q2 | 8049 | 1758 | 84055817 | locn,dateid,ksn | Inventory,Weather,Location
+  Hybrid4_retailer_5|FIVM|retailer||Inventory,Weather,Location:Q2 | 7803 | 1724 | 84055817 | locn,dateid,ksn | Inventory,Weather,Location
+  Hybrid4_retailer_5|FIVM|retailer||Inventory,Item,Weather,Location:Q1a | 27711 | 2426 | 84055817 | locn,dateid,ksn | Inventory,Item,Weather,Location

@@ -1,7 +1,7 @@
 #include <unordered_map>
 #include "tlx/container/btree_map.hpp"
 #include <optional>
-#define MAX_REHASH 6
+#define MAX_REHASH 4
 template<
     typename HashMapIter,
     typename BtreeIter
@@ -89,8 +89,6 @@ template<
     typename Key,
     typename T,
     typename Hash = std::hash<Key>,
-    typename Pred = std::equal_to<Key>,
-    typename Alloc = std::allocator<std::pair<const Key, T>>,
     typename Compare = std::less<Key>
 >
 class HybridMap {
