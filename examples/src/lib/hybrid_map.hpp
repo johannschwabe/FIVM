@@ -1,7 +1,7 @@
 #include <unordered_map>
 #include "tlx/container/btree_map.hpp"
 #include <optional>
-#define MAX_REHASH 7
+#define MAX_REHASH 7000
 template<
     typename HashMapIter,
     typename BtreeIter
@@ -78,7 +78,7 @@ public:
     return std::unordered_map<Key, T, Hash, Pred, Alloc>::insert(value);
   }
   T &operator[](const Key &key) {
-    if ((float) (this->size() + 1) / this->bucket_count() > this->max_load_factor() && rehashCount < MAX_REHASH) {
+    if ((float) (this->size() + 1) / this->bucket_count() > this->max_load_factor()) {
       this->rehash(this->bucket_count() * 2);
       rehashCount++;
     } else if ((float) (this->size() + 1) / this->bucket_count() > this->max_load_factor()) {
