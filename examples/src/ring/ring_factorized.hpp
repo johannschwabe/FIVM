@@ -15,11 +15,11 @@ template <typename... Keys>
 using SingletonArray = std::array<std::tuple<std::tuple<Keys...>, long>, 1>;
 
 template <typename... Keys>
-using HyMap = HybridMap<std::tuple<Keys...>, long, hash_tuple::hash<std::tuple<Keys...>>, std::less<>>;
+using Map = HybridMap<std::tuple<Keys...>, long, hash_tuple::hash<std::tuple<Keys...>>, std::less<>>;
 
-template <typename... Keys>
-using UnMap = std::unordered_map<std::tuple<Keys...>, long, hash_tuple::hash<std::tuple<Keys...>>>;
-
+//template <typename... Keys>
+//using Map = std::unordered_map<std::tuple<Keys...>, long, hash_tuple::hash<std::tuple<Keys...>>>;
+//
 //template <typename... Keys>
 //using Map = tlx::btree_map<std::tuple<Keys...>, long, std::less<>>;
 
@@ -45,54 +45,45 @@ long SingletonRelation<Idx, Keys...>::count = 1L;
 
 template <size_t Idx, typename... Keys>
 struct RelationMap {
-    HyMap<Keys...> hy_store;
-    UnMap<Keys...> store;
+    Map<Keys...> store;
     long count;
 
     explicit RelationMap() : count(0L) {}
 
-    RelationMap(HyMap<Keys...>&& s1, UnMap<Keys...>&& s2, long c) : hy_store(std::forward<decltype(s1)>(s1)), store((std::forward<decltype(s2)>(s2))), count(c) { }
+    RelationMap(Map<Keys...>&& s, long c) : store(std::forward<decltype(s)>(s)), count(c) { }
 
     inline bool isZero() const { return count == 0L; }
 
-  RelationMap& operator+=(const RelationMap& other) {
-    count += other.count;
-    for (const auto &it : other.hy_store) {
-      hy_store[it.first] += it.second;
-      store[it.first] += it.second;
-      if (hy_store[it.first] == 0L) {
-        hy_store.erase(it.first);
-        store.erase(it.first);
-      }
+    RelationMap& operator+=(const RelationMap& other) {
+        count += other.count;
+        for (const auto &it : other.store) {
+            store[it.first] += it.second;
+            if (store[it.first] == 0L) store.erase(it.first);
+        }
+        return *this;
     }
-    return *this;
-  }
 
-  template <typename... Args>
-  RelationMap& operator+=(const Accumulator<Idx, Args...>& acc) {
-    if (!acc.isZero()) acc.apply(*this);
-    return *this;
-  }
-
-  RelationMap& operator=(const RelationMap& other) {
-    hy_store.clear();
-    store.clear();
-    count = other.count;
-    for (const auto &it : other.hy_store) {
-      hy_store[it.first] = it.second;
-      store[it.first] = it.second;
+    template <typename... Args>
+    RelationMap& operator+=(const Accumulator<Idx, Args...>& acc) {
+        if (!acc.isZero()) acc.apply(*this);
+        return *this;
     }
-    return *this;
-  }
 
-  template <typename... Args>
-  RelationMap& operator=(const Accumulator<Idx, Args...>& acc) {
-    hy_store.clear();
-    store.clear();
-    count = 0;
-    if (!acc.isZero()) acc.apply(*this);
-    return *this;
-  }
+    RelationMap& operator=(const RelationMap& other) {
+        store.clear();
+        count = other.count;
+        for (const auto &it : other.store)
+            store[it.first] = it.second;
+        return *this;
+    }
+
+    template <typename... Args>
+    RelationMap& operator=(const Accumulator<Idx, Args...>& acc) {
+        store.clear();
+        count = 0;
+        if (!acc.isZero()) acc.apply(*this);
+        return *this;
+    }
 
     template <size_t Idx2, typename... Keys2>
     typename std::enable_if<(Idx < Idx2), Accumulator<Idx, const RelationMap<Idx, Keys...>&>>::type
@@ -144,9 +135,8 @@ struct Accumulator {
     inline void apply(Target& target) const {
         if (scale == 0L) return;
         for (auto &it : value.store) {
-            target.hy_store[std::get<0>(it)] += std::get<1>(it) * scale;
-            target.store[std::get<0>(it)] += std::get<1>(it) * scale;
             target.count += std::get<1>(it) * scale;
+            target.store[std::get<0>(it)] += std::get<1>(it) * scale;
         }
     }
 

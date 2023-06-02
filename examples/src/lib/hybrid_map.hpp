@@ -1,7 +1,7 @@
 #include <unordered_map>
 #include "tlx/container/btree_map.hpp"
 #include <optional>
-#define MAX_REHASH 7000
+#define MAX_REHASH 6
 template<
     typename HashMapIter,
     typename BtreeIter
@@ -21,11 +21,8 @@ public:
   HybridMapIterator(bool useBtree, std::optional<HashMapIter> hashmapIter, std::optional<BtreeIter> btreeIter)
       : useBtree(useBtree), hashmapIt(hashmapIter), btreeIt(btreeIter) {}
 
-  ValueType operator*() {
-    if(useBtree){
-      return *btreeIt.value();
-    }
-    return ValueType(hashmapIt.value()->first, hashmapIt.value()->second);
+  ValueType operator*() const {
+    return useBtree ? *btreeIt.value() : ValueType(hashmapIt.value()->first, hashmapIt.value()->second);
   }
   HybridMapIterator &operator++() {
     if (useBtree && btreeIt.has_value()) {
@@ -58,33 +55,31 @@ template<
     typename Key,
     typename T,
     typename Hash = std::hash<Key>,
-    typename Pred = std::equal_to<Key>,
-    typename Alloc = std::allocator<std::pair<const Key, T>>,
-    typename Compare = std::less<Key>
+    typename Pred = std::equal_to<Key>
 >
-class TrackedUnorderedMap : public std::unordered_map<Key, T, Hash, Pred, Alloc> {
+class TrackedUnorderedMap : public std::unordered_map<Key, T, Hash> {
 private:
   int rehashCount = 0;
 public:
   TrackedUnorderedMap() {}
-  std::pair<typename std::unordered_map<Key, T, Hash, Pred, Alloc>::iterator, bool> insert(
-      const typename std::unordered_map<Key, T, Hash, Pred, Alloc>::value_type &value) {
+  std::pair<typename std::unordered_map<Key, T, Hash>::iterator, bool> insert(
+      const typename std::unordered_map<Key, T, Hash>::value_type &value) {
     if ((float) (this->size() + 1) / this->bucket_count() > this->max_load_factor() && rehashCount < MAX_REHASH) {
       this->rehash(this->bucket_count() * 2);
       rehashCount++;
     } else if ((float) (this->size() + 1) / this->bucket_count() > this->max_load_factor()) {
       rehashCount++;
     }
-    return std::unordered_map<Key, T, Hash, Pred, Alloc>::insert(value);
+    return std::unordered_map<Key, T, Hash>::insert(value);
   }
   T &operator[](const Key &key) {
-    if ((float) (this->size() + 1) / this->bucket_count() > this->max_load_factor()) {
+    if ((float) (this->size() + 1) / this->bucket_count() > this->max_load_factor() && rehashCount < MAX_REHASH) {
       this->rehash(this->bucket_count() * 2);
       rehashCount++;
     } else if ((float) (this->size() + 1) / this->bucket_count() > this->max_load_factor()) {
       rehashCount++;
     }
-    return std::unordered_map<Key, T, Hash, Pred, Alloc>::operator[](key);
+    return std::unordered_map<Key, T, Hash>::operator[](key);
   }
   int getRehashCount() {
     return rehashCount;
@@ -100,11 +95,11 @@ template<
 >
 class HybridMap {
 private:
-  TrackedUnorderedMap<Key, T, Hash, Pred, Alloc> *hashmap;
+  TrackedUnorderedMap<Key, T, Hash> *hashmap;
   tlx::btree_map<Key, T, Compare> btreemap;
   bool useBtree = false;
 public:
-  HybridMap() : hashmap(new TrackedUnorderedMap<Key, T, Hash, Pred, Alloc>()) {}
+  HybridMap() : hashmap(new TrackedUnorderedMap<Key, T, Hash>()) {}
   ~HybridMap() {
     if (!useBtree) {
       delete hashmap;
@@ -116,7 +111,7 @@ public:
     if (useBtree) {
       hashmap = nullptr;
     } else {
-      hashmap = new TrackedUnorderedMap<Key, T, Hash, Pred, Alloc>(*other.hashmap);
+      hashmap = new TrackedUnorderedMap<Key, T, Hash>(*other.hashmap);
     }
   }
 
@@ -125,7 +120,7 @@ public:
     if (this != &other) {
       delete hashmap;
       if (!other.useBtree){
-        hashmap = new TrackedUnorderedMap<Key, T, Hash, Pred, Alloc>(*other.hashmap);
+        hashmap = new TrackedUnorderedMap<Key, T, Hash>(*other.hashmap);
       }
       btreemap = other.btreemap;
       useBtree = other.useBtree;
@@ -155,16 +150,16 @@ public:
       hashmap->erase(key);
     }
   }
-  HybridMapIterator<typename TrackedUnorderedMap<Key, T, Hash, Pred, Alloc>::iterator,
+  HybridMapIterator<typename TrackedUnorderedMap<Key, T, Hash>::iterator,
       typename tlx::btree_map<Key, T, Compare>::iterator> find(const Key &key) {
     if (useBtree) {
       auto it = btreemap.find(key);
-      return HybridMapIterator<typename TrackedUnorderedMap<Key, T, Hash, Pred, Alloc>::iterator,
+      return HybridMapIterator<typename TrackedUnorderedMap<Key, T, Hash>::iterator,
           typename tlx::btree_map<Key, T, Compare>::iterator>
           (useBtree, std::nullopt, it);
     } else {
       auto it = hashmap->find(key);
-      return HybridMapIterator<typename TrackedUnorderedMap<Key, T, Hash, Pred, Alloc>::iterator,
+      return HybridMapIterator<typename TrackedUnorderedMap<Key, T, Hash>::iterator,
           typename tlx::btree_map<Key, T, Compare>::iterator>
           (useBtree, it, std::nullopt);
     }
