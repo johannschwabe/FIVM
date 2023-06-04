@@ -11,14 +11,14 @@ for line in lines:
     name, executor, dataset, version, all_relations = name_dataset_processing.split('|')
     data.append([name, dataset+version, all_relations, "", "", "", "", ])
     for res in rest:
-        subname, update_time, enumeration_time, count, varnames, relations = res.split('|')
+        subname, maptype, update_time, enumeration_time, count, varnames, relations = res.split('|')
 
         data.append(
-            ["", "", "", executor, subname, int(update_time), int(enumeration_time), int(count), varnames, relations])
+            ["", "", "", executor, subname, maptype, int(update_time), int(enumeration_time), int(count), varnames, relations])
 
 # Create a DataFrame
 df = pd.DataFrame(data)
 
 # Write the DataFrame to an Excel file
 df.to_excel('output.xlsx', index=False,
-            header=['name', 'dataset', 'all Relations', 'executor', 'query','update time','enumeration time',  'nr tuples','free variables', 'relations'], engine='openpyxl')
+            header=['name', 'dataset', 'all Relations', 'executor', 'query','maptype' ,'update time','enumeration time',  'nr tuples','free variables', 'relations'], engine='openpyxl')
