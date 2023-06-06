@@ -1,0 +1,11 @@
+Queryname
+Dataset
+data file type
+Executor
+CustomHashmap MAX_REGULAR|MAX_SIZE
+propagation Size
+Query|number views|propagate?0/1
+All Relations
+Query: Atoms|Query:Atoms...
+for each propagated query: Query: free variables
+For each view:Viewname|keyspace variables|payload variables|use payload? 0/1

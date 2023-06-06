@@ -1,6 +1,4 @@
 #include <unordered_map>
-#define MAX_SIZE 1500000
-#define MAX_REGULAR 30000
 #define GROWTH_RATE 2
 
 template<
