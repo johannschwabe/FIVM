@@ -8,6 +8,7 @@
 #include "types.hpp"
 #include "serialization.hpp"
 #include "hybrid_map.hpp"
+#include "cashmap.hpp"
 
 using namespace dbtoaster;
 
@@ -24,8 +25,11 @@ using Map = std::unordered_map<std::tuple<Keys...>, long, hash_tuple::hash<std::
 #elif MAP_TYPE == 3
 template <typename... Keys>
 using Map = tlx::btree_map<std::tuple<Keys...>, long, std::less<>>;
+#elif MAP_TYPE == 4
+template <typename... Keys>
+using Map = CashMap<std::tuple<Keys...>, long, hash_tuple::hash<std::tuple<Keys...>>>;
 #else
-#error Invalid MAP_TYPE. Must be 1, 2, or 3.
+#error Invalid MAP_TYPE. Must be 1, 2, 3 or 4.
 #endif
 
 template<size_t, typename>
