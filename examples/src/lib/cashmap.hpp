@@ -11,18 +11,18 @@ public:
   CustomHashmap() {}
   std::pair<typename std::unordered_map<Key, T, Hash>::iterator, bool> insert(
       const typename std::unordered_map<Key, T, Hash>::value_type &value) {
-    if ((float) (this->size() + 1) / this->bucket_count() > this->max_load_factor() && this->size() < MAX_REGULAR) {
+    if ((float) (this->size() + 1) / this->bucket_count() > this->max_load_factor() && this->size() < MAXREGULAR) {
       this->rehash(this->bucket_count() * GROWTH_RATE);
-    } else if ((float) (this->size() + 1) / this->bucket_count() > this->max_load_factor() && this->size() >= MAX_REGULAR) {
-      this->rehash(MAX_SIZE);
+    } else if ((float) (this->size() + 1) / this->bucket_count() > this->max_load_factor() && this->size() >= MAXREGULAR) {
+      this->rehash(MAXSIZE);
     }
     return std::unordered_map<Key, T, Hash>::insert(value);
   }
   T &operator[](const Key &key) {
-    if ((float) (this->size() + 1) / this->bucket_count() > this->max_load_factor() && this->size() < MAX_REGULAR) {
+    if ((float) (this->size() + 1) / this->bucket_count() > this->max_load_factor() && this->size() < MAXREGULAR) {
       this->rehash(this->bucket_count() * GROWTH_RATE);
-    } else if ((float) (this->size() + 1) / this->bucket_count() > this->max_load_factor() && this->size() >= MAX_REGULAR) {
-      this->rehash(MAX_SIZE);
+    } else if ((float) (this->size() + 1) / this->bucket_count() > this->max_load_factor() && this->size() >= MAXREGULAR) {
+      this->rehash(MAXSIZE);
     }
     return std::unordered_map<Key, T, Hash>::operator[](key);
   }

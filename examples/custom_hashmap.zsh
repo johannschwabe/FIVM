@@ -16,4 +16,4 @@ regular=${max_regular[$query]}
 size=${max_size[$query]}
 #echo "-DMAX_REGULAR=$regular"
 #echo "-DMAX_SIZE=$size"
-printf "-DMAX_REGULAR=%s -DMAX_SIZE=%s" "$regular" "$size"
+printf "-DMAXREGULAR=%s -DMAXSIZE=%s" "$regular" "$size"

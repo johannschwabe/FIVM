@@ -148,7 +148,7 @@ public:
     } else {
       fixed_filename = splitted_filename->at(0);
     }
-    std::string map_type = "#if MAP_TYPE == 1 \n auto map_info = \"Hybrid\";\n #elif MAP_TYPE == 2 \n auto map_info = \"Hash\";\n #elif MAP_TYPE == 3 \n auto map_info = \"BTree\";\n #elif MAP_TYPE == 4 \n auto map_info = \"CustomHash\" + std::to_string(MAX_SIZE) + \", \" + std::to_string(MAX_REGULAR) + \", \" + std::to_string(GROWTH_RATE)  ;\n #endif\n";
+    std::string map_type = "#if MAP_TYPE == 1 \n auto map_info = \"Hybrid\";\n #elif MAP_TYPE == 2 \n auto map_info = \"Hash\";\n #elif MAP_TYPE == 3 \n auto map_info = \"BTree\";\n #elif MAP_TYPE == 4 \n auto map_info = \"CustomHash\" + std::to_string(MAXSIZE) + \", \" + std::to_string(MAXREGULAR) + \", \" + std::to_string(GROWTH_RATE)  ;\n #endif\n";
     write_to_config =
         "struct Measurement {\n std::string query_name;\n long update_time;\nstd::string relations;\nstd::string free_variables;\n long enumeration_time;\n long size_output; "
         "Measurement(std::string query_name, long update_time, std::string relations) : query_name(query_name), update_time(update_time), relations(relations), free_variables(\"\"), enumeration_time(0L), size_output(0L) {}\n"
