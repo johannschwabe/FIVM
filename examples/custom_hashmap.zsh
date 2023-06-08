@@ -9,7 +9,6 @@ while IFS=',' read -r query regular size; do
   max_regular[$query]=$regular
   max_size[$query]=$size
 done < CustomHashmapSizes.txt
-
 # Retrieve the macros for the provided query
 query=$1
 regular=${max_regular[$query]}
