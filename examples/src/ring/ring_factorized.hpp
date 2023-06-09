@@ -15,7 +15,7 @@ using namespace dbtoaster;
 template<typename... Keys>
 using SingletonArray = std::array<std::tuple<std::tuple<Keys...>, long>, 1>;
 
-#define MAP_TYPE 2
+#define MAP_TYPE 3
 #if MAP_TYPE == 1
 template<typename... Keys>
 using Map = HybridMap<std::tuple<Keys...>, long, hash_tuple::hash<std::tuple<Keys...>>, std::less<>>;
