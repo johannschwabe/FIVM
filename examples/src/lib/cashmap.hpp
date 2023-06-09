@@ -10,11 +10,11 @@ class CustomHashmap : public std::unordered_map<Key, T, Hash> {
 public:
   CustomHashmap() {}
 
-  virtual ~CustomHashmap() {
-    if(this->bucket_count() >= MAXSIZE) {
-      std::cout << "CustomHashmap size: " << this->size() << ", Bucket count" << this->bucket_count() << std::endl;
-    }
-  }
+//  virtual ~CustomHashmap() {
+//    if(this->bucket_count() >= MAXSIZE) {
+//      std::cout << "CustomHashmap size: " << this->size() << ", Bucket count" << this->bucket_count() << std::endl;
+//    }
+//  }
 
   std::pair<typename std::unordered_map<Key, T, Hash>::iterator, bool> insert(
       const typename std::unordered_map<Key, T, Hash>::value_type &value) {
