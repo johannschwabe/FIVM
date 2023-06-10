@@ -245,6 +245,7 @@ struct ViewConfig {
     if (position == 0) {
       res += "update.emplace_back(DELTA_"+query->query_name+"_entry{";
       auto _all_vars = all_vars();
+      std::string output_vars = join(_all_vars, " <<\"|\"<<");
       _all_vars->push_back(generate_payload());
       res += join(_all_vars, ", ");
       res += "});\n";
@@ -262,7 +263,7 @@ struct ViewConfig {
                "-1) { update.clear();}\n";
       }
 
-      res += +"if (print_result) { output_file << " + join(_all_vars, " <<\"|\"<<") +
+      res += +"if (print_result) { output_file << " + output_vars +
              " << std::endl;}\n";
       delete _all_vars;
       res += +"output_size++;\n";
@@ -608,7 +609,6 @@ public:
     }
     res += query->generate_enumeration(filename);
 
-//    res += end_brackets;
     res += "enumeration_timer.stop();\n";
     res += "enumeration_time += enumeration_timer.elapsedTimeInMilliSeconds();\n";
     res += "std::cout << \"enumeration time " + query->query_name +
