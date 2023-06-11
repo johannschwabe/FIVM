@@ -8,10 +8,10 @@ CREATE STREAM q2 (
     locn int,
     dateid int,
     ksn int
-) FROM FILE './datasets/retailer/q2.tbl' LINE DELIMITED CSV(delimiter := '|');
+) FROM FILE './datasets/retailer_unordered/q2.tbl' LINE DELIMITED CSV(delimiter := '|');
 
 CREATE STREAM Item(ksn int, subcategory int, category int, categoryCluster int, prize double)
-FROM FILE './datasets/retailer/Item.tbl' LINE DELIMITED CSV(delimiter := '|');
+FROM FILE './datasets/retailer_unordered/Item.tbl' LINE DELIMITED CSV(delimiter := '|');
 
 SELECT SUM(
     [lift<0>: RingFactorizedRelation<[0,int]>](ksn) *

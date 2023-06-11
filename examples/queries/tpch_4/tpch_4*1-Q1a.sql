@@ -22,7 +22,7 @@ CREATE STREAM lineitem (
         l_shipmode       CHAR(10),
         l_comment        VARCHAR(44)
     )
-  FROM FILE './datasets/tpch1/lineitem.csv'
+  FROM FILE './datasets/tpch_unordered1/lineitem.csv'
   LINE DELIMITED CSV (delimiter := '|');
 
 
@@ -37,7 +37,7 @@ CREATE STREAM orders (
         o_shippriority   INT,
         o_comment        VARCHAR(79)
     )
-  FROM FILE './datasets/tpch1/orders.csv'
+  FROM FILE './datasets/tpch_unordered1/orders.csv'
   LINE DELIMITED CSV (delimiter := '|');
 
 CREATE STREAM customer (
@@ -50,7 +50,7 @@ CREATE STREAM customer (
         c_mktsegment   CHAR(10),
         c_comment      VARCHAR(117)
     )
-  FROM FILE './datasets/tpch1/customer.csv'
+  FROM FILE './datasets/tpch_unordered1/customer.csv'
   LINE DELIMITED CSV (delimiter := '|');
 
 CREATE STREAM partsupp (
@@ -60,7 +60,7 @@ CREATE STREAM partsupp (
         ps_supplycost   DECIMAL,
         ps_comment      VARCHAR(199)
     )
-  FROM FILE './datasets/tpch1/partsupp.csv'
+  FROM FILE './datasets/tpch_unordered1/partsupp.csv'
   LINE DELIMITED CSV (delimiter := '|');
 
 CREATE STREAM supplier (
@@ -72,7 +72,7 @@ CREATE STREAM supplier (
         s_acctbal      DECIMAL,
         s_comment      VARCHAR(101)
     )
-  FROM FILE './datasets/tpch1/supplier.csv'
+  FROM FILE './datasets/tpch_unordered1/supplier.csv'
   LINE DELIMITED CSV (delimiter := '|');
 
 SELECT SUM(
