@@ -208,10 +208,8 @@ struct ViewConfig {
       }
       //iterate over all children
       for (auto &child: children) {
-        //iterate over all payload vars
-        for (auto &var: *child->payload_vars_splitted) {
-          all_vars->push_back(var);
-        }
+        auto child_vars = child->all_vars();
+        all_vars->insert(all_vars->end(), child_vars->begin(), child_vars->end());
       }
     }
     return all_vars;
