@@ -51,7 +51,8 @@ STREAM partsupp (
   LINE DELIMITED CSV (delimiter := '|');
 
 SELECT SUM(
-    [lift<0>: RingFactorizedRelation<[0, INT, INT]>](suppkey,partkey) *
+    [lift<0>: RingFactorizedRelation<[0, INT]>](partkey) *
+    [lift<1>: RingFactorizedRelation<[1, INT]>](suppkey) *
     [lift<2>: RingFactorizedRelation<[2, DECIMAL]>](l_quantity) *
     [lift<16>: RingFactorizedRelation<[16, INT, DECIMAL]>](ps_availqty, ps_supplycost) *
     [lift<19>: RingFactorizedRelation<[19, VARCHAR(25)]>](s_name)
