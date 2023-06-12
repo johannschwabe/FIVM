@@ -4,7 +4,7 @@
 FRONTEND_BIN = ../bin/run_frontend.sh
 BACKEND_BIN = ../bin/run_backend.sh
 CC = g++
-CFLAGS = -O3 -DNDEBUG -Wall -Wno-unused-variable -std=c++17 -pedantic -Wunused-local-typedef
+CFLAGS = -O3 -DNDEBUG -Wall -Wno-unused-variable -std=c++17 -pedantic -Wno-unused-local-typedefs
 
 # Runtime arguments
 NUMBER_OF_RUNS ?= 1
