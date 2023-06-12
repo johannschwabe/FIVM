@@ -126,7 +126,7 @@ struct ViewConfig {
 
 
     if (payload_vars.empty()) {
-      res += +"auto payload_" + nr + " = rel" + nr + ";\n";
+      res += +"auto payload_" + nr + " = rel" + nr + ";{\n";
     } else {
       res += "for (const auto &t" + nr + " : rel" + nr + ".store) {\n";
       int i = 0;
