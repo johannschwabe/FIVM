@@ -13,6 +13,10 @@ if [[ $1 == *\*_unordered* ]]; then
     # Split at '*_unordered'
     first_part=${1%%\*_unordered*}
     second_part=${1##*\*_unordered}
+    # If second_part is empty, set it to '1'
+    if [[ -z $second_part ]]; then
+        second_part=1
+    fi
 elif [[ $1 == *\** ]]; then
     # Split at the asterisk
     first_part=${1%%\**}
