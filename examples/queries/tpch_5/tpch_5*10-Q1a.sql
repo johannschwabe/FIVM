@@ -30,7 +30,7 @@ STREAM part (
         p_retailprice  DECIMAL,
         p_comment      VARCHAR(23)
     )
-  FROM FILE './datasets/tpch_unordered1/part.csv'
+  FROM FILE './datasets/tpch_unordered10/part.csv'
   LINE DELIMITED CSV (delimiter := '|');
 
 
