@@ -11,4 +11,4 @@
 9 maxtemp int 8 {0,5,6,7,8} 0
 
 Item 4 ksn,subcategory,category,categoryCluster,prize
-q2 9 locn,dateid,ksn,rain,maxtemp,zip
+R1q2 9 locn,dateid,ksn,rain,maxtemp,zip

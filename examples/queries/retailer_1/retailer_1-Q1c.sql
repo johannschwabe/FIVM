@@ -4,14 +4,14 @@ CREATE DISTRIBUTED TYPE RingFactorizedRelation
 FROM FILE 'ring/ring_factorized.hpp'
 WITH PARAMETER SCHEMA (dynamic_min);
 
-CREATE STREAM q2 (
+CREATE STREAM R1q2 (
     locn int,
     dateid int,
     ksn int,
     rain int,
     maxtemp int,
     zip int
-) FROM FILE './datasets/retailer_unordered/q2.tbl' LINE DELIMITED CSV(delimiter := '|');
+) FROM FILE './datasets/retailer_unordered/R1q2.tbl' LINE DELIMITED CSV(delimiter := '|');
 
 CREATE STREAM Item(ksn int, subcategory int, category int, categoryCluster int, prize double)
 FROM FILE './datasets/retailer_unordered/Item.tbl' LINE DELIMITED CSV(delimiter := '|');
