@@ -52,7 +52,7 @@ for unique_name in df['name'].unique():
     # Width of a bar
     bar_width = 0.35
 
-    fig, axes = plt.subplots(1, 2, figsize=(12, 6))
+    fig, axes = plt.subplots(1, 2, figsize=(12, 6), sharey=True)
 
     bar_distance = 0.05
     for idx, metric in enumerate(['update_time', 'enumeration time']):
@@ -95,7 +95,7 @@ for unique_name in df['name'].unique():
                                     ha='center', va='bottom', rotation=90, fontsize=8)
 
                     # Add patch for legend if combination is not handled
-                    combination = f'{executor}{version}'
+                    combination = f'{executor} - {version}'
                     if combination not in handled_combinations:
                         combination_patch = patches.Patch(color=color, label=combination)
                         combination_legend_handles.append(combination_patch)
@@ -112,7 +112,7 @@ for unique_name in df['name'].unique():
         ax.set_xticks(x_ticks)
         ax.set_xticklabels(sorted(query_roots))
 
-        ax.set_xlabel('Query Root')
+        ax.set_xlabel('Query')
         ax.set_ylabel(f'{metric.replace("_", " ").capitalize()} (s)')
 
         # Add legend to the first plot only
@@ -121,5 +121,6 @@ for unique_name in df['name'].unique():
 
     # Save plot
     plt.tight_layout()
+    plt.title(unique_name)
     plt.savefig(os.path.join(output_dir, f'{unique_name}_plot.png'), bbox_inches='tight')
     plt.close()
