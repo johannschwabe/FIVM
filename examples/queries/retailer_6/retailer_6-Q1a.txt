@@ -1,4 +1,4 @@
-24 3
+28 5
 0 locn int -1 {} 0
 1 dateid int 0 {0} 0
 2 ksn int 1 {0,1} 0
@@ -14,15 +14,20 @@
 12 targetdistance double 11 {0,4,5,6,7,8,9,10,11} 0
 13 targetdrivetime double 12 {0,4,5,6,7,8,9,10,11,12} 0
 14 walmartdistance double 13 {0,4,5,6,7,8,9,10,11,12,13} 0
-15 walmartdrivetime double 14 {0,4,5,6,7,8,9,10,11,12,13,14} 0
+15 walmartdrivetime double 14 {0,4,5,6,7,8,9,10,11,12,13,14} 0 
 16 walmartsupercenterdistance double 15 {0,4,5,6,7,8,9,10,11,12,13,14,15} 0
 17 walmartsupercenterdrivetime double 16 {0,4,5,6,7,8,9,10,11,12,13,14,15,16} 0
-18 rain int 1 {0,1} 0
-19 maxtemp int 18 {0,1,18} 0
-20 snow int 19 {0,1,18,19} 0
-21 mintemp int 20 {0,1,18,19,20} 0
-22 meanwind double 21 {0,1,18,19,20,21} 0
-23 thunder int 22 {0,1,18,19,20,21,22} 0
+18 category int 2 {2} 1
+19 subcategory int 18 {2,18} 0
+20 categoryCluster int 19 {2,18,19} 0
+21 prize double 20 {2,18,19,20} 0 
+22 rain int 1 {0,1} 0
+23 snow int 22 {0,1,22} 0
+24 maxtemp int 23 {0,1,22,23} 0
+25 mintemp int 24 {0,1,22,23,24} 0
+26 meanwind double 25 {0,1,22,23,24,25} 0
+27 thunder int 26 {0,1,22,23,24,25,26} 0
 Inventory 3 locn,dateid,ksn,inventoryunits
 Location 17 locn,zip,rgn_cd,clim_zn_nbr,tot_area_sq_ft,sell_area_sq_ft,avghhi,supertargetdistance,supertargetdrivetime,targetdistance,targetdrivetime,walmartdistance,walmartdrivetime,walmartsupercenterdistance,walmartsupercenterdrivetime
-Weather 23 locn,dateid,rain,snow,maxtemp,mintemp,meanwind,thunder
+Item 21 ksn,subcategory,category,categoryCluster,prize
+Weather 27 locn,dateid,rain,snow,maxtemp,mintemp,meanwind,thunder

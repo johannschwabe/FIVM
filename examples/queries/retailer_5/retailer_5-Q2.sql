@@ -10,7 +10,7 @@ FROM FILE './datasets/retailer_unordered/Inventory.tbl' LINE DELIMITED CSV(delim
 CREATE STREAM Location(locn int, zip int, rgn_cd int, clim_zn_nbr int, tot_area_sq_ft int, sell_area_sq_ft int, avghhi int, supertargetdistance double, supertargetdrivetime double, targetdistance double, targetdrivetime double, walmartdistance double, walmartdrivetime double, walmartsupercenterdistance double, walmartsupercenterdrivetime double)
 FROM FILE './datasets/retailer_unordered/Location.tbl' LINE DELIMITED CSV(delimiter := '|');
 
-CREATE STREAM  Weather(locn int, dateid int, rain int, snow byte, maxtemp int, mintemp int, meanwind double, thunder byte)
+CREATE STREAM  Weather(locn int, dateid int, rain int, snow int, maxtemp int, mintemp int, meanwind double, thunder int)
 FROM FILE './datasets/retailer_unordered/Weather.tbl' LINE DELIMITED CSV(delimiter := '|');
 
 SELECT SUM(

@@ -13,10 +13,10 @@ FROM FILE './datasets/retailer_unordered/Location.tbl' LINE DELIMITED CSV(delimi
 CREATE STREAM  Census(zip int, population int, white int, asian int, pacific int, blackafrican int, medianage double, occupiedhouseunits int, houseunits int, families int, households int, husbwife int, males int, females int, householdschildren int, hispanic int)
 FROM FILE './datasets/retailer_unordered/Census.tbl' LINE DELIMITED CSV(delimiter := '|');
 
-CREATE STREAM Item(ksn int, subcategory byte, category byte, categoryCluster byte, prize double)
+CREATE STREAM Item(ksn int, subcategory int, category int, categoryCluster int, prize double)
 FROM FILE './datasets/retailer_unordered/Item.tbl' LINE DELIMITED CSV(delimiter := '|');
 
-CREATE STREAM  Weather(locn int, dateid int, rain byte, snow byte, maxtemp int, mintemp int, meanwind double, thunder byte)
+CREATE STREAM  Weather(locn int, dateid int, rain int, snow int, maxtemp int, mintemp int, meanwind double, thunder int)
 FROM FILE './datasets/retailer_unordered/Weather.tbl' LINE DELIMITED CSV(delimiter := '|');
 
 SELECT SUM(
