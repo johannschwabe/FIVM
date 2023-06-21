@@ -30,17 +30,18 @@ for item in $list1; do
   make DATASET="$item"
 done
 
+num_iter=${1:-0}
 
 # Execute the shell script cavier/run.sh" for each element in the first list
 for item in $list1; do
   #CAVIER
-  echo cavier/run.sh "$item" "exe"
-  zsh cavier/run.sh "$item" "exe"
+  echo cavier/run.sh "$item" "-r$num_iter"
+  zsh cavier/run.sh "$item" "-r$num_iter"
 
   #FIVM
   for file in ./bin/"$item/$item"*_BATCH_1000; do
     echo "$file"
-    "$file"
+    "$file" -r "$num_iter"
   done
 
 done

@@ -14,5 +14,8 @@ for file in cavier/config/$1/*; do
   g++ -O3 -DNDEBUG -Wall -Wno-unused-variable -std=c++17 -pedantic -Wno-unused-local-typedefs src/main.cpp -I ../backend/lib -I src -I src/lib -I src/TLXInstall/include -L src/TLXInstall/lib -ltlx -DBATCH_SIZE=1000 -include cavier/cpp/$1/$1.hpp -include cavier/application/$1/$filename.hpp -o bin/$1/CAVIER_${filename}_BATCH_1000 "${customhashmapargs[@]}" || exit 1;
   if [ $2 = "exe" ]; then
     ./bin/$1/CAVIER_${filename}_BATCH_1000
+  elif [[ "$2" =~ ^-r[0-9]+ ]]; then
+    r_value="${2:2}"
+    ./bin/$1/CAVIER_${filename}_BATCH_1000 -r "$r_value"
   fi
 done
