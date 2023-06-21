@@ -40,7 +40,7 @@ for item in $list1; do
 
   #FIVM
   for file in ./bin/"$item/$item"*_BATCH_1000; do
-    echo "$file"
+    echo "$file" -r "$num_iter"
     "$file" -r "$num_iter"
   done
 
