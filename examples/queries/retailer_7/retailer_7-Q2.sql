@@ -1,4 +1,4 @@
-IMPORT DTREE FROM FILE 'retailer_6-Q2.txt';
+IMPORT DTREE FROM FILE 'retailer_7-Q2.txt';
 
 CREATE DISTRIBUTED TYPE RingFactorizedRelation
 FROM FILE 'ring/ring_factorized.hpp'
@@ -18,6 +18,7 @@ SELECT SUM(
     [lift<1>: RingFactorizedRelation<[1,int]>](dateid) *
     [lift<2>: RingFactorizedRelation<[2,int]>](ksn) *
     [lift<3>: RingFactorizedRelation<[3,int]>](inventoryunits) *
-    [lift<4>: RingFactorizedRelation<[4,int, int, int, int, int, int]>](rain,snow,maxtemp,mintemp)
-    )
+    [lift<4>: RingFactorizedRelation<[4,int, int, int, int, int, int]>](rain,snow,maxtemp,mintemp,meanwind,thunder) *
+    [lift<10>: RingFactorizedRelation<[10,int, int, int, int,int,int,int,int,int,int,int,int,int,int]>](zip,rgn_cd,clim_zn_nbr,tot_area_sq_ft,sell_area_sq_ft,avghhi, supertargetdistance, supertargetdrivetime, targetdistance, targetdrivetime, walmartdistance, walmartdrivetime, walmartsupercenterdistance, walmartsupercenterdrivetime)
+)
 FROM Inventory NATURAL JOIN Location NATURAL JOIN  Weather;
