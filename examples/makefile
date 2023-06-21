@@ -110,7 +110,7 @@ exe_batch: $(EXE_FILES_BATCH)
 
 exe_single: $(EXE_FILES_SINGLE)
 
-exe: exe_batch exe_single
+exe: exe_batch
 
 clean: 
 	rm -fr $(M3_OUT_DIR) $(CPP_OUT_DIR) $(EXE_OUT_DIR) $(CONFIG_OUT_DIR) $(APP_OUT_DIR) $(APP_GEN)
