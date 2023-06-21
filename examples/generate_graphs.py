@@ -117,10 +117,10 @@ for unique_name in df['name'].unique():
 
         # Add legend to the first plot only
         if idx == 1:
-            ax.legend(handles=combination_legend_handles, loc='upper left', bbox_to_anchor=(1, 1), title="Executor - Version")
+            ax.legend(handles=combination_legend_handles, loc='upper right', bbox_to_anchor=(1, 1), title="Executor - Version")
 
     # Save plot
-    plt.tight_layout()
-    plt.title(unique_name)
-    plt.savefig(os.path.join(output_dir, f'{unique_name}_plot.png'), bbox_inches='tight')
+    plt.tight_layout(rect=[0, 0, 1, 0.95])
+    fig.suptitle(unique_name)
+    plt.savefig(os.path.join(output_dir, f'{unique_name}_plot.png'), bbox_inches='tight', dpi=300)
     plt.close()
