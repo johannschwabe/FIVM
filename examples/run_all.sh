@@ -35,7 +35,7 @@ num_iter=${1:-1}
 for item in $list1; do
   #CAVIER
   echo cavier/run.sh "$item" "-r$num_iter"
-  zsh cavier/run.sh "$item" "-r$num_iter" &
+  zsh cavier/run.sh "$item" "-r$num_iter"
 
   #FIVM
   for file in ./bin/"$item/$item"*_BATCH_1000; do
