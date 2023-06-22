@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 # Function to find the next available file name
 get_next_filename() {
@@ -8,7 +8,7 @@ get_next_filename() {
     ((suffix++))
   done
 
-  echo "output_${suffix}.txt"
+  echo "output/output_${suffix}.txt"
 }
 
 # Check if config.txt exists
@@ -39,9 +39,19 @@ for item in $list1; do
   zsh cavier/run.sh "$item" "-r$num_iter"
 
   #FIVM
+  count=0
   for file in ./bin/"$item/$item"*_BATCH_1000; do
     echo "$file" -r "$num_iter"
-    "$file" -r "$num_iter"
+    "$file" -r "$num_iter" &
+
+    ((count++))
+    if (( count % 2 == 0 )); then
+      # Wait for the two background processes to complete
+      wait
+    fi
   done
+
+  # Wait for any remaining background processes
+  wait
 
 done
