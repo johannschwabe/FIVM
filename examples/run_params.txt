@@ -1,1 +1,1 @@
-retailer_1
+retailer_6,retailer_7

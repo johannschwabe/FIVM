@@ -30,7 +30,7 @@ for item in $list1; do
   make DATASET="$item"
 done
 
-num_iter=${1:-0}
+num_iter=${1:-1}
 
 # Execute the shell script cavier/run.sh" for each element in the first list
 for item in $list1; do
