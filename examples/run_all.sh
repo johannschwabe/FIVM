@@ -27,19 +27,19 @@ IFS=',' read -rA list2 <<< $(sed -n 2p run_params.txt)
 make clean
 for item in $list1; do
   echo make DATASET="$item"
-  make DATASET="$item"
+  make DATASET="$item" &
 done
-
+wait
 num_iter=${1:-1}
 
 # Execute the shell script cavier/run.sh" for each element in the first list
 for item in $list1; do
   #CAVIER
   echo cavier/run.sh "$item" "-r$num_iter"
-  zsh cavier/run.sh "$item" "-r$num_iter"
+  zsh cavier/run.sh "$item" "-r$num_iter" &
 
   #FIVM
-  count=0
+  count=1
   for file in ./bin/"$item/$item"*_BATCH_1000; do
     echo "$file" -r "$num_iter"
     "$file" -r "$num_iter" &
