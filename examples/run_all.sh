@@ -27,9 +27,8 @@ IFS=',' read -rA list2 <<< $(sed -n 2p run_params.txt)
 make clean
 for item in $list1; do
   echo make DATASET="$item"
-  make DATASET="$item" &
+  make -j8 DATASET="$item"
 done
-wait
 num_iter=${1:-1}
 
 # Execute the shell script cavier/run.sh" for each element in the first list
