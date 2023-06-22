@@ -38,19 +38,9 @@ for item in $list1; do
   zsh cavier/run.sh "$item" "-r$num_iter" &
 
   #FIVM
-  count=1
   for file in ./bin/"$item/$item"*_BATCH_1000; do
     echo "$file" -r "$num_iter"
-    "$file" -r "$num_iter" &
-
-    ((count++))
-    if (( count % 2 == 0 )); then
-      # Wait for the two background processes to complete
-      wait
-    fi
+    "$file" -r "$num_iter"
   done
-
-  # Wait for any remaining background processes
-  wait
 
 done
