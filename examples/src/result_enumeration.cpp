@@ -722,6 +722,7 @@ public:
     res += "std::ofstream measurements_file(\"output/output.txt\", std::ios::app | std::ios::out);\n";
     res += "write_to_config(&measurements, measurements_file, relation_list);\n";
     res += "measurements_file.close();\n";
+    res += "dynamic_multiplexer.updating_times.clear();";
     res += "}\n";
     res += " #endif";
     return res;
