@@ -265,9 +265,29 @@ struct ViewConfig {
              " << std::endl;}\n";
       delete _all_vars;
       res += +"output_size++;\n";
-      for(auto i = 0; i<query->nr_views; i++){
+      for(auto i = 0; i<query->nr_views-1; i++){
         res += "}";
       }
+      res += free_part(true);
+      res += "}\n";
+    }
+    return res;
+  }
+
+  std::string free_part(bool root = false){
+    std::string res;
+    int count = 1;
+    for(auto &child: children){
+      if(!root){
+        res += "auto part_"+std::to_string(child->position)+" = std::get<"+std::to_string(payload_vars_splitted->size() + count) + ">(t"+std::to_string(position)+");\n";
+      }
+      if(!child->children.empty()){
+        res += "for(auto t"+std::to_string(child->position)+" : *part_"+std::to_string(child->position)+"){\n";
+        res += child->free_part(false);
+        res += "}\n";
+      }
+      res += "delete part_"+std::to_string(child->position)+";\n";
+      count++;
     }
     return res;
   }
