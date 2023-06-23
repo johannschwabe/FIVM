@@ -28,7 +28,7 @@ df.columns = ['name', 'dataset', 'all Relations', 'executor', 'query', 'maptype'
 
 # Extract root query name
 df['query_root'] = df['query'].str.extract(r'(\D*\d+)')
-df['query_root'] = df['query_root'].str.strip()
+df['query_unique_root'] = df['query_root'].str.strip() + ' - ' + df['free variables'].str.strip()
 
 # Directory to save plots
 output_dir = 'viz'
@@ -41,7 +41,7 @@ for unique_name in df['name'].unique():
     name_data = df[df['name'] == unique_name]
 
     # Unique query roots
-    query_roots = name_data['query_root'].unique()
+    query_roots = name_data['query_unique_root'].unique()
 
     # Unique executors
     executors = name_data['executor'].unique()
@@ -72,8 +72,10 @@ for unique_name in df['name'].unique():
             start = start_pos
             # Loop through executors
             for ex_idx, executor in enumerate(executors):
-                version_data = name_data[(name_data['query_root'] == query_root) & (name_data['executor'] == executor)]['dataset'].unique()
-                length = len(name_data[(name_data['query_root'] == query_root) & (name_data['executor'] == executor)]) / len(version_data)
+                version_data = name_data[(name_data['query_unique_root'] == query_root) & (name_data['executor'] == executor)]['dataset'].unique()
+                if len(version_data) == 0:
+                    continue
+                length = len(name_data[(name_data['query_unique_root'] == query_root) & (name_data['executor'] == executor)]) / len(version_data)
                 positions = start_pos + np.arange(length) * (bar_width + bar_distance)
                 first = True
                 base_color = mcolors.hex2color(base_colors[ex_idx])
@@ -82,17 +84,21 @@ for unique_name in df['name'].unique():
                     shade = base_hsv.copy()
                     shade[2] = max(0.1, shade[2] - version_idx * 0.4)
                     color = mcolors.hsv_to_rgb(shade)
-                    query_data = name_data[(name_data['query_root'] == query_root) & (name_data['executor'] == executor) & (name_data['dataset'] == version)]
-                    heights = query_data[metric].values / 1000
+                    group = name_data[(name_data['query_unique_root'] == query_root) & (name_data['executor'] == executor) & (name_data['dataset'] == version)]
 
-                    # Plot bars for each query within a query_root
-                    bars = ax.bar(positions, heights, width=bar_width, color=color, alpha=1)
+                    # Calculate the average and standard deviation for the group
+                    avg_height = group[metric].mean() / 1000
+                    std_height = group[metric].std() / 1000
+                    position = start_pos + (bar_width + bar_distance) * version_idx
+
+                    # Plot bars with error bars
+                    bar = ax.bar(position, avg_height, width=bar_width, color=color, alpha=1, yerr=std_height)
                     if first:
                         first = False
-                        for bar, label in zip(bars, query_data['query']):
-                            height = bar.get_height()
-                            ax.text(bar.get_x() + bar.get_width() / 2, height, label,
-                                    ha='center', va='bottom', rotation=90, fontsize=8)
+                        name = name_data[(name_data['query_unique_root'] == query_root)].iloc[0]['query']
+                        ax.text(bar[0].get_x() + bar[0].get_width() / 2, avg_height, name,
+                                ha='center', va='bottom', rotation=90, fontsize=8)
+
 
                     # Add patch for legend if combination is not handled
                     combination = f'{executor} - {version}'
