@@ -11,10 +11,10 @@ CREATE STREAM R1q2 (
     rain int,
     maxtemp int,
     zip int
-) FROM FILE './datasets/retailer/R1q2.tbl' LINE DELIMITED CSV(delimiter := '|');
+) FROM FILE './datasets/retailer_ordered/R1q2.tbl' LINE DELIMITED CSV(delimiter := '|');
 
 CREATE STREAM Item(ksn int, subcategory int, category int, categoryCluster int, prize double)
-FROM FILE './datasets/retailer/Item.tbl' LINE DELIMITED CSV(delimiter := '|');
+FROM FILE './datasets/retailer_ordered/Item.tbl' LINE DELIMITED CSV(delimiter := '|');
 
 SELECT SUM(
     [lift<0>: RingFactorizedRelation<[0,int]>](ksn) *
