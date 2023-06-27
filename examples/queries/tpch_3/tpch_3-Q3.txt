@@ -1,0 +1,14 @@
+11 2
+0 suppkey int -1 {} 0
+1 s_name string 0 {0} 0
+2 nationkey int 1 {0,1} 0
+3 s_address string 2 {0,1,2} 0
+4 s_comment string 3 {0,1,2,3} 0
+5 s_phone string 4 {0,1,2,3,4} 0
+6 s_acctbal double 5 {0,1,2,3,4,5} 0
+7 ps_availqty int 0 {0} 0
+8 ps_supplycost double 7 {0,7} 0
+9 ps_comment string 8 {0,8,7} 0
+10 partkey int 9 {0,8,9,7} 0
+supplier 6 suppkey,s_name,s_address,nationkey,s_phone,s_acctbal,s_comment
+partsupp 10 partkey,suppkey,ps_availqty,ps_supplycost,ps_comment
