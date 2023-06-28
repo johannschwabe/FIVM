@@ -564,7 +564,7 @@ public:
 
 
   std::string generate_application() {
-    std::string base = "const string dataPath = \"data/" + dataset + "\";\n";
+    std::string base = "const std::string dataPath = \"data/" + dataset + "\";\n";
     base += "void Application::init_relations() {\n"
             "    clear_relations();\n\n";
     for (auto &relation: *relations) {

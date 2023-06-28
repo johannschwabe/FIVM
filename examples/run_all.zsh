@@ -24,23 +24,27 @@ fi
 IFS=',' read -rA list1 <<< $(sed -n 1p run_params.txt)
 IFS=',' read -rA list2 <<< $(sed -n 2p run_params.txt)
 
-make clean
-for item in $list1; do
-  echo make DATASET="$item"
-  make -j8 DATASET="$item"
-done
+if [[ $2 != "cav" ]]; then
+  make clean
+  for item in $list1; do
+    echo make DATASET="$item"
+    make -j8 DATASET="$item"
+  done
+fi
 num_iter=${1:-1}
 
 # Execute the shell script cavier/run.sh" for each element in the first list
 for item in $list1; do
   #CAVIER
-  echo cavier/run.sh "$item" "-r$num_iter"
-  zsh cavier/run.sh "$item" "-r$num_iter"
+  echo run_all.zsh "$item" "-r$num_iter"
+  zsh run_all.zsh "$item" "-r$num_iter"
 
+  if [[ $2 != "cav" ]]; then
   #FIVM
-  for file in ./bin/"$item/$item"*_BATCH_1000; do
-    echo "$file" -r "$num_iter"
-    "$file" -r "$num_iter"
-  done
+    for file in ./bin/"$item/$item"*_BATCH_1000; do
+      echo "$file" -r "$num_iter"
+      "$file" -r "$num_iter"
+    done
+  fi
 
 done

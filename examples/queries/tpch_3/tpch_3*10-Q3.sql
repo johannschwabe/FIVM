@@ -14,7 +14,7 @@ STREAM supplier (
         s_acctbal         DECIMAL,
         s_comment         VARCHAR(101)
     )
-  FROM FILE './datasets/tpch_unordered1/part.csv'
+  FROM FILE './datasets/tpch_unordered10/part.csv'
   LINE DELIMITED CSV (delimiter := '|');
 
 CREATE
@@ -25,7 +25,7 @@ STREAM partsupp (
         ps_supplycost   DECIMAL,
         ps_comment      VARCHAR(199)
     )
-  FROM FILE './datasets/tpch_unordered1/partsupp.csv'
+  FROM FILE './datasets/tpch_unordered10/partsupp.csv'
   LINE DELIMITED CSV (delimiter := '|');
 
 SELECT SUM(
