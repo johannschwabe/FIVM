@@ -1,5 +1,5 @@
 #!/bin/zsh
-
+echo $1 $2
 # Function to find the next available file name
 get_next_filename() {
   local suffix=1
