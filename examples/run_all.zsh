@@ -38,7 +38,7 @@ for item in $list1; do
   #CAVIER
   if [[ $2 != "fivm" ]]; then
     echo run_cavier.zsh "$item" "-r$num_iter"
-    zsh run_cavierq.zsh "$item" "-r$num_iter"
+    zsh run_cavier.zsh "$item" "-r$num_iter"
   fi
   if [[ $2 != "cav" ]]; then
   #FIVM
