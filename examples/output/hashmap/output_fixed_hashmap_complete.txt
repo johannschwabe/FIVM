@@ -678,4 +678,3 @@ tpch_4|FIVM|tpch_unordered1||customer,orders:Q3 | Hash | 1308 | 234 | 1500000 | 
 tpch_4|FIVM|tpch_unordered1||customer,orders:Q3 | Hash | 1296 | 235 | 1500000 | custkey,nationkey,orderkey | customer,orders
 tpch_4|FIVM|tpch_unordered1||customer,orders:Q3 | Hash | 1333 | 234 | 1500000 | custkey,nationkey,orderkey | customer,orders
 tpch_4|FIVM|tpch_unordered1||customer,orders:Q3 | Hash | 1304 | 236 | 1500000 | custkey,nationkey,orderkey | customer,orders
-retailer_6|CAVIER|retailer_unordered||Location,Weather,Inventory,Item:Q2 | Hash | 169521 | 13476 | 84055817 | Ksn,Locn,DateId,InventoryUnits,Rain,Snow,MaxTemp,MinTemp,MeanWind,Thunder,Zip,RgnCd,ClimbZnNbr,TotalAreaSqFt,SellAreaSqFt,AvgHigh | Inventory,Weather,Location : Q1 | Hash | 39228 | 10551 | 84055817 | Ksn,DateId,Locn | Item,Q2

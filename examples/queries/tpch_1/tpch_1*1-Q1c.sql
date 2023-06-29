@@ -12,7 +12,7 @@ STREAM q2 (
     l_quantity           DECIMAL,
     o_totalprice        DECIMAL
     )
-  FROM FILE './datasets/tpch1/q2.csv'
+  FROM FILE './datasets/jcch_unordered1/q2.csv'
   LINE DELIMITED CSV (delimiter := '|');
 
 CREATE
@@ -27,7 +27,7 @@ STREAM part (
         p_retailprice  DECIMAL,
         p_comment      VARCHAR(23)
     )
-  FROM FILE './datasets/tpch1/part.csv'
+  FROM FILE './datasets/jcch_unordered1/part.csv'
   LINE DELIMITED CSV (delimiter := '|');
 
 CREATE
@@ -38,7 +38,7 @@ STREAM partsupp (
         ps_supplycost   DECIMAL,
         ps_comment      VARCHAR(199)
     )
-  FROM FILE './datasets/tpch1/partsupp.csv'
+  FROM FILE './datasets/jcch_unordered1/partsupp.csv'
   LINE DELIMITED CSV (delimiter := '|');
 
 SELECT SUM(

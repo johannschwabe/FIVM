@@ -7,9 +7,10 @@ import matplotlib.colors as mcolors
 import re
 
 # Read the text file
-with open('output/output.txt', 'r') as f:
+with open('output/custom_hash/unordered/cavier/tpch.txt', 'r') as f:
     lines = f.readlines()
-
+with open('output/custom_hash/unordered/fivm/tpch.txt', 'r') as f:
+    lines.extend(f.readlines())
 root_regex = r'(\D*\d+)'
 # Parse the data
 data = []
@@ -113,4 +114,4 @@ for name in df['name'].unique():
     # plt.show()
     plt.savefig(os.path.join(output_dir, f'{name}_plot.png'), bbox_inches='tight', dpi=300)
 
-    print("gugus")
+    print(f"gugus: {name}")
