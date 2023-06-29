@@ -19,6 +19,6 @@ SELECT SUM(
     [lift<2>: RingFactorizedRelation<[2,int]>](ksn) *
     [lift<3>: RingFactorizedRelation<[3,int]>](inventoryunits) *
     [lift<4>: RingFactorizedRelation<[4,int, int, int, int, int, int]>](rain,snow,maxtemp,mintemp,meanwind,thunder) *
-    [lift<10>: RingFactorizedRelation<[10,int, int, int, int,int,int,int,int,int,int,int,int,int,int]>](zip,rgn_cd,clim_zn_nbr,tot_area_sq_ft,sell_area_sq_ft,avghhi, supertargetdistance, supertargetdrivetime, targetdistance, targetdrivetime, walmartdistance, walmartdrivetime, walmartsupercenterdistance, walmartsupercenterdrivetime)
+    [lift<10>: RingFactorizedRelation<[10,int, int, int, int,int,int,double,double,double,double,double,double,double,double]>](zip,rgn_cd,clim_zn_nbr,tot_area_sq_ft,sell_area_sq_ft,avghhi, supertargetdistance, supertargetdrivetime, targetdistance, targetdrivetime, walmartdistance, walmartdrivetime, walmartsupercenterdistance, walmartsupercenterdrivetime)
 )
 FROM Inventory NATURAL JOIN Location NATURAL JOIN  Weather;

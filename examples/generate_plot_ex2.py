@@ -7,7 +7,7 @@ import matplotlib.colors as mcolors
 import re
 
 # Read the text file
-with open('output/output.txt', 'r') as f:
+with open('output/output_exp1.txt', 'r') as f:
     lines = f.readlines()
 
 root_regex = r'(\D*\d+)'
@@ -49,9 +49,8 @@ executors = df['executor'].unique()
 bar_width = 0.35
 bar_distance = 0.05
 
-retailer_1 = df[df['name'] == 'retailer_1']
-retailer_3 = df[df['name'] == 'retailer_3']
-retailer_3.loc[retailer_3['query'] == 'Q2', 'query'] = 'Q3'
+tpch_1_unordered = df[df['name'] == 'tpch_1' and (df['dataset'] == 'tpch_unordered10' or df['dataset'] == 'tpch_unordered1')]
+tpch_1_ordered = df[df['name'] == 'tpch_1' and (df['dataset'] == 'tpch10' or df['dataset'] == 'tpch1')]
 
 
 fig, axes = plt.subplots(1, 2, figsize=(12, 6), sharey=True)
@@ -62,8 +61,8 @@ handled_combinations = set()  # To keep track of handled combinations
 ax = axes[0]
 x_ticks = []
 x_tick_labels = []
-for version_idx, dataset_version in enumerate(retailer_1['dataset'].unique()):
-    dataset_data = retailer_1[retailer_1['dataset'] == dataset_version]
+for version_idx, dataset_version in enumerate(tpch_1_ordered['dataset'].unique()):
+    dataset_data = tpch_1_ordered[tpch_1_ordered['dataset'] == dataset_version]
     # Start position for the first bar
     start_pos = 0
     last_post = 0
@@ -93,7 +92,8 @@ for version_idx, dataset_version in enumerate(retailer_1['dataset'].unique()):
                             rotation=90, fontsize=8)
 
                 start_pos += (bar_width + bar_distance)
-                combination = f'{executor} - {dataset_version}'
+                dataset_scale = 1 if dataset_version.endswith('1') else 10
+                combination = f'{executor} - tpch {dataset_scale}'
                 if combination not in handled_combinations:
                     combination_patch = patches.Patch(color=color, label=combination)
                     combination_legend_handles.append(combination_patch)
@@ -104,7 +104,7 @@ for version_idx, dataset_version in enumerate(retailer_1['dataset'].unique()):
         start_pos += (bar_width + bar_distance)
         last_post = start_pos
 
-ax.set_xlabel('Query')
+ax.set_xlabel(r'Unordered input relations')
 ax.set_ylabel(f'Update time (s)')
 ax.set_xticks(x_ticks)
 ax.set_xticklabels(x_tick_labels, rotation=90)
@@ -113,8 +113,8 @@ ax.set_xticklabels(x_tick_labels, rotation=90)
 ax = axes[1]
 x_ticks = []
 x_tick_labels = []
-for version_idx, dataset_version in enumerate(retailer_3['dataset'].unique()):
-    dataset_data = retailer_3[retailer_3['dataset'] == dataset_version]
+for version_idx, dataset_version in enumerate(tpch_1_unordered['dataset'].unique()):
+    dataset_data = tpch_1_unordered[tpch_1_unordered['dataset'] == dataset_version]
     # Start position for the first bar
     start_pos = 0
     last_post = 0
@@ -155,7 +155,7 @@ for version_idx, dataset_version in enumerate(retailer_3['dataset'].unique()):
         start_pos += (bar_width + bar_distance)
         last_post = start_pos
 
-ax.set_xlabel('Query')
+ax.set_xlabel(r'Ordered input relations')
 ax.set_ylabel(f'Update time (s)')
 ax.set_xticks(x_ticks)
 ax.set_xticklabels(x_tick_labels, rotation=90)
@@ -166,6 +166,6 @@ ax.legend(handles=combination_legend_handles, loc='upper right', bbox_to_anchor=
 plt.tight_layout(rect=[0, 0, 1, 0.95])
 fig.suptitle("Example 1")
 # plt.show()
-plt.savefig(os.path.join(output_dir, f'Ex1_plot.png'), bbox_inches='tight', dpi=300)
+plt.savefig(os.path.join(output_dir, f'Ex2_plot.png'), bbox_inches='tight', dpi=300)
 
 print("gugus")
