@@ -7,7 +7,7 @@ import matplotlib.colors as mcolors
 import re
 
 # Read the text file
-with open('output/output_exp1.txt', 'r') as f:
+with open('output/output_exp2.txt', 'r') as f:
     lines = f.readlines()
 
 root_regex = r'(\D*\d+)'
@@ -49,8 +49,8 @@ executors = df['executor'].unique()
 bar_width = 0.35
 bar_distance = 0.05
 
-tpch_1_unordered = df[df['name'] == 'tpch_1' and (df['dataset'] == 'tpch_unordered10' or df['dataset'] == 'tpch_unordered1')]
-tpch_1_ordered = df[df['name'] == 'tpch_1' and (df['dataset'] == 'tpch10' or df['dataset'] == 'tpch1')]
+tpch_1_unordered = df[(df['name'] == 'tpch_1') & ((df['dataset'] == 'tpch_unordered10') | (df['dataset'] == 'tpch_unordered1'))]
+tpch_1_ordered = df[(df['name'] == 'tpch_1') & ((df['dataset'] == 'tpch10') | (df['dataset'] == 'tpch1'))]
 
 
 fig, axes = plt.subplots(1, 2, figsize=(12, 6), sharey=True)
@@ -104,7 +104,7 @@ for version_idx, dataset_version in enumerate(tpch_1_ordered['dataset'].unique()
         start_pos += (bar_width + bar_distance)
         last_post = start_pos
 
-ax.set_xlabel(r'Unordered input relations')
+ax.set_xlabel(r'Ordered input relations')
 ax.set_ylabel(f'Update time (s)')
 ax.set_xticks(x_ticks)
 ax.set_xticklabels(x_tick_labels, rotation=90)
@@ -155,7 +155,7 @@ for version_idx, dataset_version in enumerate(tpch_1_unordered['dataset'].unique
         start_pos += (bar_width + bar_distance)
         last_post = start_pos
 
-ax.set_xlabel(r'Ordered input relations')
+ax.set_xlabel(r'Unordered input relations')
 ax.set_ylabel(f'Update time (s)')
 ax.set_xticks(x_ticks)
 ax.set_xticklabels(x_tick_labels, rotation=90)
