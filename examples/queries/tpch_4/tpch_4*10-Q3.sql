@@ -15,7 +15,7 @@ CREATE STREAM orders (
         o_shippriority   INT,
         o_comment        VARCHAR(79)
     )
-  FROM FILE './datasets/jcch_unordered10/orders.csv'
+  FROM FILE './datasets/tpch_unordered10/orders.csv'
   LINE DELIMITED CSV (delimiter := '|');
 
 
@@ -29,7 +29,7 @@ CREATE STREAM customer (
         c_mktsegment   CHAR(10),
         c_comment      VARCHAR(117)
     )
-  FROM FILE './datasets/jcch_unordered10/customer.csv'
+  FROM FILE './datasets/tpch_unordered10/customer.csv'
   LINE DELIMITED CSV (delimiter := '|');
 
 

@@ -23,7 +23,7 @@ STREAM lineitem (
         l_shipmode       CHAR(10),
         l_comment        VARCHAR(44)
     )
-  FROM FILE './datasets/jcch_unordered1/lineitem.csv'
+  FROM FILE './datasets/tpch_unordered1/lineitem.csv'
   LINE DELIMITED CSV (delimiter := '|');
 
 
@@ -38,7 +38,7 @@ CREATE STREAM orders (
         o_shippriority   INT,
         o_comment        VARCHAR(79)
     )
-  FROM FILE './datasets/jcch_unordered1/orders.csv'
+  FROM FILE './datasets/tpch_unordered1/orders.csv'
   LINE DELIMITED CSV (delimiter := '|');
 
 SELECT SUM(

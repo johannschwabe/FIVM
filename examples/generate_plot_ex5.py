@@ -6,8 +6,12 @@ import matplotlib.patches as patches
 import matplotlib.colors as mcolors
 import re
 
+# --------------------------
+# tpch vs jcch
+# --------------------------
+
 # Read the text file
-with open('output/output_exp1.txt', 'r') as f:
+with open('output/output_exp5.txt', 'r') as f:
     lines = f.readlines()
 
 root_regex = r'(\D*\d+)'
@@ -42,17 +46,13 @@ if not os.path.exists(output_dir):
 
 # Colors for executors
 
-base_colors = {'CAVIER': 'blue', "FIVM": 'orange'}
-# Unique executors
-executors = df['executor'].unique()
+base_colors = {'CAVIER-tpch': 'blue', 'CAVIER-jcch': 'blue', "FIVM-tpch": 'orange', "FIVM-jcch": 'yellow'}
 # Width of a bar
 bar_width = 0.35
 bar_distance = 0.05
 
-retailer_1 = df[df['name'] == 'retailer_1']
-retailer_3 = df[df['name'] == 'retailer_3']
-retailer_3.loc[retailer_3['query'] == 'Q2', 'query'] = 'Q3'
-retailer_3.loc[retailer_3['query_root'] == 'Q2', 'query_root'] = 'Q3'
+tpch_1_unordered = df[(df['name'] == 'tpch_2') & ((df['dataset'] == 'tpch_unordered10') | (df['dataset'] == 'tpch_unordered1'))]
+jcch_1_unordered = df[(df['name'] == 'jcch_2') & ((df['dataset'] == 'jcch_unordered10') | (df['dataset'] == 'jcch_unordered1'))]
 
 
 fig, axes = plt.subplots(1, 2, figsize=(12, 6), sharey=True)
@@ -63,8 +63,8 @@ handled_combinations = set()  # To keep track of handled combinations
 ax = axes[0]
 x_ticks = []
 x_tick_labels = []
-for version_idx, dataset_version in enumerate(retailer_1['dataset'].unique()):
-    dataset_data = retailer_1[retailer_1['dataset'] == dataset_version]
+for version_idx, dataset_version in enumerate(tpch_1_unordered['dataset'].unique()):
+    dataset_data = tpch_1_unordered[tpch_1_unordered['dataset'] == dataset_version]
     # Start position for the first bar
     start_pos = 0
     last_post = 0
@@ -80,7 +80,7 @@ for version_idx, dataset_version in enumerate(retailer_1['dataset'].unique()):
                 avg_height = exucutor_data["update_time"].mean() / 1000
                 std_height = exucutor_data["update_time"].std() / 1000
 
-                base_color = mcolors.hex2color(base_colors[executor])
+                base_color = mcolors.hex2color(base_colors[f"{executor}-tpch"])
                 base_hsv = mcolors.rgb_to_hsv(base_color)
                 shade = base_hsv.copy()
                 shade[2] = max(0.1, shade[2] - version_idx * 0.4)
@@ -94,7 +94,12 @@ for version_idx, dataset_version in enumerate(retailer_1['dataset'].unique()):
                             rotation=90, fontsize=8)
 
                 start_pos += (bar_width + bar_distance)
-                combination = f'{executor} - {dataset_version}'
+                dataset_scale = 1 if dataset_version.endswith('1') else 10
+                if executor == 'CAVIER':
+                    combination = f'{executor}'
+                else:
+                    combination = f'{executor} - tpch {dataset_scale}'
+
                 if combination not in handled_combinations:
                     combination_patch = patches.Patch(color=color, label=combination)
                     combination_legend_handles.append(combination_patch)
@@ -105,7 +110,7 @@ for version_idx, dataset_version in enumerate(retailer_1['dataset'].unique()):
         start_pos += (bar_width + bar_distance)
         last_post = start_pos
 
-ax.set_xlabel(r'Queryset $\mathcal{Q}_1$')
+ax.set_xlabel(r'tpch input relations')
 ax.set_ylabel(f'Update time (s)')
 ax.set_xticks(x_ticks)
 ax.set_xticklabels(x_tick_labels, rotation=90)
@@ -114,8 +119,8 @@ ax.set_xticklabels(x_tick_labels, rotation=90)
 ax = axes[1]
 x_ticks = []
 x_tick_labels = []
-for version_idx, dataset_version in enumerate(retailer_3['dataset'].unique()):
-    dataset_data = retailer_3[retailer_3['dataset'] == dataset_version]
+for version_idx, dataset_version in enumerate(jcch_1_unordered['dataset'].unique()):
+    dataset_data = jcch_1_unordered[jcch_1_unordered['dataset'] == dataset_version]
     # Start position for the first bar
     start_pos = 0
     last_post = 0
@@ -131,7 +136,7 @@ for version_idx, dataset_version in enumerate(retailer_3['dataset'].unique()):
                 avg_height = exucutor_data["update_time"].mean() / 1000
                 std_height = exucutor_data["update_time"].std() / 1000
 
-                base_color = mcolors.hex2color(base_colors[executor])
+                base_color = mcolors.hex2color(base_colors[f"{executor}-jcch"])
                 base_hsv = mcolors.rgb_to_hsv(base_color)
                 shade = base_hsv.copy()
                 shade[2] = max(0.1, shade[2] - version_idx * 0.4)
@@ -145,7 +150,12 @@ for version_idx, dataset_version in enumerate(retailer_3['dataset'].unique()):
                             rotation=90, fontsize=8)
 
                 start_pos += (bar_width + bar_distance)
-                combination = f'{executor} - {dataset_version}'
+                dataset_scale = 1 if dataset_version.endswith('1') else 10
+                if executor == 'CAVIER':
+                    combination = f'{executor}'
+                else:
+                    combination = f'{executor} - jcch {dataset_scale}'
+
                 if combination not in handled_combinations:
                     combination_patch = patches.Patch(color=color, label=combination)
                     combination_legend_handles.append(combination_patch)
@@ -156,7 +166,7 @@ for version_idx, dataset_version in enumerate(retailer_3['dataset'].unique()):
         start_pos += (bar_width + bar_distance)
         last_post = start_pos
 
-ax.set_xlabel(r'Queryset $\mathcal{Q}_2$')
+ax.set_xlabel(r'jcch input relations')
 ax.set_ylabel(f'Update time (s)')
 ax.set_xticks(x_ticks)
 ax.set_xticklabels(x_tick_labels, rotation=90)
@@ -165,8 +175,8 @@ ax.set_xticklabels(x_tick_labels, rotation=90)
 ax.legend(handles=combination_legend_handles, loc='upper right', bbox_to_anchor=(1, 1), title="Executor - Version")
 
 plt.tight_layout(rect=[0, 0, 1, 0.95])
-fig.suptitle("Example 1")
+fig.suptitle("TPCH vs JCCH - Update time", fontsize=16)
 # plt.show()
-plt.savefig(os.path.join(output_dir, f'Ex1_plot.png'), bbox_inches='tight', dpi=300)
+plt.savefig(os.path.join(output_dir, f'Ex5_plot.png'), bbox_inches='tight', dpi=300)
 
 print("gugus")

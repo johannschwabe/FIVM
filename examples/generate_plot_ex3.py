@@ -6,6 +6,10 @@ import matplotlib.patches as patches
 import matplotlib.colors as mcolors
 import re
 
+# --------------------------
+# Nr Free Variables
+# --------------------------
+
 # Read the text file
 with open('output/output_exp3.txt', 'r') as f:
     lines = f.readlines()

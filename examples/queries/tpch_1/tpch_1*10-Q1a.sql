@@ -23,7 +23,7 @@ STREAM lineitem (
         l_shipmode       CHAR(10),
         l_comment        VARCHAR(44)
     )
-  FROM FILE './datasets/jcch_unordered10/lineitem.csv'
+  FROM FILE './datasets/tpch_unordered10/lineitem.csv'
   LINE DELIMITED CSV (delimiter := '|');
 
 
@@ -39,7 +39,7 @@ STREAM part (
         p_retailprice  DECIMAL,
         p_comment      VARCHAR(23)
     )
-  FROM FILE './datasets/jcch_unordered10/part.csv'
+  FROM FILE './datasets/tpch_unordered10/part.csv'
   LINE DELIMITED CSV (delimiter := '|');
 
 CREATE STREAM orders (
@@ -53,7 +53,7 @@ CREATE STREAM orders (
         o_shippriority   INT,
         o_comment        VARCHAR(79)
     )
-  FROM FILE './datasets/jcch_unordered10/orders.csv'
+  FROM FILE './datasets/tpch_unordered10/orders.csv'
   LINE DELIMITED CSV (delimiter := '|');
 
 CREATE
@@ -64,7 +64,7 @@ STREAM partsupp (
         ps_supplycost   DECIMAL,
         ps_comment      VARCHAR(199)
     )
-  FROM FILE './datasets/jcch_unordered10/partsupp.csv'
+  FROM FILE './datasets/tpch_unordered10/partsupp.csv'
   LINE DELIMITED CSV (delimiter := '|');
 
 SELECT SUM(
