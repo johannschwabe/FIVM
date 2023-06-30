@@ -53,11 +53,15 @@ executors = df['executor'].unique()
 bar_width = 0.35
 bar_distance = 0.05
 
-retailer_1 = df[df['name'] == 'retailer_1']
-retailer_3 = df[df['name'] == 'retailer_3']
-retailer_3.loc[retailer_3['query'] == 'Q2', 'query'] = 'Q3'
-retailer_3.loc[retailer_3['query_root'] == 'Q2', 'query_root'] = 'Q3'
+tpch_3 = df[df['name'] == 'tpch_3']
+tpch_6 = df[df['name'] == 'tpch_6']
 
+conditions = (tpch_3['executor'] == 'FIVM') & \
+             (tpch_3['query'].isin(['Q1a', 'Q1b', 'Q3']))
+
+tpch_6 = pd.concat([tpch_6, tpch_3[conditions]])
+
+tpch_3 = tpch_3[tpch_3['query'] != 'Q3']
 
 fig, axes = plt.subplots(1, 2, figsize=(12, 6), sharey=True)
 
@@ -67,8 +71,8 @@ handled_combinations = set()  # To keep track of handled combinations
 ax = axes[0]
 x_ticks = []
 x_tick_labels = []
-for version_idx, dataset_version in enumerate(retailer_1['dataset'].unique()):
-    dataset_data = retailer_1[retailer_1['dataset'] == dataset_version]
+for version_idx, dataset_version in enumerate(tpch_3['dataset'].unique()):
+    dataset_data = tpch_3[tpch_3['dataset'] == dataset_version]
     # Start position for the first bar
     start_pos = 0
     last_post = 0
@@ -95,7 +99,7 @@ for version_idx, dataset_version in enumerate(retailer_1['dataset'].unique()):
                 if version_idx == 0:
                     query_name = query if length_unique == length_non_unique else f"{query} - {len(exucutor_data.iloc[0]['free variables'].split(','))}"
                     ax.text(start_pos, (avg_height + std_height) * 1.01, query_name, ha='center', va='bottom',
-                            rotation=90, fontsize=8)
+                            rotation=90, fontsize=12)
 
                 start_pos += (bar_width + bar_distance)
                 combination = f'{executor} - {dataset_version}'
@@ -109,8 +113,8 @@ for version_idx, dataset_version in enumerate(retailer_1['dataset'].unique()):
         start_pos += (bar_width + bar_distance)
         last_post = start_pos
 
-ax.set_xlabel(r'Queryset $\mathcal{Q}_1$')
-ax.set_ylabel(f'Update time (s)')
+ax.set_xlabel(r'Queryset $\mathcal{Q}_3$', fontsize=14)
+ax.set_ylabel(f'Update time (s)', fontsize=14)
 ax.set_xticks(x_ticks)
 ax.set_xticklabels(x_tick_labels, rotation=90)
 
@@ -118,8 +122,8 @@ ax.set_xticklabels(x_tick_labels, rotation=90)
 ax = axes[1]
 x_ticks = []
 x_tick_labels = []
-for version_idx, dataset_version in enumerate(retailer_3['dataset'].unique()):
-    dataset_data = retailer_3[retailer_3['dataset'] == dataset_version]
+for version_idx, dataset_version in enumerate(tpch_6['dataset'].unique()):
+    dataset_data = tpch_6[tpch_6['dataset'] == dataset_version]
     # Start position for the first bar
     start_pos = 0
     last_post = 0
@@ -146,7 +150,7 @@ for version_idx, dataset_version in enumerate(retailer_3['dataset'].unique()):
                 if version_idx == 0:
                     query_name = query if length_unique == length_non_unique else f"{query} - {len(exucutor_data.iloc[0]['free variables'].split(','))}"
                     ax.text(start_pos, (avg_height + std_height) * 1.01, query_name, ha='center', va='bottom',
-                            rotation=90, fontsize=8)
+                            rotation=90, fontsize=12)
 
                 start_pos += (bar_width + bar_distance)
                 combination = f'{executor} - {dataset_version}'
@@ -160,8 +164,8 @@ for version_idx, dataset_version in enumerate(retailer_3['dataset'].unique()):
         start_pos += (bar_width + bar_distance)
         last_post = start_pos
 
-ax.set_xlabel(r'Queryset $\mathcal{Q}_2$')
-ax.set_ylabel(f'Update time (s)')
+ax.set_xlabel(r'Queryset $\mathcal{Q}_4$', fontsize=14)
+ax.set_ylabel(f'Update time (s)', fontsize=14)
 ax.set_xticks(x_ticks)
 ax.set_xticklabels(x_tick_labels, rotation=90)
 
@@ -169,8 +173,8 @@ ax.set_xticklabels(x_tick_labels, rotation=90)
 ax.legend(handles=combination_legend_handles, loc='upper right', bbox_to_anchor=(1, 1), title="Executor - Version")
 
 plt.tight_layout(rect=[0, 0, 1, 0.95])
-fig.suptitle("Example 1")
+fig.suptitle("Input Cardinalities", fontsize=18)
 # plt.show()
-plt.savefig(os.path.join(output_dir, f'Ex1_plot.png'), bbox_inches='tight', dpi=300)
+plt.savefig(os.path.join(output_dir, f'InputCardinalitiesTPCH.png'), bbox_inches='tight', dpi=300)
 
 print("gugus")

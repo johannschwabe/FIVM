@@ -95,7 +95,7 @@ for version_idx, dataset_version in enumerate(retailer_1['dataset'].unique()):
                 if version_idx == 0:
                     query_name = query if length_unique == length_non_unique else f"{query} - {len(exucutor_data.iloc[0]['free variables'].split(','))}"
                     ax.text(start_pos, (avg_height + std_height) * 1.01, query_name, ha='center', va='bottom',
-                            rotation=90, fontsize=8)
+                            rotation=90, fontsize=12)
 
                 start_pos += (bar_width + bar_distance)
                 combination = f'{executor} - {dataset_version}'
@@ -109,8 +109,8 @@ for version_idx, dataset_version in enumerate(retailer_1['dataset'].unique()):
         start_pos += (bar_width + bar_distance)
         last_post = start_pos
 
-ax.set_xlabel(r'Queryset $\mathcal{Q}_1$')
-ax.set_ylabel(f'Update time (s)')
+ax.set_xlabel(r'Queryset $\mathcal{Q}_1$', fontsize=14)
+ax.set_ylabel(f'Update time (s)', fontsize=14)
 ax.set_xticks(x_ticks)
 ax.set_xticklabels(x_tick_labels, rotation=90)
 
@@ -146,7 +146,7 @@ for version_idx, dataset_version in enumerate(retailer_3['dataset'].unique()):
                 if version_idx == 0:
                     query_name = query if length_unique == length_non_unique else f"{query} - {len(exucutor_data.iloc[0]['free variables'].split(','))}"
                     ax.text(start_pos, (avg_height + std_height) * 1.01, query_name, ha='center', va='bottom',
-                            rotation=90, fontsize=8)
+                            rotation=90, fontsize=12)
 
                 start_pos += (bar_width + bar_distance)
                 combination = f'{executor} - {dataset_version}'
@@ -160,8 +160,8 @@ for version_idx, dataset_version in enumerate(retailer_3['dataset'].unique()):
         start_pos += (bar_width + bar_distance)
         last_post = start_pos
 
-ax.set_xlabel(r'Queryset $\mathcal{Q}_2$')
-ax.set_ylabel(f'Update time (s)')
+ax.set_xlabel(r'Queryset $\mathcal{Q}_2$', fontsize=14)
+ax.set_ylabel(f'Update time (s)', fontsize=14)
 ax.set_xticks(x_ticks)
 ax.set_xticklabels(x_tick_labels, rotation=90)
 
@@ -169,8 +169,8 @@ ax.set_xticklabels(x_tick_labels, rotation=90)
 ax.legend(handles=combination_legend_handles, loc='upper right', bbox_to_anchor=(1, 1), title="Executor - Version")
 
 plt.tight_layout(rect=[0, 0, 1, 0.95])
-fig.suptitle("Example 1")
+fig.suptitle("Input Cardinalities", fontsize=18)
 # plt.show()
-plt.savefig(os.path.join(output_dir, f'Ex1_plot.png'), bbox_inches='tight', dpi=300)
+plt.savefig(os.path.join(output_dir, f'InputCardinalitiesRetailer.png'), bbox_inches='tight', dpi=300)
 
 print("gugus")

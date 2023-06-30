@@ -716,7 +716,7 @@ public:
       if (count > 1) {
         res += "std::cout << \"WARNING: " + query_1->query_name +
                " is used in multiple queries but propagation time is indivisible. updating with " +
-               query_1->query_name + " took\" << " + query_1->query_name + R"(_propagation" << "ms"<< std::endl;)";
+               query_1->query_name + " took\" << " + query_1->query_name + R"(_propagation << "ms"<< std::endl;)";
       }
     }
     res += "std::ofstream measurements_file(\"output/output.txt\", std::ios::app | std::ios::out);\n";
