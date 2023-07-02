@@ -16,8 +16,7 @@ FROM FILE './datasets/retailer_unordered/Weather.tbl' LINE DELIMITED CSV(delimit
 SELECT SUM(
     [lift<0>: RingFactorizedRelation<[0,int]>](locn) *
     [lift<1>: RingFactorizedRelation<[1,int]>](dateid) *
-    [lift<2>: RingFactorizedRelation<[2,int]>](ksn) *
-    [lift<3>: RingFactorizedRelation<[3,int]>](inventoryunits) *
+    [lift<2>: RingFactorizedRelation<[2,int,int]>](ksn,inventoryunits) *
     [lift<4>: RingFactorizedRelation<[4,int, int, int, int]>](rain,snow,maxtemp,mintemp)
     )
 FROM Inventory NATURAL JOIN Location NATURAL JOIN  Weather;

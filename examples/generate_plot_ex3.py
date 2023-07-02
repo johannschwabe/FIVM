@@ -11,7 +11,7 @@ import re
 # --------------------------
 
 # Read the text file
-with open('output/output_exp3.txt', 'r') as f:
+with open('output/output.txt', 'r') as f:
     lines = f.readlines()
 
 root_regex = r'(\D*\d+)'
@@ -107,8 +107,8 @@ for version_idx, dataset_version in enumerate(retailer_7['dataset'].unique()):
         start_pos += (bar_width + bar_distance)
         last_post = start_pos
 
-ax.set_xlabel(r'# of free variables in Q1')
-ax.set_ylabel(f'Update time (s)')
+ax.set_xlabel(r'# of free variables in Q1', fontsize=14)
+ax.set_ylabel(f'Update time (s)', fontsize=14)
 ax.set_xticks(x_ticks)
 ax.set_xticklabels(x_tick_labels, rotation=90)
 
@@ -144,7 +144,7 @@ for version_idx, dataset_version in enumerate(retailer_6['dataset'].unique()):
                 if version_idx == 0:
                     query_name = query if length_unique == length_non_unique else f"{query} - {len(exucutor_data.iloc[0]['free variables'].split(','))}"
                     ax.text(start_pos, (avg_height + std_height) * 1.01, query_name, ha='center', va='bottom',
-                            rotation=90, fontsize=8)
+                            rotation=90, fontsize=12)
 
                 start_pos += (bar_width + bar_distance)
                 combination = f'{executor} - {dataset_version}'
@@ -158,8 +158,8 @@ for version_idx, dataset_version in enumerate(retailer_6['dataset'].unique()):
         start_pos += (bar_width + bar_distance)
         last_post = start_pos
 
-ax.set_xlabel(r'# of free variables in Q2')
-ax.set_ylabel(f'Update time (s)')
+ax.set_xlabel(r'# of free variables in Q2', fontsize=14)
+ax.set_ylabel(f'Update time (s)', fontsize=14)
 ax.set_xticks(x_ticks)
 ax.set_xticklabels(x_tick_labels, rotation=90)
 
@@ -167,8 +167,8 @@ ax.set_xticklabels(x_tick_labels, rotation=90)
 ax.legend(handles=combination_legend_handles, loc='upper right', bbox_to_anchor=(1, 1), title="Executor - Version")
 
 plt.tight_layout(rect=[0, 0, 1, 0.95])
-fig.suptitle("Example 1")
+fig.suptitle("NrFreeVariables", fontsize=18)
 # plt.show()
-plt.savefig(os.path.join(output_dir, f'Ex3_plot.png'), bbox_inches='tight', dpi=300)
+plt.savefig(os.path.join(output_dir, f'NrFreeVariables.png'), bbox_inches='tight', dpi=300)
 
 print("gugus")
