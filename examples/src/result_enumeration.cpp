@@ -502,7 +502,7 @@ public:
         "       << measurement->enumeration_time << \" | \"\n"
         "       << measurement->size_output << \" | \"\n"
         "       << measurement->free_variables << \" | \"\n"
-        "       << measurement->relations;\n"
+        "       << measurement->relations << \"| \" << BATCH_SIZE;\n"
         "    return os;\n"
         "}\n\n"
         "void write_to_config(std::vector<Measurement*>* measurements, std::ofstream& measurements_file, std::string relations){\n"
