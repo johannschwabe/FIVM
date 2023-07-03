@@ -248,17 +248,13 @@ struct ViewConfig {
       res += join(_all_vars, ", ");
       res += "});\n";
       if (query->call_batch_update) {
-        res += "if (output_size % " + std::to_string(query->propagation_size) + " == " +
-               std::to_string(query->propagation_size) +
-               "-1) { enumeration_timer.stop(); enumeration_time += enumeration_timer.elapsedTimeInMilliSeconds();" +
+        res += std::string("if (output_size % BATCH_SIZE == BATCH_SIZE -1) { enumeration_timer.stop(); enumeration_time += enumeration_timer.elapsedTimeInMilliSeconds();") +
                "propagation_timer.restart(); data.on_batch_update_" + query->query_name +
                "(update.begin(), update.end()); propagation_timer.stop();propagation_time += propagation_timer.elapsedTimeInMilliSeconds();\n";
         res += +"enumeration_timer.restart();update.clear();}\n";
       } else {
 
-        res += "if (output_size % " + std::to_string(query->propagation_size) + " == " +
-               std::to_string(query->propagation_size) +
-               "-1) { update.clear();}\n";
+        res += "if (output_size % BATCH_SIZE == BATCH_SIZE -1){ update.clear();}\n";
       }
 
       res += +"if (print_result) { output_file << " + output_vars +
