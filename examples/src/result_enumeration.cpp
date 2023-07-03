@@ -699,22 +699,25 @@ public:
       res += "    measurements.push_back(&measure_" + query->query_name + ");\n";
     }
 
+    std::string propagation_times;
     for (auto query_1: *queries) {
       int count = 0;
       for (auto query_2: *queries) {
         for (const auto &atom: query_atoms->at(query_2->query_name)) {
           if (atom == query_1->query_name) {
-            res += "    measure_" + query_2->query_name + ".update_time += " + query_1->query_name + "_propagation;\n";
+            propagation_times += "    measure_" + query_2->query_name + ".update_time += " + query_1->query_name + "_propagation / query_" + query_1->query_name+"_count;\n";
             count++;
           }
         }
       }
+      res += "int query_" + query_1->query_name+"_count = " + std::to_string(count) + ";\n";
       if (count > 1) {
         res += "std::cout << \"WARNING: " + query_1->query_name +
                " is used in multiple queries but propagation time is indivisible. updating with " +
                query_1->query_name + " took\" << " + query_1->query_name + R"(_propagation << "ms"<< std::endl;)";
       }
     }
+    res += propagation_times;
     res += "std::ofstream measurements_file(\"output/output.txt\", std::ios::app | std::ios::out);\n";
     res += "write_to_config(&measurements, measurements_file, relation_list);\n";
     res += "measurements_file.close();\n";
