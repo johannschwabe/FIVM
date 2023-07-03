@@ -36,6 +36,21 @@ STREAM supplier (
         s_acctbal         DECIMAL,
         s_comment         VARCHAR(101)
     )
+  FROM FILE './datasets/tpch_unordered1/supplier.csv'
+  LINE DELIMITED CSV (delimiter := '|');
+
+CREATE
+STREAM part (
+        partkey        INT,
+        p_name         VARCHAR(55),
+        p_mfgr         CHAR(25),
+        p_brand        CHAR(10),
+        p_type         VARCHAR(25),
+        p_size         INT,
+        p_container    CHAR(10),
+        p_retailprice  DECIMAL,
+        p_comment      VARCHAR(23)
+    )
   FROM FILE './datasets/tpch_unordered1/part.csv'
   LINE DELIMITED CSV (delimiter := '|');
 
@@ -51,11 +66,12 @@ STREAM partsupp (
   LINE DELIMITED CSV (delimiter := '|');
 
 SELECT SUM(
-     [lift<0>: RingFactorizedRelation<[0, INT]>](partkey) *
-    [lift<1>: RingFactorizedRelation<[1, INT]>](suppkey) *
-    [lift<2>: RingFactorizedRelation<[2, DECIMAL]>](l_quantity) *
-    [lift<16>: RingFactorizedRelation<[16, INT, DECIMAL]>](ps_availqty, ps_supplycost) *
-    [lift<19>: RingFactorizedRelation<[19, VARCHAR(25)]>](s_name)
+           [lift<0>: RingFactorizedRelation<[0, INT]>](suppkey) *
+    [lift<1>: RingFactorizedRelation<[1, VARCHAR(25)]>](s_name) *
+    [lift<2>: RingFactorizedRelation<[2, INT]>](partkey) *
+    [lift<3>: RingFactorizedRelation<[3, DECIMAL]>](l_quantity) *
+    [lift<16>: RingFactorizedRelation<[16, INT]>](ps_availqty) *
+    [lift<27>: RingFactorizedRelation<[27, VARCHAR(55)]>](p_name)
 )
 FROM lineitem
          NATURAL JOIN part

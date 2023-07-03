@@ -52,7 +52,7 @@ STREAM supplier (
         s_acctbal         DECIMAL,
         s_comment         VARCHAR(101)
     )
-  FROM FILE './datasets/tpch_unordered1/part.csv'
+  FROM FILE './datasets/tpch_unordered1/supplier.csv'
   LINE DELIMITED CSV (delimiter := '|');
 
 CREATE
@@ -67,11 +67,11 @@ STREAM partsupp (
   LINE DELIMITED CSV (delimiter := '|');
 
 SELECT SUM(
-           [lift<0>: RingFactorizedRelation<[0, INT]>](partkey) *
-    [lift<1>: RingFactorizedRelation<[1, INT]>](suppkey) *
-    [lift<2>: RingFactorizedRelation<[2, DECIMAL]>](l_quantity) *
+    [lift<0>: RingFactorizedRelation<[0, INT]>](partkey) *
+    [lift<1>: RingFactorizedRelation<[1, VARCHAR(55)]>](p_name) *
+    [lift<2>: RingFactorizedRelation<[2, INT]>](suppkey) *
+    [lift<3>: RingFactorizedRelation<[3, DECIMAL]>](l_quantity) *
     [lift<16>: RingFactorizedRelation<[16, INT]>](ps_availqty) *
-    [lift<19>: RingFactorizedRelation<[19, VARCHAR(55)]>](p_name) *
     [lift<27>: RingFactorizedRelation<[27, VARCHAR(25)]>](s_name)
 )
 FROM lineitem
