@@ -47,7 +47,7 @@ for item in $list1; do
   fi
   if [[ $2 != "cav" ]]; then
   #FIVM
-    for file in ./bin/"$item/$item"*_BATCH_1000; do
+    for file in ./bin/"$item/$item"*_BATCH_"$batch_size"; do
       echo "$file" -r "$num_iter"
       "$file" -r "$num_iter"
     done
