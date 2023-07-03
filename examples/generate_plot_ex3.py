@@ -11,7 +11,7 @@ import re
 # --------------------------
 
 # Read the text file
-with open('output/output.txt', 'r') as f:
+with open('output/output_exp3.txt', 'r') as f:
     lines = f.readlines()
 
 root_regex = r'(\D*\d+)'
@@ -64,6 +64,7 @@ handled_combinations = set()  # To keep track of handled combinations
 ax = axes[0]
 x_ticks = []
 x_tick_labels = []
+maxi = 0
 for version_idx, dataset_version in enumerate(retailer_7['dataset'].unique()):
     dataset_data = retailer_7[retailer_7['dataset'] == dataset_version]
     # Start position for the first bar
@@ -86,13 +87,13 @@ for version_idx, dataset_version in enumerate(retailer_7['dataset'].unique()):
                 shade = base_hsv.copy()
                 shade[2] = max(0.1, shade[2] - version_idx * 0.4)
                 color = mcolors.hsv_to_rgb(shade)
-
+                maxi = max(maxi, avg_height + std_height)
                 # Plot bars with error bars
                 bar = ax.bar(start_pos, avg_height, width=bar_width, color=color, alpha=1, yerr=std_height)
                 if version_idx == 0:
                     query_name = query if length_unique == length_non_unique else f"{query} - {len(exucutor_data.iloc[0]['free variables'].split(','))}"
                     ax.text(start_pos, (avg_height + std_height) * 1.01, query_name, ha='center', va='bottom',
-                            rotation=90, fontsize=8)
+                            rotation=90, fontsize=12)
 
                 start_pos += (bar_width + bar_distance)
                 dataset_scale = 1 if dataset_version.endswith('1') else 10
@@ -138,6 +139,7 @@ for version_idx, dataset_version in enumerate(retailer_6['dataset'].unique()):
                 shade = base_hsv.copy()
                 shade[2] = max(0.1, shade[2] - version_idx * 0.4)
                 color = mcolors.hsv_to_rgb(shade)
+                maxi = max(maxi, avg_height + std_height)
 
                 # Plot bars with error bars
                 bar = ax.bar(start_pos, avg_height, width=bar_width, color=color, alpha=1, yerr=std_height)
@@ -162,12 +164,13 @@ ax.set_xlabel(r'# of free variables in Q2', fontsize=14)
 ax.set_ylabel(f'Update time (s)', fontsize=14)
 ax.set_xticks(x_ticks)
 ax.set_xticklabels(x_tick_labels, rotation=90)
+ax.set_ylim(0, maxi * 1.2)
 
 
 ax.legend(handles=combination_legend_handles, loc='upper right', bbox_to_anchor=(1, 1), title="Executor - Version")
 
 plt.tight_layout(rect=[0, 0, 1, 0.95])
-fig.suptitle("NrFreeVariables", fontsize=18)
+fig.suptitle("Nr Free Variables", fontsize=18)
 # plt.show()
 plt.savefig(os.path.join(output_dir, f'NrFreeVariables.png'), bbox_inches='tight', dpi=300)
 
