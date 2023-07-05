@@ -1,8 +1,8 @@
 import pandas as pd
 
 # Read the CSV files
-df1 = pd.read_csv('output/R3Q1.csv', sep='|', header=None)
-df2 = pd.read_csv('output/R3Q1c.csv', sep='|', header=None)
+df1 = pd.read_csv('output/Q1a.csv', sep='|', header=None)
+df2 = pd.read_csv('output/CAVIER_TPCH_6_Q1.csv', sep='|', header=None)
 
 # Set column names
 df1.columns = ["locn", "dateid", "ksn", "category", "rain", "zip"]

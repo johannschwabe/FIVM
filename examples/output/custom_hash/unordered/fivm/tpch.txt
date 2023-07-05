@@ -138,106 +138,46 @@ tpch_2|FIVM|tpch_unordered1||lineitem,partsupp,part:Q2 | CustomHash1500000, 1000
 tpch_2|FIVM|tpch_unordered1||lineitem,partsupp,part:Q2 | CustomHash1500000, 1000, 2 | 10920 | 1826 | 6001215 | partkey,suppkey,orderkey,l_quantity,ps_availqty,p_name | lineitem,partsupp,part
 tpch_2|FIVM|tpch_unordered1||lineitem,partsupp,part:Q2 | CustomHash1500000, 1000, 2 | 11583 | 1804 | 6001215 | partkey,suppkey,orderkey,l_quantity,ps_availqty,p_name | lineitem,partsupp,part
 tpch_2|FIVM|tpch_unordered1||lineitem,partsupp,part:Q2 | CustomHash1500000, 1000, 2 | 11448 | 1823 | 6001215 | partkey,suppkey,orderkey,l_quantity,ps_availqty,p_name | lineitem,partsupp,part
-tpch_3|FIVM|tpch_unordered10||lineitem,partsupp,supplier,part:Q1a | CustomHash800000, 1000, 2 | 124738 | 25163 | 56367668 | partkey,suppkey,l_quantity,ps_availqty,s_name,p_name | lineitem,partsupp,supplier,part
-tpch_3|FIVM|tpch_unordered10||lineitem,partsupp,supplier,part:Q1a | CustomHash800000, 1000, 2 | 161697 | 26599 | 56367668 | partkey,suppkey,l_quantity,ps_availqty,s_name,p_name | lineitem,partsupp,supplier,part
-tpch_3|FIVM|tpch_unordered10||lineitem,partsupp,supplier,part:Q1a | CustomHash800000, 1000, 2 | 164920 | 27261 | 56367668 | partkey,suppkey,l_quantity,ps_availqty,s_name,p_name | lineitem,partsupp,supplier,part
-tpch_3|FIVM|tpch_unordered10||lineitem,partsupp,supplier,part:Q1a | CustomHash800000, 1000, 2 | 161924 | 26821 | 56367668 | partkey,suppkey,l_quantity,ps_availqty,s_name,p_name | lineitem,partsupp,supplier,part
-tpch_3|FIVM|tpch_unordered10||lineitem,partsupp,supplier,part:Q1a | CustomHash800000, 1000, 2 | 161468 | 26777 | 56367668 | partkey,suppkey,l_quantity,ps_availqty,s_name,p_name | lineitem,partsupp,supplier,part
-tpch_3|FIVM|tpch_unordered10||lineitem,partsupp,supplier:Q1b | CustomHash800000, 1000, 2 | 113468 | 22199 | 56367668 | suppkey,partkey,l_quantity,ps_availqty,ps_supplycost,s_name | lineitem,partsupp,supplier
-tpch_3|FIVM|tpch_unordered10||lineitem,partsupp,supplier:Q1b | CustomHash800000, 1000, 2 | 137555 | 23683 | 56367668 | suppkey,partkey,l_quantity,ps_availqty,ps_supplycost,s_name | lineitem,partsupp,supplier
-tpch_3|FIVM|tpch_unordered10||lineitem,partsupp,supplier:Q1b | CustomHash800000, 1000, 2 | 140227 | 24062 | 56367668 | suppkey,partkey,l_quantity,ps_availqty,ps_supplycost,s_name | lineitem,partsupp,supplier
-tpch_3|FIVM|tpch_unordered10||lineitem,partsupp,supplier:Q1b | CustomHash800000, 1000, 2 | 140910 | 23679 | 56367668 | suppkey,partkey,l_quantity,ps_availqty,ps_supplycost,s_name | lineitem,partsupp,supplier
-tpch_3|FIVM|tpch_unordered10||lineitem,partsupp,supplier:Q1b | CustomHash800000, 1000, 2 | 138213 | 24162 | 56367668 | suppkey,partkey,l_quantity,ps_availqty,ps_supplycost,s_name | lineitem,partsupp,supplier
-tpch_3|FIVM|tpch_unordered10||partsupp,lineitem,supplier:Q2 | CustomHash800000, 1000, 2 | 130726 | 21773 | 56367668 | suppkey,partkey,ps_availqty,ps_supplycost,l_quantity,s_name | partsupp,lineitem,supplier
-tpch_3|FIVM|tpch_unordered10||partsupp,lineitem,supplier:Q2 | CustomHash800000, 1000, 2 | 145914 | 22885 | 56367668 | suppkey,partkey,ps_availqty,ps_supplycost,l_quantity,s_name | partsupp,lineitem,supplier
-tpch_3|FIVM|tpch_unordered10||partsupp,lineitem,supplier:Q2 | CustomHash800000, 1000, 2 | 148105 | 23693 | 56367668 | suppkey,partkey,ps_availqty,ps_supplycost,l_quantity,s_name | partsupp,lineitem,supplier
-tpch_3|FIVM|tpch_unordered10||partsupp,lineitem,supplier:Q2 | CustomHash800000, 1000, 2 | 145835 | 23128 | 56367668 | suppkey,partkey,ps_availqty,ps_supplycost,l_quantity,s_name | partsupp,lineitem,supplier
-tpch_3|FIVM|tpch_unordered10||partsupp,lineitem,supplier:Q2 | CustomHash800000, 1000, 2 | 146796 | 23368 | 56367668 | suppkey,partkey,ps_availqty,ps_supplycost,l_quantity,s_name | partsupp,lineitem,supplier
-tpch_3|FIVM|tpch_unordered10||supplier,partsupp:Q3 | CustomHash800000, 1000, 2 | 8239 | 1522 | 8000000 | suppkey,s_name,partkey,ps_availqty,ps_supplycost | supplier,partsupp
-tpch_3|FIVM|tpch_unordered10||supplier,partsupp:Q3 | CustomHash800000, 1000, 2 | 8223 | 1539 | 8000000 | suppkey,s_name,partkey,ps_availqty,ps_supplycost | supplier,partsupp
-tpch_3|FIVM|tpch_unordered10||supplier,partsupp:Q3 | CustomHash800000, 1000, 2 | 8323 | 1540 | 8000000 | suppkey,s_name,partkey,ps_availqty,ps_supplycost | supplier,partsupp
-tpch_3|FIVM|tpch_unordered10||supplier,partsupp:Q3 | CustomHash800000, 1000, 2 | 8309 | 1555 | 8000000 | suppkey,s_name,partkey,ps_availqty,ps_supplycost | supplier,partsupp
-tpch_3|FIVM|tpch_unordered10||supplier,partsupp:Q3 | CustomHash800000, 1000, 2 | 8369 | 1534 | 8000000 | suppkey,s_name,partkey,ps_availqty,ps_supplycost | supplier,partsupp
-tpch_3|FIVM|tpch_unordered1||lineitem,partsupp,supplier,part:Q1a | CustomHash800000, 1000, 2 | 10686 | 1989 | 5579862 | partkey,suppkey,l_quantity,ps_availqty,s_name,p_name | lineitem,partsupp,supplier,part
-tpch_3|FIVM|tpch_unordered1||lineitem,partsupp,supplier,part:Q1a | CustomHash800000, 1000, 2 | 10878 | 2008 | 5579862 | partkey,suppkey,l_quantity,ps_availqty,s_name,p_name | lineitem,partsupp,supplier,part
-tpch_3|FIVM|tpch_unordered1||lineitem,partsupp,supplier,part:Q1a | CustomHash800000, 1000, 2 | 11227 | 2059 | 5579862 | partkey,suppkey,l_quantity,ps_availqty,s_name,p_name | lineitem,partsupp,supplier,part
-tpch_3|FIVM|tpch_unordered1||lineitem,partsupp,supplier,part:Q1a | CustomHash800000, 1000, 2 | 11788 | 2063 | 5579862 | partkey,suppkey,l_quantity,ps_availqty,s_name,p_name | lineitem,partsupp,supplier,part
-tpch_3|FIVM|tpch_unordered1||lineitem,partsupp,supplier,part:Q1a | CustomHash800000, 1000, 2 | 11897 | 2036 | 5579862 | partkey,suppkey,l_quantity,ps_availqty,s_name,p_name | lineitem,partsupp,supplier,part
-tpch_3|FIVM|tpch_unordered1||lineitem,partsupp,supplier:Q1b | CustomHash800000, 1000, 2 | 8553 | 1699 | 5579862 | suppkey,partkey,l_quantity,ps_availqty,ps_supplycost,s_name | lineitem,partsupp,supplier
-tpch_3|FIVM|tpch_unordered1||lineitem,partsupp,supplier:Q1b | CustomHash800000, 1000, 2 | 8989 | 1718 | 5579862 | suppkey,partkey,l_quantity,ps_availqty,ps_supplycost,s_name | lineitem,partsupp,supplier
-tpch_3|FIVM|tpch_unordered1||lineitem,partsupp,supplier:Q1b | CustomHash800000, 1000, 2 | 9024 | 1748 | 5579862 | suppkey,partkey,l_quantity,ps_availqty,ps_supplycost,s_name | lineitem,partsupp,supplier
-tpch_3|FIVM|tpch_unordered1||lineitem,partsupp,supplier:Q1b | CustomHash800000, 1000, 2 | 9007 | 1741 | 5579862 | suppkey,partkey,l_quantity,ps_availqty,ps_supplycost,s_name | lineitem,partsupp,supplier
-tpch_3|FIVM|tpch_unordered1||lineitem,partsupp,supplier:Q1b | CustomHash800000, 1000, 2 | 8745 | 1770 | 5579862 | suppkey,partkey,l_quantity,ps_availqty,ps_supplycost,s_name | lineitem,partsupp,supplier
-tpch_3|FIVM|tpch_unordered1||partsupp,lineitem,supplier:Q2 | CustomHash800000, 1000, 2 | 9694 | 1714 | 5579862 | suppkey,partkey,ps_availqty,ps_supplycost,l_quantity,s_name | partsupp,lineitem,supplier
-tpch_3|FIVM|tpch_unordered1||partsupp,lineitem,supplier:Q2 | CustomHash800000, 1000, 2 | 9833 | 1757 | 5579862 | suppkey,partkey,ps_availqty,ps_supplycost,l_quantity,s_name | partsupp,lineitem,supplier
-tpch_3|FIVM|tpch_unordered1||partsupp,lineitem,supplier:Q2 | CustomHash800000, 1000, 2 | 9902 | 1790 | 5579862 | suppkey,partkey,ps_availqty,ps_supplycost,l_quantity,s_name | partsupp,lineitem,supplier
-tpch_3|FIVM|tpch_unordered1||partsupp,lineitem,supplier:Q2 | CustomHash800000, 1000, 2 | 9809 | 1781 | 5579862 | suppkey,partkey,ps_availqty,ps_supplycost,l_quantity,s_name | partsupp,lineitem,supplier
-tpch_3|FIVM|tpch_unordered1||partsupp,lineitem,supplier:Q2 | CustomHash800000, 1000, 2 | 9889 | 1779 | 5579862 | suppkey,partkey,ps_availqty,ps_supplycost,l_quantity,s_name | partsupp,lineitem,supplier
-tpch_3|FIVM|tpch_unordered1||supplier,partsupp:Q3 | CustomHash800000, 1000, 2 | 480 | 125 | 800000 | suppkey,s_name,partkey,ps_availqty,ps_supplycost | supplier,partsupp
-tpch_3|FIVM|tpch_unordered1||supplier,partsupp:Q3 | CustomHash800000, 1000, 2 | 468 | 127 | 800000 | suppkey,s_name,partkey,ps_availqty,ps_supplycost | supplier,partsupp
-tpch_3|FIVM|tpch_unordered1||supplier,partsupp:Q3 | CustomHash800000, 1000, 2 | 457 | 126 | 800000 | suppkey,s_name,partkey,ps_availqty,ps_supplycost | supplier,partsupp
-tpch_3|FIVM|tpch_unordered1||supplier,partsupp:Q3 | CustomHash800000, 1000, 2 | 465 | 126 | 800000 | suppkey,s_name,partkey,ps_availqty,ps_supplycost | supplier,partsupp
-tpch_3|FIVM|tpch_unordered10||lineitem,partsupp,supplier,part:Q1a | CustomHash800000, 1000, 2 | 125680 | 24704 | 56367668 | partkey,suppkey,l_quantity,ps_availqty,s_name,p_name | lineitem,partsupp,supplier,part
-tpch_3|FIVM|tpch_unordered10||lineitem,partsupp,supplier,part:Q1a | CustomHash800000, 1000, 2 | 125059 | 24893 | 56367668 | partkey,suppkey,l_quantity,ps_availqty,s_name,p_name | lineitem,partsupp,supplier,part
-tpch_3|FIVM|tpch_unordered10||lineitem,partsupp,supplier,part:Q1a | CustomHash800000, 1000, 2 | 125360 | 24645 | 56367668 | partkey,suppkey,l_quantity,ps_availqty,s_name,p_name | lineitem,partsupp,supplier,part
-tpch_3|FIVM|tpch_unordered10||lineitem,partsupp,supplier,part:Q1a | CustomHash800000, 1000, 2 | 160042 | 26476 | 56367668 | partkey,suppkey,l_quantity,ps_availqty,s_name,p_name | lineitem,partsupp,supplier,part
-tpch_3|FIVM|tpch_unordered10||lineitem,partsupp,supplier,part:Q1a | CustomHash800000, 1000, 2 | 163718 | 27185 | 56367668 | partkey,suppkey,l_quantity,ps_availqty,s_name,p_name | lineitem,partsupp,supplier,part
-tpch_3|FIVM|tpch_unordered10||lineitem,partsupp,supplier,part:Q1a | CustomHash800000, 1000, 2 | 161458 | 26866 | 56367668 | partkey,suppkey,l_quantity,ps_availqty,s_name,p_name | lineitem,partsupp,supplier,part
-tpch_3|FIVM|tpch_unordered10||lineitem,partsupp,supplier,part:Q1a | CustomHash800000, 1000, 2 | 160288 | 26834 | 56367668 | partkey,suppkey,l_quantity,ps_availqty,s_name,p_name | lineitem,partsupp,supplier,part
-tpch_3|FIVM|tpch_unordered10||lineitem,partsupp,supplier,part:Q1a | CustomHash800000, 1000, 2 | 161063 | 26893 | 56367668 | partkey,suppkey,l_quantity,ps_availqty,s_name,p_name | lineitem,partsupp,supplier,part
-tpch_3|FIVM|tpch_unordered10||lineitem,partsupp,supplier,part:Q1a | CustomHash800000, 1000, 2 | 160092 | 26593 | 56367668 | partkey,suppkey,l_quantity,ps_availqty,s_name,p_name | lineitem,partsupp,supplier,part
-tpch_3|FIVM|tpch_unordered10||lineitem,partsupp,supplier,part:Q1a | CustomHash800000, 1000, 2 | 157438 | 26792 | 56367668 | partkey,suppkey,l_quantity,ps_availqty,s_name,p_name | lineitem,partsupp,supplier,part
-tpch_3|FIVM|tpch_unordered10||lineitem,partsupp,supplier:Q1b | CustomHash800000, 1000, 2 | 114199 | 22157 | 56367668 | suppkey,partkey,l_quantity,ps_availqty,ps_supplycost,s_name | lineitem,partsupp,supplier
-tpch_3|FIVM|tpch_unordered10||lineitem,partsupp,supplier:Q1b | CustomHash800000, 1000, 2 | 136888 | 23443 | 56367668 | suppkey,partkey,l_quantity,ps_availqty,ps_supplycost,s_name | lineitem,partsupp,supplier
-tpch_3|FIVM|tpch_unordered10||lineitem,partsupp,supplier:Q1b | CustomHash800000, 1000, 2 | 140185 | 23703 | 56367668 | suppkey,partkey,l_quantity,ps_availqty,ps_supplycost,s_name | lineitem,partsupp,supplier
-tpch_3|FIVM|tpch_unordered10||lineitem,partsupp,supplier:Q1b | CustomHash800000, 1000, 2 | 138036 | 23480 | 56367668 | suppkey,partkey,l_quantity,ps_availqty,ps_supplycost,s_name | lineitem,partsupp,supplier
-tpch_3|FIVM|tpch_unordered10||lineitem,partsupp,supplier:Q1b | CustomHash800000, 1000, 2 | 137859 | 23786 | 56367668 | suppkey,partkey,l_quantity,ps_availqty,ps_supplycost,s_name | lineitem,partsupp,supplier
-tpch_3|FIVM|tpch_unordered10||lineitem,partsupp,supplier:Q1b | CustomHash800000, 1000, 2 | 140303 | 23772 | 56367668 | suppkey,partkey,l_quantity,ps_availqty,ps_supplycost,s_name | lineitem,partsupp,supplier
-tpch_3|FIVM|tpch_unordered10||lineitem,partsupp,supplier:Q1b | CustomHash800000, 1000, 2 | 139542 | 23766 | 56367668 | suppkey,partkey,l_quantity,ps_availqty,ps_supplycost,s_name | lineitem,partsupp,supplier
-tpch_3|FIVM|tpch_unordered10||lineitem,partsupp,supplier:Q1b | CustomHash800000, 1000, 2 | 139603 | 23519 | 56367668 | suppkey,partkey,l_quantity,ps_availqty,ps_supplycost,s_name | lineitem,partsupp,supplier
-tpch_3|FIVM|tpch_unordered10||lineitem,partsupp,supplier:Q1b | CustomHash800000, 1000, 2 | 130265 | 23456 | 56367668 | suppkey,partkey,l_quantity,ps_availqty,ps_supplycost,s_name | lineitem,partsupp,supplier
-tpch_3|FIVM|tpch_unordered10||lineitem,partsupp,supplier:Q1b | CustomHash800000, 1000, 2 | 139423 | 23666 | 56367668 | suppkey,partkey,l_quantity,ps_availqty,ps_supplycost,s_name | lineitem,partsupp,supplier
-tpch_3|FIVM|tpch_unordered10||partsupp,lineitem,supplier:Q2 | CustomHash800000, 1000, 2 | 130271 | 21899 | 56367668 | suppkey,partkey,ps_availqty,ps_supplycost,l_quantity,s_name | partsupp,lineitem,supplier
-tpch_3|FIVM|tpch_unordered10||partsupp,lineitem,supplier:Q2 | CustomHash800000, 1000, 2 | 145879 | 22936 | 56367668 | suppkey,partkey,ps_availqty,ps_supplycost,l_quantity,s_name | partsupp,lineitem,supplier
-tpch_3|FIVM|tpch_unordered10||partsupp,lineitem,supplier:Q2 | CustomHash800000, 1000, 2 | 147822 | 23437 | 56367668 | suppkey,partkey,ps_availqty,ps_supplycost,l_quantity,s_name | partsupp,lineitem,supplier
-tpch_3|FIVM|tpch_unordered10||partsupp,lineitem,supplier:Q2 | CustomHash800000, 1000, 2 | 144136 | 22911 | 56367668 | suppkey,partkey,ps_availqty,ps_supplycost,l_quantity,s_name | partsupp,lineitem,supplier
-tpch_3|FIVM|tpch_unordered10||partsupp,lineitem,supplier:Q2 | CustomHash800000, 1000, 2 | 145337 | 23181 | 56367668 | suppkey,partkey,ps_availqty,ps_supplycost,l_quantity,s_name | partsupp,lineitem,supplier
-tpch_3|FIVM|tpch_unordered10||partsupp,lineitem,supplier:Q2 | CustomHash800000, 1000, 2 | 142699 | 23204 | 56367668 | suppkey,partkey,ps_availqty,ps_supplycost,l_quantity,s_name | partsupp,lineitem,supplier
-tpch_3|FIVM|tpch_unordered10||partsupp,lineitem,supplier:Q2 | CustomHash800000, 1000, 2 | 143024 | 23200 | 56367668 | suppkey,partkey,ps_availqty,ps_supplycost,l_quantity,s_name | partsupp,lineitem,supplier
-tpch_3|FIVM|tpch_unordered10||partsupp,lineitem,supplier:Q2 | CustomHash800000, 1000, 2 | 144179 | 23229 | 56367668 | suppkey,partkey,ps_availqty,ps_supplycost,l_quantity,s_name | partsupp,lineitem,supplier
-tpch_3|FIVM|tpch_unordered10||partsupp,lineitem,supplier:Q2 | CustomHash800000, 1000, 2 | 143808 | 23041 | 56367668 | suppkey,partkey,ps_availqty,ps_supplycost,l_quantity,s_name | partsupp,lineitem,supplier
-tpch_3|FIVM|tpch_unordered10||partsupp,lineitem,supplier:Q2 | CustomHash800000, 1000, 2 | 143631 | 23121 | 56367668 | suppkey,partkey,ps_availqty,ps_supplycost,l_quantity,s_name | partsupp,lineitem,supplier
-tpch_3|FIVM|tpch_unordered1||lineitem,partsupp,supplier,part:Q1a | CustomHash800000, 1000, 2 | 10507 | 1984 | 5579862 | partkey,suppkey,l_quantity,ps_availqty,s_name,p_name | lineitem,partsupp,supplier,part
-tpch_3|FIVM|tpch_unordered1||lineitem,partsupp,supplier,part:Q1a | CustomHash800000, 1000, 2 | 10827 | 2009 | 5579862 | partkey,suppkey,l_quantity,ps_availqty,s_name,p_name | lineitem,partsupp,supplier,part
-tpch_3|FIVM|tpch_unordered1||lineitem,partsupp,supplier,part:Q1a | CustomHash800000, 1000, 2 | 11063 | 2036 | 5579862 | partkey,suppkey,l_quantity,ps_availqty,s_name,p_name | lineitem,partsupp,supplier,part
-tpch_3|FIVM|tpch_unordered1||lineitem,partsupp,supplier,part:Q1a | CustomHash800000, 1000, 2 | 11809 | 2045 | 5579862 | partkey,suppkey,l_quantity,ps_availqty,s_name,p_name | lineitem,partsupp,supplier,part
-tpch_3|FIVM|tpch_unordered1||lineitem,partsupp,supplier,part:Q1a | CustomHash800000, 1000, 2 | 11901 | 2040 | 5579862 | partkey,suppkey,l_quantity,ps_availqty,s_name,p_name | lineitem,partsupp,supplier,part
-tpch_3|FIVM|tpch_unordered1||lineitem,partsupp,supplier,part:Q1a | CustomHash800000, 1000, 2 | 12036 | 2025 | 5579862 | partkey,suppkey,l_quantity,ps_availqty,s_name,p_name | lineitem,partsupp,supplier,part
-tpch_3|FIVM|tpch_unordered1||lineitem,partsupp,supplier,part:Q1a | CustomHash800000, 1000, 2 | 11817 | 2038 | 5579862 | partkey,suppkey,l_quantity,ps_availqty,s_name,p_name | lineitem,partsupp,supplier,part
-tpch_3|FIVM|tpch_unordered1||lineitem,partsupp,supplier,part:Q1a | CustomHash800000, 1000, 2 | 11701 | 2027 | 5579862 | partkey,suppkey,l_quantity,ps_availqty,s_name,p_name | lineitem,partsupp,supplier,part
-tpch_3|FIVM|tpch_unordered1||lineitem,partsupp,supplier,part:Q1a | CustomHash800000, 1000, 2 | 11824 | 2029 | 5579862 | partkey,suppkey,l_quantity,ps_availqty,s_name,p_name | lineitem,partsupp,supplier,part
-tpch_3|FIVM|tpch_unordered1||lineitem,partsupp,supplier,part:Q1a | CustomHash800000, 1000, 2 | 11965 | 2028 | 5579862 | partkey,suppkey,l_quantity,ps_availqty,s_name,p_name | lineitem,partsupp,supplier,part
-tpch_3|FIVM|tpch_unordered1||lineitem,partsupp,supplier:Q1b | CustomHash800000, 1000, 2 | 8461 | 1689 | 5579862 | suppkey,partkey,l_quantity,ps_availqty,ps_supplycost,s_name | lineitem,partsupp,supplier
-tpch_3|FIVM|tpch_unordered1||lineitem,partsupp,supplier:Q1b | CustomHash800000, 1000, 2 | 9045 | 1712 | 5579862 | suppkey,partkey,l_quantity,ps_availqty,ps_supplycost,s_name | lineitem,partsupp,supplier
-tpch_3|FIVM|tpch_unordered1||lineitem,partsupp,supplier:Q1b | CustomHash800000, 1000, 2 | 9036 | 1763 | 5579862 | suppkey,partkey,l_quantity,ps_availqty,ps_supplycost,s_name | lineitem,partsupp,supplier
-tpch_3|FIVM|tpch_unordered1||lineitem,partsupp,supplier:Q1b | CustomHash800000, 1000, 2 | 8943 | 1737 | 5579862 | suppkey,partkey,l_quantity,ps_availqty,ps_supplycost,s_name | lineitem,partsupp,supplier
-tpch_3|FIVM|tpch_unordered1||lineitem,partsupp,supplier:Q1b | CustomHash800000, 1000, 2 | 8733 | 1765 | 5579862 | suppkey,partkey,l_quantity,ps_availqty,ps_supplycost,s_name | lineitem,partsupp,supplier
-tpch_3|FIVM|tpch_unordered1||lineitem,partsupp,supplier:Q1b | CustomHash800000, 1000, 2 | 9007 | 1745 | 5579862 | suppkey,partkey,l_quantity,ps_availqty,ps_supplycost,s_name | lineitem,partsupp,supplier
-tpch_3|FIVM|tpch_unordered1||lineitem,partsupp,supplier:Q1b | CustomHash800000, 1000, 2 | 9179 | 1753 | 5579862 | suppkey,partkey,l_quantity,ps_availqty,ps_supplycost,s_name | lineitem,partsupp,supplier
-tpch_3|FIVM|tpch_unordered1||lineitem,partsupp,supplier:Q1b | CustomHash800000, 1000, 2 | 8969 | 1760 | 5579862 | suppkey,partkey,l_quantity,ps_availqty,ps_supplycost,s_name | lineitem,partsupp,supplier
-tpch_3|FIVM|tpch_unordered1||lineitem,partsupp,supplier:Q1b | CustomHash800000, 1000, 2 | 9200 | 1743 | 5579862 | suppkey,partkey,l_quantity,ps_availqty,ps_supplycost,s_name | lineitem,partsupp,supplier
-tpch_3|FIVM|tpch_unordered1||lineitem,partsupp,supplier:Q1b | CustomHash800000, 1000, 2 | 8971 | 1753 | 5579862 | suppkey,partkey,l_quantity,ps_availqty,ps_supplycost,s_name | lineitem,partsupp,supplier
-tpch_3|FIVM|tpch_unordered1||partsupp,lineitem,supplier:Q2 | CustomHash800000, 1000, 2 | 9680 | 1725 | 5579862 | suppkey,partkey,ps_availqty,ps_supplycost,l_quantity,s_name | partsupp,lineitem,supplier
-tpch_3|FIVM|tpch_unordered1||partsupp,lineitem,supplier:Q2 | CustomHash800000, 1000, 2 | 9849 | 1762 | 5579862 | suppkey,partkey,ps_availqty,ps_supplycost,l_quantity,s_name | partsupp,lineitem,supplier
-tpch_3|FIVM|tpch_unordered1||partsupp,lineitem,supplier:Q2 | CustomHash800000, 1000, 2 | 9894 | 1802 | 5579862 | suppkey,partkey,ps_availqty,ps_supplycost,l_quantity,s_name | partsupp,lineitem,supplier
-tpch_3|FIVM|tpch_unordered1||partsupp,lineitem,supplier:Q2 | CustomHash800000, 1000, 2 | 9793 | 1798 | 5579862 | suppkey,partkey,ps_availqty,ps_supplycost,l_quantity,s_name | partsupp,lineitem,supplier
-tpch_3|FIVM|tpch_unordered1||partsupp,lineitem,supplier:Q2 | CustomHash800000, 1000, 2 | 9851 | 1781 | 5579862 | suppkey,partkey,ps_availqty,ps_supplycost,l_quantity,s_name | partsupp,lineitem,supplier
-tpch_3|FIVM|tpch_unordered1||partsupp,lineitem,supplier:Q2 | CustomHash800000, 1000, 2 | 9842 | 1761 | 5579862 | suppkey,partkey,ps_availqty,ps_supplycost,l_quantity,s_name | partsupp,lineitem,supplier
-tpch_3|FIVM|tpch_unordered1||partsupp,lineitem,supplier:Q2 | CustomHash800000, 1000, 2 | 9763 | 1790 | 5579862 | suppkey,partkey,ps_availqty,ps_supplycost,l_quantity,s_name | partsupp,lineitem,supplier
-tpch_3|FIVM|tpch_unordered1||partsupp,lineitem,supplier:Q2 | CustomHash800000, 1000, 2 | 9856 | 1799 | 5579862 | suppkey,partkey,ps_availqty,ps_supplycost,l_quantity,s_name | partsupp,lineitem,supplier
-tpch_3|FIVM|tpch_unordered1||partsupp,lineitem,supplier:Q2 | CustomHash800000, 1000, 2 | 9829 | 1807 | 5579862 | suppkey,partkey,ps_availqty,ps_supplycost,l_quantity,s_name | partsupp,lineitem,supplier
-tpch_3|FIVM|tpch_unordered1||partsupp,lineitem,supplier:Q2 | CustomHash800000, 1000, 2 | 9879 | 1803 | 5579862 | suppkey,partkey,ps_availqty,ps_supplycost,l_quantity,s_name | partsupp,lineitem,supplier
-tpch_3|FIVM|tpch_unordered1||supplier,partsupp:Q3 | CustomHash800000, 1000, 2 | 457 | 126 | 800000 | suppkey,s_name,partkey,ps_availqty,ps_supplycost | supplier,partsupp
+tpch_3|FIVM|tpch_unordered10||lineitem,partsupp,supplier,part:Q1a | CustomHash800000, 1000, 2 | 123963 | 24753 | 56367668 | partkey,suppkey,l_quantity,ps_availqty,s_name,p_name | lineitem,partsupp,supplier,part| 1000
+tpch_3|FIVM|tpch_unordered10||lineitem,partsupp,supplier,part:Q1a | CustomHash800000, 1000, 2 | 159427 | 26299 | 56367668 | partkey,suppkey,l_quantity,ps_availqty,s_name,p_name | lineitem,partsupp,supplier,part| 1000
+tpch_3|FIVM|tpch_unordered10||lineitem,partsupp,supplier,part:Q1a | CustomHash800000, 1000, 2 | 162904 | 27145 | 56367668 | partkey,suppkey,l_quantity,ps_availqty,s_name,p_name | lineitem,partsupp,supplier,part| 1000
+tpch_3|FIVM|tpch_unordered10||lineitem,partsupp,supplier,part:Q1a | CustomHash800000, 1000, 2 | 161405 | 26969 | 56367668 | partkey,suppkey,l_quantity,ps_availqty,s_name,p_name | lineitem,partsupp,supplier,part| 1000
+tpch_3|FIVM|tpch_unordered10||lineitem,partsupp,supplier,part:Q1a | CustomHash800000, 1000, 2 | 159845 | 26870 | 56367668 | partkey,suppkey,l_quantity,ps_availqty,s_name,p_name | lineitem,partsupp,supplier,part| 1000
+tpch_3|FIVM|tpch_unordered10||partsupp,lineitem,part,supplier:Q1b | CustomHash800000, 1000, 2 | 134929 | 34371 | 56367668 | suppkey,partkey,ps_availqty,l_quantity,p_name,s_name | partsupp,lineitem,part,supplier| 1000
+tpch_3|FIVM|tpch_unordered10||partsupp,lineitem,part,supplier:Q1b | CustomHash800000, 1000, 2 | 149092 | 36083 | 56367668 | suppkey,partkey,ps_availqty,l_quantity,p_name,s_name | partsupp,lineitem,part,supplier| 1000
+tpch_3|FIVM|tpch_unordered10||partsupp,lineitem,part,supplier:Q1b | CustomHash800000, 1000, 2 | 150787 | 37046 | 56367668 | suppkey,partkey,ps_availqty,l_quantity,p_name,s_name | partsupp,lineitem,part,supplier| 1000
+tpch_3|FIVM|tpch_unordered10||partsupp,lineitem,part,supplier:Q1b | CustomHash800000, 1000, 2 | 150588 | 36662 | 56367668 | suppkey,partkey,ps_availqty,l_quantity,p_name,s_name | partsupp,lineitem,part,supplier| 1000
+tpch_3|FIVM|tpch_unordered10||partsupp,lineitem,part,supplier:Q1b | CustomHash800000, 1000, 2 | 147091 | 37249 | 56367668 | suppkey,partkey,ps_availqty,l_quantity,p_name,s_name | partsupp,lineitem,part,supplier| 1000
+tpch_3|FIVM|tpch_unordered10||partsupp,lineitem,supplier:Q2 | CustomHash800000, 1000, 2 | 130345 | 21927 | 56367668 | suppkey,partkey,ps_availqty,ps_supplycost,l_quantity,s_name | partsupp,lineitem,supplier| 1000
+tpch_3|FIVM|tpch_unordered10||partsupp,lineitem,supplier:Q2 | CustomHash800000, 1000, 2 | 146206 | 23014 | 56367668 | suppkey,partkey,ps_availqty,ps_supplycost,l_quantity,s_name | partsupp,lineitem,supplier| 1000
+tpch_3|FIVM|tpch_unordered10||partsupp,lineitem,supplier:Q2 | CustomHash800000, 1000, 2 | 148082 | 23767 | 56367668 | suppkey,partkey,ps_availqty,ps_supplycost,l_quantity,s_name | partsupp,lineitem,supplier| 1000
+tpch_3|FIVM|tpch_unordered10||partsupp,lineitem,supplier:Q2 | CustomHash800000, 1000, 2 | 146715 | 23381 | 56367668 | suppkey,partkey,ps_availqty,ps_supplycost,l_quantity,s_name | partsupp,lineitem,supplier| 1000
+tpch_3|FIVM|tpch_unordered10||partsupp,lineitem,supplier:Q2 | CustomHash800000, 1000, 2 | 148115 | 23758 | 56367668 | suppkey,partkey,ps_availqty,ps_supplycost,l_quantity,s_name | partsupp,lineitem,supplier| 1000
+tpch_3|FIVM|tpch_unordered10||supplier,partsupp:Q3 | CustomHash800000, 1000, 2 | 8377 | 1525 | 8000000 | suppkey,s_name,partkey,ps_availqty,ps_supplycost | supplier,partsupp| 1000
+tpch_3|FIVM|tpch_unordered10||supplier,partsupp:Q3 | CustomHash800000, 1000, 2 | 8172 | 1542 | 8000000 | suppkey,s_name,partkey,ps_availqty,ps_supplycost | supplier,partsupp| 1000
+tpch_3|FIVM|tpch_unordered10||supplier,partsupp:Q3 | CustomHash800000, 1000, 2 | 8304 | 1535 | 8000000 | suppkey,s_name,partkey,ps_availqty,ps_supplycost | supplier,partsupp| 1000
+tpch_3|FIVM|tpch_unordered10||supplier,partsupp:Q3 | CustomHash800000, 1000, 2 | 8264 | 1536 | 8000000 | suppkey,s_name,partkey,ps_availqty,ps_supplycost | supplier,partsupp| 1000
+tpch_3|FIVM|tpch_unordered10||supplier,partsupp:Q3 | CustomHash800000, 1000, 2 | 8237 | 1532 | 8000000 | suppkey,s_name,partkey,ps_availqty,ps_supplycost | supplier,partsupp| 1000
+tpch_3|FIVM|tpch_unordered1||lineitem,partsupp,supplier,part:Q1a | CustomHash800000, 1000, 2 | 10383 | 1969 | 5579862 | partkey,suppkey,l_quantity,ps_availqty,s_name,p_name | lineitem,partsupp,supplier,part| 1000
+tpch_3|FIVM|tpch_unordered1||lineitem,partsupp,supplier,part:Q1a | CustomHash800000, 1000, 2 | 10808 | 2007 | 5579862 | partkey,suppkey,l_quantity,ps_availqty,s_name,p_name | lineitem,partsupp,supplier,part| 1000
+tpch_3|FIVM|tpch_unordered1||lineitem,partsupp,supplier,part:Q1a | CustomHash800000, 1000, 2 | 11301 | 2037 | 5579862 | partkey,suppkey,l_quantity,ps_availqty,s_name,p_name | lineitem,partsupp,supplier,part| 1000
+tpch_3|FIVM|tpch_unordered1||lineitem,partsupp,supplier,part:Q1a | CustomHash800000, 1000, 2 | 11728 | 2041 | 5579862 | partkey,suppkey,l_quantity,ps_availqty,s_name,p_name | lineitem,partsupp,supplier,part| 1000
+tpch_3|FIVM|tpch_unordered1||lineitem,partsupp,supplier,part:Q1a | CustomHash800000, 1000, 2 | 11798 | 2034 | 5579862 | partkey,suppkey,l_quantity,ps_availqty,s_name,p_name | lineitem,partsupp,supplier,part| 1000
+tpch_3|FIVM|tpch_unordered1||partsupp,lineitem,part,supplier:Q1b | CustomHash800000, 1000, 2 | 9747 | 2332 | 5579862 | suppkey,partkey,ps_availqty,l_quantity,p_name,s_name | partsupp,lineitem,part,supplier| 1000
+tpch_3|FIVM|tpch_unordered1||partsupp,lineitem,part,supplier:Q1b | CustomHash800000, 1000, 2 | 9835 | 2383 | 5579862 | suppkey,partkey,ps_availqty,l_quantity,p_name,s_name | partsupp,lineitem,part,supplier| 1000
+tpch_3|FIVM|tpch_unordered1||partsupp,lineitem,part,supplier:Q1b | CustomHash800000, 1000, 2 | 9968 | 2427 | 5579862 | suppkey,partkey,ps_availqty,l_quantity,p_name,s_name | partsupp,lineitem,part,supplier| 1000
+tpch_3|FIVM|tpch_unordered1||partsupp,lineitem,part,supplier:Q1b | CustomHash800000, 1000, 2 | 9834 | 2437 | 5579862 | suppkey,partkey,ps_availqty,l_quantity,p_name,s_name | partsupp,lineitem,part,supplier| 1000
+tpch_3|FIVM|tpch_unordered1||partsupp,lineitem,part,supplier:Q1b | CustomHash800000, 1000, 2 | 9944 | 2445 | 5579862 | suppkey,partkey,ps_availqty,l_quantity,p_name,s_name | partsupp,lineitem,part,supplier| 1000
+tpch_3|FIVM|tpch_unordered1||partsupp,lineitem,supplier:Q2 | CustomHash800000, 1000, 2 | 9617 | 1738 | 5579862 | suppkey,partkey,ps_availqty,ps_supplycost,l_quantity,s_name | partsupp,lineitem,supplier| 1000
+tpch_3|FIVM|tpch_unordered1||partsupp,lineitem,supplier:Q2 | CustomHash800000, 1000, 2 | 9830 | 1782 | 5579862 | suppkey,partkey,ps_availqty,ps_supplycost,l_quantity,s_name | partsupp,lineitem,supplier| 1000
+tpch_3|FIVM|tpch_unordered1||partsupp,lineitem,supplier:Q2 | CustomHash800000, 1000, 2 | 9863 | 1811 | 5579862 | suppkey,partkey,ps_availqty,ps_supplycost,l_quantity,s_name | partsupp,lineitem,supplier| 1000
+tpch_3|FIVM|tpch_unordered1||partsupp,lineitem,supplier:Q2 | CustomHash800000, 1000, 2 | 9790 | 1798 | 5579862 | suppkey,partkey,ps_availqty,ps_supplycost,l_quantity,s_name | partsupp,lineitem,supplier| 1000
+tpch_3|FIVM|tpch_unordered1||partsupp,lineitem,supplier:Q2 | CustomHash800000, 1000, 2 | 9846 | 1799 | 5579862 | suppkey,partkey,ps_availqty,ps_supplycost,l_quantity,s_name | partsupp,lineitem,supplier| 1000
+tpch_3|FIVM|tpch_unordered1||supplier,partsupp:Q3 | CustomHash800000, 1000, 2 | 472 | 126 | 800000 | suppkey,s_name,partkey,ps_availqty,ps_supplycost | supplier,partsupp| 1000
+tpch_3|FIVM|tpch_unordered1||supplier,partsupp:Q3 | CustomHash800000, 1000, 2 | 466 | 126 | 800000 | suppkey,s_name,partkey,ps_availqty,ps_supplycost | supplier,partsupp| 1000
+tpch_3|FIVM|tpch_unordered1||supplier,partsupp:Q3 | CustomHash800000, 1000, 2 | 454 | 127 | 800000 | suppkey,s_name,partkey,ps_availqty,ps_supplycost | supplier,partsupp| 1000
+tpch_3|FIVM|tpch_unordered1||supplier,partsupp:Q3 | CustomHash800000, 1000, 2 | 463 | 133 | 800000 | suppkey,s_name,partkey,ps_availqty,ps_supplycost | supplier,partsupp| 1000
+tpch_3|FIVM|tpch_unordered1||supplier,partsupp:Q3 | CustomHash800000, 1000, 2 | 453 | 127 | 800000 | suppkey,s_name,partkey,ps_availqty,ps_supplycost | supplier,partsupp| 1000
 tpch_4|FIVM|tpch_unordered10||lineitem,partsupp,supplier,customer,orders:Q1a | CustomHash1500000, 1000, 2 | 162890 | 86455 | 2398579 | orderkey,partkey,suppkey,nationkey,custkey | lineitem,partsupp,supplier,customer,orders
 tpch_4|FIVM|tpch_unordered10||lineitem,partsupp,supplier,customer,orders:Q1a | CustomHash1500000, 1000, 2 | 184834 | 94734 | 2398579 | orderkey,partkey,suppkey,nationkey,custkey | lineitem,partsupp,supplier,customer,orders
 tpch_4|FIVM|tpch_unordered10||lineitem,partsupp,supplier,customer,orders:Q1a | CustomHash1500000, 1000, 2 | 197201 | 96306 | 2398579 | orderkey,partkey,suppkey,nationkey,custkey | lineitem,partsupp,supplier,customer,orders
@@ -328,46 +268,6 @@ tpch_4|FIVM|tpch_unordered1||customer,orders:Q3 | CustomHash1500000, 1000, 2 | 1
 tpch_4|FIVM|tpch_unordered1||customer,orders:Q3 | CustomHash1500000, 1000, 2 | 1282 | 226 | 1500000 | custkey,nationkey,orderkey | customer,orders
 tpch_4|FIVM|tpch_unordered1||customer,orders:Q3 | CustomHash1500000, 1000, 2 | 1265 | 228 | 1500000 | custkey,nationkey,orderkey | customer,orders
 tpch_4|FIVM|tpch_unordered1||customer,orders:Q3 | CustomHash1500000, 1000, 2 | 1317 | 225 | 1500000 | custkey,nationkey,orderkey | customer,orders
-tpch_3|FIVM|tpch_unordered10||lineitem,partsupp,supplier,part:Q1a | CustomHash800000, 1000, 2 | 125114 | 24819 | 56367668 | partkey,suppkey,l_quantity,ps_availqty,s_name,p_name | lineitem,partsupp,supplier,part
-tpch_3|FIVM|tpch_unordered10||lineitem,partsupp,supplier,part:Q1a | CustomHash800000, 1000, 2 | 161000 | 26364 | 56367668 | partkey,suppkey,l_quantity,ps_availqty,s_name,p_name | lineitem,partsupp,supplier,part
-tpch_3|FIVM|tpch_unordered10||lineitem,partsupp,supplier,part:Q1a | CustomHash800000, 1000, 2 | 164079 | 27211 | 56367668 | partkey,suppkey,l_quantity,ps_availqty,s_name,p_name | lineitem,partsupp,supplier,part
-tpch_3|FIVM|tpch_unordered10||lineitem,partsupp,supplier,part:Q1a | CustomHash800000, 1000, 2 | 161540 | 26909 | 56367668 | partkey,suppkey,l_quantity,ps_availqty,s_name,p_name | lineitem,partsupp,supplier,part
-tpch_3|FIVM|tpch_unordered10||lineitem,partsupp,supplier,part:Q1a | CustomHash800000, 1000, 2 | 161820 | 26814 | 56367668 | partkey,suppkey,l_quantity,ps_availqty,s_name,p_name | lineitem,partsupp,supplier,part
-tpch_3|FIVM|tpch_unordered10||lineitem,partsupp,supplier:Q1b | CustomHash800000, 1000, 2 | 114377 | 22368 | 56367668 | suppkey,partkey,l_quantity,ps_availqty,ps_supplycost,s_name | lineitem,partsupp,supplier
-tpch_3|FIVM|tpch_unordered10||lineitem,partsupp,supplier:Q1b | CustomHash800000, 1000, 2 | 137324 | 23825 | 56367668 | suppkey,partkey,l_quantity,ps_availqty,ps_supplycost,s_name | lineitem,partsupp,supplier
-tpch_3|FIVM|tpch_unordered10||lineitem,partsupp,supplier:Q1b | CustomHash800000, 1000, 2 | 140077 | 24290 | 56367668 | suppkey,partkey,l_quantity,ps_availqty,ps_supplycost,s_name | lineitem,partsupp,supplier
-tpch_3|FIVM|tpch_unordered10||lineitem,partsupp,supplier:Q1b | CustomHash800000, 1000, 2 | 139815 | 23615 | 56367668 | suppkey,partkey,l_quantity,ps_availqty,ps_supplycost,s_name | lineitem,partsupp,supplier
-tpch_3|FIVM|tpch_unordered10||lineitem,partsupp,supplier:Q1b | CustomHash800000, 1000, 2 | 137950 | 24230 | 56367668 | suppkey,partkey,l_quantity,ps_availqty,ps_supplycost,s_name | lineitem,partsupp,supplier
-tpch_3|FIVM|tpch_unordered10||partsupp,lineitem,supplier:Q2 | CustomHash800000, 1000, 2 | 130279 | 21918 | 56367668 | suppkey,partkey,ps_availqty,ps_supplycost,l_quantity,s_name | partsupp,lineitem,supplier
-tpch_3|FIVM|tpch_unordered10||partsupp,lineitem,supplier:Q2 | CustomHash800000, 1000, 2 | 144848 | 22854 | 56367668 | suppkey,partkey,ps_availqty,ps_supplycost,l_quantity,s_name | partsupp,lineitem,supplier
-tpch_3|FIVM|tpch_unordered10||partsupp,lineitem,supplier:Q2 | CustomHash800000, 1000, 2 | 147292 | 23531 | 56367668 | suppkey,partkey,ps_availqty,ps_supplycost,l_quantity,s_name | partsupp,lineitem,supplier
-tpch_3|FIVM|tpch_unordered10||partsupp,lineitem,supplier:Q2 | CustomHash800000, 1000, 2 | 145302 | 22961 | 56367668 | suppkey,partkey,ps_availqty,ps_supplycost,l_quantity,s_name | partsupp,lineitem,supplier
-tpch_3|FIVM|tpch_unordered10||partsupp,lineitem,supplier:Q2 | CustomHash800000, 1000, 2 | 145593 | 23399 | 56367668 | suppkey,partkey,ps_availqty,ps_supplycost,l_quantity,s_name | partsupp,lineitem,supplier
-tpch_3|FIVM|tpch_unordered10||supplier,partsupp:Q3 | CustomHash800000, 1000, 2 | 8470 | 1522 | 8000000 | suppkey,s_name,partkey,ps_availqty,ps_supplycost | supplier,partsupp
-tpch_3|FIVM|tpch_unordered10||supplier,partsupp:Q3 | CustomHash800000, 1000, 2 | 8268 | 1541 | 8000000 | suppkey,s_name,partkey,ps_availqty,ps_supplycost | supplier,partsupp
-tpch_3|FIVM|tpch_unordered10||supplier,partsupp:Q3 | CustomHash800000, 1000, 2 | 8308 | 1536 | 8000000 | suppkey,s_name,partkey,ps_availqty,ps_supplycost | supplier,partsupp
-tpch_3|FIVM|tpch_unordered10||supplier,partsupp:Q3 | CustomHash800000, 1000, 2 | 8282 | 1540 | 8000000 | suppkey,s_name,partkey,ps_availqty,ps_supplycost | supplier,partsupp
-tpch_3|FIVM|tpch_unordered10||supplier,partsupp:Q3 | CustomHash800000, 1000, 2 | 8279 | 1537 | 8000000 | suppkey,s_name,partkey,ps_availqty,ps_supplycost | supplier,partsupp
-tpch_3|FIVM|tpch_unordered1||lineitem,partsupp,supplier,part:Q1a | CustomHash800000, 1000, 2 | 10398 | 1983 | 5579862 | partkey,suppkey,l_quantity,ps_availqty,s_name,p_name | lineitem,partsupp,supplier,part
-tpch_3|FIVM|tpch_unordered1||lineitem,partsupp,supplier,part:Q1a | CustomHash800000, 1000, 2 | 10823 | 2000 | 5579862 | partkey,suppkey,l_quantity,ps_availqty,s_name,p_name | lineitem,partsupp,supplier,part
-tpch_3|FIVM|tpch_unordered1||lineitem,partsupp,supplier,part:Q1a | CustomHash800000, 1000, 2 | 11327 | 2040 | 5579862 | partkey,suppkey,l_quantity,ps_availqty,s_name,p_name | lineitem,partsupp,supplier,part
-tpch_3|FIVM|tpch_unordered1||lineitem,partsupp,supplier,part:Q1a | CustomHash800000, 1000, 2 | 11694 | 2034 | 5579862 | partkey,suppkey,l_quantity,ps_availqty,s_name,p_name | lineitem,partsupp,supplier,part
-tpch_3|FIVM|tpch_unordered1||lineitem,partsupp,supplier,part:Q1a | CustomHash800000, 1000, 2 | 11890 | 2032 | 5579862 | partkey,suppkey,l_quantity,ps_availqty,s_name,p_name | lineitem,partsupp,supplier,part
-tpch_3|FIVM|tpch_unordered1||lineitem,partsupp,supplier:Q1b | CustomHash800000, 1000, 2 | 8537 | 1691 | 5579862 | suppkey,partkey,l_quantity,ps_availqty,ps_supplycost,s_name | lineitem,partsupp,supplier
-tpch_3|FIVM|tpch_unordered1||lineitem,partsupp,supplier:Q1b | CustomHash800000, 1000, 2 | 8964 | 1724 | 5579862 | suppkey,partkey,l_quantity,ps_availqty,ps_supplycost,s_name | lineitem,partsupp,supplier
-tpch_3|FIVM|tpch_unordered1||lineitem,partsupp,supplier:Q1b | CustomHash800000, 1000, 2 | 9016 | 1745 | 5579862 | suppkey,partkey,l_quantity,ps_availqty,ps_supplycost,s_name | lineitem,partsupp,supplier
-tpch_3|FIVM|tpch_unordered1||lineitem,partsupp,supplier:Q1b | CustomHash800000, 1000, 2 | 9034 | 1763 | 5579862 | suppkey,partkey,l_quantity,ps_availqty,ps_supplycost,s_name | lineitem,partsupp,supplier
-tpch_3|FIVM|tpch_unordered1||lineitem,partsupp,supplier:Q1b | CustomHash800000, 1000, 2 | 8726 | 1762 | 5579862 | suppkey,partkey,l_quantity,ps_availqty,ps_supplycost,s_name | lineitem,partsupp,supplier
-tpch_3|FIVM|tpch_unordered1||partsupp,lineitem,supplier:Q2 | CustomHash800000, 1000, 2 | 9634 | 1714 | 5579862 | suppkey,partkey,ps_availqty,ps_supplycost,l_quantity,s_name | partsupp,lineitem,supplier
-tpch_3|FIVM|tpch_unordered1||partsupp,lineitem,supplier:Q2 | CustomHash800000, 1000, 2 | 9784 | 1756 | 5579862 | suppkey,partkey,ps_availqty,ps_supplycost,l_quantity,s_name | partsupp,lineitem,supplier
-tpch_3|FIVM|tpch_unordered1||partsupp,lineitem,supplier:Q2 | CustomHash800000, 1000, 2 | 9841 | 1782 | 5579862 | suppkey,partkey,ps_availqty,ps_supplycost,l_quantity,s_name | partsupp,lineitem,supplier
-tpch_3|FIVM|tpch_unordered1||partsupp,lineitem,supplier:Q2 | CustomHash800000, 1000, 2 | 9757 | 1775 | 5579862 | suppkey,partkey,ps_availqty,ps_supplycost,l_quantity,s_name | partsupp,lineitem,supplier
-tpch_3|FIVM|tpch_unordered1||partsupp,lineitem,supplier:Q2 | CustomHash800000, 1000, 2 | 9868 | 1767 | 5579862 | suppkey,partkey,ps_availqty,ps_supplycost,l_quantity,s_name | partsupp,lineitem,supplier
-tpch_3|FIVM|tpch_unordered1||supplier,partsupp:Q3 | CustomHash800000, 1000, 2 | 473 | 126 | 800000 | suppkey,s_name,partkey,ps_availqty,ps_supplycost | supplier,partsupp
-tpch_3|FIVM|tpch_unordered1||supplier,partsupp:Q3 | CustomHash800000, 1000, 2 | 463 | 127 | 800000 | suppkey,s_name,partkey,ps_availqty,ps_supplycost | supplier,partsupp
-tpch_3|FIVM|tpch_unordered1||supplier,partsupp:Q3 | CustomHash800000, 1000, 2 | 455 | 126 | 800000 | suppkey,s_name,partkey,ps_availqty,ps_supplycost | supplier,partsupp
-tpch_3|FIVM|tpch_unordered1||supplier,partsupp:Q3 | CustomHash800000, 1000, 2 | 464 | 126 | 800000 | suppkey,s_name,partkey,ps_availqty,ps_supplycost | supplier,partsupp
-tpch_3|FIVM|tpch_unordered1||supplier,partsupp:Q3 | CustomHash800000, 1000, 2 | 455 | 126 | 800000 | suppkey,s_name,partkey,ps_availqty,ps_supplycost | supplier,partsupp
 tpch_4|FIVM|tpch_unordered10||lineitem,partsupp,supplier,customer,orders:Q1a | CustomHash1500000, 1000, 2 | 179329 | 105817 | 2398579 | orderkey,partkey,suppkey,nationkey,custkey | lineitem,partsupp,supplier,customer,orders
 tpch_4|FIVM|tpch_unordered10||lineitem,partsupp,supplier,customer,orders:Q1a | CustomHash1500000, 1000, 2 | 210961 | 119297 | 2398579 | orderkey,partkey,suppkey,nationkey,custkey | lineitem,partsupp,supplier,customer,orders
 tpch_4|FIVM|tpch_unordered10||lineitem,partsupp,supplier,customer,orders:Q1a | CustomHash1500000, 1000, 2 | 225401 | 124521 | 2398579 | orderkey,partkey,suppkey,nationkey,custkey | lineitem,partsupp,supplier,customer,orders
@@ -398,13 +298,3 @@ tpch_4|FIVM|tpch_unordered1||customer,orders:Q3 | CustomHash1500000, 1000, 2 | 1
 tpch_4|FIVM|tpch_unordered1||customer,orders:Q3 | CustomHash1500000, 1000, 2 | 1368 | 227 | 1500000 | custkey,nationkey,orderkey | customer,orders
 tpch_4|FIVM|tpch_unordered1||customer,orders:Q3 | CustomHash1500000, 1000, 2 | 1306 | 226 | 1500000 | custkey,nationkey,orderkey | customer,orders
 tpch_4|FIVM|tpch_unordered1||customer,orders:Q3 | CustomHash1500000, 1000, 2 | 1269 | 224 | 1500000 | custkey,nationkey,orderkey | customer,orders
-tpch_3|FIVM|tpch_unordered1||supplier,partsupp:Q3 | CustomHash800000, 1000, 2 | 479 | 125 | 800000 | suppkey,s_name,partkey,ps_availqty,ps_supplycost | supplier,partsupp
-tpch_3|FIVM|tpch_unordered1||supplier,partsupp:Q3 | CustomHash800000, 1000, 2 | 469 | 127 | 800000 | suppkey,s_name,partkey,ps_availqty,ps_supplycost | supplier,partsupp
-tpch_3|FIVM|tpch_unordered1||supplier,partsupp:Q3 | CustomHash800000, 1000, 2 | 463 | 126 | 800000 | suppkey,s_name,partkey,ps_availqty,ps_supplycost | supplier,partsupp
-tpch_3|FIVM|tpch_unordered1||supplier,partsupp:Q3 | CustomHash800000, 1000, 2 | 461 | 126 | 800000 | suppkey,s_name,partkey,ps_availqty,ps_supplycost | supplier,partsupp
-tpch_3|FIVM|tpch_unordered1||supplier,partsupp:Q3 | CustomHash800000, 1000, 2 | 455 | 126 | 800000 | suppkey,s_name,partkey,ps_availqty,ps_supplycost | supplier,partsupp
-tpch_3|FIVM|tpch_unordered10||supplier,partsupp:Q3 | CustomHash800000, 1000, 2 | 8472 | 1523 | 8000000 | suppkey,s_name,partkey,ps_availqty,ps_supplycost | supplier,partsupp
-tpch_3|FIVM|tpch_unordered10||supplier,partsupp:Q3 | CustomHash800000, 1000, 2 | 8196 | 1544 | 8000000 | suppkey,s_name,partkey,ps_availqty,ps_supplycost | supplier,partsupp
-tpch_3|FIVM|tpch_unordered10||supplier,partsupp:Q3 | CustomHash800000, 1000, 2 | 8279 | 1552 | 8000000 | suppkey,s_name,partkey,ps_availqty,ps_supplycost | supplier,partsupp
-tpch_3|FIVM|tpch_unordered10||supplier,partsupp:Q3 | CustomHash800000, 1000, 2 | 8252 | 1533 | 8000000 | suppkey,s_name,partkey,ps_availqty,ps_supplycost | supplier,partsupp
-tpch_3|FIVM|tpch_unordered10||supplier,partsupp:Q3 | CustomHash800000, 1000, 2 | 8259 | 1535 | 8000000 | suppkey,s_name,partkey,ps_availqty,ps_supplycost | supplier,partsupp

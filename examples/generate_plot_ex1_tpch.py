@@ -22,7 +22,13 @@ for line in lines:
     name, executor, dataset, _, all_relations = name_dataset_processing.split('|')
     base = [name, dataset, all_relations]
     for res in rest:
-        subname, maptype, update_time, enumeration_time, count, varnames, relations = res.split('|')
+        splitted = res.split('|')
+        if len(splitted) == 7:
+            subname, maptype, update_time, enumeration_time, count, varnames, relations = splitted
+            batch_size = 1000
+        else:
+            subname, maptype, update_time, enumeration_time, count, varnames, relations, batch_size = splitted
+
         splitted_var_names = [x.strip() for x in varnames.lower().split(',')]
         sorted_var_names = ','.join(sorted(splitted_var_names)).replace(' ', '').replace('_', '')
         # extract the query root using the regex r'(\D*\d+)' and strip the whitespaces

@@ -108,6 +108,7 @@ for version_idx, dataset_version in enumerate(retailer_7['dataset'].unique()):
         start_pos += (bar_width + bar_distance)
         last_post = start_pos
 
+
 ax.set_xlabel(r'# of free variables in Q1', fontsize=14)
 ax.set_ylabel(f'Update time (s)', fontsize=14)
 ax.set_xticks(x_ticks)
@@ -170,7 +171,7 @@ ax.set_ylim(0, maxi * 1.2)
 ax.legend(handles=combination_legend_handles, loc='upper right', bbox_to_anchor=(1, 1), title="Executor - Version")
 
 plt.tight_layout(rect=[0, 0, 1, 0.95])
-fig.suptitle("Nr Free Variables", fontsize=18)
+fig.suptitle("Number Free Variables", fontsize=18)
 # plt.show()
 plt.savefig(os.path.join(output_dir, f'NrFreeVariables.png'), bbox_inches='tight', dpi=300)
 

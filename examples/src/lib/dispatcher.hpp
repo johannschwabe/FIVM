@@ -85,7 +85,8 @@ class Multiplexer : public Dispatcher {
       Stopwatch sw;
       sw.restart();
       v[idx]->next();
-
+      sw.stop();
+      updating_times[v[idx]->name] += sw.elapsedTimeInMilliSeconds();
       if (v[idx]->has_next()) {
           idx++;
       }
@@ -97,8 +98,7 @@ class Multiplexer : public Dispatcher {
       }
 
       if (idx >= active) { idx = 0; }
-      sw.stop();
-      updating_times[v[idx]->name] += sw.elapsedTimeInMilliSeconds();
+
     }
 
     void add_dispatcher(Dispatcher* d) {

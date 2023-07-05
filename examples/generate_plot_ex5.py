@@ -46,7 +46,7 @@ if not os.path.exists(output_dir):
 
 # Colors for executors
 
-base_colors = {'CAVIER-tpch': 'blue', 'CAVIER-jcch': 'blue', "FIVM-tpch": 'orange', "FIVM-jcch": 'yellow'}
+base_colors = {'CAVIER': 'blue', "FIVM": 'orange'}
 # Width of a bar
 bar_width = 0.35
 bar_distance = 0.05
@@ -80,7 +80,7 @@ for version_idx, dataset_version in enumerate(tpch_1_unordered['dataset'].unique
                 avg_height = exucutor_data["update_time"].mean() / 1000
                 std_height = exucutor_data["update_time"].std() / 1000
 
-                base_color = mcolors.hex2color(base_colors[f"{executor}-tpch"])
+                base_color = mcolors.hex2color(base_colors[f"{executor}"])
                 base_hsv = mcolors.rgb_to_hsv(base_color)
                 shade = base_hsv.copy()
                 shade[2] = max(0.1, shade[2] - version_idx * 0.4)
@@ -91,14 +91,11 @@ for version_idx, dataset_version in enumerate(tpch_1_unordered['dataset'].unique
                 if version_idx == 0:
                     query_name = query if length_unique == length_non_unique else f"{query} - {len(exucutor_data.iloc[0]['free variables'].split(','))}"
                     ax.text(start_pos, (avg_height + std_height) * 1.01, query_name, ha='center', va='bottom',
-                            rotation=90, fontsize=8)
+                            rotation=90, fontsize=12)
 
                 start_pos += (bar_width + bar_distance)
                 dataset_scale = 1 if dataset_version.endswith('1') else 10
-                if executor == 'CAVIER':
-                    combination = f'{executor}'
-                else:
-                    combination = f'{executor} - tpch {dataset_scale}'
+                combination = f'{executor} - {dataset_scale}'
 
                 if combination not in handled_combinations:
                     combination_patch = patches.Patch(color=color, label=combination)
@@ -110,8 +107,8 @@ for version_idx, dataset_version in enumerate(tpch_1_unordered['dataset'].unique
         start_pos += (bar_width + bar_distance)
         last_post = start_pos
 
-ax.set_xlabel(r'tpch input relations')
-ax.set_ylabel(f'Update time (s)')
+ax.set_xlabel(r'tpch input relations', fontsize=14)
+ax.set_ylabel(f'Update time (s)', fontsize=14)
 ax.set_xticks(x_ticks)
 ax.set_xticklabels(x_tick_labels, rotation=90)
 
@@ -136,7 +133,7 @@ for version_idx, dataset_version in enumerate(jcch_1_unordered['dataset'].unique
                 avg_height = exucutor_data["update_time"].mean() / 1000
                 std_height = exucutor_data["update_time"].std() / 1000
 
-                base_color = mcolors.hex2color(base_colors[f"{executor}-jcch"])
+                base_color = mcolors.hex2color(base_colors[f"{executor}"])
                 base_hsv = mcolors.rgb_to_hsv(base_color)
                 shade = base_hsv.copy()
                 shade[2] = max(0.1, shade[2] - version_idx * 0.4)
@@ -147,14 +144,11 @@ for version_idx, dataset_version in enumerate(jcch_1_unordered['dataset'].unique
                 if version_idx == 0:
                     query_name = query if length_unique == length_non_unique else f"{query} - {len(exucutor_data.iloc[0]['free variables'].split(','))}"
                     ax.text(start_pos, (avg_height + std_height) * 1.01, query_name, ha='center', va='bottom',
-                            rotation=90, fontsize=8)
+                            rotation=90, fontsize=12)
 
                 start_pos += (bar_width + bar_distance)
                 dataset_scale = 1 if dataset_version.endswith('1') else 10
-                if executor == 'CAVIER':
-                    combination = f'{executor}'
-                else:
-                    combination = f'{executor} - jcch {dataset_scale}'
+                combination = f'{executor} - {dataset_scale}'
 
                 if combination not in handled_combinations:
                     combination_patch = patches.Patch(color=color, label=combination)
@@ -166,17 +160,17 @@ for version_idx, dataset_version in enumerate(jcch_1_unordered['dataset'].unique
         start_pos += (bar_width + bar_distance)
         last_post = start_pos
 
-ax.set_xlabel(r'jcch input relations')
-ax.set_ylabel(f'Update time (s)')
+ax.set_xlabel(r'jcch input relations', fontsize=14)
+ax.set_ylabel(f'Update time (s)', fontsize=14)
 ax.set_xticks(x_ticks)
 ax.set_xticklabels(x_tick_labels, rotation=90)
 
 
-ax.legend(handles=combination_legend_handles, loc='upper right', bbox_to_anchor=(1, 1), title="Executor - Version")
+ax.legend(handles=combination_legend_handles, loc='upper right', bbox_to_anchor=(1, 1), title="Executor - Version", fontsize=12)
 
 plt.tight_layout(rect=[0, 0, 1, 0.95])
-fig.suptitle("TPCH vs JCCH - Update time", fontsize=16)
+fig.suptitle("TPCH vs JCCH - Update time", fontsize=18)
 # plt.show()
-plt.savefig(os.path.join(output_dir, f'Ex5_plot.png'), bbox_inches='tight', dpi=300)
+plt.savefig(os.path.join(output_dir, f'TPCH_VS_JCCH.png'), bbox_inches='tight', dpi=300)
 
 print("gugus")
