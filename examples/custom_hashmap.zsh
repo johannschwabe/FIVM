@@ -26,7 +26,9 @@ else
     first_part=$1
     second_part=1
 fi
-
+if [[ $1 == retailer_* ]]; then
+  second_part=1
+fi
 query=$first_part
 regular=$((${max_regular[$query]} * $second_part))
 size=$((${max_size[$query]} * $second_part))
