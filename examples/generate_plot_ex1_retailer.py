@@ -15,6 +15,10 @@ QueryNameTranslate = {
     'Q2': r'$RQ_2$',
     'Q3': r'$RQ_3$',
 }
+ExecutorTranslate = {
+    'CAVIER': 'CaVieR',
+    'FIVM': 'F-IVM',
+}
 
 # Read the text file
 with open('output/output_exp1.txt', 'r') as f:
@@ -145,7 +149,7 @@ for version_idx, dataset_version in enumerate(retailer_3['dataset'].unique()):
             color = mcolors.hsv_to_rgb(shade)
 
             # Plot bars with error bars
-            bar = ax.bar(start_pos, best_avg, width=bar_width, color=color, alpha=1, yerr=std, label=executor)
+            bar = ax.bar(start_pos, best_avg, width=bar_width, color=color, alpha=1, yerr=std, label=ExecutorTranslate[executor])
 
             start_pos += (bar_width + bar_distance)
 
@@ -154,7 +158,7 @@ for version_idx, dataset_version in enumerate(retailer_3['dataset'].unique()):
         start_pos += (bar_width + bar_distance)
         last_post = start_pos
 
-ax.set_xlabel(r'Queryset $\mathcal{S}_1$', fontsize=14)
+ax.set_xlabel(r'Queryset $\mathcal{S}_2$', fontsize=14)
 ax.set_ylabel(f'Update time (s)', fontsize=14)
 ax.set_xticks(x_ticks)
 ax.set_xticklabels(x_tick_labels, rotation=0, fontsize=13)

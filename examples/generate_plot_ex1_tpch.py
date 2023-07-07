@@ -3,9 +3,6 @@ import math
 import pandas as pd
 import matplotlib.pyplot as plt
 import os
-import numpy as np
-import matplotlib.patches as patches
-import matplotlib.colors as mcolors
 import re
 
 # --------------------------
@@ -16,6 +13,10 @@ QueryNameTranslate = {
     'Q1': r'$TNQ_1$',
     'Q2': r'$TQ_2$',
     'Q3': r'$TQ_3$',
+}
+ExecutorTranslate = {
+    'CAVIER': 'CaVieR',
+    'FIVM': 'F-IVM',
 }
 
 # Read the text file

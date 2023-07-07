@@ -1,14 +1,22 @@
+import math
+
 import pandas as pd
 import matplotlib.pyplot as plt
 import os
-import numpy as np
-import matplotlib.patches as patches
-import matplotlib.colors as mcolors
+
 import re
 
 # --------------------------
 # tpch vs jcch
 # --------------------------
+QueryNameTranslate = {
+    'Q1': r'$TNQ_1$',
+    'Q2': r'$TQ_5$',
+}
+ExecutorTranslate = {
+    'CAVIER': 'CaVieR',
+    'FIVM': 'F-IVM',
+}
 
 # Read the text file
 with open('output/output_exp5.txt', 'r') as f:
@@ -51,8 +59,8 @@ base_colors = {'CAVIER': 'blue', "FIVM": 'orange'}
 bar_width = 0.35
 bar_distance = 0.05
 
-tpch_1_unordered = df[(df['name'] == 'tpch_2') & ((df['dataset'] == 'tpch_unordered10') | (df['dataset'] == 'tpch_unordered1'))]
-jcch_1_unordered = df[(df['name'] == 'jcch_2') & ((df['dataset'] == 'jcch_unordered10') | (df['dataset'] == 'jcch_unordered1'))]
+tpch_1_unordered = df[(df['name'] == 'tpch_2') & ((df['dataset'] == 'tpch_unordered10'))]
+jcch_1_unordered = df[(df['name'] == 'jcch_2') & ((df['dataset'] == 'jcch_unordered10'))]
 
 
 fig, axes = plt.subplots(1, 2, figsize=(12, 6), sharey=True)
@@ -61,115 +69,99 @@ combination_legend_handles = []
 handled_combinations = set()  # To keep track of handled combinations
 
 ax = axes[0]
+start_pos = 0
+last_post = 0
 x_ticks = []
 x_tick_labels = []
-for version_idx, dataset_version in enumerate(tpch_1_unordered['dataset'].unique()):
-    dataset_data = tpch_1_unordered[tpch_1_unordered['dataset'] == dataset_version]
-    # Start position for the first bar
-    start_pos = 0
-    last_post = 0
-    length_unique = len(dataset_data['query_root_unique'].unique())
-    length_non_unique = len(dataset_data['query_root'].unique())
-    for query_root_unique in sorted(dataset_data['query_root_unique'].unique()):
-        query_root_unique_data = dataset_data[dataset_data['query_root_unique'] == query_root_unique]
-        for query in query_root_unique_data['query'].unique():
-            query_data = query_root_unique_data[query_root_unique_data['query'] == query]
-            for executor in query_data['executor'].unique():
-                exucutor_data = query_data[query_data['executor'] == executor]
-                # Calculate the average and standard deviation for the group
-                avg_height = exucutor_data["update_time"].mean() / 1000
-                std_height = exucutor_data["update_time"].std() / 1000
+length_unique = len(tpch_1_unordered['query_root_unique'].unique())
+length_non_unique = len(tpch_1_unordered['query_root'].unique())
+for query_root_unique in sorted(tpch_1_unordered['query_root_unique'].unique()):
+    query_root_unique_data = tpch_1_unordered[tpch_1_unordered['query_root_unique'] == query_root_unique]
+    for executor in query_root_unique_data['executor'].unique():
+        exucutor_data = query_root_unique_data[query_root_unique_data['executor'] == executor]
+        best_avg = math.inf
+        std = 0
+        for query in exucutor_data['query'].unique():
+            query_data = exucutor_data[exucutor_data['query'] == query]
+            # Calculate the average and standard deviation for the group
+            avg_height = exucutor_data["update_time"].mean() / 1000
+            std_height = exucutor_data["update_time"].std() / 1000
+            if avg_height < best_avg:
+                best_avg = avg_height
+                std = std_height
 
-                base_color = mcolors.hex2color(base_colors[f"{executor}"])
-                base_hsv = mcolors.rgb_to_hsv(base_color)
-                shade = base_hsv.copy()
-                shade[2] = max(0.1, shade[2] - version_idx * 0.4)
-                color = mcolors.hsv_to_rgb(shade)
 
-                # Plot bars with error bars
-                bar = ax.bar(start_pos, avg_height, width=bar_width, color=color, alpha=1, yerr=std_height)
-                if version_idx == 0:
-                    query_name = query if length_unique == length_non_unique else f"{query} - {len(exucutor_data.iloc[0]['free variables'].split(','))}"
-                    ax.text(start_pos, (avg_height + std_height) * 1.01, query_name, ha='center', va='bottom',
-                            rotation=90, fontsize=12)
+        # Plot bars with error bars
+        bar = ax.bar(start_pos, best_avg, width=bar_width, color=base_colors[executor], alpha=1, yerr=std, label=executor)
 
-                start_pos += (bar_width + bar_distance)
-                dataset_scale = 1 if dataset_version.endswith('1') else 10
-                combination = f'{executor} - {dataset_scale}'
-
-                if combination not in handled_combinations:
-                    combination_patch = patches.Patch(color=color, label=combination)
-                    combination_legend_handles.append(combination_patch)
-                    handled_combinations.add(combination)
-
-        x_ticks.append((start_pos + last_post) / 2 - bar_width / 2 - bar_distance / 2)
-        x_tick_labels.append(query_root_unique_data.iloc[0]['query_root'])
         start_pos += (bar_width + bar_distance)
-        last_post = start_pos
 
-ax.set_xlabel(r'tpch input relations', fontsize=14)
+    x_ticks.append((start_pos + last_post) / 2 - bar_width / 2 - bar_distance / 2)
+    x_tick_labels.append(QueryNameTranslate[query_root_unique_data.iloc[0]['query_root']])
+    start_pos += (bar_width + bar_distance)
+    last_post = start_pos
+
+
+ax.set_xlabel(r'TPC-H input relations', fontsize=14)
 ax.set_ylabel(f'Update time (s)', fontsize=14)
 ax.set_xticks(x_ticks)
-ax.set_xticklabels(x_tick_labels, rotation=90)
+ax.set_xticklabels(x_tick_labels, rotation=0,fontsize=13)
 
-
+QueryNameTranslate = {
+    'Q1': r'$JNQ_1$',
+    'Q2': r'$JQ_5$',
+}
 ax = axes[1]
 x_ticks = []
 x_tick_labels = []
-for version_idx, dataset_version in enumerate(jcch_1_unordered['dataset'].unique()):
-    dataset_data = jcch_1_unordered[jcch_1_unordered['dataset'] == dataset_version]
-    # Start position for the first bar
-    start_pos = 0
-    last_post = 0
-    length_unique = len(dataset_data['query_root_unique'].unique())
-    length_non_unique = len(dataset_data['query_root'].unique())
-    for query_root_unique in sorted(dataset_data['query_root_unique'].unique()):
-        query_root_unique_data = dataset_data[dataset_data['query_root_unique'] == query_root_unique]
-        for query in query_root_unique_data['query'].unique():
-            query_data = query_root_unique_data[query_root_unique_data['query'] == query]
-            for executor in query_data['executor'].unique():
-                exucutor_data = query_data[query_data['executor'] == executor]
-                # Calculate the average and standard deviation for the group
-                avg_height = exucutor_data["update_time"].mean() / 1000
-                std_height = exucutor_data["update_time"].std() / 1000
+start_pos = 0
+last_post = 0
+length_unique = len(jcch_1_unordered['query_root_unique'].unique())
+length_non_unique = len(jcch_1_unordered['query_root'].unique())
+for query_root_unique in sorted(jcch_1_unordered['query_root_unique'].unique()):
+    query_root_unique_data = jcch_1_unordered[jcch_1_unordered['query_root_unique'] == query_root_unique]
+    for executor in query_root_unique_data['executor'].unique():
+        exucutor_data = query_root_unique_data[query_root_unique_data['executor'] == executor]
+        best_avg = math.inf
+        std = 0
+        for query in exucutor_data['query'].unique():
+            query_data = exucutor_data[exucutor_data['query'] == query]
+            # Calculate the average and standard deviation for the group
+            avg_height = exucutor_data["update_time"].mean() / 1000
+            std_height = exucutor_data["update_time"].std() / 1000
+            if avg_height < best_avg:
+                best_avg = avg_height
+                std = std_height
 
-                base_color = mcolors.hex2color(base_colors[f"{executor}"])
-                base_hsv = mcolors.rgb_to_hsv(base_color)
-                shade = base_hsv.copy()
-                shade[2] = max(0.1, shade[2] - version_idx * 0.4)
-                color = mcolors.hsv_to_rgb(shade)
 
-                # Plot bars with error bars
-                bar = ax.bar(start_pos, avg_height, width=bar_width, color=color, alpha=1, yerr=std_height)
-                if version_idx == 0:
-                    query_name = query if length_unique == length_non_unique else f"{query} - {len(exucutor_data.iloc[0]['free variables'].split(','))}"
-                    ax.text(start_pos, (avg_height + std_height) * 1.01, query_name, ha='center', va='bottom',
-                            rotation=90, fontsize=12)
+        # Plot bars with error bars
+        bar = ax.bar(start_pos, best_avg, width=bar_width, color=base_colors[executor], alpha=1, yerr=std, label=executor)
 
-                start_pos += (bar_width + bar_distance)
-                dataset_scale = 1 if dataset_version.endswith('1') else 10
-                combination = f'{executor} - {dataset_scale}'
-
-                if combination not in handled_combinations:
-                    combination_patch = patches.Patch(color=color, label=combination)
-                    combination_legend_handles.append(combination_patch)
-                    handled_combinations.add(combination)
-
-        x_ticks.append((start_pos + last_post) / 2 - bar_width / 2 - bar_distance / 2)
-        x_tick_labels.append(query_root_unique_data.iloc[0]['query_root'])
         start_pos += (bar_width + bar_distance)
-        last_post = start_pos
 
-ax.set_xlabel(r'jcch input relations', fontsize=14)
+    x_ticks.append((start_pos + last_post) / 2 - bar_width / 2 - bar_distance / 2)
+    x_tick_labels.append(QueryNameTranslate[query_root_unique_data.iloc[0]['query_root']])
+    start_pos += (bar_width + bar_distance)
+    last_post = start_pos
+
+
+ax.set_xlabel(r'JCC-H input relations', fontsize=14)
 ax.set_ylabel(f'Update time (s)', fontsize=14)
 ax.set_xticks(x_ticks)
-ax.set_xticklabels(x_tick_labels, rotation=90)
+ax.set_xticklabels(x_tick_labels, rotation=0,fontsize=13)
 
 
-ax.legend(handles=combination_legend_handles, loc='upper right', bbox_to_anchor=(1, 1), title="Executor - Version", fontsize=12)
+# Get handles and labels
+handles, labels = ax.get_legend_handles_labels()
+
+# Remove duplicates
+unique = dict(zip(labels, handles))
+ax.legend(unique.values(), unique.keys())
 
 plt.tight_layout(rect=[0, 0, 1, 0.95])
-fig.suptitle("TPCH vs JCCH - Update time", fontsize=18)
+fig.suptitle("TPC-H vs JCC-H - Update time", fontsize=18)
+fig.text(0.5, 0.01, "TPC-H / JCC-H scale 10", ha='center', fontsize=14)
+
 # plt.show()
 plt.savefig(os.path.join(output_dir, f'TPCH_VS_JCCH.png'), bbox_inches='tight', dpi=300)
 

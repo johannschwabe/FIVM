@@ -15,6 +15,10 @@ QueryNameTranslate = {
     'Q1': r'$TNQ_3$',
     'Q2': r'$TQ_4$',
 }
+ExecutorTranslate = {
+    'CAVIER': 'CaVieR',
+    'FIVM': 'F-IVM',
+}
 # Read the text file
 with open('output/output_exp2.txt', 'r') as f:
     lines = f.readlines()
