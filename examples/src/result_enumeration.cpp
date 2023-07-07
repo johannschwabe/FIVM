@@ -170,8 +170,7 @@ struct ViewConfig {
 
   std::string generate_vector() {
     if (position == 0) {
-      return "std::vector<DELTA_" + query->query_name + "_entry> update;\nupdate.reserve(" +
-             std::to_string(query->propagation_size) + ");";
+      return "std::vector<DELTA_" + query->query_name + "_entry> update;\nupdate.reserve(BATCH_SIZE);";
     }
     auto vector_type = generate_vector_type();
     return vector_type + "* part_" + std::to_string(position) + "= new " + vector_type + "();\n";
