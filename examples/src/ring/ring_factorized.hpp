@@ -15,7 +15,6 @@ using namespace dbtoaster;
 template<typename... Keys>
 using SingletonArray = std::array<std::tuple<std::tuple<Keys...>, long>, 1>;
 
-#define MAP_TYPE 2
 #if MAP_TYPE == 1
 template<typename... Keys>
 using Map = HybridMap<std::tuple<Keys...>, long, hash_tuple::hash<std::tuple<Keys...>>, std::less<>>;
@@ -28,8 +27,11 @@ using Map = tlx::btree_map<std::tuple<Keys...>, long, std::less<>>;
 #elif MAP_TYPE == 4
 template <typename... Keys>
 using Map = CustomHashmap<std::tuple<Keys...>, long, hash_tuple::hash<std::tuple<Keys...>>>;
+#elif MAP_TYPE == 5
+template <typename... Keys>
+using Map = std::map<std::tuple<Keys...>, long, std::less<>>;
 #else
-#error Invalid MAP_TYPE. Must be 1, 2, 3 or 4.
+#error Invalid MAP_TYPE. Must be 1, 2, 3, 4 or 5.
 #endif
 
 template<size_t, typename>

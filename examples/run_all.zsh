@@ -1,5 +1,10 @@
 #!/bin/zsh
-echo "-$1-$2-$3-"
+#$1 num iter
+#$2 cavier / fivm / both
+#$3 batch size
+#$4 map type
+
+echo "-$1-$2-$3-$4-"
 # Function to find the next available file name
 get_next_filename() {
   local suffix=1
@@ -23,8 +28,13 @@ fi
 # Read the comma-separated lists from the file run_params.txt
 IFS=',' read -rA list1 <<< $(sed -n 1p run_params.txt)
 IFS=',' read -rA list2 <<< $(sed -n 2p run_params.txt)
-batch_size=1000
 
+MAP_TYPE=4
+if [[ $4 != "" ]]; then
+  MAP_TYPE=$4
+fi
+
+batch_size=1000
 if [[ $3 != "" ]]; then
   batch_size=$3
 fi
@@ -32,8 +42,8 @@ fi
 if [[ $2 != "cav" ]]; then
   make clean
   for item in $list1; do
-    echo make DATASET="$item" BATCH_SIZE="$batch_size"
-    make -j8 DATASET="$item" BATCH_SIZE="$batch_size"
+    echo make DATASET="$item" BATCH_SIZE="$batch_size" MAP_TYPE="$MAP_TYPE"
+    make -j8 DATASET="$item" BATCH_SIZE="$batch_size" MAP_TYPE="$MAP_TYPE"
   done
 fi
 num_iter=${1:-1}
@@ -42,8 +52,8 @@ num_iter=${1:-1}
 for item in $list1; do
   #CAVIER
   if [[ $2 != "fivm" ]]; then
-    echo run_cavier.zsh "$item" "-r$num_iter" "$batch_size"
-    zsh run_cavier.zsh "$item" "-r$num_iter" "$batch_size"
+    echo run_cavier.zsh "$item" "-r$num_iter" "$batch_size" "$MAP_TYPE"
+    zsh run_cavier.zsh "$item" "-r$num_iter" "$batch_size" "$MAP_TYPE"
   fi
   if [[ $2 != "cav" ]]; then
   #FIVM

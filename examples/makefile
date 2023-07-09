@@ -10,6 +10,7 @@ CFLAGS = -O3 -DNDEBUG -Wall -Wno-unused-variable -std=c++17 -pedantic -Wno-unuse
 NUMBER_OF_RUNS ?= 1
 BATCH_SIZE ?= 1000
 APP ?=
+MAP_TYPE ?= 4
 
 # Directories
 SRC_DIR = src
@@ -83,7 +84,7 @@ $(EXE_FILES_BATCH): $(EXE_OUT_DIR)/%_BATCH_$(BATCH_SIZE) : $(CPP_OUT_DIR)/%_BATC
 	$(eval DATASET := $(patsubst $(EXE_OUT_DIR)/%/, %, $(dir $@)))
 	$(eval APP_HEADER := $(patsubst $(EXE_OUT_DIR)/$(DATASET)/%_BATCH_${BATCH_SIZE}, $(APP_OUT_DIR)/$(DATASET)/%.hpp, $@))
 	$(eval CUSTOMHASHMAPARGS = $(shell zsh custom_hashmap.zsh $(DATASET)))
-	$(CC) $(CFLAGS) $(CUSTOMHASHMAPARGS) $(SRC_DIR)/main.cpp -I ../backend/lib -I $(SRC_DIR) -I $(SRC_DIR)/lib -I $(SRC_DIR)/TLXInstall/include -L $(SRC_DIR)/TLXInstall/lib -ltlx -DBATCH_SIZE=$(BATCH_SIZE) -include $< -include $(APP_HEADER) -o $@; \
+	$(CC) $(CFLAGS) $(CUSTOMHASHMAPARGS) $(SRC_DIR)/main.cpp -I ../backend/lib -I $(SRC_DIR) -I $(SRC_DIR)/lib -I $(SRC_DIR)/TLXInstall/include -L $(SRC_DIR)/TLXInstall/lib -ltlx -DBATCH_SIZE=$(BATCH_SIZE) -DMAP_TYPE=$(MAP_TYPE) -include $< -include $(APP_HEADER) -o $@; \
 
 
 $(EXE_FILES_SINGLE): $(EXE_OUT_DIR)/%_SINGLE : $(CPP_OUT_DIR)/%_SINGLE.hpp $(SRC_DIR)/main.cpp $(APP_OUT_DIR)/%.hpp

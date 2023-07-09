@@ -1,0 +1,200 @@
+retailer_1|CAVIER|retailer_unordered||Inventory,Item,Location,Weather:Q2 | Hash | 182073 | 19119 | 84055817 | Ksn,Locn,DateId,MaxTemp,Zip,Rain | Inventory,Weather,Location| 1 : Q1 | Hash | 68593 | 14018 | 84055817 | Ksn,Category,Locn,DateId,Zip,Rain | Item,Q2| 1
+retailer_1|CAVIER|retailer_unordered||Inventory,Item,Location,Weather:Q2 | Hash | 189183 | 18566 | 84055817 | Ksn,Locn,DateId,MaxTemp,Zip,Rain | Inventory,Weather,Location| 1 : Q1 | Hash | 66769 | 13927 | 84055817 | Ksn,Category,Locn,DateId,Zip,Rain | Item,Q2| 1
+retailer_1|CAVIER|retailer_unordered||Inventory,Item,Location,Weather:Q2 | Hash | 183394 | 18164 | 84055817 | Ksn,Locn,DateId,MaxTemp,Zip,Rain | Inventory,Weather,Location| 1 : Q1 | Hash | 66546 | 13929 | 84055817 | Ksn,Category,Locn,DateId,Zip,Rain | Item,Q2| 1
+retailer_1|CAVIER|retailer_unordered||Inventory,Item,Location,Weather:Q2 | Hash | 181212 | 17410 | 84055817 | Ksn,Locn,DateId,MaxTemp,Zip,Rain | Inventory,Weather,Location| 1 : Q1 | Hash | 65812 | 13620 | 84055817 | Ksn,Category,Locn,DateId,Zip,Rain | Item,Q2| 1
+retailer_1|CAVIER|retailer_unordered||Inventory,Item,Location,Weather:Q2 | Hash | 182300 | 18083 | 84055817 | Ksn,Locn,DateId,MaxTemp,Zip,Rain | Inventory,Weather,Location| 1 : Q1 | Hash | 62024 | 12613 | 84055817 | Ksn,Category,Locn,DateId,Zip,Rain | Item,Q2| 1
+retailer_1|FIVM|retailer_unordered||Inventory,Item,Weather,Location:Q1a | Hash | 223498 | 25431 | 84055817 | locn,dateid,ksn,category,rain,zip | Inventory,Item,Weather,Location| 1
+retailer_1|FIVM|retailer_unordered||Inventory,Item,Weather,Location:Q1a | Hash | 235929 | 24344 | 84055817 | locn,dateid,ksn,category,rain,zip | Inventory,Item,Weather,Location| 1
+retailer_1|FIVM|retailer_unordered||Inventory,Item,Weather,Location:Q1a | Hash | 224839 | 23979 | 84055817 | locn,dateid,ksn,category,rain,zip | Inventory,Item,Weather,Location| 1
+retailer_1|FIVM|retailer_unordered||Inventory,Item,Weather,Location:Q1a | Hash | 230159 | 23704 | 84055817 | locn,dateid,ksn,category,rain,zip | Inventory,Item,Weather,Location| 1
+retailer_1|FIVM|retailer_unordered||Inventory,Item,Weather,Location:Q1a | Hash | 215503 | 23683 | 84055817 | locn,dateid,ksn,category,rain,zip | Inventory,Item,Weather,Location| 1
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location,Item:Q1b | Hash | 206374 | 71785 | 84055817 | ksn,locn,dateid,rain,zip,category | Inventory,Weather,Location,Item| 1
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location,Item:Q1b | Hash | 222085 | 70667 | 84055817 | ksn,locn,dateid,rain,zip,category | Inventory,Weather,Location,Item| 1
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location,Item:Q1b | Hash | 221166 | 70218 | 84055817 | ksn,locn,dateid,rain,zip,category | Inventory,Weather,Location,Item| 1
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location,Item:Q1b | Hash | 222657 | 72603 | 84055817 | ksn,locn,dateid,rain,zip,category | Inventory,Weather,Location,Item| 1
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location,Item:Q1b | Hash | 221590 | 71208 | 84055817 | ksn,locn,dateid,rain,zip,category | Inventory,Weather,Location,Item| 1
+retailer_1|FIVM|retailer_unordered||Item,R1q2:Q1c | Hash | 75142 | 13883 | 84055817 | ksn,category,locn,dateid,rain,zip | Item,R1q2| 1
+retailer_1|FIVM|retailer_unordered||Item,R1q2:Q1c | Hash | 71152 | 13603 | 84055817 | ksn,category,locn,dateid,rain,zip | Item,R1q2| 1
+retailer_1|FIVM|retailer_unordered||Item,R1q2:Q1c | Hash | 71194 | 13616 | 84055817 | ksn,category,locn,dateid,rain,zip | Item,R1q2| 1
+retailer_1|FIVM|retailer_unordered||Item,R1q2:Q1c | Hash | 70719 | 13622 | 84055817 | ksn,category,locn,dateid,rain,zip | Item,R1q2| 1
+retailer_1|FIVM|retailer_unordered||Item,R1q2:Q1c | Hash | 71435 | 13869 | 84055817 | ksn,category,locn,dateid,rain,zip | Item,R1q2| 1
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location:Q2 | Hash | 165210 | 14089 | 84055817 | locn,dateid,ksn,rain,maxtemp,zip | Inventory,Weather,Location| 1
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location:Q2 | Hash | 163344 | 13907 | 84055817 | locn,dateid,ksn,rain,maxtemp,zip | Inventory,Weather,Location| 1
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location:Q2 | Hash | 159270 | 13723 | 84055817 | locn,dateid,ksn,rain,maxtemp,zip | Inventory,Weather,Location| 1
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location:Q2 | Hash | 153003 | 13395 | 84055817 | locn,dateid,ksn,rain,maxtemp,zip | Inventory,Weather,Location| 1
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location:Q2 | Hash | 161639 | 13115 | 84055817 | locn,dateid,ksn,rain,maxtemp,zip | Inventory,Weather,Location| 1
+retailer_1|CAVIER|retailer_unordered||Inventory,Item,Location,Weather:Q2 | Hash | 172852 | 16599 | 84055817 | Ksn,Locn,DateId,MaxTemp,Zip,Rain | Inventory,Weather,Location| 10 : Q1 | Hash | 66066 | 14323 | 84055817 | Ksn,Category,Locn,DateId,Zip,Rain | Item,Q2| 10
+retailer_1|CAVIER|retailer_unordered||Inventory,Item,Location,Weather:Q2 | Hash | 179940 | 16440 | 84055817 | Ksn,Locn,DateId,MaxTemp,Zip,Rain | Inventory,Weather,Location| 10 : Q1 | Hash | 64618 | 14385 | 84055817 | Ksn,Category,Locn,DateId,Zip,Rain | Item,Q2| 10
+retailer_1|CAVIER|retailer_unordered||Inventory,Item,Location,Weather:Q2 | Hash | 171397 | 15679 | 84055817 | Ksn,Locn,DateId,MaxTemp,Zip,Rain | Inventory,Weather,Location| 10 : Q1 | Hash | 64368 | 14357 | 84055817 | Ksn,Category,Locn,DateId,Zip,Rain | Item,Q2| 10
+retailer_1|CAVIER|retailer_unordered||Inventory,Item,Location,Weather:Q2 | Hash | 171735 | 15325 | 84055817 | Ksn,Locn,DateId,MaxTemp,Zip,Rain | Inventory,Weather,Location| 10 : Q1 | Hash | 63994 | 14058 | 84055817 | Ksn,Category,Locn,DateId,Zip,Rain | Item,Q2| 10
+retailer_1|CAVIER|retailer_unordered||Inventory,Item,Location,Weather:Q2 | Hash | 158291 | 14099 | 84055817 | Ksn,Locn,DateId,MaxTemp,Zip,Rain | Inventory,Weather,Location| 10 : Q1 | Hash | 64079 | 14312 | 84055817 | Ksn,Category,Locn,DateId,Zip,Rain | Item,Q2| 10
+retailer_1|FIVM|retailer_unordered||Inventory,Item,Weather,Location:Q1a | Hash | 203587 | 25503 | 84055817 | locn,dateid,ksn,category,rain,zip | Inventory,Item,Weather,Location| 10
+retailer_1|FIVM|retailer_unordered||Inventory,Item,Weather,Location:Q1a | Hash | 213690 | 24836 | 84055817 | locn,dateid,ksn,category,rain,zip | Inventory,Item,Weather,Location| 10
+retailer_1|FIVM|retailer_unordered||Inventory,Item,Weather,Location:Q1a | Hash | 212796 | 24122 | 84055817 | locn,dateid,ksn,category,rain,zip | Inventory,Item,Weather,Location| 10
+retailer_1|FIVM|retailer_unordered||Inventory,Item,Weather,Location:Q1a | Hash | 195974 | 23781 | 84055817 | locn,dateid,ksn,category,rain,zip | Inventory,Item,Weather,Location| 10
+retailer_1|FIVM|retailer_unordered||Inventory,Item,Weather,Location:Q1a | Hash | 197718 | 24084 | 84055817 | locn,dateid,ksn,category,rain,zip | Inventory,Item,Weather,Location| 10
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location,Item:Q1b | Hash | 189936 | 72387 | 84055817 | ksn,locn,dateid,rain,zip,category | Inventory,Weather,Location,Item| 10
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location,Item:Q1b | Hash | 203387 | 72446 | 84055817 | ksn,locn,dateid,rain,zip,category | Inventory,Weather,Location,Item| 10
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location,Item:Q1b | Hash | 201652 | 71811 | 84055817 | ksn,locn,dateid,rain,zip,category | Inventory,Weather,Location,Item| 10
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location,Item:Q1b | Hash | 196397 | 69534 | 84055817 | ksn,locn,dateid,rain,zip,category | Inventory,Weather,Location,Item| 10
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location,Item:Q1b | Hash | 194910 | 70243 | 84055817 | ksn,locn,dateid,rain,zip,category | Inventory,Weather,Location,Item| 10
+retailer_1|FIVM|retailer_unordered||Item,R1q2:Q1c | Hash | 70257 | 14496 | 84055817 | ksn,category,locn,dateid,rain,zip | Item,R1q2| 10
+retailer_1|FIVM|retailer_unordered||Item,R1q2:Q1c | Hash | 69693 | 14358 | 84055817 | ksn,category,locn,dateid,rain,zip | Item,R1q2| 10
+retailer_1|FIVM|retailer_unordered||Item,R1q2:Q1c | Hash | 67708 | 14252 | 84055817 | ksn,category,locn,dateid,rain,zip | Item,R1q2| 10
+retailer_1|FIVM|retailer_unordered||Item,R1q2:Q1c | Hash | 67379 | 14142 | 84055817 | ksn,category,locn,dateid,rain,zip | Item,R1q2| 10
+retailer_1|FIVM|retailer_unordered||Item,R1q2:Q1c | Hash | 67407 | 14084 | 84055817 | ksn,category,locn,dateid,rain,zip | Item,R1q2| 10
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location:Q2 | Hash | 171039 | 14541 | 84055817 | locn,dateid,ksn,rain,maxtemp,zip | Inventory,Weather,Location| 10
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location:Q2 | Hash | 175908 | 14387 | 84055817 | locn,dateid,ksn,rain,maxtemp,zip | Inventory,Weather,Location| 10
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location:Q2 | Hash | 171661 | 14553 | 84055817 | locn,dateid,ksn,rain,maxtemp,zip | Inventory,Weather,Location| 10
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location:Q2 | Hash | 159144 | 14024 | 84055817 | locn,dateid,ksn,rain,maxtemp,zip | Inventory,Weather,Location| 10
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location:Q2 | Hash | 149848 | 13664 | 84055817 | locn,dateid,ksn,rain,maxtemp,zip | Inventory,Weather,Location| 10
+retailer_1|CAVIER|retailer_unordered||Inventory,Item,Location,Weather:Q2 | Hash | 171083 | 16345 | 84055817 | Ksn,Locn,DateId,MaxTemp,Zip,Rain | Inventory,Weather,Location| 100 : Q1 | Hash | 66580 | 14130 | 84055817 | Ksn,Category,Locn,DateId,Zip,Rain | Item,Q2| 100
+retailer_1|CAVIER|retailer_unordered||Inventory,Item,Location,Weather:Q2 | Hash | 179353 | 15922 | 84055817 | Ksn,Locn,DateId,MaxTemp,Zip,Rain | Inventory,Weather,Location| 100 : Q1 | Hash | 65193 | 14264 | 84055817 | Ksn,Category,Locn,DateId,Zip,Rain | Item,Q2| 100
+retailer_1|CAVIER|retailer_unordered||Inventory,Item,Location,Weather:Q2 | Hash | 180205 | 15633 | 84055817 | Ksn,Locn,DateId,MaxTemp,Zip,Rain | Inventory,Weather,Location| 100 : Q1 | Hash | 64970 | 14106 | 84055817 | Ksn,Category,Locn,DateId,Zip,Rain | Item,Q2| 100
+retailer_1|CAVIER|retailer_unordered||Inventory,Item,Location,Weather:Q2 | Hash | 167991 | 15727 | 84055817 | Ksn,Locn,DateId,MaxTemp,Zip,Rain | Inventory,Weather,Location| 100 : Q1 | Hash | 64033 | 13812 | 84055817 | Ksn,Category,Locn,DateId,Zip,Rain | Item,Q2| 100
+retailer_1|CAVIER|retailer_unordered||Inventory,Item,Location,Weather:Q2 | Hash | 179716 | 15636 | 84055817 | Ksn,Locn,DateId,MaxTemp,Zip,Rain | Inventory,Weather,Location| 100 : Q1 | Hash | 62023 | 13215 | 84055817 | Ksn,Category,Locn,DateId,Zip,Rain | Item,Q2| 100
+retailer_1|FIVM|retailer_unordered||Inventory,Item,Weather,Location:Q1a | Hash | 201899 | 32645 | 84055817 | locn,dateid,ksn,category,rain,zip | Inventory,Item,Weather,Location| 100
+retailer_1|FIVM|retailer_unordered||Inventory,Item,Weather,Location:Q1a | Hash | 206110 | 31238 | 84055817 | locn,dateid,ksn,category,rain,zip | Inventory,Item,Weather,Location| 100
+retailer_1|FIVM|retailer_unordered||Inventory,Item,Weather,Location:Q1a | Hash | 208665 | 30874 | 84055817 | locn,dateid,ksn,category,rain,zip | Inventory,Item,Weather,Location| 100
+retailer_1|FIVM|retailer_unordered||Inventory,Item,Weather,Location:Q1a | Hash | 203964 | 30520 | 84055817 | locn,dateid,ksn,category,rain,zip | Inventory,Item,Weather,Location| 100
+retailer_1|FIVM|retailer_unordered||Inventory,Item,Weather,Location:Q1a | Hash | 194318 | 30119 | 84055817 | locn,dateid,ksn,category,rain,zip | Inventory,Item,Weather,Location| 100
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location,Item:Q1b | Hash | 195016 | 77586 | 84055817 | ksn,locn,dateid,rain,zip,category | Inventory,Weather,Location,Item| 100
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location,Item:Q1b | Hash | 204278 | 77508 | 84055817 | ksn,locn,dateid,rain,zip,category | Inventory,Weather,Location,Item| 100
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location,Item:Q1b | Hash | 195935 | 76721 | 84055817 | ksn,locn,dateid,rain,zip,category | Inventory,Weather,Location,Item| 100
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location,Item:Q1b | Hash | 202203 | 77502 | 84055817 | ksn,locn,dateid,rain,zip,category | Inventory,Weather,Location,Item| 100
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location,Item:Q1b | Hash | 200903 | 76197 | 84055817 | ksn,locn,dateid,rain,zip,category | Inventory,Weather,Location,Item| 100
+retailer_1|FIVM|retailer_unordered||Item,R1q2:Q1c | Hash | 70068 | 14550 | 84055817 | ksn,category,locn,dateid,rain,zip | Item,R1q2| 100
+retailer_1|FIVM|retailer_unordered||Item,R1q2:Q1c | Hash | 67737 | 14408 | 84055817 | ksn,category,locn,dateid,rain,zip | Item,R1q2| 100
+retailer_1|FIVM|retailer_unordered||Item,R1q2:Q1c | Hash | 66354 | 14100 | 84055817 | ksn,category,locn,dateid,rain,zip | Item,R1q2| 100
+retailer_1|FIVM|retailer_unordered||Item,R1q2:Q1c | Hash | 64827 | 13861 | 84055817 | ksn,category,locn,dateid,rain,zip | Item,R1q2| 100
+retailer_1|FIVM|retailer_unordered||Item,R1q2:Q1c | Hash | 64087 | 13307 | 84055817 | ksn,category,locn,dateid,rain,zip | Item,R1q2| 100
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location:Q2 | Hash | 171228 | 14301 | 84055817 | locn,dateid,ksn,rain,maxtemp,zip | Inventory,Weather,Location| 100
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location:Q2 | Hash | 182859 | 14262 | 84055817 | locn,dateid,ksn,rain,maxtemp,zip | Inventory,Weather,Location| 100
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location:Q2 | Hash | 181293 | 14011 | 84055817 | locn,dateid,ksn,rain,maxtemp,zip | Inventory,Weather,Location| 100
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location:Q2 | Hash | 178393 | 13780 | 84055817 | locn,dateid,ksn,rain,maxtemp,zip | Inventory,Weather,Location| 100
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location:Q2 | Hash | 171982 | 13486 | 84055817 | locn,dateid,ksn,rain,maxtemp,zip | Inventory,Weather,Location| 100
+retailer_1|CAVIER|retailer_unordered||Inventory,Item,Location,Weather:Q2 | Hash | 172251 | 16324 | 84055817 | Ksn,Locn,DateId,MaxTemp,Zip,Rain | Inventory,Weather,Location| 1000 : Q1 | Hash | 67774 | 14197 | 84055817 | Ksn,Category,Locn,DateId,Zip,Rain | Item,Q2| 1000
+retailer_1|CAVIER|retailer_unordered||Inventory,Item,Location,Weather:Q2 | Hash | 182193 | 15872 | 84055817 | Ksn,Locn,DateId,MaxTemp,Zip,Rain | Inventory,Weather,Location| 1000 : Q1 | Hash | 65760 | 14027 | 84055817 | Ksn,Category,Locn,DateId,Zip,Rain | Item,Q2| 1000
+retailer_1|CAVIER|retailer_unordered||Inventory,Item,Location,Weather:Q2 | Hash | 177389 | 15707 | 84055817 | Ksn,Locn,DateId,MaxTemp,Zip,Rain | Inventory,Weather,Location| 1000 : Q1 | Hash | 65538 | 14007 | 84055817 | Ksn,Category,Locn,DateId,Zip,Rain | Item,Q2| 1000
+retailer_1|CAVIER|retailer_unordered||Inventory,Item,Location,Weather:Q2 | Hash | 175757 | 15139 | 84055817 | Ksn,Locn,DateId,MaxTemp,Zip,Rain | Inventory,Weather,Location| 1000 : Q1 | Hash | 63676 | 13501 | 84055817 | Ksn,Category,Locn,DateId,Zip,Rain | Item,Q2| 1000
+retailer_1|CAVIER|retailer_unordered||Inventory,Item,Location,Weather:Q2 | Hash | 170407 | 14642 | 84055817 | Ksn,Locn,DateId,MaxTemp,Zip,Rain | Inventory,Weather,Location| 1000 : Q1 | Hash | 65111 | 13597 | 84055817 | Ksn,Category,Locn,DateId,Zip,Rain | Item,Q2| 1000
+retailer_1|FIVM|retailer_unordered||Inventory,Item,Weather,Location:Q1a | Hash | 201332 | 29894 | 84055817 | locn,dateid,ksn,category,rain,zip | Inventory,Item,Weather,Location| 1000
+retailer_1|FIVM|retailer_unordered||Inventory,Item,Weather,Location:Q1a | Hash | 208264 | 29015 | 84055817 | locn,dateid,ksn,category,rain,zip | Inventory,Item,Weather,Location| 1000
+retailer_1|FIVM|retailer_unordered||Inventory,Item,Weather,Location:Q1a | Hash | 207054 | 28891 | 84055817 | locn,dateid,ksn,category,rain,zip | Inventory,Item,Weather,Location| 1000
+retailer_1|FIVM|retailer_unordered||Inventory,Item,Weather,Location:Q1a | Hash | 202058 | 28536 | 84055817 | locn,dateid,ksn,category,rain,zip | Inventory,Item,Weather,Location| 1000
+retailer_1|FIVM|retailer_unordered||Inventory,Item,Weather,Location:Q1a | Hash | 192720 | 27394 | 84055817 | locn,dateid,ksn,category,rain,zip | Inventory,Item,Weather,Location| 1000
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location,Item:Q1b | Hash | 199326 | 76437 | 84055817 | ksn,locn,dateid,rain,zip,category | Inventory,Weather,Location,Item| 1000
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location,Item:Q1b | Hash | 213446 | 78831 | 84055817 | ksn,locn,dateid,rain,zip,category | Inventory,Weather,Location,Item| 1000
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location,Item:Q1b | Hash | 201076 | 74743 | 84055817 | ksn,locn,dateid,rain,zip,category | Inventory,Weather,Location,Item| 1000
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location,Item:Q1b | Hash | 206484 | 76797 | 84055817 | ksn,locn,dateid,rain,zip,category | Inventory,Weather,Location,Item| 1000
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location,Item:Q1b | Hash | 191351 | 73285 | 84055817 | ksn,locn,dateid,rain,zip,category | Inventory,Weather,Location,Item| 1000
+retailer_1|FIVM|retailer_unordered||Item,R1q2:Q1c | Hash | 68176 | 14211 | 84055817 | ksn,category,locn,dateid,rain,zip | Item,R1q2| 1000
+retailer_1|FIVM|retailer_unordered||Item,R1q2:Q1c | Hash | 66187 | 14196 | 84055817 | ksn,category,locn,dateid,rain,zip | Item,R1q2| 1000
+retailer_1|FIVM|retailer_unordered||Item,R1q2:Q1c | Hash | 66200 | 14255 | 84055817 | ksn,category,locn,dateid,rain,zip | Item,R1q2| 1000
+retailer_1|FIVM|retailer_unordered||Item,R1q2:Q1c | Hash | 66247 | 14242 | 84055817 | ksn,category,locn,dateid,rain,zip | Item,R1q2| 1000
+retailer_1|FIVM|retailer_unordered||Item,R1q2:Q1c | Hash | 65870 | 14003 | 84055817 | ksn,category,locn,dateid,rain,zip | Item,R1q2| 1000
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location:Q2 | Hash | 173331 | 14642 | 84055817 | locn,dateid,ksn,rain,maxtemp,zip | Inventory,Weather,Location| 1000
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location:Q2 | Hash | 177466 | 14565 | 84055817 | locn,dateid,ksn,rain,maxtemp,zip | Inventory,Weather,Location| 1000
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location:Q2 | Hash | 178514 | 14267 | 84055817 | locn,dateid,ksn,rain,maxtemp,zip | Inventory,Weather,Location| 1000
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location:Q2 | Hash | 174446 | 14227 | 84055817 | locn,dateid,ksn,rain,maxtemp,zip | Inventory,Weather,Location| 1000
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location:Q2 | Hash | 180130 | 14226 | 84055817 | locn,dateid,ksn,rain,maxtemp,zip | Inventory,Weather,Location| 1000
+retailer_1|CAVIER|retailer_unordered||Inventory,Item,Location,Weather:Q2 | Hash | 170828 | 15854 | 84055817 | Ksn,Locn,DateId,MaxTemp,Zip,Rain | Inventory,Weather,Location| 10000 : Q1 | Hash | 60739 | 11011 | 84055817 | Ksn,Category,Locn,DateId,Zip,Rain | Item,Q2| 10000
+retailer_1|CAVIER|retailer_unordered||Inventory,Item,Location,Weather:Q2 | Hash | 175649 | 15445 | 84055817 | Ksn,Locn,DateId,MaxTemp,Zip,Rain | Inventory,Weather,Location| 10000 : Q1 | Hash | 57364 | 11038 | 84055817 | Ksn,Category,Locn,DateId,Zip,Rain | Item,Q2| 10000
+retailer_1|CAVIER|retailer_unordered||Inventory,Item,Location,Weather:Q2 | Hash | 177939 | 15521 | 84055817 | Ksn,Locn,DateId,MaxTemp,Zip,Rain | Inventory,Weather,Location| 10000 : Q1 | Hash | 56566 | 11050 | 84055817 | Ksn,Category,Locn,DateId,Zip,Rain | Item,Q2| 10000
+retailer_1|CAVIER|retailer_unordered||Inventory,Item,Location,Weather:Q2 | Hash | 174138 | 14725 | 84055817 | Ksn,Locn,DateId,MaxTemp,Zip,Rain | Inventory,Weather,Location| 10000 : Q1 | Hash | 56184 | 10999 | 84055817 | Ksn,Category,Locn,DateId,Zip,Rain | Item,Q2| 10000
+retailer_1|CAVIER|retailer_unordered||Inventory,Item,Location,Weather:Q2 | Hash | 165522 | 14549 | 84055817 | Ksn,Locn,DateId,MaxTemp,Zip,Rain | Inventory,Weather,Location| 10000 : Q1 | Hash | 56399 | 10918 | 84055817 | Ksn,Category,Locn,DateId,Zip,Rain | Item,Q2| 10000
+retailer_1|FIVM|retailer_unordered||Inventory,Item,Weather,Location:Q1a | Hash | 196612 | 29975 | 84055817 | locn,dateid,ksn,category,rain,zip | Inventory,Item,Weather,Location| 10000
+retailer_1|FIVM|retailer_unordered||Inventory,Item,Weather,Location:Q1a | Hash | 208539 | 29949 | 84055817 | locn,dateid,ksn,category,rain,zip | Inventory,Item,Weather,Location| 10000
+retailer_1|FIVM|retailer_unordered||Inventory,Item,Weather,Location:Q1a | Hash | 205793 | 29027 | 84055817 | locn,dateid,ksn,category,rain,zip | Inventory,Item,Weather,Location| 10000
+retailer_1|FIVM|retailer_unordered||Inventory,Item,Weather,Location:Q1a | Hash | 198654 | 28714 | 84055817 | locn,dateid,ksn,category,rain,zip | Inventory,Item,Weather,Location| 10000
+retailer_1|FIVM|retailer_unordered||Inventory,Item,Weather,Location:Q1a | Hash | 197258 | 27994 | 84055817 | locn,dateid,ksn,category,rain,zip | Inventory,Item,Weather,Location| 10000
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location,Item:Q1b | Hash | 191321 | 91535 | 84055817 | ksn,locn,dateid,rain,zip,category | Inventory,Weather,Location,Item| 10000
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location,Item:Q1b | Hash | 207981 | 91501 | 84055817 | ksn,locn,dateid,rain,zip,category | Inventory,Weather,Location,Item| 10000
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location,Item:Q1b | Hash | 197987 | 89455 | 84055817 | ksn,locn,dateid,rain,zip,category | Inventory,Weather,Location,Item| 10000
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location,Item:Q1b | Hash | 199264 | 87369 | 84055817 | ksn,locn,dateid,rain,zip,category | Inventory,Weather,Location,Item| 10000
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location,Item:Q1b | Hash | 197620 | 88003 | 84055817 | ksn,locn,dateid,rain,zip,category | Inventory,Weather,Location,Item| 10000
+retailer_1|FIVM|retailer_unordered||Item,R1q2:Q1c | Hash | 57863 | 10774 | 84055817 | ksn,category,locn,dateid,rain,zip | Item,R1q2| 10000
+retailer_1|FIVM|retailer_unordered||Item,R1q2:Q1c | Hash | 55826 | 10806 | 84055817 | ksn,category,locn,dateid,rain,zip | Item,R1q2| 10000
+retailer_1|FIVM|retailer_unordered||Item,R1q2:Q1c | Hash | 55744 | 10805 | 84055817 | ksn,category,locn,dateid,rain,zip | Item,R1q2| 10000
+retailer_1|FIVM|retailer_unordered||Item,R1q2:Q1c | Hash | 55858 | 10804 | 84055817 | ksn,category,locn,dateid,rain,zip | Item,R1q2| 10000
+retailer_1|FIVM|retailer_unordered||Item,R1q2:Q1c | Hash | 55862 | 10804 | 84055817 | ksn,category,locn,dateid,rain,zip | Item,R1q2| 10000
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location:Q2 | Hash | 169797 | 14642 | 84055817 | locn,dateid,ksn,rain,maxtemp,zip | Inventory,Weather,Location| 10000
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location:Q2 | Hash | 174901 | 14329 | 84055817 | locn,dateid,ksn,rain,maxtemp,zip | Inventory,Weather,Location| 10000
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location:Q2 | Hash | 163827 | 14084 | 84055817 | locn,dateid,ksn,rain,maxtemp,zip | Inventory,Weather,Location| 10000
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location:Q2 | Hash | 163837 | 13896 | 84055817 | locn,dateid,ksn,rain,maxtemp,zip | Inventory,Weather,Location| 10000
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location:Q2 | Hash | 161404 | 13525 | 84055817 | locn,dateid,ksn,rain,maxtemp,zip | Inventory,Weather,Location| 10000
+retailer_1|CAVIER|retailer_unordered||Inventory,Item,Location,Weather:Q2 | Hash | 171606 | 13528 | 84055817 | Ksn,Locn,DateId,MaxTemp,Zip,Rain | Inventory,Weather,Location| 100000 : Q1 | Hash | 69936 | 8797 | 84055817 | Ksn,Category,Locn,DateId,Zip,Rain | Item,Q2| 100000
+retailer_1|CAVIER|retailer_unordered||Inventory,Item,Location,Weather:Q2 | Hash | 176889 | 13304 | 84055817 | Ksn,Locn,DateId,MaxTemp,Zip,Rain | Inventory,Weather,Location| 100000 : Q1 | Hash | 67053 | 8633 | 84055817 | Ksn,Category,Locn,DateId,Zip,Rain | Item,Q2| 100000
+retailer_1|CAVIER|retailer_unordered||Inventory,Item,Location,Weather:Q2 | Hash | 168824 | 12691 | 84055817 | Ksn,Locn,DateId,MaxTemp,Zip,Rain | Inventory,Weather,Location| 100000 : Q1 | Hash | 66578 | 8621 | 84055817 | Ksn,Category,Locn,DateId,Zip,Rain | Item,Q2| 100000
+retailer_1|CAVIER|retailer_unordered||Inventory,Item,Location,Weather:Q2 | Hash | 172390 | 13283 | 84055817 | Ksn,Locn,DateId,MaxTemp,Zip,Rain | Inventory,Weather,Location| 100000 : Q1 | Hash | 64827 | 8566 | 84055817 | Ksn,Category,Locn,DateId,Zip,Rain | Item,Q2| 100000
+retailer_1|CAVIER|retailer_unordered||Inventory,Item,Location,Weather:Q2 | Hash | 175481 | 12709 | 84055817 | Ksn,Locn,DateId,MaxTemp,Zip,Rain | Inventory,Weather,Location| 100000 : Q1 | Hash | 61949 | 8644 | 84055817 | Ksn,Category,Locn,DateId,Zip,Rain | Item,Q2| 100000
+retailer_1|FIVM|retailer_unordered||Inventory,Item,Weather,Location:Q1a | Hash | 206787 | 33328 | 84055817 | locn,dateid,ksn,category,rain,zip | Inventory,Item,Weather,Location| 100000
+retailer_1|FIVM|retailer_unordered||Inventory,Item,Weather,Location:Q1a | Hash | 212655 | 36140 | 84055817 | locn,dateid,ksn,category,rain,zip | Inventory,Item,Weather,Location| 100000
+retailer_1|FIVM|retailer_unordered||Inventory,Item,Weather,Location:Q1a | Hash | 209600 | 35701 | 84055817 | locn,dateid,ksn,category,rain,zip | Inventory,Item,Weather,Location| 100000
+retailer_1|FIVM|retailer_unordered||Inventory,Item,Weather,Location:Q1a | Hash | 197724 | 35096 | 84055817 | locn,dateid,ksn,category,rain,zip | Inventory,Item,Weather,Location| 100000
+retailer_1|FIVM|retailer_unordered||Inventory,Item,Weather,Location:Q1a | Hash | 196606 | 33456 | 84055817 | locn,dateid,ksn,category,rain,zip | Inventory,Item,Weather,Location| 100000
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location,Item:Q1b | Hash | 219198 | 84426 | 84055817 | ksn,locn,dateid,rain,zip,category | Inventory,Weather,Location,Item| 100000
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location,Item:Q1b | Hash | 235715 | 87565 | 84055817 | ksn,locn,dateid,rain,zip,category | Inventory,Weather,Location,Item| 100000
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location,Item:Q1b | Hash | 231417 | 83960 | 84055817 | ksn,locn,dateid,rain,zip,category | Inventory,Weather,Location,Item| 100000
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location,Item:Q1b | Hash | 222350 | 83287 | 84055817 | ksn,locn,dateid,rain,zip,category | Inventory,Weather,Location,Item| 100000
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location,Item:Q1b | Hash | 216185 | 81563 | 84055817 | ksn,locn,dateid,rain,zip,category | Inventory,Weather,Location,Item| 100000
+retailer_1|FIVM|retailer_unordered||Item,R1q2:Q1c | Hash | 69033 | 8633 | 84055817 | ksn,category,locn,dateid,rain,zip | Item,R1q2| 100000
+retailer_1|FIVM|retailer_unordered||Item,R1q2:Q1c | Hash | 66313 | 8636 | 84055817 | ksn,category,locn,dateid,rain,zip | Item,R1q2| 100000
+retailer_1|FIVM|retailer_unordered||Item,R1q2:Q1c | Hash | 66450 | 8624 | 84055817 | ksn,category,locn,dateid,rain,zip | Item,R1q2| 100000
+retailer_1|FIVM|retailer_unordered||Item,R1q2:Q1c | Hash | 66376 | 8627 | 84055817 | ksn,category,locn,dateid,rain,zip | Item,R1q2| 100000
+retailer_1|FIVM|retailer_unordered||Item,R1q2:Q1c | Hash | 66423 | 8862 | 84055817 | ksn,category,locn,dateid,rain,zip | Item,R1q2| 100000
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location:Q2 | Hash | 164838 | 15150 | 84055817 | locn,dateid,ksn,rain,maxtemp,zip | Inventory,Weather,Location| 100000
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location:Q2 | Hash | 171613 | 14869 | 84055817 | locn,dateid,ksn,rain,maxtemp,zip | Inventory,Weather,Location| 100000
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location:Q2 | Hash | 164403 | 14582 | 84055817 | locn,dateid,ksn,rain,maxtemp,zip | Inventory,Weather,Location| 100000
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location:Q2 | Hash | 159943 | 14403 | 84055817 | locn,dateid,ksn,rain,maxtemp,zip | Inventory,Weather,Location| 100000
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location:Q2 | Hash | 155157 | 13819 | 84055817 | locn,dateid,ksn,rain,maxtemp,zip | Inventory,Weather,Location| 100000
+retailer_1|CAVIER|retailer_unordered||Inventory,Item,Location,Weather:Q2 | Hash | 110946 | 7569 | 84055817 | Ksn,Locn,DateId,MaxTemp,Zip,Rain | Inventory,Weather,Location| 1000000 : Q1 | Hash | 84639 | 8213 | 84055817 | Ksn,Category,Locn,DateId,Zip,Rain | Item,Q2| 1000000
+retailer_1|CAVIER|retailer_unordered||Inventory,Item,Location,Weather:Q2 | Hash | 112635 | 7575 | 84055817 | Ksn,Locn,DateId,MaxTemp,Zip,Rain | Inventory,Weather,Location| 1000000 : Q1 | Hash | 84246 | 8236 | 84055817 | Ksn,Category,Locn,DateId,Zip,Rain | Item,Q2| 1000000
+retailer_1|CAVIER|retailer_unordered||Inventory,Item,Location,Weather:Q2 | Hash | 112973 | 7575 | 84055817 | Ksn,Locn,DateId,MaxTemp,Zip,Rain | Inventory,Weather,Location| 1000000 : Q1 | Hash | 83742 | 8255 | 84055817 | Ksn,Category,Locn,DateId,Zip,Rain | Item,Q2| 1000000
+retailer_1|CAVIER|retailer_unordered||Inventory,Item,Location,Weather:Q2 | Hash | 106378 | 7490 | 84055817 | Ksn,Locn,DateId,MaxTemp,Zip,Rain | Inventory,Weather,Location| 1000000 : Q1 | Hash | 81107 | 8249 | 84055817 | Ksn,Category,Locn,DateId,Zip,Rain | Item,Q2| 1000000
+retailer_1|CAVIER|retailer_unordered||Inventory,Item,Location,Weather:Q2 | Hash | 104587 | 7505 | 84055817 | Ksn,Locn,DateId,MaxTemp,Zip,Rain | Inventory,Weather,Location| 1000000 : Q1 | Hash | 78904 | 8229 | 84055817 | Ksn,Category,Locn,DateId,Zip,Rain | Item,Q2| 1000000
+retailer_1|FIVM|retailer_unordered||Inventory,Item,Weather,Location:Q1a | Hash | 140835 | 25613 | 84055817 | locn,dateid,ksn,category,rain,zip | Inventory,Item,Weather,Location| 1000000
+retailer_1|FIVM|retailer_unordered||Inventory,Item,Weather,Location:Q1a | Hash | 139412 | 25169 | 84055817 | locn,dateid,ksn,category,rain,zip | Inventory,Item,Weather,Location| 1000000
+retailer_1|FIVM|retailer_unordered||Inventory,Item,Weather,Location:Q1a | Hash | 143691 | 25451 | 84055817 | locn,dateid,ksn,category,rain,zip | Inventory,Item,Weather,Location| 1000000
+retailer_1|FIVM|retailer_unordered||Inventory,Item,Weather,Location:Q1a | Hash | 143093 | 25770 | 84055817 | locn,dateid,ksn,category,rain,zip | Inventory,Item,Weather,Location| 1000000
+retailer_1|FIVM|retailer_unordered||Inventory,Item,Weather,Location:Q1a | Hash | 136803 | 24083 | 84055817 | locn,dateid,ksn,category,rain,zip | Inventory,Item,Weather,Location| 1000000
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location,Item:Q1b | Hash | 194599 | 78590 | 84055817 | ksn,locn,dateid,rain,zip,category | Inventory,Weather,Location,Item| 1000000
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location,Item:Q1b | Hash | 211723 | 104342 | 84055817 | ksn,locn,dateid,rain,zip,category | Inventory,Weather,Location,Item| 1000000
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location,Item:Q1b | Hash | 205508 | 105028 | 84055817 | ksn,locn,dateid,rain,zip,category | Inventory,Weather,Location,Item| 1000000
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location,Item:Q1b | Hash | 201453 | 101660 | 84055817 | ksn,locn,dateid,rain,zip,category | Inventory,Weather,Location,Item| 1000000
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location,Item:Q1b | Hash | 202563 | 97531 | 84055817 | ksn,locn,dateid,rain,zip,category | Inventory,Weather,Location,Item| 1000000
+retailer_1|FIVM|retailer_unordered||Item,R1q2:Q1c | Hash | 88743 | 8166 | 84055817 | ksn,category,locn,dateid,rain,zip | Item,R1q2| 1000000
+retailer_1|FIVM|retailer_unordered||Item,R1q2:Q1c | Hash | 88723 | 8186 | 84055817 | ksn,category,locn,dateid,rain,zip | Item,R1q2| 1000000
+retailer_1|FIVM|retailer_unordered||Item,R1q2:Q1c | Hash | 88594 | 8276 | 84055817 | ksn,category,locn,dateid,rain,zip | Item,R1q2| 1000000
+retailer_1|FIVM|retailer_unordered||Item,R1q2:Q1c | Hash | 88730 | 8200 | 84055817 | ksn,category,locn,dateid,rain,zip | Item,R1q2| 1000000
+retailer_1|FIVM|retailer_unordered||Item,R1q2:Q1c | Hash | 88612 | 8135 | 84055817 | ksn,category,locn,dateid,rain,zip | Item,R1q2| 1000000
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location:Q2 | Hash | 105016 | 10704 | 84055817 | locn,dateid,ksn,rain,maxtemp,zip | Inventory,Weather,Location| 1000000
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location:Q2 | Hash | 102880 | 10539 | 84055817 | locn,dateid,ksn,rain,maxtemp,zip | Inventory,Weather,Location| 1000000
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location:Q2 | Hash | 101423 | 10529 | 84055817 | locn,dateid,ksn,rain,maxtemp,zip | Inventory,Weather,Location| 1000000
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location:Q2 | Hash | 100861 | 10502 | 84055817 | locn,dateid,ksn,rain,maxtemp,zip | Inventory,Weather,Location| 1000000
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location:Q2 | Hash | 99722 | 10411 | 84055817 | locn,dateid,ksn,rain,maxtemp,zip | Inventory,Weather,Location| 1000000
+retailer_1|CAVIER|retailer_unordered||Inventory,Item,Location,Weather:Q2 | Hash | 116838 | 4345 | 84055817 | Ksn,Locn,DateId,MaxTemp,Zip,Rain | Inventory,Weather,Location| 10000000 : Q1 | Hash | 97579 | 7925 | 84055817 | Ksn,Category,Locn,DateId,Zip,Rain | Item,Q2| 10000000
+retailer_1|CAVIER|retailer_unordered||Inventory,Item,Location,Weather:Q2 | Hash | 117240 | 4756 | 84055817 | Ksn,Locn,DateId,MaxTemp,Zip,Rain | Inventory,Weather,Location| 10000000 : Q1 | Hash | 101651 | 7930 | 84055817 | Ksn,Category,Locn,DateId,Zip,Rain | Item,Q2| 10000000
+retailer_1|CAVIER|retailer_unordered||Inventory,Item,Location,Weather:Q2 | Hash | 116842 | 4740 | 84055817 | Ksn,Locn,DateId,MaxTemp,Zip,Rain | Inventory,Weather,Location| 10000000 : Q1 | Hash | 100608 | 7944 | 84055817 | Ksn,Category,Locn,DateId,Zip,Rain | Item,Q2| 10000000
+retailer_1|CAVIER|retailer_unordered||Inventory,Item,Location,Weather:Q2 | Hash | 114850 | 4706 | 84055817 | Ksn,Locn,DateId,MaxTemp,Zip,Rain | Inventory,Weather,Location| 10000000 : Q1 | Hash | 99706 | 7968 | 84055817 | Ksn,Category,Locn,DateId,Zip,Rain | Item,Q2| 10000000
+retailer_1|CAVIER|retailer_unordered||Inventory,Item,Location,Weather:Q2 | Hash | 113927 | 4723 | 84055817 | Ksn,Locn,DateId,MaxTemp,Zip,Rain | Inventory,Weather,Location| 10000000 : Q1 | Hash | 98645 | 7924 | 84055817 | Ksn,Category,Locn,DateId,Zip,Rain | Item,Q2| 10000000
+retailer_1|FIVM|retailer_unordered||Inventory,Item,Weather,Location:Q1a | Hash | 143216 | 39964 | 84055817 | locn,dateid,ksn,category,rain,zip | Inventory,Item,Weather,Location| 10000000
+retailer_1|FIVM|retailer_unordered||Inventory,Item,Weather,Location:Q1a | Hash | 146245 | 38739 | 84055817 | locn,dateid,ksn,category,rain,zip | Inventory,Item,Weather,Location| 10000000
+retailer_1|FIVM|retailer_unordered||Inventory,Item,Weather,Location:Q1a | Hash | 144947 | 37135 | 84055817 | locn,dateid,ksn,category,rain,zip | Inventory,Item,Weather,Location| 10000000
+retailer_1|FIVM|retailer_unordered||Inventory,Item,Weather,Location:Q1a | Hash | 143890 | 38209 | 84055817 | locn,dateid,ksn,category,rain,zip | Inventory,Item,Weather,Location| 10000000
+retailer_1|FIVM|retailer_unordered||Inventory,Item,Weather,Location:Q1a | Hash | 144153 | 37754 | 84055817 | locn,dateid,ksn,category,rain,zip | Inventory,Item,Weather,Location| 10000000
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location,Item:Q1b | Hash | 145961 | 67627 | 84055817 | ksn,locn,dateid,rain,zip,category | Inventory,Weather,Location,Item| 10000000
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location,Item:Q1b | Hash | 149060 | 70156 | 84055817 | ksn,locn,dateid,rain,zip,category | Inventory,Weather,Location,Item| 10000000
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location,Item:Q1b | Hash | 155298 | 74843 | 84055817 | ksn,locn,dateid,rain,zip,category | Inventory,Weather,Location,Item| 10000000
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location,Item:Q1b | Hash | 161940 | 73735 | 84055817 | ksn,locn,dateid,rain,zip,category | Inventory,Weather,Location,Item| 10000000
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location,Item:Q1b | Hash | 138938 | 69616 | 84055817 | ksn,locn,dateid,rain,zip,category | Inventory,Weather,Location,Item| 10000000
+retailer_1|FIVM|retailer_unordered||Item,R1q2:Q1c | Hash | 100143 | 7868 | 84055817 | ksn,category,locn,dateid,rain,zip | Item,R1q2| 10000000
+retailer_1|FIVM|retailer_unordered||Item,R1q2:Q1c | Hash | 99137 | 7810 | 84055817 | ksn,category,locn,dateid,rain,zip | Item,R1q2| 10000000
+retailer_1|FIVM|retailer_unordered||Item,R1q2:Q1c | Hash | 99164 | 7816 | 84055817 | ksn,category,locn,dateid,rain,zip | Item,R1q2| 10000000
+retailer_1|FIVM|retailer_unordered||Item,R1q2:Q1c | Hash | 99081 | 7853 | 84055817 | ksn,category,locn,dateid,rain,zip | Item,R1q2| 10000000
+retailer_1|FIVM|retailer_unordered||Item,R1q2:Q1c | Hash | 94127 | 7832 | 84055817 | ksn,category,locn,dateid,rain,zip | Item,R1q2| 10000000
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location:Q2 | Hash | 117017 | 7642 | 84055817 | locn,dateid,ksn,rain,maxtemp,zip | Inventory,Weather,Location| 10000000
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location:Q2 | Hash | 119443 | 7690 | 84055817 | locn,dateid,ksn,rain,maxtemp,zip | Inventory,Weather,Location| 10000000
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location:Q2 | Hash | 118292 | 7693 | 84055817 | locn,dateid,ksn,rain,maxtemp,zip | Inventory,Weather,Location| 10000000
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location:Q2 | Hash | 119596 | 7678 | 84055817 | locn,dateid,ksn,rain,maxtemp,zip | Inventory,Weather,Location| 10000000
+retailer_1|FIVM|retailer_unordered||Inventory,Weather,Location:Q2 | Hash | 117514 | 7698 | 84055817 | locn,dateid,ksn,rain,maxtemp,zip | Inventory,Weather,Location| 10000000
