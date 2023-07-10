@@ -84,15 +84,15 @@ for query_root_unique in sorted(tpch_1_unordered['query_root_unique'].unique()):
         for query in exucutor_data['query'].unique():
             query_data = exucutor_data[exucutor_data['query'] == query]
             # Calculate the average and standard deviation for the group
-            avg_height = exucutor_data["update_time"].mean() / 1000
-            std_height = exucutor_data["update_time"].std() / 1000
+            avg_height = query_data["update_time"].mean() / 1000
+            std_height = query_data["update_time"].std() / 1000
             if avg_height < best_avg:
                 best_avg = avg_height
                 std = std_height
 
 
         # Plot bars with error bars
-        bar = ax.bar(start_pos, best_avg, width=bar_width, color=base_colors[executor], alpha=1, yerr=std, label=executor)
+        bar = ax.bar(start_pos, best_avg, width=bar_width, color=base_colors[executor], alpha=1, yerr=std, label=executor, )
 
         start_pos += (bar_width + bar_distance)
 
@@ -127,8 +127,8 @@ for query_root_unique in sorted(jcch_1_unordered['query_root_unique'].unique()):
         for query in exucutor_data['query'].unique():
             query_data = exucutor_data[exucutor_data['query'] == query]
             # Calculate the average and standard deviation for the group
-            avg_height = exucutor_data["update_time"].mean() / 1000
-            std_height = exucutor_data["update_time"].std() / 1000
+            avg_height = query_data["update_time"].mean() / 1000
+            std_height = query_data["update_time"].std() / 1000
             if avg_height < best_avg:
                 best_avg = avg_height
                 std = std_height

@@ -121,7 +121,7 @@ ax.set_xticklabels(x_tick_labels, rotation=0)
 
 combination_legend_handles = [patches.Patch(color='blue', label="CaVieR"),patches.Patch(color='orange', label="F-IVM")]
 
-ax.legend(handles=combination_legend_handles, loc='upper right', bbox_to_anchor=(1, 1), title="Executor")
+ax.legend(handles=combination_legend_handles, loc='upper right', bbox_to_anchor=(1, 1))
 
 plt.tight_layout(rect=[0, 0, 1, 0.95])
 fig.suptitle("Batch Sizes", fontsize=18)

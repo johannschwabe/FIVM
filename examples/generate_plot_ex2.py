@@ -12,8 +12,8 @@ import re
 # Ordered vs unordered
 # --------------------------
 QueryNameTranslate = {
-    'Q1': r'$TNQ_3$',
-    'Q2': r'$TQ_4$',
+    'Q1': r'$TNQ_4$',
+    'Q2': r'$TQ_5$',
 }
 ExecutorTranslate = {
     'CAVIER': 'CaVieR',
