@@ -9,6 +9,7 @@
 #include "serialization.hpp"
 #include "hybrid_map.hpp"
 #include "cashmap.hpp"
+#include <map>
 
 using namespace dbtoaster;
 
