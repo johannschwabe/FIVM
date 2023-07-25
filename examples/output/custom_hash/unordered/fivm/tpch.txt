@@ -298,3 +298,8 @@ tpch_4|FIVM|tpch_unordered1||customer,orders:Q3 | CustomHash1500000, 1000, 2 | 1
 tpch_4|FIVM|tpch_unordered1||customer,orders:Q3 | CustomHash1500000, 1000, 2 | 1368 | 227 | 1500000 | custkey,nationkey,orderkey | customer,orders
 tpch_4|FIVM|tpch_unordered1||customer,orders:Q3 | CustomHash1500000, 1000, 2 | 1306 | 226 | 1500000 | custkey,nationkey,orderkey | customer,orders
 tpch_4|FIVM|tpch_unordered1||customer,orders:Q3 | CustomHash1500000, 1000, 2 | 1269 | 224 | 1500000 | custkey,nationkey,orderkey | customer,orders
+tpch_11|FIVM|tpch10_sorted||partsupp,lineitem,supplier:Q2 | CustomHash1500000, 1000, 2 | 23373 | 17172 | 59986052 | suppkey,partkey,ps_availqty,ps_supplycost,l_quantity,l_linenumber,orderkey,s_name | partsupp,lineitem,supplier| 1000
+tpch_11|FIVM|tpch10_sorted||partsupp,lineitem,supplier:Q2 | CustomHash1500000, 1000, 2 | 22202 | 17384 | 59986052 | suppkey,partkey,ps_availqty,ps_supplycost,l_quantity,l_linenumber,orderkey,s_name | partsupp,lineitem,supplier| 1000
+tpch_11|FIVM|tpch10_sorted||partsupp,lineitem,supplier:Q2 | CustomHash1500000, 1000, 2 | 21800 | 17635 | 59986052 | suppkey,partkey,ps_availqty,ps_supplycost,l_quantity,l_linenumber,orderkey,s_name | partsupp,lineitem,supplier| 1000
+tpch_11|FIVM|tpch10_sorted||partsupp,lineitem,supplier:Q2 | CustomHash1500000, 1000, 2 | 21625 | 17562 | 59986052 | suppkey,partkey,ps_availqty,ps_supplycost,l_quantity,l_linenumber,orderkey,s_name | partsupp,lineitem,supplier| 1000
+tpch_11|FIVM|tpch10_sorted||partsupp,lineitem,supplier:Q2 | CustomHash1500000, 1000, 2 | 21649 | 17642 | 59986052 | suppkey,partkey,ps_availqty,ps_supplycost,l_quantity,l_linenumber,orderkey,s_name | partsupp,lineitem,supplier| 1000
